@@ -19,12 +19,12 @@ dan `../design/DESIGN_SYSTEM.md`. Kerjakan tiket P0 berurutan, commit per tiket.
 - Gunakan istilah dari CONTEXT; waktu ditampilkan dalam Asia/Jakarta.
 
 ## 3. Agent
-- Permintaan pengguna mengutamakan OpenAI Agents SDK **Python**. Agent berada
-  satu per file di `agent_service/agents/`; `lib/agents/` menjadi jembatan Next.js.
-- Tool divalidasi Zod di jembatan; schema Python sesuai kontrak, bukan kontrak baru.
-- ID rencana/laporan/job berasal dari `RunContextWrapper`, bukan argumen yang
-  ditentukan model. Gunakan batas `max_turns` (padanan `maxTurns`).
-- Bungkus run dengan trace ber-group ID (padanan `withTrace`), simpan lokal
+- Permintaan pengguna mengutamakan OpenAI Agents SDK JavaScript/TypeScript
+  (`@openai/agents`). Agent berada satu per file di `lib/agents/`.
+- Tool divalidasi Zod dan mengikuti kontrak bersama.
+- ID rencana/laporan/job berasal dari `RunContext`, bukan argumen yang
+  ditentukan model. Gunakan batas `maxTurns`.
+- Bungkus run dengan `withTrace` ber-group ID, simpan lokal
   tanpa ekspor. Jangan menulis kunci API/base64 foto ke log.
 - History ringkas, maksimal 30 pesan user/assistant, foto lama diganti caption.
 - Mutation tool harus memanggil aturan server; agent tidak menulis DB langsung.
@@ -32,6 +32,8 @@ dan `../design/DESIGN_SYSTEM.md`. Kerjakan tiket P0 berurutan, commit per tiket.
   hasil agent ketika model tidak tersedia.
 
 ## 4. Desain
+- Seluruh UI, pesan Lumo, dan konten demo berbahasa Inggris sesuai instruksi
+  pengguna. Identifier kontrak tetap; tanggal memakai Asia/Jakarta.
 - Salin tokens.css, globals.css, truck-model.css tanpa perubahan.
 - Semua teks UI memakai `.t-*` sesuai DESIGN_SYSTEM §3; berat hanya 400/500.
 - Satu `.t-display` per halaman; pengecualian halaman Agent (`.t-title`) dan chat
@@ -44,9 +46,19 @@ dan `../design/DESIGN_SYSTEM.md`. Kerjakan tiket P0 berurutan, commit per tiket.
 ## 5. Peta kepemilikan folder
 - `app/`: layout, halaman client dan route handler; `components/`: UI bersama.
 - `lib/`: kontrak, aturan domain, SQLite, seed, file, jembatan agent.
-- `agent_service/`: runtime SDK Python dan agent per file.
+- `lib/agents/`: runtime SDK JavaScript/TypeScript dan agent per file.
 - `skills/anatomy/`: kit geometri dan petunjuk Pembuat Model.
 - `public/`: aset desain; `data/`: DB, unggahan, model, trace (tidak di-commit).
 - `scripts/`: seed dan pemeriksaan; `test/`: fixture dan pengujian integrasi.
 - `../docs/`: spesifikasi, ADR, tiket dan bukti verifikasi;
   `../design/`: acuan desain yang tidak diubah.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+## This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

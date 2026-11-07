@@ -1,0 +1,24 @@
+[
+  {
+    "target": "/",
+    "width": 1440,
+    "height": 900,
+    "status": 200,
+    "font": "Geist, \"Geist Fallback\", Geist, system-ui, sans-serif",
+    "primary": "#1b8ce8",
+    "lang": "en",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "target": "/",
+    "width": 390,
+    "height": 844,
+    "status": 200,
+    "font": "Geist, \"Geist Fallback\", Geist, system-ui, sans-serif",
+    "primary": "#1b8ce8",
+    "lang": "en",
+    "overflow": false,
+    "errors": []
+  }
+]

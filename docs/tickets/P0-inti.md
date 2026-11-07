@@ -47,9 +47,9 @@ Baca dulu: `docs/tickets/README.md` (Definition of Done), `docs/PRD.md` §4.1–
 **Desain:** §2 token, §3.1 kelas teks. Logo: kotak 28 px radius 7, `bg-[image:var(--gradient-primary)]`, `shadow-[var(--shadow-primary-rest)]`, huruf "P" putih 13 px 500.
 
 **Selesai bila**
-- [ ] `npm run dev` menampilkan halaman pilihan peran dengan font Geist dan tombol/panel bergaya FlowPilot.
-- [ ] `npx next build` lolos.
-- [ ] Perintah `rg` di DESIGN_SYSTEM §3.4 tanpa hasil.
+- [x] `npm run dev` menampilkan halaman pilihan peran dengan font Geist dan tombol/panel bergaya FlowPilot.
+- [x] `npx next build` lolos.
+- [x] Perintah `rg` di DESIGN_SYSTEM §3.4 tanpa hasil.
 
 **Verifikasi:** buka `http://localhost:3000`, periksa di DevTools bahwa `font-family` body = Geist dan `--color-primary` = `#1b8ce8`.
 
