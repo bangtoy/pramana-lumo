@@ -312,8 +312,8 @@ Baca dulu: `docs/tickets/README.md` (Definition of Done), `docs/PRD.md` §4.1–
 - Rencana: segmented Aktif/Arsip, tabel judul/tipe/jumlah item/status model; klik → tab Agent.
 
 **Selesai bila**
-- [ ] `LI-2026-10-29-DT07` tampil "DT-07 tidak layak jalan", roda dan lampu merah di truk, foto bukti terlihat.
-- [ ] Screenshot setara `screens/02, 03, 05` (tanpa kolom WO dan filter — itu P1/P2).
+- [x] `LI-2026-10-29-DT07` tampil "DT-07 is not roadworthy", roda dan lampu merah di truk, foto bukti terlihat.
+- [x] Screenshot ditinjau terhadap spesifikasi `screens/02, 03, 05` yang masih placeholder (tanpa kolom WO dan filter — itu P1/P2).
 
 **Prompt /goal**
 ```

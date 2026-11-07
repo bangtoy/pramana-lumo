@@ -1,0 +1,38 @@
+import assert from 'node:assert/strict';
+import { writeFileSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
+const { chromium } = await import(pathToFileURL(process.env.PLAYWRIGHT_MODULE).href);
+const base = `http://localhost:${process.env.PORT || 3002}`, id = 'LI-2026-10-29-DT07';
+const browser = await chromium.launch({ channel: 'chrome', headless: true });
+const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+const errors = []; page.on('pageerror', e => errors.push(e.message)); page.on('console', e => { if (e.type() === 'error') errors.push(e.text()); });
+try {
+  await page.goto(`${base}/supervisor/laporan`, { waitUntil: 'networkidle' });
+  await page.getByRole('link', { name: 'DT-07', exact: true }).click();
+  await page.getByRole('heading', { name: 'DT-07 is not roadworthy', exact: true }).waitFor();
+  await page.locator('.truck-svg [data-comp="ban_roda"][data-status="tidak_baik"]').first().waitFor();
+  assert.ok(await page.locator('.truck-svg [data-comp="lampu_reflector"][data-status="tidak_baik"]').count());
+  assert.equal(await page.locator('h1.t-display').count(), 1);
+  await page.screenshot({ path: '../docs/verification/screenshots/report-stop-1440.png' });
+  const tyre = page.locator('#finding-ITEM-3'); await tyre.getByRole('button', { name: /Tyres/ }).click();
+  await page.locator('.truck-svg [data-comp="ban_roda"].is-focus').first().waitFor();
+  await tyre.getByRole('button', { name: 'Mark handled', exact: true }).click(); await tyre.getByText('Handled', { exact: true }).waitFor();
+  const marked = await (await fetch(`${base}/api/laporan/${id}`)).json(); assert.equal(marked.hasil['ITEM-3'].ditangani, true); assert.equal(marked.hasil['ITEM-3'].stop, true);
+  await tyre.getByRole('button', { name: 'Mark unresolved' }).click(); await tyre.getByRole('button', { name: 'Mark handled' }).waitFor();
+  await tyre.getByRole('button', { name: 'Ask Lumo', exact: true }).click();
+  const oldAnswers = await tyre.locator('[role="log"] .bubble-pramana').count();
+  await tyre.getByRole('textbox', { name: 'Question about this finding' }).fill('What does this photo show, and can this truck be operated before the tyre is replaced?');
+  await tyre.getByRole('button', { name: 'Send finding question' }).click();
+  await page.waitForFunction(expected => document.querySelectorAll('#finding-ITEM-3 [role="log"] .bubble-pramana').length >= expected, oldAnswers + 1, { timeout: 120000 });
+  const report = await (await fetch(`${base}/api/laporan/${id}`)).json(); assert.ok(report.tanya['ITEM-3'].at(-1).text.length > 20); assert.equal(report.hasil['ITEM-3'].stop, true);
+  await page.screenshot({ path: '../docs/verification/screenshots/report-tanya-1440.png' });
+  await page.reload({ waitUntil: 'networkidle' }); await page.locator('#finding-ITEM-3').getByRole('button', { name: 'Ask Lumo' }).click();
+  assert.ok(await page.getByText(report.tanya['ITEM-3'].at(-1).text, { exact: true }).isVisible());
+  const response = await fetch(`${base}/api/laporan/${id}/pdf`); assert.equal(response.status, 200); assert.match(response.headers.get('content-type'), /application\/pdf/);
+  const pdf = Buffer.from(await response.arrayBuffer()); assert.equal(pdf.subarray(0, 5).toString(), '%PDF-'); writeFileSync('../docs/verification/inspection-DT07.pdf', pdf);
+  await page.goto(`${base}/supervisor/rencana`, { waitUntil: 'networkidle' }); await page.getByRole('button', { name: 'Archived', exact: true }).click(); await page.getByRole('heading', { name: 'No archived plans' }).waitFor(); await page.getByRole('button', { name: 'Active', exact: true }).click();
+  assert.ok(await page.getByRole('link', { name: 'P2H · U-type dump truck' }).isVisible());
+  assert.deepEqual(errors, []);
+  const result = { redComponents: ['ban_roda', 'lampu_reflector'], handledRetainsStop: true, findingThreadPersists: true, answer: report.tanya['ITEM-3'].at(-1).text, pdfBytes: pdf.length, errors };
+  writeFileSync('../docs/verification/reports-check.json', JSON.stringify(result, null, 2)); console.log(result);
+} finally { await browser.close(); }

@@ -1,3 +1,11 @@
 "use client";
-import { EmptyState } from "@/components/ui";
-export default function Page() { return <div className="px-6 pt-5 pb-10 space-y-4"><p className="t-data muted">Dashboard</p><h1 className="t-display">Inspection reports</h1><p className="t-body muted">Vehicle condition, findings and photo evidence in one place.</p><EmptyState title="Evidence for every inspection" pose="mencatat">Submitted inspections bring the condition of each vehicle into focus.</EmptyState></div>; }
+import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
+import { api, fmtDateTime } from "@/lib/client";
+import { counts, unitCode, verdict, type ReportView } from "@/lib/rules";
+import { EmptyState, ErrorState, ResultPills, Spinner, StopPill } from "@/components/ui";
+export default function Page() {
+  const query = useQuery({ queryKey: ['laporan', 'submitted'], queryFn: () => api<ReportView[]>('/api/laporan?status=terkirim'), refetchInterval: 5000 });
+  const reports = [...(query.data || [])].sort((a, b) => Number(!!counts(b).stop) - Number(!!counts(a).stop) || (b.submitted_at || '').localeCompare(a.submitted_at || ''));
+  return <div className="px-6 pt-5 pb-10 space-y-5"><header className="space-y-2"><p className="t-data muted">Dashboard</p><h1 className="t-display">Inspection reports</h1><p className="t-body muted">Vehicle condition, findings and photo evidence in one place.</p></header>{query.isLoading ? <Spinner/> : query.error ? <ErrorState error={query.error}/> : !reports.length ? <EmptyState title="No reports yet" pose="mencatat">Completed inspections will appear here, with STOP findings first.</EmptyState> : <div className="panel overflow-x-auto"><table className="w-full text-left min-w-[760px]"><thead><tr>{['Unit', 'Verdict', 'Results', 'Inspector', 'Submitted'].map(label => <th className="t-label muted font-normal px-4 py-3" key={label}>{label}</th>)}</tr></thead><tbody className="divide-y divide-[var(--color-line)]">{reports.map(report => <tr key={report.id}><td className="px-4 py-4 t-data"><Link className="text-[var(--color-primary)] underline-offset-4 hover:underline" href={`/supervisor/laporan/${report.id}`}>{unitCode(report.unit)}</Link></td><td className="px-4 py-4"><Link href={`/supervisor/laporan/${report.id}`} className={`t-body inline-flex items-center gap-2 ${counts(report).stop ? 'text-[var(--color-status-tidak-baik)]' : ''}`}>{!!counts(report).stop && <StopPill/>}{verdict(report).replace(`${unitCode(report.unit)} is `, '')}</Link></td><td className="px-4 py-4"><ResultPills counts={counts(report)}/></td><td className="px-4 py-4 t-body">{report.petugas}</td><td className="px-4 py-4 t-data muted">{fmtDateTime(report.submitted_at!)} WIB</td></tr>)}</tbody></table></div>}</div>;
+}

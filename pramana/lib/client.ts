@@ -47,8 +47,9 @@ export async function compressImage(file: File, maxSize = 1280): Promise<File> {
   } finally { bitmap.close(); }
 }
 
-export async function postTurn<T>(url: string, body: FormData, onStatus: (status: string) => void = () => {}, signal?: AbortSignal): Promise<T> {
-  const response = await fetch(url, { method: "POST", body, signal });
+export async function postTurn<T>(url: string, body: FormData | Record<string, unknown>, onStatus: (status: string) => void = () => {}, signal?: AbortSignal): Promise<T> {
+  const multipart = body instanceof FormData;
+  const response = await fetch(url, { method: "POST", body: multipart ? body : JSON.stringify(body), headers: multipart ? undefined : { 'Content-Type': 'application/json' }, signal });
   if (!response.ok) {
     const error = await response.json().catch(() => ({}));
     throw new Error(error.error || "Lumo could not respond. Please try again.");
