@@ -20,7 +20,7 @@ The current presentation follows the root README through its opening question, p
 - `../../design/DESIGN_SYSTEM.md`, `tokens.css`, and `design/screens/`: visual sources.
 - Implementation repo: `C:/Users/AndraApta/Desktop/projects/2026/next/pramana`, branch `lumo-design`, commit `c70e025`.
 - Source reviewed: `pramana/lib/rules.ts`, `pramana/lib/agents/inspektor.ts`, `pramana/lib/agents/analis.ts`, and `pramana/lib/work-order.ts` on that branch.
-- User-supplied deployment: [Pramana](https://p2h.apta.works/). Captures and navigation results appear in `assets/live/capture.json`.
+- User-supplied deployment: [Pramana](https://lumo.bangtoy.work/). Captures and navigation results appear in `assets/live/capture.json`.
 - [Official Indonesia hackathon guide](https://seaxopenai-hackathon-id.sea.com/): source for build direction names. The page requires JavaScript. Indexed excerpts and organizer pages mention Autonomous & Adaptive AI, AI-Native Products & Operations, and Deep Domain AI. The project-to-track mapping is an editorial assessment based on PRD features.
 
 A public search for the exact name `pramana-lumo` did not produce a verified product page with stronger evidence than the user's repo. Feature status therefore relies on the user-specified repo and deployment, rather than assumptions based on the product name or model memory.

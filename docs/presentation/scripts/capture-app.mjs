@@ -6,7 +6,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const out = path.join(root, 'assets/live');
 await mkdir(out, { recursive: true });
 const browser = await chromium.launch({ channel: process.env.PLAYWRIGHT_CHANNEL || 'chrome' });
-const evidence = { capturedAt: new Date().toISOString(), baseURL: 'https://p2h.apta.works', policy: 'Read-only navigation of existing records; no chat, report, or work order submitted. Avoid /supervisor/agent without a rencana ID because that page creates a draft on load.', pages: [] };
+const evidence = { capturedAt: new Date().toISOString(), baseURL: 'https://lumo.bangtoy.work', policy: 'Read-only navigation of existing records; no chat, report, or work order submitted. Avoid /supervisor/agent without a rencana ID because that page creates a draft on load.', pages: [] };
 const routes = [ ['home', '/', 1440, 900], ['laporan', '/supervisor/laporan', 1440, 900], ['report-detail', '/supervisor/laporan/LI-2026-10-29-DT07', 1440, 900], ['rencana', '/supervisor/rencana', 1440, 900], ['plan-detail', '/supervisor/agent?rencana=RI-DT-UTYPE-01', 1440, 900], ['work-order', '/supervisor/work-order', 1440, 900], ['ringkasan', '/supervisor', 1440, 900], ['petugas', '/petugas', 390, 844] ];
 for (const [name, route, width, height] of routes) {
   const page = await browser.newPage({ viewport: { width, height } });

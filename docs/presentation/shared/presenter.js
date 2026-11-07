@@ -9,7 +9,6 @@
   controls.innerHTML='<button id="pitchClock" type="button" aria-label="Start or pause the 6-minute timer" title="T: start / pause · R: reset">06:00</button><button id="notesToggle" type="button" aria-expanded="false" aria-controls="notesPanel" title="N: speaker notes">Notes</button><button id="fullScreenToggle" type="button" title="F: fullscreen">Fullscreen</button>';
   document.body.appendChild(controls);
   const notes=document.createElement('aside'); notes.id='notesPanel'; notes.hidden=true; notes.setAttribute('aria-label','Speaker notes'); document.body.appendChild(notes);
-  const help=document.createElement('div'); help.id='keyboardHelp'; help.textContent='← → slides · Esc gallery · N notes · F fullscreen · T timer'; document.body.appendChild(help);
   const clock=document.getElementById('pitchClock');
   let elapsed=0, runningSince=null;
   const readElapsed=()=>elapsed+(runningSince===null?0:performance.now()-runningSince);

@@ -6,6 +6,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const manifest=JSON.parse(await readFile(path.join(root,'manifest.json'),'utf8'));
 const timing=JSON.parse(await readFile(path.join(root,'timing.json'),'utf8'));
+const appBase='https://lumo.bangtoy.work/';
 const out=path.join(root,'verification');await mkdir(out,{recursive:true});
 const browser=await chromium.launch({channel:process.env.PLAYWRIGHT_CHANNEL||'chrome'});
 const page=await browser.newPage({viewport:{width:1920,height:1080},reducedMotion:'reduce'});
@@ -15,20 +16,24 @@ for(const item of manifest){
   const errors=[];const onError=e=>errors.push(e.message);page.on('pageerror',onError);
   await page.goto(pathToFileURL(path.join(root,item.file)).href,{waitUntil:'load'});
   await page.evaluate(()=>document.fonts.ready);
-  const details=await page.evaluate(()=>({
+  const details=await page.evaluate(appBase=>({
     title:document.title,
     images:[...document.images].filter(i=>!i.complete||!i.naturalWidth).map(i=>i.getAttribute('src')),
     headingCount:document.querySelectorAll('h1').length,
     fonts:{geist:document.fonts.check('400 30px Geist'),mono:document.fonts.check('400 20px "Geist Mono"')},
+    removedChrome:document.querySelectorAll('footer.source,#keyboardHelp,.keyboard-help,#counter,.counter').length,
+    brandLinks:[...document.querySelectorAll('a.brand')].map(link=>link.href),
+    invalidAppLinks:[...document.querySelectorAll('a.brand,.demo-links a')].filter(link=>link.matches('.brand')?link.href!==appBase:![new URL('petugas',appBase).href,new URL('supervisor/laporan',appBase).href].includes(link.href)).map(link=>({text:link.textContent.trim(),href:link.href})),
     overflow:[...document.querySelectorAll('h1,h2,h3,p,.source,.evidence-controls,.demo-tabs,.target-row,.rubric')].filter(el=>{const r=el.getBoundingClientRect();return r.bottom>1072||r.right>1920||r.left<0||r.top<0}).map(el=>({element:el.tagName,text:el.textContent.trim().slice(0,85),bottom:Math.round(el.getBoundingClientRect().bottom)}))
-  }));
+  }),appBase);
   await page.screenshot({path:path.join(out,path.basename(item.file,'.html')+'.png')});
-  if(errors.length||details.images.length||details.headingCount!==1||details.overflow.length)failures.push({file:item.file,errors,...details});
+  if(errors.length||details.images.length||details.headingCount!==1||details.overflow.length||details.removedChrome||details.brandLinks.length!==1||details.brandLinks[0]!==appBase||details.invalidAppLinks.length)failures.push({file:item.file,errors,...details});
   report.pages.push({file:item.file,errors,...details});page.off('pageerror',onError);
 }
 const index=pathToFileURL(path.join(root,'index.html')).href;
 const expect=(condition,label)=>{report.interactions.push({label,passed:!!condition});if(!condition)failures.push({interaction:label});};
 await page.goto(index+'?ov=grid');await page.waitForTimeout(300);
+expect(await page.locator('footer.source,#keyboardHelp,.keyboard-help,#counter,.counter').count()===0,'Presentation shell has no source footer, keyboard help, or slide counter');
 expect(await page.locator('#wall .card').count()===manifest.length,'Overview has every slide');
 await page.locator('#startBtn').click();
 expect(await page.locator('body').getAttribute('data-mode')==='present','Start enters presentation');
@@ -46,8 +51,8 @@ const inner=page.frameLocator('#frame');
 await inner.locator('[data-demo="clarify"]').click();expect(await inner.locator('#demoStatus').innerText()==='Evidence detail supplied','Missing detail resolved in preview');
 await inner.locator('[data-demo="report"]').click();expect(await inner.locator('#demoStatus').innerText()==='Structured report','Supervisor report stage');
 await inner.locator('[data-demo="input"]').click();expect(await inner.locator('#demoStatus').innerText()==='Required detail missing','Demo preview resets');
-expect((await inner.locator('a').filter({hasText:'Open field operator app'}).getAttribute('href')).endsWith('/petugas'),'Field operator app link');
-expect((await inner.locator('a').filter({hasText:'Open supervisor reports'}).getAttribute('href')).endsWith('/supervisor/laporan'),'Supervisor reports link');
+expect(await inner.locator('a').filter({hasText:'Open field operator app'}).evaluate(link=>link.href)===new URL('petugas',appBase).href,'Field operator app link uses the exact current application URL');
+expect(await inner.locator('a').filter({hasText:'Open supervisor reports'}).evaluate(link=>link.href)===new URL('supervisor/laporan',appBase).href,'Supervisor reports link uses the exact current application URL');
 await inner.locator('[data-demo="clarify"]').focus();await page.keyboard.press('ArrowRight');await page.waitForTimeout(100);expect(new URL(page.url()).hash==='#6','Keyboard works after focus enters iframe');
 await page.keyboard.press('Escape');await page.waitForFunction(()=>document.body.dataset.mode==='overview');expect(await page.locator('body').getAttribute('data-mode')==='overview','Escape returns to overview from iframe');
 await page.goto(index+'?ov=gallery');await page.waitForTimeout(250);expect(await page.locator('#gallery .card').count()>manifest.length,'3D gallery builds from thumbnails');
@@ -58,6 +63,7 @@ for(const viewport of [{width:1440,height:900},{width:1280,height:720},{width:39
   await page.setViewportSize(viewport);await page.goto(index+'#5');await page.waitForTimeout(100);
   const bounds=await page.locator('#stage').boundingBox();
   expect(bounds.x>=-1&&bounds.y>=-1&&bounds.x+bounds.width<=viewport.width+1&&bounds.y+bounds.height<=viewport.height+1,`Presentation fits ${viewport.width}x${viewport.height}`);
+  if(viewport.width===1440)await page.screenshot({path:path.join(out,'presentation-1440.png')});
 }
 await page.setViewportSize({width:1440,height:900});await page.goto(index+'?ov=grid');await page.waitForTimeout(200);await page.screenshot({path:path.join(out,'overview-grid.png')});
 await page.context().setOffline(true);await page.goto(index+'#5');await page.frameLocator('#frame').locator('#demoScreen').waitFor();

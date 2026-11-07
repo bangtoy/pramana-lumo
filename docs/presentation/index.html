@@ -170,8 +170,6 @@ window.DECK_TIMING = {"totalSeconds":360,"contentSeconds":330,"demoSeconds":90,"
   /* ════════ 演示模式 ════════ */
   #stage { position: fixed; top: 50%; left: 50%; transform-origin: top left; will-change: transform; background: #fff; box-shadow: 0 10px 60px rgba(0,0,0,0.4); }
   #stage iframe { width: 100%; height: 100%; border: 0; display: block; background: #fff; }
-  .counter { position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.65); color: #fff; padding: 6px 14px; border-radius: 999px; font-size: 13px; letter-spacing: 0.05em; font-variant-numeric: tabular-nums; z-index: 100; opacity: 0.7; }
-  .counter .label { color: rgba(255,255,255,0.7); margin-left: 8px; }
   .overview-btn { position: fixed; top: 20px; left: 20px; background: rgba(0,0,0,0.55); color: rgba(255,255,255,0.85); border: 0; padding: 7px 14px; border-radius: 999px; font-size: 13px; font-family: inherit; cursor: pointer; z-index: 100; opacity: 0.6; }
   .overview-btn:hover { opacity: 1; }
   .nav-zone { position: fixed; top: 0; bottom: 0; width: 15%; cursor: pointer; z-index: 50; }
@@ -185,7 +183,7 @@ window.DECK_TIMING = {"totalSeconds":360,"contentSeconds":330,"demoSeconds":90,"
     html, body { background: #fff; overflow: visible; height: auto; }
     body[data-mode] .overview { display: none !important; }
     #stage { position: static; transform: none !important; box-shadow: none; }
-    .counter, .nav-zone, .overview-btn, .start-btn { display: none !important; }
+    .nav-zone, .overview-btn, .start-btn { display: none !important; }
     .print-stack { display: block; }
     .print-stack iframe { width: 1920px; height: 1080px; page-break-after: always; display: block; }
   }
@@ -212,7 +210,6 @@ window.DECK_TIMING = {"totalSeconds":360,"contentSeconds":330,"demoSeconds":90,"
   <button class="overview-btn" id="overviewBtn">Back to gallery</button>
   <div class="nav-zone left"  id="navL"><div class="nav-hint">‹</div></div>
   <div class="nav-zone right" id="navR"><div class="nav-hint">›</div></div>
-  <div class="counter" id="counter">1 / 1</div>
 </div>
 
 <div class="print-stack" id="printStack" style="display:none;"></div>
@@ -226,7 +223,6 @@ window.DECK_TIMING = {"totalSeconds":360,"contentSeconds":330,"demoSeconds":90,"
   const DRIFT_SEC = window.GALLERY_DRIFT_SECONDS || 80;
   const stage = document.getElementById('stage');
   const frame = document.getElementById('frame');
-  const counter = document.getElementById('counter');
   const printStack = document.getElementById('printStack');
   const wall = document.getElementById('wall');
   const gallery = document.getElementById('gallery');
@@ -378,7 +374,6 @@ window.DECK_TIMING = {"totalSeconds":360,"contentSeconds":330,"demoSeconds":90,"
     current = idx;
     if (frame.getAttribute('src') !== deck[idx].file) frame.src = deck[idx].file;
     document.dispatchEvent(new CustomEvent('pramana:slide', { detail: idx }));
-    counter.innerHTML = (idx + 1) + ' / ' + deck.length + ' <span class="label">' + (deck[idx].label || '') + '</span>';
     try { localStorage.setItem(storageKey, String(idx)); } catch (_) {}
     if (location.hash !== '#' + (idx + 1)) history.replaceState(null, '', '#' + (idx + 1));
   }

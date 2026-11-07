@@ -33,9 +33,11 @@ The demonstration uses a pre-operational inspection as the application example. 
 3. Review the report and evidence in the supervisor view over 25 seconds.
 4. Return to the presentation over 10 seconds and continue to Technology.
 
-The slide provides a prepared preview with sample photos and an existing English report screenshot. Its three buttons select Field input, Missing detail resolved, and Supervisor report. The application links open the field operator and supervisor views at [p2h.apta.works](https://p2h.apta.works/). Identify the prepared preview when using it during the presentation.
+The slide provides a prepared preview with sample photos and an existing English report screenshot. Its three buttons select Field input, Missing detail resolved, and Supervisor report. The application links open the field operator and supervisor views at [lumo.bangtoy.work](https://lumo.bangtoy.work/). Identify the prepared preview when using it during the presentation.
 
 ## Controls
+
+Slides show their content without source footers, a keyboard shortcut strip, or a slide counter. Keyboard controls remain available.
 
 Click Start presentation to begin the six-minute timer. Click any gallery slide to open that section. The gallery supports Grid and 3D Gallery views, and navigation restores the last slide on refresh.
 
