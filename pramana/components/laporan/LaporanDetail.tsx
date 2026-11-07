@@ -37,7 +37,7 @@ export function LaporanDetail({ id, stacked = false }: { id: string; stacked?: b
     {create.error && <ErrorState error={create.error}/>}
     <VerdictStrip report={report}/>
     <div className={`grid gap-5 ${stacked ? '' : '@4xl:grid-cols-[minmax(0,1fr)_420px]'}`}>
-      <section className="min-w-0"><div className="panel p-3"><VehicleModel modelId={report.rencana_snapshot?.model_id || null} statuses={statuses} focus={items.find(i => i.id === selected)?.comp_id} onPick={pick} className={stacked ? 'h-56' : 'h-[min(60vh,580px)]'} tiltControl={!stacked}/></div><div className="mt-3"><Legend/></div></section>
+      <section aria-label="Vehicle model" className={`min-w-0 ${stacked ? '' : '@4xl:sticky @4xl:top-5 @4xl:self-start'}`}><div className="panel p-3"><VehicleModel modelId={report.rencana_snapshot?.model_id || null} statuses={statuses} focus={items.find(i => i.id === selected)?.comp_id} onPick={pick} className={stacked ? 'h-56' : 'h-[min(60vh,580px)]'} tiltControl={!stacked}/></div><div className="mt-3"><Legend/></div></section>
       <section className="space-y-3 min-w-0" aria-label="Inspection findings"><h2 className="t-heading">Findings by item</h2>{findings.map(item => {
         const finding = report.hasil[item.id]; if (!finding) return null;
         const expanded = selected === item.id;

@@ -1,7 +1,8 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { ArrowDown, ArrowUp, Box, Check, Pencil, Plus, Trash2, X } from "lucide-react";
 import type { ItemRencana, ModelKendaraan } from "@/lib/contracts";
+import { Select } from "@/components/ui/Select";
 const iconButton = "w-8 h-8 grid place-items-center rounded-md muted hover:bg-[var(--color-surface-muted)] disabled:opacity-40";
 const sources = { spec: "Spec sheet", standar: "Standard", form_lama: "Existing form", manual: "Manual" };
 
@@ -41,17 +42,18 @@ export function PlanItems({ items, model, selected, select, hover, save, disable
 function ItemForm({ item, model, submit, cancel, disabled }: { item?: ItemRencana; model?: ModelKendaraan; submit: (value: ItemRencana) => Promise<void>; cancel: () => void; disabled: boolean }) {
   const [draft, setDraft] = useState<ItemRencana>(item ?? { id: `ITEM-${crypto.randomUUID()}`, urutan: 0, nama: "", sumber: "manual", yang_dicek: "", bukti: [{ jenis: "foto", deskripsi: "", wajib: true }], kondisi_stop: null, comp_id: null });
   const name = useRef<HTMLInputElement>(null);
+  const componentId = useId();
   useEffect(() => { name.current?.focus(); }, []);
   return <form className="px-4 pb-2 space-y-3" onSubmit={async event => { event.preventDefault(); try { await submit(draft); } catch {} }}>
     <label className="block t-label">Item name<input ref={name} className="input t-body w-full mt-1" value={draft.nama} required maxLength={160} onChange={e => setDraft({ ...draft, nama: e.target.value })}/></label>
     <label className="block t-label">What to check<textarea className="input t-body w-full mt-1" rows={3} value={draft.yang_dicek} required maxLength={3000} onChange={e => setDraft({ ...draft, yang_dicek: e.target.value })}/></label>
     <fieldset className="space-y-2"><legend className="t-label mb-1">Evidence requirements</legend>{draft.bukti.map((b, index) => <div key={index} className="rounded-lg border border-[var(--color-line)] p-2 space-y-2">
-      <div className="flex gap-2"><select aria-label={`Evidence ${index + 1} type`} className="input t-body min-w-0 flex-1" value={b.jenis} onChange={e => setDraft({ ...draft, bukti: draft.bukti.map((v, i) => i === index ? { ...v, jenis: e.target.value as "foto" | "jawaban" } : v) })}><option value="foto">Photo</option><option value="jawaban">Answer</option></select><button type="button" className={iconButton} aria-label={`Remove evidence ${index + 1}`} onClick={() => setDraft({ ...draft, bukti: draft.bukti.filter((_, i) => i !== index) })}><X size={15}/></button></div>
+      <div className="flex gap-2"><Select aria-label={`Evidence ${index + 1} type`} className="flex-1" value={b.jenis} disabled={disabled} options={[{ value: "foto", label: "Photo" }, { value: "jawaban", label: "Answer" }]} onChange={value => setDraft({ ...draft, bukti: draft.bukti.map((v, i) => i === index ? { ...v, jenis: value as "foto" | "jawaban" } : v) })}/><button type="button" className={iconButton} aria-label={`Remove evidence ${index + 1}`} onClick={() => setDraft({ ...draft, bukti: draft.bukti.filter((_, i) => i !== index) })}><X size={15}/></button></div>
       <input aria-label={`Evidence ${index + 1} description`} placeholder="Describe the evidence" className="input t-body w-full" required value={b.deskripsi} onChange={e => setDraft({ ...draft, bukti: draft.bukti.map((v, i) => i === index ? { ...v, deskripsi: e.target.value } : v) })}/>
       <label className="t-body-sm flex gap-2 items-center"><input type="checkbox" checked={b.wajib} onChange={e => setDraft({ ...draft, bukti: draft.bukti.map((v, i) => i === index ? { ...v, wajib: e.target.checked } : v) })}/>Required</label>
     </div>)}<button type="button" className="btn btn-secondary t-body" onClick={() => setDraft({ ...draft, bukti: [...draft.bukti, { jenis: "foto", deskripsi: "", wajib: true }] })}><Plus size={14}/>Add evidence</button></fieldset>
     <label className="block t-label">STOP condition<textarea className="input t-body w-full mt-1" rows={2} value={draft.kondisi_stop || ""} onChange={e => setDraft({ ...draft, kondisi_stop: e.target.value || null })}/></label>
-    <label className="block t-label">Model component<select className="input t-body w-full mt-1" value={draft.comp_id || ""} onChange={e => setDraft({ ...draft, comp_id: e.target.value || null })}><option value="">Not linked</option>{model?.komponen.map(c => <option key={c.comp_id} value={c.comp_id}>{c.label}</option>)}</select></label>
+    <div><label htmlFor={componentId} id={`${componentId}-label`} className="block t-label">Model component</label><Select id={componentId} aria-labelledby={`${componentId}-label`} className="w-full mt-1" value={draft.comp_id || ""} disabled={disabled} options={[{ value: "", label: "Not linked" }, ...(model?.komponen.map(c => ({ value: c.comp_id, label: c.label })) ?? [])]} onChange={value => setDraft({ ...draft, comp_id: value || null })}/></div>
     <p className="t-body-sm muted">Safety checks always require a photo and a STOP condition.</p>
     <div className="flex gap-2"><button className="btn btn-primary t-body" disabled={disabled || !draft.nama.trim() || !draft.yang_dicek.trim()}><Check size={15}/>Save item</button><button className="btn btn-secondary t-body" type="button" onClick={cancel}>Cancel</button></div>
   </form>;
