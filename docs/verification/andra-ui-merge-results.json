@@ -1,0 +1,130 @@
+{
+  "date": "2026-11-07",
+  "sourceBranch": "origin/andra",
+  "sourceCommit": "d035878",
+  "mainBefore": "b77cc9e",
+  "gitConflicts": [],
+  "typecheck": "passed",
+  "tests": {
+    "passed": 34,
+    "failed": 0
+  },
+  "productionBuild": "passed",
+  "planner": {
+    "historyScroll": {
+      "height": 466,
+      "scroll": 1558,
+      "width": 223,
+      "scrollbar": "thin",
+      "overscroll": "contain"
+    },
+    "menuNotClipped": true,
+    "selectMouseKeyboardAndSave": true,
+    "attachmentHoverPressSelectedDisabled": true,
+    "fileOnlyPendingPreview": true,
+    "dockAndPin": true,
+    "savedPreviewAfterReload": true,
+    "objectUrlsRevoked": true,
+    "pdfAndRemoval": true,
+    "retryPreservesDraft": true,
+    "noHorizontalOverflow390": true,
+    "errors": []
+  },
+  "sticky": {
+    "stickyOnWideReport": true,
+    "desktop": {
+      "x": 264,
+      "y": 20,
+      "width": 664,
+      "height": 596
+    },
+    "stackedOnMobile": true,
+    "noPageOverflow": true,
+    "errors": []
+  },
+  "recommendations": {
+    "base": "http://localhost:3002",
+    "conversationId": "TL-2c0ab6aa-734c-4a6f-b069-d06685ceeda5",
+    "clickableSavedConversation": true,
+    "overdueIds": [
+      "WO-RW-07",
+      "WO-RW-08",
+      "WO-RW-06"
+    ],
+    "awaitingUnits": [
+      "DT-05",
+      "DT-08"
+    ],
+    "filtersSurviveReload": true,
+    "clearFilters": true,
+    "emptySelection": true,
+    "dailyRecommendations": true,
+    "keyboardActivation": true,
+    "mobileNoOverflow": true,
+    "mobileClosesAfterNavigation": true,
+    "navigationMutations": 0,
+    "recordsUnchanged": true,
+    "genericFollowUp": "Browser route fixture; expected question posted once, disabled while pending",
+    "errors": [],
+    "failures": []
+  },
+  "composer": {
+    "390": {
+      "initial": {
+        "height": 96,
+        "scroll": 94,
+        "client": 94,
+        "font": "16px",
+        "width": 335
+      },
+      "grown": {
+        "height": 208,
+        "scroll": 206,
+        "client": 206,
+        "font": "16px",
+        "width": 335
+      },
+      "expanded": {
+        "height": 464.1875,
+        "scroll": 462,
+        "client": 462,
+        "font": "16px",
+        "width": 335
+      },
+      "shiftEnter": true,
+      "expandReducePreservesText": true,
+      "collapseReopenPreservesText": true,
+      "sendResetsHeight": true,
+      "noOverflow": true
+    },
+    "1440": {
+      "initial": {
+        "height": 96,
+        "scroll": 94,
+        "client": 94,
+        "font": "16px",
+        "width": 335
+      },
+      "grown": {
+        "height": 208,
+        "scroll": 206,
+        "client": 206,
+        "font": "16px",
+        "width": 335
+      },
+      "expanded": {
+        "height": 480,
+        "scroll": 478,
+        "client": 478,
+        "font": "16px",
+        "width": 335
+      },
+      "shiftEnter": true,
+      "expandReducePreservesText": true,
+      "collapseReopenPreservesText": true,
+      "sendResetsHeight": true,
+      "noOverflow": true
+    },
+    "errors": []
+  }
+}

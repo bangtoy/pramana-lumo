@@ -52,7 +52,9 @@ try {
   await page.getByLabel('Item name', { exact: true }).fill('Windscreen cleaning');
   await page.getByRole('textbox', { name: 'What to check', exact: true }).fill('Check visibility.');
   await page.getByLabel('Evidence 1 description').fill('Photo of the windscreen.');
-  await page.getByRole('combobox', { name: 'Model component', exact: true }).selectOption('kabin');
+  await page.getByRole('combobox', { name: 'Model component', exact: true }).click();
+  const componentLabel = (await (await page.request.get(`${base}/api/models/${seed.model_id}`)).json()).komponen.find(component => component.comp_id === 'kabin').label;
+  await page.getByRole('option', { name: componentLabel, exact: true }).click();
   await page.getByRole('button', { name: 'Save item', exact: true }).click();
   await page.getByRole('button', { name: 'Delete Windscreen cleaning', exact: true }).click();
   await page.getByRole('button', { name: 'Delete Windscreen cleaning', exact: true }).waitFor({ state: 'detached' });

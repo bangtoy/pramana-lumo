@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Box, ChevronDown, FileText, Sparkles } from "lucide-react";
 import type { ChatMessage, ItemRencana, ModelKendaraan, RencanaInspeksi, TurnResponse } from "@/lib/contracts";
+import type { PlannerMessage } from "@/components/supervisor/PlannerAttachment";
 import { api, postJson, postTurn } from "@/lib/client";
 import { ErrorState, MascotHero, Spinner } from "@/components/ui";
 import { VehicleModel } from "@/components/vehicle-model/VehicleModel";
@@ -42,7 +43,7 @@ function PlanWorkspace({ id, chatMode }: { id: string; chatMode: string | null }
   const [selected, setSelected] = useState<string | null>(null), [hovered, setHovered] = useState<string | null>(null);
   const [tab, setTab] = useState("items"), [menu, setMenu] = useState(false), [picker, setPicker] = useState(false);
   const [pinPreference, setPinPreference] = useState(false), [wide, setWide] = useState(false);
-  const [status, setStatus] = useState(""), [flashed, setFlashed] = useState<string[]>([]), [optimistic, setOptimistic] = useState<ChatMessage[]>([]);
+  const [status, setStatus] = useState(""), [flashed, setFlashed] = useState<string[]>([]), [optimistic, setOptimistic] = useState<PlannerMessage[]>([]);
   const [notice, setNotice] = useState<string | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const pinned = pinPreference && wide;
@@ -66,7 +67,7 @@ function PlanWorkspace({ id, chatMode }: { id: string; chatMode: string | null }
   const turn = useMutation({ mutationFn: async ({ text, file }: { text: string; file?: File }) => {
     const form = new FormData(); form.set("text", text); if (file) form.set("file", file);
     return postTurn<TurnResponse<RencanaInspeksi>>(`/api/rencana/${encodeURIComponent(id)}/turn`, form, setStatus);
-  }, onMutate: ({ text }) => { setOptimistic([{ id: "pending", role: "user", text, created_at: new Date().toISOString() }]); setStatus("Lumo is reading…"); }, onSuccess: result => {
+  }, onMutate: ({ text, file }) => { setOptimistic([{ id: "pending", role: "user", text, pendingFile: file, created_at: new Date().toISOString() }]); setStatus(file ? "Reading the attachment…" : "Lumo is reading…"); }, onSuccess: result => {
     setFlashed(result.data.items.filter(i => !plan?.items.some(old => old.id === i.id)).map(i => i.id));
     cache.setQueryData(["rencana", id], { ...result.data, messages: result.messages });
     void cache.invalidateQueries({ queryKey: ["rencana"], exact: true }); setTab("items");
