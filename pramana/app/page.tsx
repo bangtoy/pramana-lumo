@@ -6,7 +6,7 @@ export default function Home() {
   return <main className="min-h-dvh bg-[var(--color-rail)] px-6 py-10 flex items-center justify-center">
     <div className="w-full max-w-2xl">
       <header className="mb-8 flex items-center gap-3">
-        <Image src="/icon.svg" alt="" width={28} height={28} className="rounded-[7px] shadow-[var(--shadow-primary-rest)]" />
+        <Image src="/icon-lens-bot.svg" alt="" width={28} height={28} className="rounded-[7px] shadow-[var(--shadow-primary-rest)]" />
         <h1 className="t-title">Pramana</h1>
       </header>
       <p className="t-body muted mb-6 max-w-prose">Complete inspections, backed by evidence. Choose your role to get started with Lumo.</p>
