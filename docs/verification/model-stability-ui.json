@@ -1,0 +1,8 @@
+{
+  "repairStage": true,
+  "stageSurvivesReviewEvents": true,
+  "desktopAndMobile": true,
+  "noOverflow": true,
+  "fixture": true,
+  "errors": []
+}

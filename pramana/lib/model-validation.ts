@@ -11,6 +11,20 @@ export function requireGeometryAudit(raw: unknown) {
   return report.data;
 }
 
+/** Validate the kit's complete report, not a generator's choice of console wording. */
+export function requireIndependentAudit(exitCode: number | null, output: string, quality: unknown) {
+  const checks = ['clearance', 'clearance apart', 'terminals', 'loose ends', 'screen folds', 'support', 'depth order', 'through in mid-flight', 'self-overlap', 'wobble', 'saddles off their host apart', 'stand-in shapes', 'crowding'];
+  const lines = output.replace(/\r/g, '').split('\n');
+  const complete = checks.every(check => {
+    const summaries = lines.filter(line => line.startsWith(`${check}: `));
+    if (summaries.length !== 1) return false;
+    const counts = summaries[0].slice(check.length + 2).match(/\d+/g) || [];
+    return counts.length === (check === 'support' ? 3 : 1) && counts.every(count => Number(count) === 0);
+  });
+  if (exitCode !== 0 || !complete || /audit failed/i.test(output)) throw new Error('The independent Anatomy audit did not pass. The draft is retained for repair.');
+  return requireGeometryAudit(quality);
+}
+
 /** XML is parsed without external entities; active and externally loaded content is rejected. */
 export async function inspectModelSvg(svg: string): Promise<{ components: string[]; frames: number[]; shapes: number }> {
   if (Buffer.byteLength(svg) > 5_000_000) throw new Error("Model SVG exceeds the 5 MB limit.");

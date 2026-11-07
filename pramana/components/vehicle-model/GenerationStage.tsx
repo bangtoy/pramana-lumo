@@ -4,7 +4,8 @@ import type { ModelKendaraan } from "@/lib/contracts";
 import { ErrorState, MascotAvatar } from "@/components/ui";
 import { VehicleModel } from "./VehicleModel";
 export function GenerationStage({ model }: { model: ModelKendaraan }) {
-  const stage = model.status === "gagal" ? "Generation failed" : model.status === "siap" ? "Model ready" : model.log?.some(l => /Refining/.test(l.teks)) ? "Refining the model" : (model.log?.length || 0) > 1 ? "Building your vehicle" : "Queued for generation";
+  const phase = model.log?.filter(entry => entry.jenis === 'fase' && /Repairing|Refining|Building|Queued/.test(entry.teks)).at(-1)?.teks || '';
+  const stage = model.status === "gagal" ? "Generation failed" : model.status === "siap" ? "Model ready" : /Repairing/.test(phase) ? "Repairing your model" : model.log?.some(l => /Refining/.test(l.teks)) ? "Refining the model" : (model.log?.length || 0) > 1 ? "Building your vehicle" : "Queued for generation";
   return <div className="relative h-full flex flex-col overflow-hidden">
     {model.status === "proses" && <BuildPoints/>}
     {model.pratinjau_ref && <div className="absolute inset-0 opacity-35 blur-[2px] pointer-events-none" aria-hidden="true"><VehicleModel modelId={model.id} version={model.updated_at} pratinjau quiet tiltControl={false} className="h-full"/></div>}

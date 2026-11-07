@@ -1,0 +1,21 @@
+{
+  "modelId": "MDL-6ee58b7d-3503-403d-b33e-11714e261740",
+  "status": "siap",
+  "seconds": 185,
+  "message": "Model ready. Select an inspection item to highlight its component.",
+  "items": 10,
+  "mapped": 10,
+  "automaticRepair": false,
+  "phases": [
+    "Queued for model generation",
+    "Building the vehicle from its specification and inspection items",
+    "Reviewing the model and component mapping",
+    "Reviewing the model and component mapping",
+    "Reviewing the model and component mapping",
+    "Reviewing the model and component mapping",
+    "Reviewing the model and component mapping",
+    "Reviewing the model and component mapping",
+    "Reviewing the model and component mapping",
+    "Refining and validating the final model (attempt 1 of 2)"
+  ]
+}
