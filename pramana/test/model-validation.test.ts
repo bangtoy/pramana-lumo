@@ -14,3 +14,21 @@ test("model acceptance requires parsed SVG, complete manifest and item mapping",
   await assert.rejects(inspectModelSvg(svg.replace("</g>", '<path fill="url(//evil.invalid/x)"/></g>')), /active content/);
   await assert.rejects(inspectModelSvg(svg.replace("</svg>", "")), /not valid/);
 });
+
+test("a drawn component may be outside the inspection plan when every item is mapped", async () => {
+  const unmapped = { comp_id: "step", label: "Access step", item_ids: [] };
+  const withStep = svg.replace("</svg>", '<g data-comp="step"><rect x="0" y="2" width="1" height="1"/></g></svg>');
+  const draft = { ...manifest, komponen: [...manifest.komponen, unmapped] };
+
+  assert.deepEqual(await validateModel(withStep, draft, ["ITEM-1"]), draft);
+  await assert.rejects(validateModel(withStep, draft, ["ITEM-1", "ITEM-2"]), /Every inspection item/);
+  await assert.rejects(validateModel(svg, draft, ["ITEM-1"]), /missing from the drawing/);
+  const unknown = { ...draft, komponen: [...manifest.komponen, { ...unmapped, item_ids: ["ITEM-2"] }] };
+  await assert.rejects(validateModel(withStep, unknown, ["ITEM-1"]), /unknown inspection item/);
+});
+
+test("generated SVGs can use a single literal hex fill in a style attribute", async () => {
+  const withFill = svg.replace("<rect ", '<rect style="fill:#66686a" ');
+  assert.deepEqual(await validateModel(withFill, manifest, ["ITEM-1"]), manifest);
+  await assert.rejects(inspectModelSvg(withFill.replace("#66686a", "#66686a;opacity:0")), /not valid/);
+});

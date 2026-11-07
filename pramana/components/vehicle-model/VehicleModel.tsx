@@ -17,8 +17,16 @@ export function parseSafeSvg(source:string):SVGSVGElement {
   for(const element of [doc.documentElement,...doc.documentElement.querySelectorAll("*")]) {
     if(!tags.has(element.localName)||element.namespaceURI!=="http://www.w3.org/2000/svg") {element.remove();continue;}
     for(const attr of [...element.attributes]) {
-      // Anatomy uses only these two local paint declarations for real fades.
-      if(attr.name==="style"&&/^(stroke:url\(#[\w-]+\)|stop-color:var\(--anatomy-(hi|mid|lo|faint|lit)\));?$/.test(attr.value))continue;
+      if(attr.name==="style") {
+        // Presentation attributes let Anatomy classes override paint for highlighting.
+        const solidFill=/^fill:(#[0-9A-Fa-f]{6});?$/.exec(attr.value);
+        if(solidFill) {
+          element.setAttribute("fill",solidFill[1]);
+          element.removeAttribute("style");
+          continue;
+        }
+        if(/^(stroke:url\(#[\w-]+\)|stop-color:var\(--anatomy-(hi|mid|lo|faint|lit)\));?$/.test(attr.value))continue;
+      }
       if(!attrs.has(attr.name)||/[<>]|(?:javascript|data|https?|file):|url\((?!#[\w-]+\))/i.test(attr.value)) element.removeAttribute(attr.name);
     }
   }
