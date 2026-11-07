@@ -1,0 +1,420 @@
+{
+  "case": "pending",
+  "reportId": "LI-04593f75-be9a-4df1-8589-aea3431d578a",
+  "note": "Actual agent and original photos. Operator accounts are simulation inputs, not physical checks by the test runner.",
+  "turns": [
+    {
+      "text": "I am Batch pending, at Riau. Use RI-DT-UTYPE-01 for QA-BATCH-pending. The truck is safely parked, isolated and chocked; inspections are from a safe position with the mechanical body prop engaged where required.",
+      "seconds": 5.745,
+      "photos": [],
+      "reply": "Thank you, Batch pending—I’ll use the U-type dump truck checklist and its photo requirements shown below. Please send up to five photos, starting with the cabin safety equipment and a close-up of the extinguisher gauge and expiry label.",
+      "quickReplies": [],
+      "checklist": {
+        "kind": "overview",
+        "items": [
+          {
+            "id": "ITEM-1",
+            "name": "Cabin & safety equipment",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-2",
+            "name": "Brakes & air system",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-3",
+            "name": "Tyres & wheel nuts",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-4",
+            "name": "Dump body",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-5",
+            "name": "Hydraulic cylinder",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-6",
+            "name": "Body safety prop",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-7",
+            "name": "Tailgate & latch",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-8",
+            "name": "Lights & reflectors",
+            "photo_required": true,
+            "state": "pending"
+          }
+        ]
+      },
+      "findings": {},
+      "status": "berjalan"
+    },
+    {
+      "text": "I checked the photographed visible parts from a safe position: tyres and nuts intact on both sides, body welds and mounts without cracks, hydraulics dry, prop straight and locked. Cabin photo is included for documentation. Please review every image.",
+      "seconds": 19.071,
+      "photos": [
+        {
+          "source": "Normal/03-Ban-dan-Roda.jpg",
+          "bytes": 261149,
+          "sha256": "d8fb3df3579907e6bd84db792910ffe089002ababaffeb7fa6d562fa90fbbe90",
+          "fileId": "FILE-50497f88-96a0-4738-9490-13f613d0e8fd"
+        },
+        {
+          "source": "Normal/01-Kabin-dan-Safety.jpg",
+          "bytes": 127648,
+          "sha256": "4a7c45980ea3c22beed331a2a47f30d2506bac8f64e01a9176a9c76a7b0f98a2",
+          "fileId": "FILE-af56072e-1031-43a5-83f0-b6eba8522a2e"
+        },
+        {
+          "source": "Normal/05-Silinder-Hidraulik.jpg",
+          "bytes": 167184,
+          "sha256": "1f47f937ed1022a3166ceb16e75fe5ee4beeefc926cb138cab4ef5b68949c78b",
+          "fileId": "FILE-2c54e5b1-0d18-48b0-9c22-df704945ffea"
+        },
+        {
+          "source": "Normal/04-Bak-Dump.jpg",
+          "bytes": 175255,
+          "sha256": "29d7094ce5ecaa25d6901f1363ca41a5a9288a569fc966b4d795ccf57da95205",
+          "fileId": "FILE-aeee5567-18c6-4edd-89f5-efc10281c119"
+        },
+        {
+          "source": "Normal/06-Safety-Bak.jpg",
+          "bytes": 211431,
+          "sha256": "c88fb85616172bcb9b569a5fecb10a810416480ef6cd6f0ceef6bb8e03fbfa10",
+          "fileId": "FILE-06f73fe5-e02c-4343-b1a9-28b43ede2938"
+        }
+      ],
+      "reply": "Batch pending, I reviewed all five photos and recorded four checks as good. For the cabin, can you confirm the seat belt and mirrors are sound, the horn works, and the extinguisher gauge is green and its expiry is current?",
+      "quickReplies": [
+        "I checked: belt and mirrors sound, horn works, gauge green, extinguisher in date",
+        "I checked and found a defect",
+        "I could not check safely"
+      ],
+      "checklist": {
+        "kind": "progress",
+        "items": [
+          {
+            "id": "ITEM-1",
+            "name": "Cabin & safety equipment",
+            "photo_required": true,
+            "state": "photo_received"
+          },
+          {
+            "id": "ITEM-2",
+            "name": "Brakes & air system",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-3",
+            "name": "Tyres & wheel nuts",
+            "photo_required": true,
+            "state": "recorded",
+            "status": "baik",
+            "stop": false
+          },
+          {
+            "id": "ITEM-4",
+            "name": "Dump body",
+            "photo_required": true,
+            "state": "recorded",
+            "status": "baik",
+            "stop": false
+          },
+          {
+            "id": "ITEM-5",
+            "name": "Hydraulic cylinder",
+            "photo_required": true,
+            "state": "recorded",
+            "status": "baik",
+            "stop": false
+          },
+          {
+            "id": "ITEM-6",
+            "name": "Body safety prop",
+            "photo_required": true,
+            "state": "recorded",
+            "status": "baik",
+            "stop": false
+          },
+          {
+            "id": "ITEM-7",
+            "name": "Tailgate & latch",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-8",
+            "name": "Lights & reflectors",
+            "photo_required": true,
+            "state": "pending"
+          }
+        ]
+      },
+      "findings": {
+        "ITEM-3": {
+          "status": "baik",
+          "stop": false,
+          "catatan": "Photo shows rear tyre tread, sidewalls and wheel nuts with indicators; no obvious bulge, exposed cord or missing nut in this view. Inspector reports tyres and nuts checked and intact on both sides.",
+          "bukti_ids": [
+            "FILE-50497f88-96a0-4738-9490-13f613d0e8fd"
+          ],
+          "alasan": null,
+          "dicatat_at": "2026-11-07T08:30:42.443Z",
+          "ditangani": false
+        },
+        "ITEM-4": {
+          "status": "baik",
+          "stop": false,
+          "catatan": "Photos show body floor, underside and mounting areas with wear and surface rust but no obvious structural crack. Inspector reports body welds and mounts checked without cracks from a safe position.",
+          "bukti_ids": [
+            "FILE-aeee5567-18c6-4edd-89f5-efc10281c119",
+            "FILE-2c54e5b1-0d18-48b0-9c22-df704945ffea",
+            "FILE-06f73fe5-e02c-4343-b1a9-28b43ede2938"
+          ],
+          "alasan": null,
+          "dicatat_at": "2026-11-07T08:30:42.444Z",
+          "ditangani": false
+        },
+        "ITEM-5": {
+          "status": "baik",
+          "stop": false,
+          "catatan": "Photo shows cylinder, hoses and couplings without obvious wet leakage or hose break. Inspector reports hydraulics checked and dry from a safe position.",
+          "bukti_ids": [
+            "FILE-2c54e5b1-0d18-48b0-9c22-df704945ffea"
+          ],
+          "alasan": null,
+          "dicatat_at": "2026-11-07T08:30:42.444Z",
+          "ditangani": false
+        },
+        "ITEM-6": {
+          "status": "baik",
+          "stop": false,
+          "catatan": "Photo shows mechanical body prop positioned between chassis and raised body with retaining pin visible and no obvious bending. Inspector reports prop straight and locked, with mechanical support engaged for the inspection.",
+          "bukti_ids": [
+            "FILE-06f73fe5-e02c-4343-b1a9-28b43ede2938"
+          ],
+          "alasan": null,
+          "dicatat_at": "2026-11-07T08:30:42.445Z",
+          "ditangani": false
+        }
+      },
+      "photoMatches": {
+        "FILE-50497f88-96a0-4738-9490-13f613d0e8fd": {
+          "item_ids": [
+            "ITEM-3"
+          ],
+          "usable": true
+        },
+        "FILE-af56072e-1031-43a5-83f0-b6eba8522a2e": {
+          "item_ids": [
+            "ITEM-1"
+          ],
+          "usable": true
+        },
+        "FILE-2c54e5b1-0d18-48b0-9c22-df704945ffea": {
+          "item_ids": [
+            "ITEM-5",
+            "ITEM-4"
+          ],
+          "usable": true
+        },
+        "FILE-aeee5567-18c6-4edd-89f5-efc10281c119": {
+          "item_ids": [
+            "ITEM-4"
+          ],
+          "usable": true
+        },
+        "FILE-06f73fe5-e02c-4343-b1a9-28b43ede2938": {
+          "item_ids": [
+            "ITEM-6",
+            "ITEM-4"
+          ],
+          "usable": true
+        }
+      },
+      "status": "berjalan"
+    },
+    {
+      "text": "I checked directly: seat belt locks and is intact, mirrors intact, horn sounds, extinguisher seal intact, gauge green and label in date. Use the cabin photo already sent.",
+      "seconds": 6.074,
+      "photos": [],
+      "reply": "Batch pending, I’ve recorded cabin safety as good using your photo and direct checks. Please send a clear photo of the brakes and air system, including the air-pressure gauge; you may include up to five photos of remaining checks.",
+      "quickReplies": [],
+      "checklist": {
+        "kind": "progress",
+        "items": [
+          {
+            "id": "ITEM-1",
+            "name": "Cabin & safety equipment",
+            "photo_required": true,
+            "state": "recorded",
+            "status": "baik",
+            "stop": false
+          },
+          {
+            "id": "ITEM-2",
+            "name": "Brakes & air system",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-3",
+            "name": "Tyres & wheel nuts",
+            "photo_required": true,
+            "state": "recorded",
+            "status": "baik",
+            "stop": false
+          },
+          {
+            "id": "ITEM-4",
+            "name": "Dump body",
+            "photo_required": true,
+            "state": "recorded",
+            "status": "baik",
+            "stop": false
+          },
+          {
+            "id": "ITEM-5",
+            "name": "Hydraulic cylinder",
+            "photo_required": true,
+            "state": "recorded",
+            "status": "baik",
+            "stop": false
+          },
+          {
+            "id": "ITEM-6",
+            "name": "Body safety prop",
+            "photo_required": true,
+            "state": "recorded",
+            "status": "baik",
+            "stop": false
+          },
+          {
+            "id": "ITEM-7",
+            "name": "Tailgate & latch",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-8",
+            "name": "Lights & reflectors",
+            "photo_required": true,
+            "state": "pending"
+          }
+        ]
+      },
+      "findings": {
+        "ITEM-3": {
+          "status": "baik",
+          "stop": false,
+          "catatan": "Photo shows rear tyre tread, sidewalls and wheel nuts with indicators; no obvious bulge, exposed cord or missing nut in this view. Inspector reports tyres and nuts checked and intact on both sides.",
+          "bukti_ids": [
+            "FILE-50497f88-96a0-4738-9490-13f613d0e8fd"
+          ],
+          "alasan": null,
+          "dicatat_at": "2026-11-07T08:30:42.443Z",
+          "ditangani": false
+        },
+        "ITEM-4": {
+          "status": "baik",
+          "stop": false,
+          "catatan": "Photos show body floor, underside and mounting areas with wear and surface rust but no obvious structural crack. Inspector reports body welds and mounts checked without cracks from a safe position.",
+          "bukti_ids": [
+            "FILE-aeee5567-18c6-4edd-89f5-efc10281c119",
+            "FILE-2c54e5b1-0d18-48b0-9c22-df704945ffea",
+            "FILE-06f73fe5-e02c-4343-b1a9-28b43ede2938"
+          ],
+          "alasan": null,
+          "dicatat_at": "2026-11-07T08:30:42.444Z",
+          "ditangani": false
+        },
+        "ITEM-5": {
+          "status": "baik",
+          "stop": false,
+          "catatan": "Photo shows cylinder, hoses and couplings without obvious wet leakage or hose break. Inspector reports hydraulics checked and dry from a safe position.",
+          "bukti_ids": [
+            "FILE-2c54e5b1-0d18-48b0-9c22-df704945ffea"
+          ],
+          "alasan": null,
+          "dicatat_at": "2026-11-07T08:30:42.444Z",
+          "ditangani": false
+        },
+        "ITEM-6": {
+          "status": "baik",
+          "stop": false,
+          "catatan": "Photo shows mechanical body prop positioned between chassis and raised body with retaining pin visible and no obvious bending. Inspector reports prop straight and locked, with mechanical support engaged for the inspection.",
+          "bukti_ids": [
+            "FILE-06f73fe5-e02c-4343-b1a9-28b43ede2938"
+          ],
+          "alasan": null,
+          "dicatat_at": "2026-11-07T08:30:42.445Z",
+          "ditangani": false
+        },
+        "ITEM-1": {
+          "status": "baik",
+          "stop": false,
+          "catatan": "Existing cabin photo shows seat belt, exterior mirrors and mounted fire extinguisher; gauge and expiry details are not legible in the photo. Inspector directly reports seat belt intact and locking, mirrors intact, horn sounding, extinguisher seal intact, gauge green and label in date.",
+          "bukti_ids": [
+            "FILE-af56072e-1031-43a5-83f0-b6eba8522a2e"
+          ],
+          "alasan": null,
+          "dicatat_at": "2026-11-07T08:30:49.982Z",
+          "ditangani": false
+        }
+      },
+      "photoMatches": {
+        "FILE-50497f88-96a0-4738-9490-13f613d0e8fd": {
+          "item_ids": [
+            "ITEM-3"
+          ],
+          "usable": true
+        },
+        "FILE-af56072e-1031-43a5-83f0-b6eba8522a2e": {
+          "item_ids": [
+            "ITEM-1"
+          ],
+          "usable": true
+        },
+        "FILE-2c54e5b1-0d18-48b0-9c22-df704945ffea": {
+          "item_ids": [
+            "ITEM-5",
+            "ITEM-4"
+          ],
+          "usable": true
+        },
+        "FILE-aeee5567-18c6-4edd-89f5-efc10281c119": {
+          "item_ids": [
+            "ITEM-4"
+          ],
+          "usable": true
+        },
+        "FILE-06f73fe5-e02c-4343-b1a9-28b43ede2938": {
+          "item_ids": [
+            "ITEM-6",
+            "ITEM-4"
+          ],
+          "usable": true
+        }
+      },
+      "status": "berjalan"
+    }
+  ],
+  "passed": true
+}

@@ -1,0 +1,233 @@
+{
+  "case": "mixed",
+  "reportId": "LI-ad4a615a-e864-4355-b93b-68f0da881018",
+  "note": "Actual agent and original photos. Operator accounts are simulation inputs, not physical checks by the test runner.",
+  "turns": [
+    {
+      "text": "I am Batch mixed, at Riau. Use RI-DT-UTYPE-01 for QA-BATCH-mixed. The truck is safely parked, isolated and chocked; inspections are from a safe position with the mechanical body prop engaged where required.",
+      "seconds": 6.507,
+      "photos": [],
+      "reply": "Batch mixed, I’ve saved your details; the checklist and photo requirements are shown below. Please upload up to five photos, starting with the cabin safety equipment and a close-up of the extinguisher gauge and expiry label.",
+      "quickReplies": [],
+      "checklist": {
+        "kind": "overview",
+        "items": [
+          {
+            "id": "ITEM-1",
+            "name": "Cabin & safety equipment",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-2",
+            "name": "Brakes & air system",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-3",
+            "name": "Tyres & wheel nuts",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-4",
+            "name": "Dump body",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-5",
+            "name": "Hydraulic cylinder",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-6",
+            "name": "Body safety prop",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-7",
+            "name": "Tailgate & latch",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-8",
+            "name": "Lights & reflectors",
+            "photo_required": true,
+            "state": "pending"
+          }
+        ]
+      },
+      "findings": {},
+      "status": "berjalan"
+    },
+    {
+      "text": "Review this batch. I checked the photographed tyre and hydraulic components: tyres and all wheel nuts intact on both sides; hydraulics dry without damage. The photographed dump floor has a structural crack and a hole, so the truck is kept out of service. Some attachments may be duplicates or unrelated; do not use those to invent extra checks.",
+      "seconds": 18.265,
+      "photos": [
+        {
+          "source": "Normal/03-Ban-dan-Roda.jpg",
+          "bytes": 261149,
+          "sha256": "d8fb3df3579907e6bd84db792910ffe089002ababaffeb7fa6d562fa90fbbe90",
+          "fileId": "FILE-b431e271-afa1-4f31-983a-280b2aceefeb"
+        },
+        {
+          "source": "Issue/04-Bak-Dump.jpg",
+          "bytes": 159113,
+          "sha256": "cd7f29619d0439d3d787637cfe37a91b462287bf84d22859106d283a4ee0d84a",
+          "fileId": "FILE-81569f20-3c0a-4d40-8954-f3b0de845431"
+        },
+        {
+          "source": "Existing Lumo avatar",
+          "bytes": 90424,
+          "sha256": "58c60dfb5bd3deb53fad10df9da27288e281843006d001f79121b2103dbbf0c1",
+          "fileId": "FILE-95fa266e-5b6e-4d14-977c-c7bfd190c9c7"
+        },
+        {
+          "source": "Normal/03-Ban-dan-Roda.jpg",
+          "bytes": 261149,
+          "sha256": "d8fb3df3579907e6bd84db792910ffe089002ababaffeb7fa6d562fa90fbbe90",
+          "fileId": "FILE-d0e66368-69b4-4b19-a77e-f8319d21ab22"
+        },
+        {
+          "source": "Normal/05-Silinder-Hidraulik.jpg",
+          "bytes": 167184,
+          "sha256": "1f47f937ed1022a3166ceb16e75fe5ee4beeefc926cb138cab4ef5b68949c78b",
+          "fileId": "FILE-3baba8dc-6f6b-4e3d-8b04-4ae59ea0c1d1"
+        }
+      ],
+      "reply": "Batch mixed, I’ve recorded tyres and hydraulics as good and the cracked dump floor as STOP—the truck must remain out of service. I excluded the mascot and counted the duplicate tyre view only once. Please upload cabin safety equipment photos, including a close-up of the extinguisher gauge and expiry label; you may send up to five photos.",
+      "quickReplies": [],
+      "checklist": {
+        "kind": "progress",
+        "items": [
+          {
+            "id": "ITEM-1",
+            "name": "Cabin & safety equipment",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-2",
+            "name": "Brakes & air system",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-3",
+            "name": "Tyres & wheel nuts",
+            "photo_required": true,
+            "state": "recorded",
+            "status": "baik",
+            "stop": false
+          },
+          {
+            "id": "ITEM-4",
+            "name": "Dump body",
+            "photo_required": true,
+            "state": "recorded",
+            "status": "tidak_baik",
+            "stop": true
+          },
+          {
+            "id": "ITEM-5",
+            "name": "Hydraulic cylinder",
+            "photo_required": true,
+            "state": "recorded",
+            "status": "baik",
+            "stop": false
+          },
+          {
+            "id": "ITEM-6",
+            "name": "Body safety prop",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-7",
+            "name": "Tailgate & latch",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-8",
+            "name": "Lights & reflectors",
+            "photo_required": true,
+            "state": "pending"
+          }
+        ]
+      },
+      "findings": {
+        "ITEM-3": {
+          "status": "baik",
+          "stop": false,
+          "catatan": "Photo shows rear tyre tread, sidewalls and wheel nuts with yellow indicators; no obvious bulge or exposed cord in this view. Inspector reports checking tyres and all wheel nuts on both sides and finding them intact. Duplicate tyre photo adds no separate check.",
+          "bukti_ids": [
+            "FILE-b431e271-afa1-4f31-983a-280b2aceefeb"
+          ],
+          "alasan": null,
+          "dicatat_at": "2026-11-07T08:30:42.387Z",
+          "ditangani": false
+        },
+        "ITEM-4": {
+          "status": "tidak_baik",
+          "stop": true,
+          "catatan": "Photo shows a long crack along a welded steel floor area, an open hole and locally deformed edges. Inspector identifies this as the dump floor, confirms a structural crack and hole, and reports the truck is kept out of service.",
+          "bukti_ids": [
+            "FILE-81569f20-3c0a-4d40-8954-f3b0de845431"
+          ],
+          "alasan": "Structural crack in dump floor meets the dump body STOP condition.",
+          "dicatat_at": "2026-11-07T08:30:42.388Z",
+          "ditangani": false
+        },
+        "ITEM-5": {
+          "status": "baik",
+          "stop": false,
+          "catatan": "Photo shows hydraulic cylinder, rod, hoses and couplings without obvious wet leakage or hose rupture in this view. Inspector reports checking the hydraulic components and finding them dry without damage. This image does not establish safety prop engagement and is not used to complete that separate item.",
+          "bukti_ids": [
+            "FILE-3baba8dc-6f6b-4e3d-8b04-4ae59ea0c1d1"
+          ],
+          "alasan": null,
+          "dicatat_at": "2026-11-07T08:30:42.389Z",
+          "ditangani": false
+        }
+      },
+      "photoMatches": {
+        "FILE-b431e271-afa1-4f31-983a-280b2aceefeb": {
+          "item_ids": [
+            "ITEM-3"
+          ],
+          "usable": true
+        },
+        "FILE-81569f20-3c0a-4d40-8954-f3b0de845431": {
+          "item_ids": [
+            "ITEM-4"
+          ],
+          "usable": true
+        },
+        "FILE-95fa266e-5b6e-4d14-977c-c7bfd190c9c7": {
+          "item_ids": [],
+          "usable": false
+        },
+        "FILE-d0e66368-69b4-4b19-a77e-f8319d21ab22": {
+          "item_ids": [
+            "ITEM-3"
+          ],
+          "usable": true
+        },
+        "FILE-3baba8dc-6f6b-4e3d-8b04-4ae59ea0c1d1": {
+          "item_ids": [
+            "ITEM-5"
+          ],
+          "usable": true
+        }
+      },
+      "status": "berjalan"
+    }
+  ],
+  "passed": true
+}

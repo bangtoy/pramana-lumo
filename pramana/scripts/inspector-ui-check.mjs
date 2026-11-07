@@ -12,17 +12,23 @@ try {
   const id = await page.evaluate(() => localStorage.getItem('pramana.inspection-draft'));
   assert.equal(await composer.evaluate(el => getComputedStyle(el).fontSize), '16px');
   assert.equal(await page.getByLabel('Take an inspection photo').getAttribute('capture'), 'environment');
-  assert.equal(await page.getByLabel('Attach an image').getAttribute('capture'), null);
+  assert.equal(await page.getByLabel('Attach inspection photos').getAttribute('capture'), null);
   await page.screenshot({ path: '../docs/verification/screenshots/inspector-opening-390.png' });
-  async function send(text) { await composer.fill(text); await page.getByRole('button', { name: 'Send message', exact: true }).click(); await page.waitForFunction(() => !document.querySelector('textarea')?.disabled, null, { timeout: 120000 }); }
+  async function send(text) {
+    await composer.fill(text);
+    const request = page.waitForRequest(request => /\/api\/laporan\/[^/]+\/turn$/.test(new URL(request.url()).pathname) && request.method() === 'POST');
+    await page.getByRole('button', { name: 'Send message', exact: true }).click();
+    await request;
+    await page.waitForFunction(() => { const camera = document.querySelector('button[aria-label="Take a photo"]'); return camera && !camera.disabled; }, null, { timeout: 120000 });
+  }
   await send('I am Alex at Tanjung Enim. Use RI-DT-UTYPE-01 for DT-11 · B 9111 KD. The truck is safely parked, isolated and chocked.');
   await page.locator('.truck-svg [data-comp="kabin"].is-focus').first().waitFor();
   await page.screenshot({ path: '../docs/verification/screenshots/inspector-active-390.png' });
   await page.getByRole('button', { name: 'Vehicle model' }).click(); assert.equal(await page.locator('.truck-svg').count(), 0);
   await page.getByRole('button', { name: 'Vehicle model' }).click();
-  await page.getByLabel(process.env.PHOTO_SOURCE === 'gallery' ? 'Attach an image' : 'Take an inspection photo').setInputFiles('public/demo/apar-label.jpg');
-  await page.getByText(/Photo ready ·/).waitFor();
-  const previewText = await page.getByText(/Photo ready ·/).innerText();
+  await page.getByLabel(process.env.PHOTO_SOURCE === 'gallery' ? 'Attach inspection photos' : 'Take an inspection photo').setInputFiles('public/demo/apar-label.jpg');
+  await page.getByText(/1\/5 photos ready ·/).waitFor();
+  const previewText = await page.getByText(/1\/5 photos ready ·/).innerText();
   await page.screenshot({ path: '../docs/verification/screenshots/inspector-photo-390.png' });
   await send('Record cabin safety as cannot inspect, STOP pending safe reinspection: access and functional safety checks are unavailable. This photo only documents the extinguisher label, not a complete cabin inspection.');
   const report = await (await fetch(`${base}/api/laporan/${id}`)).json(); assert.ok(report.hasil['ITEM-1']);

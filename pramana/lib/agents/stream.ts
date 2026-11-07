@@ -7,6 +7,7 @@ export type EmitStatus = (status: string) => void;
 const toolStatuses: Record<string, string> = {
   set_items: "Organising inspection items…", list_models: "Checking available models…", pakai_model: "Linking the vehicle model…", start_model_job: "Starting model generation…",
   set_header: "Saving inspection details…", record_item: "Recording the finding…", beri_keterangan_foto: "Labelling the photo…", submit_report: "Checking and submitting the report…",
+  review_photos: 'Matching photos to your checklist…', record_items: 'Recording the validated checks…',
 };
 export async function runWithStatus<C, O extends AgentOutputType>(agent: Agent<C, O>, input: AgentInputItem[], context: C, groupId: string, emit: EmitStatus, signal?: AbortSignal) {
   const runner = new Runner({ modelProvider: modelProvider(), traceIncludeSensitiveData: false });
