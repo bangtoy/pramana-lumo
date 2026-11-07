@@ -1,0 +1,21 @@
+{
+  "offlineConversation": "TL-d564f047-633b-45bb-8ebd-a1c2bdb133e2",
+  "onlineConversation": "TL-da7a5e93-1b47-4108-a771-2a78b770039e",
+  "examplesAndPendingState": true,
+  "clickableReportAndWorkOrderSources": true,
+  "refreshPersists": true,
+  "newConversationClears": true,
+  "enterAndShiftEnter": true,
+  "reportQuestionDraft": true,
+  "noPanelOnAgentTab": true,
+  "collapsePersists": true,
+  "closedPanelDoesNotFetch": true,
+  "responsiveWidth": true,
+  "defaultCollapsedBelow1360": true,
+  "suggestionsPoll": true,
+  "mobileNoOverflow": true,
+  "errorRecovery": true,
+  "noNullRequests": true,
+  "errors": [],
+  "failures": []
+}

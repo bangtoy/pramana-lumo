@@ -50,6 +50,10 @@ test('fallback follows unit/repair/component/missing/STOP/summary order with fou
   assert.match(jawabCadangan('Which units had STOP this week?').text, /last seven Jakarta days/);
   assert.match(jawabCadangan('Give me a summary.').text, /6 of 8 units/);
   assert.match(jawabCadangan('Close all work orders for DT-07.').text, /I can only read.*DT-07 is not roadworthy/);
+  assert.ok(jawabCadangan('Explain inspection report LI-RW-45.').sumber?.includes('LI-RW-45'));
+  assert.ok(jawabCadangan('Explain inspection report LI-RW-02.').sumber?.includes('LI-RW-02'));
+  assert.ok(jawabCadangan('Explain inspection report LI-2026-10-29-DT07.').sumber?.includes('LI-2026-10-29-DT07'));
+  assert.match(jawabCadangan('Explain inspection report LI-missing.').text, /was not found/);
 });
 
 test('conversation persists model/fallback turns, rejects missing IDs and never mutates fleet evidence', async () => {

@@ -6,7 +6,7 @@ import { Suspense, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ChartNoAxesCombined, ClipboardList, FileCheck2, PanelLeftClose, PanelLeftOpen, Sparkles, Wrench, UserRound, Plus, LogOut } from "lucide-react";
 import { RiwayatSidebar } from "@/components/supervisor/RiwayatSidebar";
-import { AssistantPanel } from '@/components/supervisor/AssistantPanel';
+import { TanyaPanel } from '@/components/supervisor/TanyaPanel';
 import { Spinner } from "@/components/ui";
 import { api } from "@/lib/client";
 import type { WorkOrder } from "@/lib/contracts";
@@ -43,6 +43,6 @@ export default function SupervisorLayout({ children }: { children: React.ReactNo
       <footer className="mt-auto space-y-3"><div className="flex gap-2 items-center px-1"><UserRound size={20} className="muted shrink-0" aria-hidden="true"/><span className={labelClass}><span className="t-body block">Rina</span><span className="t-label muted font-normal block">Supervisor</span></span></div><div className="flex justify-between"><button onClick={toggle} aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"} title="Ctrl+B" className="w-8 h-8 rounded-md muted hover:bg-[var(--color-surface-muted)] grid place-items-center">{collapsed ? <PanelLeftOpen size={16}/> : <PanelLeftClose size={16}/>}</button><Link href="/" aria-label="Switch role" className={`${labelClass} w-8 h-8 rounded-md muted grid place-items-center hover:bg-[var(--color-surface-muted)]`}><LogOut size={16}/></Link></div></footer>
     </aside>
     <main id="supervisor-content" className="flex-1 min-w-0 h-dvh overflow-y-auto @container">{children}</main>
-    {!agent && <AssistantPanel/>}
+    {!agent && <TanyaPanel/>}
   </div>;
 }

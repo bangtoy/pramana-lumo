@@ -86,10 +86,10 @@ curl -s localhost:3000/api/tanya/saran | jq
 - Query percakapan `enabled` hanya bila ID valid dan panel terbuka. **Jangan memanggil `refetch()` di `onSuccess`** setelah mengganti ID; query lama masih memakai ID lama (bug nyata: `GET /api/tanya/null`). Saran di-refetch 30 dtk.
 
 **Selesai bila**
-- [ ] Screenshot 1440×900 panel kosong dan panel berisi jawaban setara `screens/01` dan `10`.
-- [ ] Klik contoh pertanyaan → jawaban dengan chip sumber yang bisa diklik; refresh → percakapan masih ada; "Percakapan baru" mengosongkan.
-- [ ] Lipat/buka diingat; halaman Dashboard menyesuaikan lebar (container query P2-04).
-- [ ] Tidak ada request `404` atau error di console; `rg` §3.4 bersih.
+- [x] Screenshot 1440×900 panel kosong dan panel berisi jawaban setara `screens/01` dan `10`.
+- [x] Klik contoh pertanyaan → jawaban dengan chip sumber yang bisa diklik; refresh → percakapan masih ada; "Percakapan baru" mengosongkan.
+- [x] Lipat/buka diingat; halaman Dashboard menyesuaikan lebar (container query P2-04).
+- [x] Tidak ada request `404` atau error di console; `rg` §3.4 bersih.
 
 **Prompt /goal**
 ```

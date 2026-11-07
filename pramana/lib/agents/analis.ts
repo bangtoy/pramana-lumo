@@ -114,14 +114,17 @@ export function rekomendasiDariData(data: Ringkasan = ringkasan(), orders: WorkO
 type AnalystReply = Pick<ChatMessage, 'role' | 'text' | 'sumber' | 'rekomendasi' | 'fallback'>;
 export function jawabCadangan(question: string): AnalystReply {
   const data = ringkasan(), orders = sortWorkOrders(listWorkOrders()), open = orders.filter(order => order.status === 'terbuka');
-  // Avoid interpreting the RW-45 suffix of a report ID as a vehicle code.
-  const match = /(?<![\w-])\b([A-Z]{1,3})-?\s?(\d{1,3})\b/i.exec(question);
-  const code = match ? `${match[1].toUpperCase()}-${match[2].padStart(2, '0')}` : null;
+  // Report IDs can contain dates/unit codes; only scan text outside those IDs.
+  const match = /(?<![\w-])\b([A-Z]{1,3})-?\s?(\d{1,3})\b/i.exec(question.replace(/\bLI-[A-Za-z0-9-]+\b/gi, ''));
+  const reference = /\bLI-[A-Za-z0-9-]+\b/.exec(question)?.[0];
+  const referencedReport = reference && !match ? getLaporan(reference) : null;
+  if (reference && !match && (!referencedReport || referencedReport.status !== 'terkirim')) return { role: 'pramana', text: `Submitted inspection report ${reference} was not found. I cannot explain findings without its evidence.`, sumber: [], rekomendasi: rekomendasiDariData(data, orders), fallback: true };
+  const code = match ? `${match[1].toUpperCase()}-${match[2].padStart(2, '0')}` : referencedReport ? unitCode(referencedReport.unit).toUpperCase() : null;
   let text: string, sources: string[] = [];
   if (code) {
     const reports = cariLaporan({ unit: code }).filter(report => unitCode(report.unit).toUpperCase() === code && dayKey(report.submitted_at || report.started_at) <= data.hari_ini)
       .sort((a, b) => Date.parse(b.submitted_at || b.started_at) - Date.parse(a.submitted_at || a.started_at) || a.id.localeCompare(b.id));
-    const latest = reports[0], repairs = open.filter(order => unitCode(order.unit).toUpperCase() === code);
+    const latest = referencedReport || reports[0], repairs = open.filter(order => unitCode(order.unit).toUpperCase() === code);
     if (!latest) text = `No submitted inspection reports match ${code}. I cannot determine its condition from the available data.`;
     else {
       const findings = itemsOf(latest).filter(item => latest.hasil[item.id]?.status !== 'baik').map(item => {
@@ -129,7 +132,7 @@ export function jawabCadangan(question: string): AnalystReply {
         return `${short(item.nama, 100)}${finding?.stop ? ' (STOP)' : ''}${finding?.ditangani ? ' (handled; original verdict unchanged)' : ''}: ${short(finding?.catatan, 300).replace(/[.!?]+$/, '')}`;
       });
       text = `${verdict(latest)} in report ${latest.id} (${time(latest.submitted_at || latest.started_at)}). ${findings.length ? `Findings: ${findings.join('; ')}.` : 'All recorded items are good.'} ${reports.length} submitted reports and ${repairs.length} open work orders are recorded for ${code}.`;
-      if (dayKey(latest.submitted_at || latest.started_at) !== data.hari_ini) text += ' No P2H is recorded today; the latest report does not establish today’s condition.';
+      if (dayKey(latest.submitted_at || latest.started_at) !== data.hari_ini) text += ' This historical report does not establish today’s condition.';
       sources = [latest.id, ...repairs.map(order => order.id)];
     }
   } else if (/\b(?:wo|work\s*orders?|repairs?|mechanics?)\b|perbaikan|mekanik/i.test(question)) {

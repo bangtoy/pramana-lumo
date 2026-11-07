@@ -75,12 +75,21 @@ and [Cloudflare Quick Tunnels](https://developers.cloudflare.com/tunnel/get-star
 The [P0 evidence log](../docs/verification/P0.md) records per-ticket checks;
 the [P0 demo runbook](../docs/verification/DEMO-P0.md) lists the presenter flow,
 real-agent integration results and backup report. The implementation covers
-P0-00 through P0-13, P1-01 through P1-04 and P2-01 through P2-05. See the
+P0-00 through P0-13, P1-01 through P1-04, P2-01 through P2-05 and P3-01 through
+P3-04. See the
 [P1 evidence log](../docs/verification/P1.md) for work-order checks and the demo
 flow, and the [P2 evidence log](../docs/verification/P2.md) for dashboard and report
-search checks. Cross-report analysis remains P3; the existing finding chat
-answers questions about a single finding. The dashboard's right panel currently
-offers report/work-order shortcuts.
+search checks. The [P3 evidence log](../docs/verification/P3.md) covers read-only
+cross-report analysis, model-on/off integration and the persistent Ask Lumo panel.
+
+Use **Ask Lumo** on any Dashboard page to ask about inspections, units and work
+orders. Answers include clickable report/work-order sources and recommendations;
+the analyst cannot change fleet records. If the configured model is unavailable,
+the panel explicitly labels its data-based fallback answer. Daily suggestions
+work without a model and refresh every 30 seconds while the panel is open.
+Conversations persist on the server; this browser remembers the current one and
+whether the panel is expanded. **New conversation** starts a separate thread.
+On a report, **Ask Lumo** prepares a question about that report for review/send.
 
 From a submitted inspection report, choose **Create work orders** to draft one
 repair instruction per unassigned Not good finding. If the model is unavailable,

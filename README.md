@@ -5,7 +5,9 @@ Agents SDK JavaScript/TypeScript, SQLite, dan model kendaraan interaktif Anatomy
 Antarmuka aplikasi berbahasa Inggris. Implementasi mencakup P0-00 sampai P0-13
 dan P1-01 sampai P1-04: pembuatan work order, penugasan mekanik, target, serta
 sinkronisasi penyelesaian dengan temuan. P2-01 sampai P2-05 menambahkan Ringkasan
-armada, riwayat inspeksi 14 hari, tren, dan filter laporan. P3 menjadi tahap berikutnya.
+armada, riwayat inspeksi 14 hari, tren, dan filter laporan. P3-01 sampai P3-04
+menambahkan Ask Lumo: analisis laporan dan work order hanya-baca, sumber yang
+bisa dibuka, rekomendasi dari data, serta percakapan yang tersimpan.
 
 ```sh
 cd pramana
@@ -24,6 +26,8 @@ cadangan, dan batas lingkup demo. [Verifikasi P1](docs/verification/P1.md)
 mencatat pengujian work order dan alur demo lanjutannya.
 [Verifikasi P2](docs/verification/P2.md) mencatat metrik WIB, seed riwayat,
 Ringkasan interaktif dan filter laporan yang tersimpan di URL.
+[Verifikasi P3](docs/verification/P3.md) mencatat uji model aktif, jawaban
+cadangan saat model tidak tersedia, API percakapan, dan panel Ask Lumo.
 
 ## Kit desain & dokumen
 
