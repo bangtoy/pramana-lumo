@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { FileText, Paperclip, Pin, PinOff, Send, X } from "lucide-react";
 import type { ChatMessage } from "@/lib/contracts";
 import { ErrorState, MascotAvatar, MascotHero, TypingBubble } from "@/components/ui";
@@ -11,6 +11,12 @@ export function PlannerChat({ messages, pinned, setPinned, busy, status, error, 
   const fileInput = useRef<HTMLInputElement>(null), composer = useRef<HTMLTextAreaElement>(null), end = useRef<HTMLDivElement>(null), panel = useRef<HTMLDivElement>(null);
   const last = messages.findLast(m => m.role === "pramana");
   const quick = last?.quick_replies ?? ["Create a dump truck plan", "Which safety checks are required?"];
+  useLayoutEffect(() => {
+    const input = composer.current;
+    if (!input) return;
+    input.style.height = "auto";
+    input.style.height = `${Math.min(input.scrollHeight, 128)}px`;
+  }, [text, pinned]);
   useEffect(() => { end.current?.scrollIntoView({ block: "nearest" }); }, [messages.length, busy, open, pinned]);
   useEffect(() => {
     if (!open || pinned) return;
@@ -44,7 +50,7 @@ export function PlannerChat({ messages, pinned, setPinned, busy, status, error, 
       <form className="flex gap-2 items-end" onSubmit={event => { event.preventDefault(); void submit(); }}>
         <input ref={fileInput} aria-label="Attach Spec Sheet" type="file" accept="image/jpeg,image/png,image/webp,application/pdf" className="sr-only" disabled={busy || disabled} onChange={event => { const chosen = event.target.files?.[0]; if (chosen && chosen.size > 20 * 1024 * 1024) { setFileError("Choose a file smaller than 20 MB."); event.target.value = ""; return; } setFileError(null); setFile(chosen); }}/>
         <button type="button" className={`${iconButton} mb-1`} aria-label="Attach a Spec Sheet" disabled={busy || disabled} onClick={() => fileInput.current?.click()}><Paperclip size={18}/></button>
-        <textarea ref={composer} rows={1} aria-label="Message Lumo" placeholder="Ask Lumo to build or refine your plan…" className="input t-body flex-1 min-w-0 resize-none max-h-32" value={text} disabled={busy || disabled} onClick={() => setOpen(true)} onChange={event => setText(event.target.value)} onKeyDown={event => { if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); void submit(); } }}/>
+        <textarea ref={composer} rows={1} aria-label="Message Lumo" placeholder="Ask Lumo to build or refine your plan…" className="input t-body flex-1 min-w-0 min-h-10 max-h-32 resize-none overflow-y-auto" value={text} disabled={busy || disabled} onClick={() => setOpen(true)} onChange={event => setText(event.target.value)} onKeyDown={event => { if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); void submit(); } }}/>
         <button className="btn btn-primary h-9 px-3" aria-label="Send message" disabled={busy || disabled || (!text.trim() && !file)}><Send size={16}/></button>
         {!pinned && <button type="button" className={`${iconButton} max-xl:hidden mb-1`} aria-label="Pin conversation" onClick={() => setPinned(true)}><Pin size={16}/></button>}
       </form>
