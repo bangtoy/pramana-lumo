@@ -20,7 +20,7 @@ The demonstration immediately precedes Technology. The planned content totals 33
 
 ## Content and images
 
-The opening, problem, solution, five capabilities, and technology stack follow the root README. The opening uses its inspection workspace image from `docs/verification/screenshots/`. The solution uses the presenter’s excavator screenshot stored in `assets/screens/excavator-inspection.png`.
+The opening, problem, solution, five capabilities, and technology stack follow the root README. The workspace, excavator, and supervisor-report screenshots in `assets/screens/` were recaptured from the existing application records with the current Lumo logo. Adjacent capture JSON files record each source route, viewport, image hash, and logo check.
 
 The capabilities cover building inspection plans, inspecting on a phone, reviewing results, managing follow-up, and asking Lumo questions with cited sources. Technology covers the application stack, OpenAI Agents SDK, Zod and inspection rules, SQLite and local artifacts, the Anatomy geometry workflow, English UI, and Jakarta operational dates.
 
@@ -33,7 +33,7 @@ The demonstration uses a pre-operational inspection as the application example. 
 3. Review the report and evidence in the supervisor view over 25 seconds.
 4. Return to the presentation over 10 seconds and continue to Technology.
 
-The slide provides a prepared preview with sample photos and an existing English report screenshot. Its three buttons select Field input, Missing detail resolved, and Supervisor report. The application links open the field operator and supervisor views at [lumo.bangtoy.work](https://lumo.bangtoy.work/). Identify the prepared preview when using it during the presentation.
+The slide provides a prepared preview with sample photos and a fresh screenshot of the existing English report. Its three buttons select Field input, Missing detail resolved, and Supervisor report. The application links open the field operator and supervisor views at [lumo.bangtoy.work](https://lumo.bangtoy.work/). Identify the prepared preview when using it during the presentation.
 
 ## Controls
 
@@ -59,12 +59,13 @@ Click Start presentation to begin the six-minute timer. Click any gallery slide 
 ```powershell
 cd docs/presentation
 npm ci
+npm run capture:slides
 npm run slides
 npm run thumbs
 npm run verify
 npm run export
 ```
 
-The browser scripts use installed Chrome. The generator updates the manifest, notes, and timing file and removes superseded artifacts named by the previous manifest. The HTML version references repository screenshots and design assets by relative path, so copy the full repository when moving it. The PDF embeds the images and fonts.
+The browser scripts use installed Chrome. `capture:slides` reads the three existing records from `https://lumo.bangtoy.work` and blocks API writes. Set `APP_CAPTURE_BASE_URL` to capture another deployment containing the same records. The generator updates the manifest, notes, and timing file and removes superseded artifacts named by the previous manifest. The HTML version references repository screenshots and design assets by relative path, so copy the full repository when moving it. The PDF embeds the images and fonts.
 
 Presentation verification results are saved in [verification/report.json](verification/report.json) and [verification/contact-sheet.jpg](verification/contact-sheet.jpg).

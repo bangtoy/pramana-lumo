@@ -8,7 +8,7 @@
 - Lumo completion: `../../design/assets/lumo/lumo-jempol.png`.
 - Conversation avatar: `../../design/assets/lumo/lumo-avatar-netral.png`.
 - Design screenshots: `../../design/screens/08-agent-item-terpilih.png`, `03-supervisor-laporan-detail.png`, `04-supervisor-work-order.png`, and `10-tanya-lumo-jawaban.png`.
-- Product captures: `assets/live/plan-detail.png`, `report-detail.png`, and other pages recorded in `assets/live/capture.json`.
+- Current slide screenshots: `assets/screens/dump-truck-inspection.png`, `excavator-inspection.png`, and `supervisor-report.png`. Recaptured from the existing application records with the current Lumo face branding; adjacent capture JSON files record the source and checks. Historical product captures remain in `assets/live/`.
 - Scenario evidence photos: `../../design/assets/demo/apar-jauh.jpg`, `apar-label.jpg`, and `ban-benjol.jpg`. Images are examples, not evidence from a new inspection.
 - OpenAI logo for the Codex context: `assets/brand/openai.svg`. The download source is recorded in `assets/brand/source.json`. The existing mark is used without redrawing it.
 
@@ -25,7 +25,7 @@
 
 ## Presentation composition
 
-The presentation follows the root README in six sections, from the opening question through Technology. The Demonstration section immediately precedes Technology and has a 90-second allocation. Existing Pramana typography, colours, and gallery styling frame the content. English screenshots from `docs/verification/screenshots/` illustrate the workspace, dashboard, and report. The demonstration includes a prepared preview with sample photos.
+The presentation follows the root README in six sections, from the opening question through Technology. The Demonstration section immediately precedes Technology and has a 90-second allocation. Existing Pramana typography, colours, and gallery styling frame the content. Current English screenshots in `assets/screens/` illustrate the dump-truck workspace, excavator workspace, and report. The demonstration includes a prepared preview with sample photos.
 
 - Logical size: 1920 × 1080, with fitting and letterboxing for other viewports.
 - One main title per page, body text around 30 px, and titles at 70–106 px depending on their role. This extends the app hierarchy for projection without changing app UI sizing.

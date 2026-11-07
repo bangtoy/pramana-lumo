@@ -1,0 +1,20 @@
+{
+  "capturedAt": "2026-11-07T09:17:41.586Z",
+  "baseURL": "https://lumo.bangtoy.work",
+  "route": "/supervisor/laporan/LI-ee9abbcb-7a1d-470a-beb0-d716984c73db",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "title": "Proactive Agentic Inspection",
+  "image": "assets/screens/supervisor-report.png",
+  "sha256": "d7ee3334548ca01d2a5a79d41b8f87588ee2c7e73f8d731c0b56bf67eb08428a",
+  "logo": {
+    "src": "/_next/image?url=%2Ficon-lumo-face.png&w=64&q=75",
+    "width": 32,
+    "height": 32
+  },
+  "policy": "Read-only capture of an existing plan or report. API writes are blocked.",
+  "errors": [],
+  "blockedWrites": []
+}

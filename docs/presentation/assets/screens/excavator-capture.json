@@ -1,0 +1,20 @@
+{
+  "capturedAt": "2026-11-07T09:17:37.952Z",
+  "baseURL": "https://lumo.bangtoy.work",
+  "route": "/supervisor/agent?rencana=RI-48ee9f27-fe3f-491b-93d2-e6ed24cf9081",
+  "viewport": {
+    "width": 1916,
+    "height": 947
+  },
+  "title": "Proactive Agentic Inspection",
+  "image": "assets/screens/excavator-inspection.png",
+  "sha256": "1713695d72869dca21f12ba7ddbac61350f863d8569f6173413b0ba834a6ca5e",
+  "logo": {
+    "src": "/_next/image?url=%2Ficon-lumo-face.png&w=64&q=75",
+    "width": 32,
+    "height": 32
+  },
+  "policy": "Read-only capture of an existing plan or report. API writes are blocked.",
+  "errors": [],
+  "blockedWrites": []
+}

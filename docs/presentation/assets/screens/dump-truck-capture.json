@@ -1,0 +1,20 @@
+{
+  "capturedAt": "2026-11-07T09:17:33.190Z",
+  "baseURL": "https://lumo.bangtoy.work",
+  "route": "/supervisor/agent?rencana=RI-DT-UTYPE-01",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "title": "Proactive Agentic Inspection",
+  "image": "assets/screens/dump-truck-inspection.png",
+  "sha256": "91f41e6de90669881995c0e6b58d4f985b73a480deffd04b39ec6ba6481cc068",
+  "logo": {
+    "src": "/_next/image?url=%2Ficon-lumo-face.png&w=64&q=75",
+    "width": 32,
+    "height": 32
+  },
+  "policy": "Read-only capture of an existing plan or report. API writes are blocked.",
+  "errors": [],
+  "blockedWrites": []
+}

@@ -5,6 +5,7 @@
   "scripts": {
     "slides": "node scripts/build-slides.mjs",
     "capture": "node scripts/capture-app.mjs",
+    "capture:slides": "node scripts/capture-slide-screens.mjs",
     "verify": "node scripts/verify.mjs",
     "export": "node scripts/export-deck-pdf.mjs --slides slides --out Pramana-Lumo.pdf",
     "thumbs": "node scripts/gen-deck-thumbs.mjs --slides slides --out thumbs"
