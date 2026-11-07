@@ -1,3 +1,11 @@
 node_modules/
 .DS_Store
 Thumbs.db
+.next/
+data/
+.env
+.env.local
+*.tsbuildinfo
+.venv/
+__pycache__/
+*.pyc

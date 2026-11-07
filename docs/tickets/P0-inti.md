@@ -19,8 +19,8 @@ Baca dulu: `docs/tickets/README.md` (Definition of Done), `docs/PRD.md` §4.1–
 - `AGENTS.md` berisi: aturan Next.js (client component + `fetch` + TanStack Query, route handler dibungkus `handle()`, params `Promise`), aturan data (kontrak = sumber tunggal, hanya tambah field opsional), konvensi agent (satu agent per file di `lib/agents/`, tool zod, ID dari `RunContext`, `maxTurns`, `withTrace`, history ringkas), aturan desain (§3 DESIGN_SYSTEM), dan peta kepemilikan folder.
 
 **Selesai bila**
-- [ ] `lib/contracts.ts` ter-commit dan `npx tsc --noEmit` bersih.
-- [ ] `AGENTS.md` memuat 5 bagian di atas.
+- [x] `lib/contracts.ts` ter-commit dan `npx tsc --noEmit` bersih.
+- [x] `AGENTS.md` memuat 5 bagian di atas.
 
 **Prompt /goal**
 ```
