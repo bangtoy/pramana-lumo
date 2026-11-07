@@ -35,7 +35,7 @@ Prasyarat: P0 dan P1. Acuan layar: `design/screens/01-supervisor-ringkasan.png`,
 - Foto: temuan ban DT-07 memakai `FILE-DT07-SISI-KIRI` dan `FILE-DT07-BAN`; lainnya tanpa foto.
 
 **Selesai bila**
-- [ ] Setelah restart server: `GET /api/dashboard` → `kpi.stop = 2`, `kpi.stop_tanpa_wo = 1`, `kpi.belum_p2h ≥ 2`, `kpi.wo_terlambat = 3`, komponen teratas ban dengan `berulang.unit = "DT-07"`.
+- [x] Setelah restart server: `GET /api/dashboard` pada DB seed → `kpi.stop = 2`, `kpi.stop_tanpa_wo = 1`, `kpi.belum_p2h = 2`, `kpi.wo_terlambat = 3`, komponen teratas ban dengan `berulang.unit = "DT-07"` (DB live tetap menyertakan laporan demo lama).
 - [x] Restart kedua tidak menggandakan data.
 
 **Catatan:** koneksi DB disimpan di `globalThis`; perubahan kode seed baru berlaku setelah proses dev server dimulai ulang.
@@ -60,7 +60,7 @@ Prasyarat: P0 dan P1. Acuan layar: `design/screens/01-supervisor-ringkasan.png`,
 - `GET /api/dashboard?hari=7|14`.
 
 **Selesai bila**
-- [ ] Angka di P2-02 terpenuhi; `tren` panjang 14 (atau 7); `units` berurutan stop → belum → layak.
+- [x] Angka di P2-02 terpenuhi; `tren` panjang 14 (atau 7); `units` berurutan stop → belum → layak.
 
 **Prompt /goal (P2-01…P2-03)**
 ```

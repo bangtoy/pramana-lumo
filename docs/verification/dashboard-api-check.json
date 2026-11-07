@@ -1,0 +1,53 @@
+{
+  "baselineKpi": {
+    "unit_total": 8,
+    "unit_diperiksa": 6,
+    "layak": 4,
+    "stop": 2,
+    "belum_p2h": 2,
+    "wo_terbuka": 6,
+    "wo_tinggi": 3,
+    "wo_terlambat": 3,
+    "stop_tanpa_wo": 1,
+    "laporan_7h": 25,
+    "stop_7h": 7
+  },
+  "topComponent": {
+    "nama": "Tyres & wheel nuts",
+    "comp_id": "ban_roda",
+    "kali": 8,
+    "laporan_terakhir": "LI-RW-45",
+    "units": [
+      "DT-05",
+      "DT-07"
+    ],
+    "berulang": {
+      "unit": "DT-07",
+      "kali": 7
+    }
+  },
+  "trendLengths": [
+    7,
+    14
+  ],
+  "unitOrderVerified": true,
+  "restartUnchanged": true,
+  "baselineReports": 47,
+  "historyReports": 46,
+  "historyWorkOrders": 11,
+  "liveKpi": {
+    "unit_total": 10,
+    "unit_diperiksa": 8,
+    "layak": 4,
+    "stop": 4,
+    "belum_p2h": 2,
+    "wo_terbuka": 8,
+    "wo_tinggi": 5,
+    "wo_terlambat": 3,
+    "stop_tanpa_wo": 1,
+    "laporan_7h": 27,
+    "stop_7h": 9
+  },
+  "liveReports": 49,
+  "existingReportsPreserved": true
+}
