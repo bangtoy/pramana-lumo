@@ -1,0 +1,59 @@
+{
+  "390": {
+    "initial": {
+      "height": 96,
+      "scroll": 94,
+      "client": 94,
+      "font": "16px",
+      "width": 335
+    },
+    "grown": {
+      "height": 208,
+      "scroll": 206,
+      "client": 206,
+      "font": "16px",
+      "width": 335
+    },
+    "expanded": {
+      "height": 464.1875,
+      "scroll": 462,
+      "client": 462,
+      "font": "16px",
+      "width": 335
+    },
+    "shiftEnter": true,
+    "expandReducePreservesText": true,
+    "collapseReopenPreservesText": true,
+    "sendResetsHeight": true,
+    "noOverflow": true
+  },
+  "1440": {
+    "initial": {
+      "height": 96,
+      "scroll": 94,
+      "client": 94,
+      "font": "16px",
+      "width": 335
+    },
+    "grown": {
+      "height": 208,
+      "scroll": 206,
+      "client": 206,
+      "font": "16px",
+      "width": 335
+    },
+    "expanded": {
+      "height": 480,
+      "scroll": 478,
+      "client": 478,
+      "font": "16px",
+      "width": 335
+    },
+    "shiftEnter": true,
+    "expandReducePreservesText": true,
+    "collapseReopenPreservesText": true,
+    "sendResetsHeight": true,
+    "noOverflow": true
+  },
+  "errors": []
+}

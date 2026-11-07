@@ -1,7 +1,7 @@
 "use client";
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Lightbulb, MessageSquarePlus, PanelRightClose, PanelRightOpen, Send, Sparkles } from 'lucide-react';
+import { Lightbulb, Maximize2, MessageSquarePlus, Minimize2, PanelRightClose, PanelRightOpen, Send, Sparkles } from 'lucide-react';
 import { api, postJson } from '@/lib/client';
 import type { PublicPercakapan } from '@/lib/tanya';
 import type { RecommendationAction } from '@/lib/contracts';
@@ -19,7 +19,28 @@ export function TanyaPanel() {
   const cache = useQueryClient();
   const [open, setOpen] = useState(false), [hydrated, setHydrated] = useState(false);
   const [id, setId] = useState<string | null>(null), [text, setText] = useState('');
+  const [composerExpanded, setComposerExpanded] = useState(false);
   const scroll = useRef<HTMLDivElement>(null), composer = useRef<HTMLTextAreaElement>(null);
+  useLayoutEffect(() => {
+    const input = composer.current;
+    if (!input) return;
+    let active = true, width = input.getBoundingClientRect().width;
+    const fit = () => {
+      if (!active) return;
+      input.style.height = composerExpanded ? 'min(55dvh, 480px)' : 'auto';
+      if (!composerExpanded) input.style.height = `${input.scrollHeight + 2}px`;
+    };
+    fit();
+    // Reflow wrapped text when the side panel or viewport changes width.
+    const observer = new ResizeObserver(() => {
+      const next = input.getBoundingClientRect().width;
+      if (next !== width) { width = next; fit(); }
+    });
+    observer.observe(input);
+    void document.fonts.ready.then(fit);
+    window.addEventListener('resize', fit);
+    return () => { active = false; observer.disconnect(); window.removeEventListener('resize', fit); };
+  }, [text, open, composerExpanded]);
   useEffect(() => {
     let savedOpen: string | null = null, savedId: string | null = null;
     try { savedOpen = localStorage.getItem('pramana.tanya-open'); savedId = localStorage.getItem('pramana.tanya-id'); } catch {}
@@ -78,11 +99,11 @@ export function TanyaPanel() {
   function send(question = text) {
     const value = question.trim();
     if (!hydrated || !value || ask.isPending || (id && (conversation.isLoading || conversation.isError))) return;
-    setText(''); ask.mutate({ percakapan_id: id, text: value });
+    setText(''); setComposerExpanded(false); ask.mutate({ percakapan_id: id, text: value });
   }
   function newConversation() {
     if (ask.isPending) return;
-    setId(null); setText(''); ask.reset(); remember('pramana.tanya-id', null);
+    setId(null); setText(''); setComposerExpanded(false); ask.reset(); remember('pramana.tanya-id', null);
     requestAnimationFrame(() => composer.current?.focus());
   }
   const waitingForConversation = !!id && conversation.isLoading;
@@ -102,7 +123,14 @@ export function TanyaPanel() {
         </div>}
         {ask.error && <ErrorState error={ask.error}><p className="t-body-sm muted">Your question is restored below. Send it again to retry.</p></ErrorState>}
       </div>
-      <form className="shrink-0 p-3 border-t border-[var(--color-line)] flex items-end gap-2" onSubmit={event => { event.preventDefault(); send(); }}><textarea ref={composer} className="input t-body min-w-0 flex-1 min-h-10 max-h-32 resize-y" aria-label="Question for Lumo" placeholder="Ask about units, findings, or WO…" rows={1} maxLength={4000} value={text} disabled={disabled} onChange={event => setText(event.target.value)} onKeyDown={event => { if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); send(); } }}/><button className="btn btn-primary w-10 h-10 !p-0 shrink-0" aria-label="Send question" disabled={disabled || !text.trim()}><Send size={17}/></button></form>
+      <form className="shrink-0 p-3 border-t border-[var(--color-line)] space-y-2" onSubmit={event => { event.preventDefault(); send(); }}>
+        <textarea ref={composer} id="lumo-question" className={`input t-body-lg block w-full min-w-0 min-h-[96px] resize-none overflow-y-auto ${composerExpanded ? 'max-h-[min(55dvh,480px)]' : 'max-h-[min(40dvh,320px)]'}`} aria-label="Question for Lumo" aria-describedby="lumo-composer-hint" placeholder="Ask about units, findings, or WO…" rows={3} maxLength={4000} value={text} disabled={disabled} onChange={event => setText(event.target.value)} onKeyDown={event => { if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); send(); } }}/>
+        <div className="flex items-center justify-between gap-2">
+          <button type="button" className="inline-flex items-center gap-1.5 rounded-md min-h-10 px-1 t-body-sm muted hover:bg-[var(--color-surface-muted)]" aria-controls="lumo-question" aria-expanded={composerExpanded} onClick={() => { setComposerExpanded(value => !value); composer.current?.focus(); }}>{composerExpanded ? <Minimize2 size={14} aria-hidden="true"/> : <Maximize2 size={14} aria-hidden="true"/>}{composerExpanded ? 'Reduce input' : 'Expand input'}</button>
+          <span id="lumo-composer-hint" className="t-label font-normal muted flex-1 text-right">Shift+Enter for a new line</span>
+          <button className="btn btn-primary w-10 h-10 !p-0 shrink-0" aria-label="Send question" disabled={disabled || !text.trim()}><Send size={17}/></button>
+        </div>
+      </form>
     </> : <button className="flex-1 flex flex-col items-center gap-4 py-4 muted hover:bg-[var(--color-surface-muted)]" aria-label="Expand Lumo panel" aria-expanded="false" disabled={!hydrated} onClick={() => toggle(true)}><MascotAvatar size={32}/><PanelRightOpen size={16}/><span className="t-body rotate-180" style={{ writingMode: 'vertical-rl' }}>Ask Lumo</span></button>}
   </aside>;
 }
