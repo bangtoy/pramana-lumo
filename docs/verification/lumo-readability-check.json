@@ -1,0 +1,303 @@
+{
+  "conversationId": "TL-2c0ab6aa-734c-4a6f-b069-d06685ceeda5",
+  "reply": {
+    "id": "MSG-d15ad16b-a078-468d-af14-9495bb6df312",
+    "role": "pramana",
+    "text": "Six units had STOP reports this week, 1–7 November 2026: DT-07, DT-03, DEMO-1, DEMO-2, DT-05 and DT-08.\n\nThe chart shows nine STOP reports in total; DT-07 had the most, with three. These are historical report counts, not confirmation of today’s unit condition.",
+    "sumber": [
+      "LI-dfcb81e2-232f-4eca-8dad-12f0d16da30b",
+      "LI-ee9abbcb-7a1d-470a-beb0-d716984c73db",
+      "LI-RW-45",
+      "LI-RW-42",
+      "LI-RW-38",
+      "LI-RW-36",
+      "LI-RW-26",
+      "LI-RW-25",
+      "LI-RW-21"
+    ],
+    "rekomendasi": [
+      "Follow up on 3 overdue work orders (DT-08, DT-07, DT-02).",
+      "Remind the inspectors for DT-05, DT-08: no P2H submitted today."
+    ],
+    "fallback": false,
+    "chart": {
+      "view": "bar",
+      "title": "STOP reports by unit",
+      "from": "2026-11-01",
+      "to": "2026-11-07",
+      "group_by": "unit",
+      "only_stop": true,
+      "unit": null,
+      "rows": [
+        {
+          "label": "DT-07",
+          "value": 3
+        },
+        {
+          "label": "DT-03",
+          "value": 2
+        },
+        {
+          "label": "DEMO-1",
+          "value": 1
+        },
+        {
+          "label": "DEMO-2",
+          "value": 1
+        },
+        {
+          "label": "DT-05",
+          "value": 1
+        },
+        {
+          "label": "DT-08",
+          "value": 1
+        }
+      ],
+      "total": 9,
+      "omitted_groups": 0
+    },
+    "created_at": "2026-11-07T06:05:58.424Z",
+    "source_details": [
+      {
+        "id": "LI-dfcb81e2-232f-4eca-8dad-12f0d16da30b",
+        "label": "DEMO-2 · 7 Nov"
+      },
+      {
+        "id": "LI-ee9abbcb-7a1d-470a-beb0-d716984c73db",
+        "label": "DEMO-1 · 7 Nov"
+      },
+      {
+        "id": "LI-RW-45",
+        "label": "DT-07 · 7 Nov"
+      },
+      {
+        "id": "LI-RW-42",
+        "label": "DT-03 · 7 Nov"
+      },
+      {
+        "id": "LI-RW-38",
+        "label": "DT-05 · 6 Nov"
+      },
+      {
+        "id": "LI-RW-36",
+        "label": "DT-07 · 5 Nov"
+      },
+      {
+        "id": "LI-RW-26",
+        "label": "DT-08 · 2 Nov"
+      },
+      {
+        "id": "LI-RW-25",
+        "label": "DT-07 · 2 Nov"
+      },
+      {
+        "id": "LI-RW-21",
+        "label": "DT-03 · 1 Nov"
+      }
+    ]
+  },
+  "trendConversationId": "TL-af4f57c8-f91f-4919-a7ee-7e4af39a0fa0",
+  "trendReply": {
+    "id": "MSG-50fb79a6-aa6e-43d8-ae00-d0a79672500c",
+    "role": "pramana",
+    "text": "The line chart shows 27 inspection reports across 1–7 November 2026 (WIB).\n\nDaily counts were steady at 3–4 reports through 6 November, then peaked at 8 on 7 November. These are report counts, not unique units.",
+    "sumber": [
+      "LI-dfcb81e2-232f-4eca-8dad-12f0d16da30b",
+      "LI-ee9abbcb-7a1d-470a-beb0-d716984c73db",
+      "LI-RW-45",
+      "LI-RW-44",
+      "LI-RW-43",
+      "LI-RW-42",
+      "LI-RW-41",
+      "LI-RW-40",
+      "LI-RW-39",
+      "LI-RW-38",
+      "LI-RW-37",
+      "LI-RW-33",
+      "LI-RW-36",
+      "LI-RW-35",
+      "LI-RW-34",
+      "LI-RW-32",
+      "LI-RW-31",
+      "LI-RW-30",
+      "LI-RW-29",
+      "LI-RW-28",
+      "LI-RW-27",
+      "LI-RW-24",
+      "LI-RW-26",
+      "LI-RW-25",
+      "LI-RW-23",
+      "LI-RW-22",
+      "LI-RW-21"
+    ],
+    "rekomendasi": [
+      "Follow up on 3 overdue work orders (DT-08, DT-07, DT-02).",
+      "Remind the inspectors for DT-05, DT-08: no P2H submitted today."
+    ],
+    "fallback": false,
+    "chart": {
+      "view": "line",
+      "title": "Inspection reports by day",
+      "from": "2026-11-01",
+      "to": "2026-11-07",
+      "group_by": "day",
+      "only_stop": false,
+      "unit": null,
+      "rows": [
+        {
+          "label": "2026-11-01",
+          "value": 3
+        },
+        {
+          "label": "2026-11-02",
+          "value": 3
+        },
+        {
+          "label": "2026-11-03",
+          "value": 3
+        },
+        {
+          "label": "2026-11-04",
+          "value": 3
+        },
+        {
+          "label": "2026-11-05",
+          "value": 4
+        },
+        {
+          "label": "2026-11-06",
+          "value": 3
+        },
+        {
+          "label": "2026-11-07",
+          "value": 8
+        }
+      ],
+      "total": 27,
+      "omitted_groups": 0
+    },
+    "created_at": "2026-11-07T06:13:51.230Z",
+    "source_details": [
+      {
+        "id": "LI-dfcb81e2-232f-4eca-8dad-12f0d16da30b",
+        "label": "DEMO-2 · 7 Nov"
+      },
+      {
+        "id": "LI-ee9abbcb-7a1d-470a-beb0-d716984c73db",
+        "label": "DEMO-1 · 7 Nov"
+      },
+      {
+        "id": "LI-RW-45",
+        "label": "DT-07 · 7 Nov"
+      },
+      {
+        "id": "LI-RW-44",
+        "label": "DT-06 · 7 Nov"
+      },
+      {
+        "id": "LI-RW-43",
+        "label": "DT-04 · 7 Nov"
+      },
+      {
+        "id": "LI-RW-42",
+        "label": "DT-03 · 7 Nov"
+      },
+      {
+        "id": "LI-RW-41",
+        "label": "DT-02 · 7 Nov"
+      },
+      {
+        "id": "LI-RW-40",
+        "label": "DT-01 · 7 Nov"
+      },
+      {
+        "id": "LI-RW-39",
+        "label": "DT-08 · 6 Nov"
+      },
+      {
+        "id": "LI-RW-38",
+        "label": "DT-05 · 6 Nov"
+      },
+      {
+        "id": "LI-RW-37",
+        "label": "DT-03 · 6 Nov"
+      },
+      {
+        "id": "LI-RW-33",
+        "label": "DT-01 · 5 Nov"
+      },
+      {
+        "id": "LI-RW-36",
+        "label": "DT-07 · 5 Nov"
+      },
+      {
+        "id": "LI-RW-35",
+        "label": "DT-06 · 5 Nov"
+      },
+      {
+        "id": "LI-RW-34",
+        "label": "DT-02 · 5 Nov"
+      },
+      {
+        "id": "LI-RW-32",
+        "label": "DT-07 · 4 Nov"
+      },
+      {
+        "id": "LI-RW-31",
+        "label": "DT-05 · 4 Nov"
+      },
+      {
+        "id": "LI-RW-30",
+        "label": "DT-04 · 4 Nov"
+      },
+      {
+        "id": "LI-RW-29",
+        "label": "DT-03 · 3 Nov"
+      },
+      {
+        "id": "LI-RW-28",
+        "label": "DT-02 · 3 Nov"
+      },
+      {
+        "id": "LI-RW-27",
+        "label": "DT-01 · 3 Nov"
+      },
+      {
+        "id": "LI-RW-24",
+        "label": "DT-06 · 2 Nov"
+      },
+      {
+        "id": "LI-RW-26",
+        "label": "DT-08 · 2 Nov"
+      },
+      {
+        "id": "LI-RW-25",
+        "label": "DT-07 · 2 Nov"
+      },
+      {
+        "id": "LI-RW-23",
+        "label": "DT-05 · 1 Nov"
+      },
+      {
+        "id": "LI-RW-22",
+        "label": "DT-04 · 1 Nov"
+      },
+      {
+        "id": "LI-RW-21",
+        "label": "DT-03 · 1 Nov"
+      }
+    ]
+  },
+  "chartMatchesReports": true,
+  "allFiveViews": true,
+  "sourcesExpandAndNavigate": true,
+  "dragAndKeyboardResize": true,
+  "widthPersists": true,
+  "collapseRestoresWidth": true,
+  "responsive390": true,
+  "legacyFormatting": true,
+  "longAnswerStartsVisible": true,
+  "errors": [],
+  "failures": []
+}

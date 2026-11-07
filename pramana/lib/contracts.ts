@@ -58,6 +58,19 @@ export const Pill = z.object({
 });
 export type Pill = z.infer<typeof Pill>;
 
+/** A snapshot computed by server tools, never chart values supplied by the model. */
+export const AnswerChart = z.object({
+  view: z.enum(['bar', 'line', 'pie', 'table', 'kpi']),
+  title: z.string().max(120),
+  from: z.string(), to: z.string(),
+  group_by: z.enum(['unit', 'day']),
+  only_stop: z.boolean(), unit: z.string().nullable(),
+  rows: z.array(z.object({ label: z.string().max(120), value: z.number().int().nonnegative() })).max(31),
+  total: z.number().int().nonnegative(),
+  omitted_groups: z.number().int().nonnegative(),
+});
+export type AnswerChart = z.infer<typeof AnswerChart>;
+
 export const ChatMessage = z.object({
   id: z.string(),
   role: z.enum(["pramana", "user"]),
@@ -73,6 +86,8 @@ export const ChatMessage = z.object({
   rekomendasi: z.array(z.string()).optional(),
   /** True when the answer came from the rule-based fallback, not the agent. */
   fallback: z.boolean().optional(),
+  chart: AnswerChart.optional(),
+  source_details: z.array(z.object({ id: z.string(), label: z.string() })).optional(),
   created_at: z.string(),
 });
 export type ChatMessage = z.infer<typeof ChatMessage>;
