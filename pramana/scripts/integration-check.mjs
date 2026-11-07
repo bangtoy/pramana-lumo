@@ -53,8 +53,8 @@ try {
     let report;
     async function send(text, photo, camera = false) {
       if (photo) {
-        await page.getByLabel(camera ? 'Take an inspection photo' : 'Attach an image', { exact: true }).setInputFiles(`public/demo/${photo}`);
-        await page.getByText(/Photo ready ·/).waitFor();
+        await page.getByLabel(camera ? 'Take an inspection photo' : 'Attach inspection photos', { exact: true }).setInputFiles(`public/demo/${photo}`);
+        await page.getByText(/1\/5 photos ready ·/).waitFor();
       }
       await composer.fill(text);
       const start = performance.now();

@@ -35,7 +35,7 @@ try {
   assert.equal(response.status(), 200);
   await page.getByLabel('Take an inspection photo').waitFor({ state: 'attached' });
   assert.equal(await page.getByLabel('Take an inspection photo').getAttribute('capture'), 'environment');
-  assert.equal(await page.getByLabel('Attach an image', { exact: true }).getAttribute('capture'), null);
+  assert.equal(await page.getByLabel('Attach inspection photos', { exact: true }).getAttribute('capture'), null);
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
   await page.screenshot({ path: '../docs/verification/screenshots/docker-tunnel-390.png', fullPage: true });
 } finally { await browser.close(); }
