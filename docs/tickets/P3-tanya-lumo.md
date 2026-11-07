@@ -42,8 +42,8 @@ Prasyarat: P2-03 (`lib/dashboard.ts`). Acuan layar: `design/screens/01` (panel k
 - `tanyaAnalis(percakapanId | null, question)`: muat/buat `Percakapan` (`TL-…`), coba agent dalam `withTrace("pramana-analis", …, {groupId})`; bila error atau pesan kosong → `jawabCadangan`; simpan `messages` (+ `agent_history` ringkas bila agent jalan).
 
 **Selesai bila**
-- [ ] Dengan model mati: "Kenapa DT-07 tidak layak?" → teks berisi "DT-07 tidak layak jalan", sumber `LI-RW-45`, 4 rekomendasi, `fallback: true`.
-- [ ] Dengan model aktif: jawaban agent dengan sumber yang semuanya ada di DB.
+- [x] Dengan model mati: "Why is DT-07 not roadworthy?" → teks berisi "DT-07 is not roadworthy", sumber `LI-RW-45`, 4 rekomendasi, `fallback: true` (bahasa Inggris mengikuti instruksi pengguna).
+- [x] Dengan model aktif: jawaban agent dengan sumber yang semuanya ada di DB.
 
 **Prompt /goal (P3-01, P3-02)**
 ```

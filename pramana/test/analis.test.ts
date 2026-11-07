@@ -4,8 +4,8 @@ import { mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 process.env.DATA_DIR = mkdtempSync(path.join(tmpdir(), 'pramana-analis-'));
-const { database, listLaporan, listWorkOrders } = await import('../lib/db.ts');
-const { analis, analisReads, cleanAnalisOutput } = await import('../lib/agents/analis.ts');
+const { database, getPercakapan, listLaporan, listWorkOrders, savePercakapan } = await import('../lib/db.ts');
+const { analis, analisReads, cleanAnalisOutput, jawabCadangan, rekomendasiDariData, tanyaAnalis } = await import('../lib/agents/analis.ts');
 const noFilter = { unit: null, petugas: null, dari: null, sampai: null, hanya_stop: null, item: null };
 
 test('analyst readers expose bounded evidence and leave reports, work orders and plans unchanged', () => {
@@ -32,4 +32,52 @@ test('analyst output removes invented sources, caps sentences and supplies two d
   assert.throws(() => cleanAnalisOutput({ message: ' ', sumber: [], rekomendasi: [] }));
   const agent = analis(); assert.equal(agent.name, 'Analis (Lumo)'); assert.equal(agent.modelSettings.reasoning?.effort, 'low');
   assert.deepEqual(agent.tools.map(tool => tool.name), ['ringkasan', 'cari_laporan', 'get_laporan', 'list_work_order']);
+});
+
+test('fallback follows unit/repair/component/missing/STOP/summary order with four grounded suggestions', () => {
+  const recommendations = rekomendasiDariData(); assert.equal(recommendations.length, 4);
+  assert.match(recommendations[0], /Create a work order for DT-07/); assert.match(recommendations[1], /3 overdue/);
+  assert.match(recommendations[2], /DT-05, DT-08/); assert.match(recommendations[3], /DT-07.*14 days/);
+  for (const name of ['DT-07', 'dt7', 'DT 7']) {
+    const reply = jawabCadangan(`Why is ${name} not roadworthy?`);
+    assert.match(reply.text, /DT-07 is not roadworthy/); assert.ok(reply.sumber?.includes('LI-RW-45'));
+    assert.equal(reply.fallback, true); assert.equal(reply.rekomendasi?.length, 4);
+  }
+  assert.match(jawabCadangan('Why is DT-99 not roadworthy?').text, /No submitted inspection reports match DT-99/);
+  assert.match(jawabCadangan('Which work orders are still open?').text, /6 work orders.*overdue/);
+  assert.match(jawabCadangan('What components fail most often?').text, /Tyres.*DT-07/);
+  assert.match(jawabCadangan('Who has not been inspected? Please remind them.').text, /DT-05.*DT-08/);
+  assert.match(jawabCadangan('Which units had STOP this week?').text, /last seven Jakarta days/);
+  assert.match(jawabCadangan('Give me a summary.').text, /6 of 8 units/);
+  assert.match(jawabCadangan('Close all work orders for DT-07.').text, /I can only read.*DT-07 is not roadworthy/);
+});
+
+test('conversation persists model/fallback turns, rejects missing IDs and never mutates fleet evidence', async () => {
+  const before = JSON.stringify({ reports: listLaporan(), orders: listWorkOrders() });
+  const first = await tanyaAnalis(null, 'Why is DT-07 not roadworthy?', async () => { throw new Error('Provider unavailable'); });
+  assert.ok(first.id.startsWith('TL-')); assert.equal(first.messages.length, 2); assert.equal(first.messages[1].fallback, true);
+  const second = await tanyaAnalis(first.id, 'What should I do next?', async input => {
+    assert.match(JSON.stringify(input), /LI-RW-45/);
+    return { output: { message: 'Review report LI-RW-45.', sumber: ['LI-RW-45', 'LI-fiction'], rekomendasi: [] }, history: input };
+  });
+  assert.equal(second.messages.length, 4); assert.equal(second.messages[3].fallback, false);
+  assert.deepEqual(second.messages[3].sumber, ['LI-RW-45']); assert.equal(second.messages[3].rekomendasi?.length, 2);
+  assert.deepEqual(getPercakapan(first.id), second);
+  const empty = await tanyaAnalis(first.id, 'Show the fleet.', async () => ({ output: { message: '', sumber: [], rekomendasi: [] }, history: [] }));
+  assert.equal(empty.messages.at(-1)?.fallback, true);
+  await assert.rejects(tanyaAnalis('TL-missing', 'Hello'), /Conversation not found/);
+  await assert.rejects(tanyaAnalis(null, ' '.repeat(10))); await assert.rejects(tanyaAnalis(null, 'x'.repeat(4001)));
+  assert.equal(JSON.stringify({ reports: listLaporan(), orders: listWorkOrders() }), before);
+});
+
+test('conversation lock prevents lost turns and long conversations keep at most 30 history messages', async () => {
+  const id = 'TL-history-test';
+  savePercakapan({ id, created_at: new Date().toISOString(), agent_history: [], messages: Array.from({ length: 40 }, (_, i) => ({ id: `MSG-${i}`, role: i % 2 ? 'pramana' : 'user', text: `Message ${i}`, created_at: new Date().toISOString() })) });
+  let release!: () => void; const gate = new Promise<void>(resolve => { release = resolve; });
+  const first = tanyaAnalis(id, 'The next turn.', async input => {
+    assert.equal(input.length, 31); await gate;
+    return { output: { message: 'Review the inspection.', sumber: ['LI-RW-45'], rekomendasi: [] }, history: input };
+  });
+  await assert.rejects(tanyaAnalis(id, 'Concurrent question.'), /still working/); release();
+  const saved = await first; assert.equal(saved.messages.length, 42); assert.equal(saved.agent_history.length, 30);
 });

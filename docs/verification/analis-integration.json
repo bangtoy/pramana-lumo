@@ -1,0 +1,72 @@
+[
+  {
+    "mode": "offline",
+    "conversationId": "TL-39ce0b5c-8e2c-4141-859f-a5cb607612c1",
+    "elapsedMs": 1596,
+    "reply": {
+      "id": "MSG-7912edb9-c49b-4245-8ab6-901bfa1c7715",
+      "role": "pramana",
+      "text": "DT-07 is not roadworthy in report LI-RW-45 (7 Nov 07:42 WIB). Findings: Tyres & wheel nuts (STOP): Approximately 6 cm sidewall bulge on the left rear outer tyre. Keep the unit out of service.; Hydraulic cylinder (STOP): Active hydraulic oil leak at the left cylinder hose coupling. Keep the body lowered and the unit out of service.. 10 submitted reports and 2 open work orders are recorded for DT-07.",
+      "sumber": [
+        "LI-RW-45",
+        "WO-RW-08",
+        "WO-RW-05"
+      ],
+      "rekomendasi": [
+        "Create a work order for DT-07: STOP today with no work order yet.",
+        "Follow up on 3 overdue work orders (DT-08, DT-07, DT-02).",
+        "Remind the inspectors for DT-05, DT-08: no P2H submitted today.",
+        "Investigate recurring tyres & wheel nuts findings on DT-07 (7× in 14 days)."
+      ],
+      "fallback": true,
+      "created_at": "2026-11-07T05:30:55.881Z"
+    },
+    "followUp": null,
+    "readOnly": true,
+    "persisted": true,
+    "historyLength": 0,
+    "localTraceEvents": 5
+  },
+  {
+    "mode": "online",
+    "conversationId": "TL-85e1e2e3-b25d-494d-a420-1eeffd04458d",
+    "elapsedMs": 16703,
+    "reply": {
+      "id": "MSG-61d9279c-5b53-46f6-bc43-bfd515205827",
+      "role": "pramana",
+      "text": "DT-07 is not roadworthy in its latest inspection, LI-RW-45, recorded on 7 November 2026 at 07:42 WIB. It records two STOP findings: an approximately 6 cm sidewall bulge on the left rear outer tyre and an active hydraulic oil leak at the left cylinder hose coupling. Hydraulic repair WO-RW-08 is open and overdue since 6 November; WO-RW-05 is also open, due 8 November.",
+      "sumber": [
+        "LI-RW-45",
+        "WO-RW-08",
+        "WO-RW-05"
+      ],
+      "rekomendasi": [
+        "Keep DT-07 out of service with the dump body lowered, as instructed in LI-RW-45.",
+        "On the Work Orders page, prioritize overdue WO-RW-08 and reconcile it with WO-RW-05; arrange qualified repair of both STOP findings.",
+        "Require a qualified reinspection before returning DT-07 to service; completing repairs or work orders alone does not establish roadworthiness."
+      ],
+      "fallback": false,
+      "created_at": "2026-11-07T05:31:07.086Z"
+    },
+    "followUp": {
+      "id": "MSG-299e955e-a059-4b21-8ea6-5009a1eb9960",
+      "role": "pramana",
+      "text": "DT-07 has one overdue open work order: WO-RW-08, for repair of the hydraulic coupling seal, due 6 November 2026 and assigned to Rahmat (linked report LI-RW-32). The other open work order, WO-RW-05, is due 8 November 2026 and is not overdue.",
+      "sumber": [
+        "WO-RW-08",
+        "LI-RW-32",
+        "WO-RW-05"
+      ],
+      "rekomendasi": [
+        "Create a work order for DT-07: STOP today with no work order yet.",
+        "Follow up on 3 overdue work orders (DT-08, DT-07, DT-02)."
+      ],
+      "fallback": false,
+      "created_at": "2026-11-07T05:31:13.666Z"
+    },
+    "readOnly": true,
+    "persisted": true,
+    "historyLength": 4,
+    "localTraceEvents": 22
+  }
+]

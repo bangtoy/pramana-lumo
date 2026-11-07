@@ -1,11 +1,14 @@
 import { Agent, Runner, tool, withTrace, type AgentInputItem } from '@openai/agents';
 import { z } from 'zod';
-import { getLaporan, getWorkOrder, listWorkOrders } from '../db.ts';
-import { cariLaporan, isTerlambat, ringkasan } from '../dashboard.ts';
+import { getLaporan, getPercakapan, getWorkOrder, listWorkOrders, newId, now, savePercakapan } from '../db.ts';
+import { cariLaporan, isTerlambat, ringkasan, type Ringkasan } from '../dashboard.ts';
+import type { ChatMessage, Percakapan, WorkOrder } from '../contracts.ts';
+import { fail } from '../http.ts';
 import { counts, itemsOf, unitCode, verdict } from '../rules.ts';
 import { dayKey, dayLabel, jakartaDay } from '../waktu.ts';
 import { sortWorkOrders } from '../work-order-rules.ts';
 import { MODEL, compactHistory, modelProvider, safeText } from './client.ts';
+import { lockTurn } from './turn.ts';
 
 const nullableText = z.string().trim().max(120).nullable();
 export const AnalisSearch = z.object({
@@ -63,7 +66,7 @@ export function sumberValid(ids: string[]): string[] {
   return [...new Set(ids)].filter(id => (id.startsWith('LI-') && !!getLaporan(id)) || (id.startsWith('WO-') && !!getWorkOrder(id)));
 }
 
-/** Recommendations from data are supplied by the conversation service in P3-02. */
+/** Server validation never trusts model-supplied source IDs. */
 export function cleanAnalisOutput(value: unknown, recommendations: string[] = []): AnalisOutput {
   const output = AnalisOutput.parse(value);
   const message = [...new Intl.Segmenter('en', { granularity: 'sentence' }).segment(safeText(output.message))].slice(0, 5).map(part => part.segment).join('').trim();
@@ -95,4 +98,90 @@ export async function runAnalis(input: AgentInputItem[], conversationId: string,
     const result = await runner.run(analis(), input, { maxTurns: 8, signal });
     return { output: cleanAnalisOutput(result.finalOutput), history: compactHistory(result.history) };
   }, { groupId: conversationId });
+}
+
+export function rekomendasiDariData(data: Ringkasan = ringkasan(), orders: WorkOrder[] = listWorkOrders()): string[] {
+  const recommendations = data.units.filter(unit => unit.stop_tanpa_wo).map(unit => `Create a work order for ${unit.unit}: STOP today with no work order yet.`);
+  const overdue = sortWorkOrders(orders.filter(order => isTerlambat(order, data.hari_ini)), data.hari_ini);
+  if (overdue.length) recommendations.push(`Follow up on ${overdue.length} overdue work orders (${[...new Set(overdue.map(order => unitCode(order.unit)))].join(', ')}).`);
+  const awaiting = data.units.filter(unit => unit.vonis === 'belum');
+  if (awaiting.length) recommendations.push(`Remind the inspectors for ${awaiting.map(unit => unit.unit).join(', ')}: no P2H submitted today.`);
+  const repeated = data.komponen.find(component => component.berulang);
+  if (repeated?.berulang) recommendations.push(`Investigate recurring ${repeated.nama.toLowerCase()} findings on ${repeated.berulang.unit} (${repeated.berulang.kali}× in 14 days).`);
+  return recommendations.slice(0, 4);
+}
+
+type AnalystReply = Pick<ChatMessage, 'role' | 'text' | 'sumber' | 'rekomendasi' | 'fallback'>;
+export function jawabCadangan(question: string): AnalystReply {
+  const data = ringkasan(), orders = sortWorkOrders(listWorkOrders()), open = orders.filter(order => order.status === 'terbuka');
+  // Avoid interpreting the RW-45 suffix of a report ID as a vehicle code.
+  const match = /(?<![\w-])\b([A-Z]{1,3})-?\s?(\d{1,3})\b/i.exec(question);
+  const code = match ? `${match[1].toUpperCase()}-${match[2].padStart(2, '0')}` : null;
+  let text: string, sources: string[] = [];
+  if (code) {
+    const reports = cariLaporan({ unit: code }).filter(report => unitCode(report.unit).toUpperCase() === code && dayKey(report.submitted_at || report.started_at) <= data.hari_ini)
+      .sort((a, b) => Date.parse(b.submitted_at || b.started_at) - Date.parse(a.submitted_at || a.started_at) || a.id.localeCompare(b.id));
+    const latest = reports[0], repairs = open.filter(order => unitCode(order.unit).toUpperCase() === code);
+    if (!latest) text = `No submitted inspection reports match ${code}. I cannot determine its condition from the available data.`;
+    else {
+      const findings = itemsOf(latest).filter(item => latest.hasil[item.id]?.status !== 'baik').map(item => {
+        const finding = latest.hasil[item.id];
+        return `${short(item.nama, 100)}${finding?.stop ? ' (STOP)' : ''}${finding?.ditangani ? ' (handled; original verdict unchanged)' : ''}: ${short(finding?.catatan, 300).replace(/[.!?]+$/, '')}`;
+      });
+      text = `${verdict(latest)} in report ${latest.id} (${time(latest.submitted_at || latest.started_at)}). ${findings.length ? `Findings: ${findings.join('; ')}.` : 'All recorded items are good.'} ${reports.length} submitted reports and ${repairs.length} open work orders are recorded for ${code}.`;
+      if (dayKey(latest.submitted_at || latest.started_at) !== data.hari_ini) text += ' No P2H is recorded today; the latest report does not establish today’s condition.';
+      sources = [latest.id, ...repairs.map(order => order.id)];
+    }
+  } else if (/\b(?:wo|work\s*orders?|repairs?|mechanics?)\b|perbaikan|mekanik/i.test(question)) {
+    text = open.length ? `${open.length} work orders are open. Highest-priority follow-up: ${open.slice(0, 5).map(order => `${order.id} · ${unitCode(order.unit)} · ${short(order.judul, 160)}${isTerlambat(order) ? ' (overdue)' : ''}`).join('; ')}.` : 'There are no open work orders in the available data.';
+    sources = open.slice(0, 5).map(order => order.id);
+  } else if (/component|often|frequent|broken|recurr|pattern|komponen|sering|rusak|berulang|pola/i.test(question)) {
+    const components = data.komponen.slice(0, 3);
+    text = components.length ? `The most frequent Not good findings in the last 14 days are ${components.map(component => `${short(component.nama, 100)} (${component.kali}×${component.berulang ? `; recurring on ${component.berulang.unit} ${component.berulang.kali}×` : ''})`).join('; ')}. Repetition shows a pattern, not a confirmed root cause.` : 'No Not good component findings are recorded in the last 14 days.';
+    sources = components.map(component => component.laporan_terakhir);
+  } else if (/not (?:yet )?inspected|not (?:yet )?(?:had|completed|submitted).*p2h|missing.*inspection|remind|await.*inspection|belum|ingat/i.test(question)) {
+    const awaiting = data.units.filter(unit => unit.vonis === 'belum');
+    text = awaiting.length ? `${awaiting.length} units have no submitted P2H today: ${awaiting.map(unit => `${unit.unit} (${unit.catatan})`).join('; ')}. The last inspection does not establish today’s condition.` : 'All units seen in the last 14 days have a submitted P2H today.';
+    if (!data.units.length) text = 'There are no submitted inspections in the last 14 days, so I cannot identify units awaiting P2H.';
+    sources = awaiting.map(unit => unit.laporan_id);
+  } else if (/stop|not roadworthy|unroadworthy|danger|tidak layak|bahaya/i.test(question)) {
+    const reports = cariLaporan({ hanya_stop: true, dari: jakartaDay(6), sampai: data.hari_ini });
+    text = `${reports.length} STOP reports were submitted in the last seven Jakarta days${reports.length ? ` across ${[...new Set(reports.map(report => unitCode(report.unit)))].join(', ')}` : ''}. Today ${data.kpi.stop} units have a STOP verdict. Repair completion does not clear the original STOP; qualified reinspection is required.`;
+    sources = reports.slice(0, 15).map(report => report.id);
+  } else {
+    const k = data.kpi;
+    text = `Today (${data.hari_ini}, WIB), ${k.unit_diperiksa} of ${k.unit_total} units have a submitted P2H: ${k.layak} roadworthy and ${k.stop} STOP. ${k.belum_p2h} units await inspection. There are ${k.wo_terbuka} open work orders, including ${k.wo_terlambat} overdue.`;
+    sources = data.units.filter(unit => unit.vonis === 'stop').map(unit => unit.laporan_id);
+  }
+  if (/\b(?:create|close|delete|assign|update|complete)\b|buat|tutup|hapus|selesaikan/i.test(question)) text = `I can only read the data; make changes through the report or Work orders page. ${text}`;
+  return { role: 'pramana', text: safeText(text), sumber: sumberValid(sources), rekomendasi: rekomendasiDariData(data, orders), fallback: true };
+}
+
+export const TanyaQuestion = z.string().trim().min(1).max(4000);
+export const PercakapanId = z.string().regex(/^TL-[A-Za-z0-9-]{1,100}$/);
+export async function tanyaAnalis(percakapanId: string | null, question: string, run = runAnalis): Promise<Percakapan> {
+  const text = safeText(TanyaQuestion.parse(question)), id = percakapanId === null ? newId('TL') : PercakapanId.parse(percakapanId);
+  const unlock = lockTurn(id);
+  try {
+    const existing = percakapanId ? getPercakapan(id) : null;
+    if (percakapanId && !existing) fail('Conversation not found.', 404);
+    const conversation: Percakapan = existing || { id, messages: [], agent_history: [], created_at: now() };
+    const user: ChatMessage = { id: newId('MSG'), role: 'user', text, created_at: now() };
+    // Visible messages also include fallback turns, so a restored model can follow them.
+    const history = compactHistory(conversation.messages.map(message => ({ role: message.role === 'user' ? 'user' : 'assistant', content: message.role === 'user' ? message.text : JSON.stringify({ message: message.text, sumber: message.sumber || [], rekomendasi: message.rekomendasi || [] }) })));
+    const input = [...history, { role: 'user' as const, content: text }];
+    let reply: AnalystReply;
+    try {
+      const result = await run(input, id);
+      const output = cleanAnalisOutput(result.output, rekomendasiDariData());
+      reply = { role: 'pramana', text: output.message, sumber: output.sumber, rekomendasi: output.rekomendasi, fallback: false };
+      conversation.agent_history = compactHistory(result.history);
+    } catch {
+      console.warn('Analyst unavailable; answering from inspection data.');
+      reply = jawabCadangan(text);
+    }
+    conversation.messages.push(user, { ...reply, id: newId('MSG'), created_at: now() });
+    savePercakapan(conversation);
+    return getPercakapan(id)!;
+  } finally { unlock(); }
 }
