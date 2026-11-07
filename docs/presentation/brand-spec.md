@@ -2,7 +2,7 @@
 
 ## Assets and sources
 
-- Pramana logo: the letter P in a blue gradient square, sourced from `../../design/layouts/index.html` and product screenshots. Reproduced with `.brand-mark` markup using the existing logo concept.
+- Pramana logo: the current Lumo face icon at `../../pramana/public/icon-lumo-face.png`, shared with the application homepage, supervisor sidebar, and manifest. Slide mastheads reference this local asset directly and render it at 40 ? 40 px with a 10 px radius.
 - Lumo greeting: `../../design/assets/lumo/lumo-menyapa.png`.
 - Lumo observing: `../../design/assets/lumo/lumo-mengamati.png`.
 - Lumo completion: `../../design/assets/lumo/lumo-jempol.png`.

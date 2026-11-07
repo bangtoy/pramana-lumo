@@ -11,7 +11,7 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const design = '../../../design';
 const app = 'https://lumo.bangtoy.work';
-const brand = `<a class="brand" href="${app}/" target="_blank" rel="noopener"><span class="brand-mark" aria-hidden="true">P</span>Pramana<span class="brand-detail">/ Lumo</span></a>`;
+const brand = `<a class="brand" href="${app}/" target="_blank" rel="noopener"><img class="brand-mark" src="../../../pramana/public/icon-lumo-face.png" alt="" width="40" height="40">Pramana<span class="brand-detail">/ Lumo</span></a>`;
 const head = (section, appendix = false) => `<header class="masthead">${brand}<span class="meta">${appendix ? 'Appendix · ' : ''}${section}</span></header>`;
 function screen(file, alt) {
   return `<img src="../../verification/screenshots/${file}" alt="${alt}"><span class="screenshot-label">Application screenshot · demo data</span>`;
