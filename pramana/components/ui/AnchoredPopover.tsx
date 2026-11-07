@@ -50,12 +50,17 @@ export function AnchoredPopover({ anchor, onClose, children, id, role, className
       if (event.key === "Escape") { event.preventDefault(); event.stopPropagation(); onClose(); anchor.current?.focus(); }
     }
     place();
+    // Searchable lists can shrink after opening; keep the panel attached to its trigger.
+    const resize = new ResizeObserver(place);
+    if (panel.current) resize.observe(panel.current);
+    if (anchor.current) resize.observe(anchor.current);
     window.addEventListener("resize", place);
     document.addEventListener("scroll", place, true);
     document.addEventListener("pointerdown", outside);
     document.addEventListener("focusin", focusOutside);
     document.addEventListener("keydown", escape);
     return () => {
+      resize.disconnect();
       window.removeEventListener("resize", place);
       document.removeEventListener("scroll", place, true);
       document.removeEventListener("pointerdown", outside);

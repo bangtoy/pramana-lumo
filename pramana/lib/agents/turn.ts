@@ -20,5 +20,5 @@ export async function readTurn(request: Request) {
   if (!text && !file) fail("Write a message or attach a Spec Sheet.");
   const content: { type: "input_text"; text: string }[] = [{ type: "input_text", text: `${text || "Please inspect the attached document."}${file ? `\n[file ${file.id}]` : ""}` }];
   const input: AgentInputItem = { role: "user", content: file ? [...content, await fileInputPart(file.id)] : content };
-  return { text, file, input };
+  return { text, file, input, planId: String(form.get("planId") || "") };
 }

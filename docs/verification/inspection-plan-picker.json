@@ -1,0 +1,14 @@
+{
+  "reportId": "LI-6a1b4089-8b91-45f3-9bc8-8fec20495ee7",
+  "activePlans": 20,
+  "searchByTitleAndVehicle": true,
+  "longTitlesWrap": true,
+  "keyboardSelection": true,
+  "touchOpen": true,
+  "escapeAndOutsideClose": true,
+  "noMatchesState": true,
+  "persistedPlanId": "RI-DT-UTYPE-01",
+  "snapshotItems": 8,
+  "followUp": "Picker QA, I’ll guide you through the P2H · U-type dump truck inspection. What is the vehicle’s unit code and registration plate, if known?",
+  "browserErrors": []
+}

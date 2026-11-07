@@ -1,10 +1,18 @@
 import { z } from "zod";
 import { HasilItem, type LaporanInspeksi, type ChatMessage } from "./contracts.ts";
-import { getFile, getLaporan, getRencana, newId, now, saveLaporan, setFileCaption } from "./db.ts";
+import { getFile, getLaporan, getRencana, listRencana, newId, now, saveLaporan, setFileCaption } from "./db.ts";
 import { evidenceProblem, headerMissing, itemsOf, nextItem, progress, stopSummary, verdict } from "./rules.ts";
 import { fail } from "./http.ts";
 export function requireReport(id: string) { const report = getLaporan(id); if (!report) fail('Inspection report not found.', 404); return report; }
-export function publicReport(report: LaporanInspeksi) { const { agent_history: _history, ...visible } = report; return visible; }
+export function publicReport(report: LaporanInspeksi) {
+  const { agent_history: _history, ...visible } = report;
+  // Plan selection is a complete database picker, not the agent's four suggested replies.
+  // Enrich on read as well so existing drafts receive the full, current list on refresh.
+  if (report.status !== 'berjalan' || headerMissing(report)[0] !== 'rencana_id' || report.messages.at(-1)?.role !== 'pramana') return visible;
+  const plans = listRencana().filter(plan => !plan.diarsipkan && plan.items.length);
+  const choices = plans.map(plan => ({ id: plan.id, title: plan.judul, vehicle: plan.tipe_kendaraan }));
+  return { ...visible, messages: visible.messages.map((message, index) => index === visible.messages.length - 1 ? { ...message, quick_replies: [], plan_choices: choices } : message) };
+}
 export function openingMessage(): ChatMessage {
   const hour = Number(new Intl.DateTimeFormat('en-GB', { hour: 'numeric', hourCycle: 'h23', timeZone: 'Asia/Jakarta' }).format(new Date()));
   return { id: newId('MSG'), role: 'pramana', text: `Good ${hour < 12 ? 'morning' : hour < 18 ? 'afternoon' : 'evening'}! I'm Lumo, your daily inspection companion. Before we begin, what is your name?`, quick_replies: [], mood: 'netral', created_at: now() };
@@ -25,6 +33,12 @@ export function setHeader(id: string, raw: z.infer<typeof HeaderInput>) {
   }
   for (const key of ['petugas', 'lokasi', 'unit'] as const) if (input[key]) report[key] = input[key];
   saveLaporan(report); return { missing: headerMissing(report), next: nextItem(report), progress: progress(report) };
+}
+export function selectInspectionPlan(id: string, planId: string) {
+  const report = editable(id);
+  if (headerMissing(report)[0] !== 'rencana_id') fail('Inspection plan selection is no longer pending. Refresh the conversation.', 409);
+  setHeader(id, { petugas: null, lokasi: null, unit: null, rencana_id: z.string().trim().min(1).max(200).parse(planId) });
+  return requireReport(id);
 }
 export const RecordInput = HasilItem.omit({ dicatat_at: true, ditangani: true }).extend({ item_id: z.string(), catatan: z.string().trim().min(1).max(4000), bukti_ids: z.string().array().max(12), alasan: z.string().nullable() }).strict();
 export function recordItem(id: string, raw: z.infer<typeof RecordInput>) {

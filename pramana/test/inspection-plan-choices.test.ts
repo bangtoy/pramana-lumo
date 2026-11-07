@@ -1,0 +1,52 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { mkdtempSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+process.env.DATA_DIR = mkdtempSync(path.join(tmpdir(), 'pramana-plan-choices-'));
+const { createReport, publicReport, setHeader, requireReport, selectInspectionPlan } = await import('../lib/laporan.ts');
+const { getRencana, saveRencana, saveLaporan } = await import('../lib/db.ts');
+
+test('resumed plan selection includes every active plan beyond the four agent replies', () => {
+  const plan = getRencana('RI-DT-UTYPE-01')!;
+  const otherTitles = Array.from({ length: 5 }, (_, i) => `Inspection plan ${i + 1}`);
+  for (const [i, judul] of otherTitles.entries()) saveRencana({ ...plan, id: `PLAN-${i}`, judul });
+  saveRencana({ ...plan, id: 'ARCHIVED', judul: 'Archived plan', diarsipkan: true });
+  saveRencana({ ...plan, id: 'EMPTY', judul: 'Empty plan', items: [] });
+  const draft = { ...createReport(), petugas: 'Andra', lokasi: 'Riau' };
+  draft.messages.push({ id: 'choose-plan', role: 'pramana', text: 'Which inspection plan will you use?', quick_replies: otherTitles.slice(0, 4), created_at: draft.started_at });
+  const original = structuredClone(draft);
+  const choices = publicReport(draft).messages.at(-1)!.plan_choices!;
+  assert.deepEqual(choices.map(choice => choice.title).sort(), [plan.judul, ...otherTitles].sort());
+  assert.deepEqual(publicReport(draft).messages.at(-1)!.quick_replies, [], 'Use the selector instead of a long list of cards');
+  assert.deepEqual(draft, original, 'Refreshing cards must not mutate the saved draft');
+  assert.ok(!('agent_history' in publicReport(draft)));
+  assert.deepEqual(publicReport({ ...draft, petugas: null }).messages, draft.messages, 'Keep name questions unchanged');
+  assert.deepEqual(publicReport({ ...draft, lokasi: null }).messages, draft.messages, 'Keep location questions unchanged');
+  assert.deepEqual(publicReport({ ...draft, status: 'terkirim' }).messages, draft.messages, 'Keep submitted history unchanged');
+  const pending = { ...draft, messages: [...draft.messages, { id: 'pending', role: 'user' as const, text: plan.judul, created_at: draft.started_at }] };
+  assert.deepEqual(publicReport(pending).messages, pending.messages, 'Do not rewrite historical choices during a turn');
+  setHeader(draft.id, { petugas: 'Andra', lokasi: 'Riau', rencana_id: plan.id, unit: null });
+  const selected = { ...requireReport(draft.id), messages: draft.messages };
+  assert.deepEqual(publicReport(selected).messages, selected.messages, 'Stop offering plan cards once a plan is selected');
+  saveRencana({ ...plan, diarsipkan: true });
+  assert.ok(!publicReport(draft).messages.at(-1)!.plan_choices!.some(choice => choice.id === plan.id), 'Refresh removes plans archived since the question');
+});
+
+test('selection saves the exact plan ID and rejects archived, empty and stale choices', () => {
+  const plan = getRencana('PLAN-0')!;
+  saveRencana({ ...plan, id: 'DUPLICATE-A', judul: 'Same title' });
+  saveRencana({ ...plan, id: 'DUPLICATE-B', judul: 'Same title' });
+  const draft = { ...createReport(), petugas: 'Andra', lokasi: 'Riau' };
+  saveLaporan(draft);
+  const choices = publicReport(draft).messages.at(-1)!.plan_choices!;
+  assert.equal(new Set(choices.map(choice => choice.id)).size, choices.length);
+  assert.equal(choices.filter(choice => choice.title === 'Same title').length, 2);
+  for (const id of ['MISSING', 'ARCHIVED', 'EMPTY']) assert.throws(() => selectInspectionPlan(draft.id, id), /active inspection plan/);
+  assert.equal(requireReport(draft.id).rencana_id, null);
+  const selected = selectInspectionPlan(draft.id, 'DUPLICATE-B');
+  assert.equal(selected.rencana_id, 'DUPLICATE-B');
+  assert.equal(selected.rencana_snapshot!.id, 'DUPLICATE-B');
+  assert.throws(() => selectInspectionPlan(draft.id, 'DUPLICATE-A'), /no longer pending/);
+  assert.throws(() => selectInspectionPlan(createReport().id, 'DUPLICATE-A'), /no longer pending/);
+});

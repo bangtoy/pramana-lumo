@@ -84,6 +84,8 @@ export const ChatMessage = z.object({
   files: z.array(z.object({ id: z.string(), caption: z.string().nullable().optional(), mime: z.string().optional() })).optional(),
   pills: z.array(Pill).optional(),
   quick_replies: z.array(z.string()).optional(),
+  /** Complete active plan catalog for the searchable inspector picker. */
+  plan_choices: z.array(z.object({ id: z.string(), title: z.string(), vehicle: z.string() })).optional(),
   evidence_request: z.string().nullable().optional(),
   mood: z.enum(["netral", "serius"]).optional(),
   /** Report / work-order IDs an answer is based on (Tanya Lumo on the dashboard). */

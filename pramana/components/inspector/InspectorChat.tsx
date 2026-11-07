@@ -9,6 +9,7 @@ import { counts, itemsOf, nextItem, progress, unitCode, verdict, type ReportView
 import type { ChatMessage, StatusItem, TurnResponse } from "@/lib/contracts";
 import { ChatPill, ErrorState, MascotAvatar, MascotHero, ProgressSegments, ResultPills, Spinner, TypingBubble } from "@/components/ui";
 import { VehicleModel } from "@/components/vehicle-model/VehicleModel";
+import { InspectionPlanSelect } from './InspectionPlanSelect';
 const draftKey = 'pramana.inspection-draft';
 const iconButton = 'btn btn-secondary w-11 h-11 p-0 shrink-0';
 export function InspectorChat() {
@@ -34,8 +35,8 @@ function Conversation({ id, create }: { id: string; create: () => Promise<void> 
   const [showModel, setShowModel] = useState(true), [status, setStatus] = useState(''), [optimistic, setOptimistic] = useState<ChatMessage[]>([]);
   const query = useQuery({ queryKey: ['laporan', id], queryFn: () => api<ReportView>(`/api/laporan/${encodeURIComponent(id)}`) });
   const report = query.data;
-  const turn = useMutation({ mutationFn: async ({ text, photo }: { text: string; photo?: File }) => {
-    const body = new FormData(); body.set('text', text); if (photo) body.set('file', photo);
+  const turn = useMutation({ mutationFn: async ({ text, photo, planId }: { text: string; photo?: File; planId?: string }) => {
+    const body = new FormData(); body.set('text', text); if (photo) body.set('file', photo); if (planId) body.set('planId', planId);
     return postTurn<TurnResponse<ReportView>>(`/api/laporan/${id}/turn`, body, setStatus);
   }, onMutate: ({ text }) => { setOptimistic([{ id: 'pending', role: 'user', text: text || 'Photo attached', created_at: new Date().toISOString() }]); setStatus('Lumo is reading…'); }, onSuccess: reply => {
     cache.setQueryData(['laporan', id], reply.data); setText(''); setPhoto(undefined); if (input.current) input.current.value = ''; if (attachment.current) attachment.current.value = '';
@@ -48,7 +49,7 @@ function Conversation({ id, create }: { id: string; create: () => Promise<void> 
     catch (error) { setPhotoError(error instanceof Error ? error.message : 'The photo could not be prepared.'); }
     finally { setPreparing(false); }
   }
-  function send(value = text) { if ((!value.trim() && !photo) || turn.isPending || preparing) return; turn.mutate({ text: value.trim(), photo }); }
+  function send(value = text, planId?: string) { if ((!value.trim() && !photo) || turn.isPending || preparing) return; turn.mutate({ text: value.trim(), photo, planId }); }
   async function startNew() { if (report?.status === 'berjalan' && Object.keys(report.hasil).length && !window.confirm('Start a new inspection? Your current draft will stay saved, but this device will resume the new one.')) return; await create(); }
   if (query.isLoading) return <div className="p-5"><Spinner/></div>;
   if (query.error || !report) return <div className="p-5"><ErrorState error={query.error || 'Inspection not found.'}><button className="btn btn-secondary" onClick={() => void create()}>Start a new inspection</button></ErrorState></div>;
@@ -80,7 +81,8 @@ function Conversation({ id, create }: { id: string; create: () => Promise<void> 
           return <div key={message.id} className={`flex gap-2 ${message.role === 'user' ? 'justify-end' : ''}`}>
           {message.role === 'pramana' && <MascotAvatar size={28} mood={message.mood}/>}
           <div className="min-w-0 max-w-[88%] space-y-2"><div className={`p-3 t-body-lg whitespace-pre-wrap break-words ${message.role === 'user' ? 'bubble-petugas' : 'bubble-pramana'}`}>{message.text}{message.files?.map(file => <a key={file.id} href={`/api/files/${file.id}`} target="_blank" rel="noreferrer" className="block mt-2"><img src={`/api/files/${file.id}`} alt={file.caption || 'Inspection photo'} className="rounded-lg max-h-48 w-full object-cover" onLoad={() => end.current?.scrollIntoView({ block: 'end' })}/></a>)}</div>{!!message.pills?.length && <div className="flex flex-wrap gap-1.5">{message.pills.map((pill, i) => <ChatPill key={i} pill={pill}/>)}</div>}
-            {!!choices.length && <div role="group" aria-label={current ? 'Reply choices' : 'Selected reply'} className="space-y-2" data-inspection-choices>
+            {current && message.plan_choices && !report.rencana_id && <InspectionPlanSelect plans={message.plan_choices} disabled={disabled} onChoose={plan => send(plan.title, plan.id)}/>}
+            {!!choices.length && !message.plan_choices && <div role="group" aria-label={current ? 'Reply choices' : 'Selected reply'} className="space-y-2" data-inspection-choices>
               <p className="t-label muted font-normal pt-1">{current ? 'Choose an option' : 'Selected option'}</p>
               {choices.map(reply => <button key={reply} type="button" className={`flex w-full min-h-12 items-center gap-3 rounded-[12px] border px-3 py-3 text-left t-body-lg disabled:cursor-default ${selected === reply ? 'border-[var(--color-primary)] bg-[var(--color-accent-subtle)] text-[var(--color-on-accent-subtle)]' : 'border-[var(--color-line)] bg-[var(--color-surface)] text-[var(--color-text-strong)] enabled:hover:border-[var(--color-primary)] enabled:hover:bg-[var(--color-accent-subtle)]'} ${turn.isPending || preparing ? 'opacity-60' : ''}`} aria-pressed={selected === reply} disabled={disabled} onClick={() => send(reply)}><span className="min-w-0 flex-1 whitespace-normal [overflow-wrap:anywhere]">{reply}</span>{selected === reply ? <Check size={18} aria-hidden="true" className="shrink-0"/> : <ArrowRight size={18} aria-hidden="true" className="shrink-0 text-[var(--color-primary)]"/>}</button>)}
             </div>}
