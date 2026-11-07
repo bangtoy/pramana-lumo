@@ -69,3 +69,11 @@ application logs are available through `docker compose logs app`.
 
 References: [Compose environment files](https://docs.docker.com/compose/how-tos/environment-variables/set-environment-variables/)
 and [Cloudflare Quick Tunnels](https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/).
+
+## Verification and demo
+
+The [P0 evidence log](../docs/verification/P0.md) records per-ticket checks;
+the [P0 demo runbook](../docs/verification/DEMO-P0.md) lists the presenter flow,
+real-agent integration results and backup report. The implementation covers
+P0-00 through P0-13. Work orders, daily metrics and cross-report analysis remain
+P1–P3; the P0 finding chat answers questions about a single finding.

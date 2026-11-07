@@ -30,7 +30,11 @@ try {
   assert.ok(await page.getByText(report.tanya['ITEM-3'].at(-1).text, { exact: true }).isVisible());
   const response = await fetch(`${base}/api/laporan/${id}/pdf`); assert.equal(response.status, 200); assert.match(response.headers.get('content-type'), /application\/pdf/);
   const pdf = Buffer.from(await response.arrayBuffer()); assert.equal(pdf.subarray(0, 5).toString(), '%PDF-'); writeFileSync('../docs/verification/inspection-DT07.pdf', pdf);
-  await page.goto(`${base}/supervisor/rencana`, { waitUntil: 'networkidle' }); await page.getByRole('button', { name: 'Archived', exact: true }).click(); await page.getByRole('heading', { name: 'No archived plans' }).waitFor(); await page.getByRole('button', { name: 'Active', exact: true }).click();
+  await page.goto(`${base}/supervisor/rencana`, { waitUntil: 'networkidle' }); await page.getByRole('button', { name: 'Archived', exact: true }).click();
+  const archived = (await (await fetch(`${base}/api/rencana`)).json()).filter(plan => plan.diarsipkan);
+  if (archived.length) await page.locator(`a[href="/supervisor/agent?rencana=${archived[0].id}"]`).waitFor();
+  else await page.getByRole('heading', { name: 'No archived plans' }).waitFor();
+  await page.getByRole('button', { name: 'Active', exact: true }).click();
   assert.ok(await page.getByRole('link', { name: 'P2H · U-type dump truck' }).isVisible());
   assert.deepEqual(errors, []);
   const result = { redComponents: ['ban_roda', 'lampu_reflector'], handledRetainsStop: true, findingThreadPersists: true, answer: report.tanya['ITEM-3'].at(-1).text, pdfBytes: pdf.length, errors };

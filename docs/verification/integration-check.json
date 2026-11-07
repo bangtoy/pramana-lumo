@@ -1,0 +1,204 @@
+{
+  "base": "http://localhost:3002",
+  "runs": [
+    {
+      "run": 1,
+      "generatedPlan": "RI-827599b2-6929-4950-b409-43ba710d3351",
+      "inspectedPlan": "RI-DT-UTYPE-01",
+      "reportId": "LI-ee9abbcb-7a1d-470a-beb0-d716984c73db",
+      "planSeconds": 31.39,
+      "inspectionSeconds": 130.4,
+      "journeySeconds": 169.65,
+      "retakeRequested": true,
+      "resumed": true,
+      "componentFocus": [
+        "kabin",
+        "rem",
+        "ban_roda",
+        "bak_dump",
+        "silinder_hidraulik",
+        "safety_bak",
+        "pintu_dump",
+        "lampu_reflector"
+      ],
+      "photoBytes": [
+        159925,
+        196759,
+        181385,
+        196759,
+        196759,
+        196759,
+        196759,
+        196759
+      ],
+      "recorded": 8,
+      "stopCount": 8,
+      "submitted": true,
+      "dashboardVisible": true,
+      "findingChatReadOnly": true,
+      "findingAnswer": "The photo shows a pronounced tyre sidewall bulge with surrounding cracking, meeting the STOP condition. Alex also reports the bulge and requests STOP, separately from the visible evidence. Only part of this tyre and rim is visible; wheel nuts and the remaining tyres on both sides are unverified. DEMO-1 must not operate; STOP remains in effect until qualified repair and reinspection.",
+      "pdfBytes": 1636459,
+      "turns": [
+        {
+          "seconds": 5.22,
+          "recorded": 0,
+          "reply": "Thanks, Alex—I’ve saved your details and will start with cabin safety. Please share photos of the cabin safety equipment and extinguisher gauge/expiry label, together with your findings on the seat belt, mirrors and horn."
+        },
+        {
+          "seconds": 7.79,
+          "recorded": 0,
+          "reply": "No, Alex—I can’t read the extinguisher’s pressure gauge or expiry label clearly enough to record a good result. Keep the truck out of service while this safety equipment remains unverified. Please send close-ups showing the gauge reading and expiry label clearly."
+        },
+        {
+          "seconds": 11.36,
+          "recorded": 1,
+          "reply": "Alex, I’ve recorded cabin safety as cannot inspect, with STOP pending safe reinspection because safe access and qualified testing are unavailable. Keep the truck out of service. For brakes and the air system, please share only safely available photo evidence and qualified test findings, or explain why inspection is unavailable."
+        },
+        {
+          "seconds": 9.16,
+          "recorded": 2,
+          "reply": "Alex, I’ve recorded brakes and the air system as cannot inspect, with STOP pending safe reinspection. Keep the truck out of service. For tyres and wheel nuts, please share safely available photos and findings from both sides, or explain why safe inspection is unavailable."
+        },
+        {
+          "seconds": 11.75,
+          "recorded": 3,
+          "reply": "Alex, I’ve recorded the tyre sidewall bulge as a defect requiring STOP—the truck must not operate. Never approach beneath a raised body without its mechanical safety prop engaged. For the dump body, please share safely available photos and findings on the floor, welds and mountings, or explain why safe inspection is unavailable."
+        },
+        {
+          "seconds": 13.35,
+          "recorded": 4,
+          "reply": "Alex, I’ve recorded the dump body as cannot inspect, with STOP pending safe reinspection; the truck must remain out of service. For the hydraulic cylinder, hoses, couplings and seals, please share only safely available photos and findings, or explain why safe inspection is unavailable."
+        },
+        {
+          "seconds": 22.56,
+          "recorded": 5,
+          "reply": "Alex, I’ve recorded the hydraulic cylinder as cannot inspect, with STOP pending safe reinspection. Never enter beneath an unsupported raised body; the truck must remain out of service. For the body safety prop, please share only safely available photo evidence and findings, or explain why safe inspection is unavailable."
+        },
+        {
+          "seconds": 13.47,
+          "recorded": 6,
+          "reply": "Alex, I’ve recorded the body safety prop as cannot inspect, with STOP pending safe reinspection; the truck must remain out of service. For the tailgate and latch, please share only safely available photos and findings on hinges, locking pins and latch engagement, or explain why safe inspection is unavailable."
+        },
+        {
+          "seconds": 13.12,
+          "recorded": 7,
+          "reply": "Alex, I’ve recorded the tailgate and latch as cannot inspect, with STOP pending safe reinspection; the truck must remain out of service. For lights and reflectors, please share only safely available photos and observed test results, or explain why safe inspection is unavailable."
+        },
+        {
+          "seconds": 11.65,
+          "recorded": 8,
+          "reply": "Alex, I’ve recorded lights and reflectors as cannot inspect, with STOP pending safe reinspection; the truck must remain out of service. All eight items are recorded, but the report is still a draft. Would you like me to submit it?"
+        },
+        {
+          "seconds": 5.47,
+          "recorded": 8,
+          "reply": "Alex, I’ve submitted your inspection report: DEMO-1 is not roadworthy due to the tyre sidewall bulge, and the other seven items remain unverified because safe access and qualified testing were unavailable. The truck must remain out of service pending repairs and safe reinspection."
+        }
+      ],
+      "pdfRevalidatedAfterLayoutFix": true
+    },
+    {
+      "run": 2,
+      "generatedPlan": "RI-272e42d8-61a5-495a-a77f-1a50ff68e3a2",
+      "inspectedPlan": "RI-272e42d8-61a5-495a-a77f-1a50ff68e3a2",
+      "reportId": "LI-dfcb81e2-232f-4eca-8dad-12f0d16da30b",
+      "planSeconds": 29.13,
+      "inspectionSeconds": 123.7,
+      "journeySeconds": 160.78,
+      "retakeRequested": true,
+      "resumed": true,
+      "componentFocus": [
+        "kabin",
+        "rem",
+        "ban_roda",
+        "bak_dump",
+        "silinder_hidraulik",
+        "safety_bak",
+        "pintu_dump",
+        "lampu_reflector"
+      ],
+      "photoBytes": [
+        159925,
+        196759,
+        196759,
+        181385,
+        196759,
+        196759,
+        196759,
+        196759,
+        196759
+      ],
+      "recorded": 8,
+      "stopCount": 8,
+      "submitted": true,
+      "dashboardVisible": true,
+      "findingChatReadOnly": true,
+      "findingAnswer": "The close-up shows a pronounced tyre sidewall bulge with surrounding cracking, supporting Alex’s reported defect and STOP request. The wider photo covers only some left-side tyres; the remaining wheels, opposite side and wheel nuts are unverified, and Alex reports safe inspection access is unavailable. This vehicle must not operate: STOP remains in effect until qualified repair and reinspection, including completion of the outstanding wheel checks.",
+      "pdfBytes": 1847644,
+      "turns": [
+        {
+          "seconds": 6,
+          "recorded": 0,
+          "reply": "Alex, I’ve saved your inspection details and will start with cabin safety. Please send clear photos of the extinguisher’s gauge and expiry date, seat belt and steering, together with your findings on belt, horn, reversing alarm and steering function, mirror and windscreen condition, and extinguisher validity."
+        },
+        {
+          "seconds": 6.75,
+          "recorded": 0,
+          "reply": "Alex, I can see the extinguisher, but its label, expiry date and gauge indication are not readable enough to record a good result. Keep the truck out of service until this safety equipment is verified. Please send clear close-ups of the expiry date and pressure gauge."
+        },
+        {
+          "seconds": 11.86,
+          "recorded": 1,
+          "reply": "Alex, I’ve recorded cabin safety as cannot inspect, with STOP pending safe reinspection because safe access and testing are unavailable. Keep the truck isolated and out of service. For brakes next, please confirm whether safe access and qualified testing are available without approaching unsafe equipment."
+        },
+        {
+          "seconds": 10.06,
+          "recorded": 2,
+          "reply": "Alex, I’ve recorded brakes as cannot inspect, with STOP pending safe reinspection. Keep the truck isolated and out of service. For tyres and wheel nuts next, please confirm whether safe inspection access is available without approaching unsafe equipment."
+        },
+        {
+          "seconds": 7.51,
+          "recorded": 2,
+          "reply": "Alex, I’ve saved the photo description; this partial view cannot establish the condition of all 10 wheels or their nuts. I’ll wait for your final available evidence and account without asking you to approach unsafe equipment; the existing STOP remains in place."
+        },
+        {
+          "seconds": 13.96,
+          "recorded": 3,
+          "reply": "Alex, I’ve recorded the tyre sidewall bulge as a defect with STOP; the vehicle must not operate. Other tyres and wheel nuts remain unverified. For the dump body next, please confirm whether safe inspection access is available without approaching unsafe equipment."
+        },
+        {
+          "seconds": 12.96,
+          "recorded": 4,
+          "reply": "Alex, I’ve recorded the dump body as cannot inspect, with STOP pending safe reinspection. Keep the truck isolated; never go beneath an unsupported raised body. For hydraulics and fluids next, please confirm whether safe access and qualified testing are available without approaching unsafe equipment."
+        },
+        {
+          "seconds": 10.85,
+          "recorded": 5,
+          "reply": "Alex, I’ve recorded hydraulics and fluids as cannot inspect, with STOP pending safe reinspection. Keep the truck isolated; do not raise the body or go beneath it for this check. For the mechanical safety supports next, please confirm whether safe inspection and qualified testing are available."
+        },
+        {
+          "seconds": 10.95,
+          "recorded": 6,
+          "reply": "Alex, I’ve recorded the mechanical safety prop as cannot inspect, with STOP pending safe reinspection. The truck must remain isolated and out of service. For the tailgate and latch next, please confirm whether safe access and qualified testing are available without approaching unsafe equipment."
+        },
+        {
+          "seconds": 11.11,
+          "recorded": 7,
+          "reply": "Alex, I’ve recorded the tailgate and latch as cannot inspect, with STOP pending safe reinspection. The truck must remain isolated and out of service. For lights and reflectors next, please confirm whether safe access and qualified testing are available without approaching unsafe equipment."
+        },
+        {
+          "seconds": 10.49,
+          "recorded": 8,
+          "reply": "Alex, I’ve recorded lights and reflectors as cannot inspect, with STOP pending safe reinspection. All eight items are recorded; the report remains a draft, and the truck must remain isolated and out of service. Please confirm if you want me to submit the report."
+        },
+        {
+          "seconds": 5.08,
+          "recorded": 8,
+          "reply": "Alex, I’ve submitted the report: DEMO-2 · B 9102 KD is not roadworthy due to the tyre sidewall bulge, with seven other inspection items unable to be safely completed. The truck must remain isolated and out of service pending repair and safe reinspection."
+        }
+      ],
+      "pdfRevalidatedAfterLayoutFix": true
+    }
+  ],
+  "errors": []
+}

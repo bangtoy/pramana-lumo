@@ -1,5 +1,49 @@
 [
   {
+    "target": "/",
+    "width": 1440,
+    "height": 900,
+    "status": 200,
+    "font": "Geist, \"Geist Fallback\", Geist, system-ui, sans-serif",
+    "primary": "#1b8ce8",
+    "lang": "en",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "target": "/",
+    "width": 390,
+    "height": 844,
+    "status": 200,
+    "font": "Geist, \"Geist Fallback\", Geist, system-ui, sans-serif",
+    "primary": "#1b8ce8",
+    "lang": "en",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "target": "/supervisor",
+    "width": 1440,
+    "height": 900,
+    "status": 200,
+    "font": "Geist, \"Geist Fallback\", Geist, system-ui, sans-serif",
+    "primary": "#1b8ce8",
+    "lang": "en",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "target": "/supervisor",
+    "width": 390,
+    "height": 844,
+    "status": 200,
+    "font": "Geist, \"Geist Fallback\", Geist, system-ui, sans-serif",
+    "primary": "#1b8ce8",
+    "lang": "en",
+    "overflow": false,
+    "errors": []
+  },
+  {
     "target": "/supervisor/laporan",
     "width": 1440,
     "height": 900,
@@ -56,6 +100,116 @@
   },
   {
     "target": "/supervisor/rencana",
+    "width": 390,
+    "height": 844,
+    "status": 200,
+    "font": "Geist, \"Geist Fallback\", Geist, system-ui, sans-serif",
+    "primary": "#1b8ce8",
+    "lang": "en",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "target": "/supervisor/agent?rencana=RI-DT-UTYPE-01",
+    "width": 1440,
+    "height": 900,
+    "status": 200,
+    "font": "Geist, \"Geist Fallback\", Geist, system-ui, sans-serif",
+    "primary": "#1b8ce8",
+    "lang": "en",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "target": "/supervisor/agent?rencana=RI-DT-UTYPE-01",
+    "width": 390,
+    "height": 844,
+    "status": 200,
+    "font": "Geist, \"Geist Fallback\", Geist, system-ui, sans-serif",
+    "primary": "#1b8ce8",
+    "lang": "en",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "target": "/supervisor/work-order",
+    "width": 1440,
+    "height": 900,
+    "status": 200,
+    "font": "Geist, \"Geist Fallback\", Geist, system-ui, sans-serif",
+    "primary": "#1b8ce8",
+    "lang": "en",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "target": "/supervisor/work-order",
+    "width": 390,
+    "height": 844,
+    "status": 200,
+    "font": "Geist, \"Geist Fallback\", Geist, system-ui, sans-serif",
+    "primary": "#1b8ce8",
+    "lang": "en",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "target": "/petugas?laporan=LI-2026-10-29-DT07",
+    "width": 1440,
+    "height": 900,
+    "status": 200,
+    "font": "Geist, \"Geist Fallback\", Geist, system-ui, sans-serif",
+    "primary": "#1b8ce8",
+    "lang": "en",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "target": "/petugas?laporan=LI-2026-10-29-DT07",
+    "width": 390,
+    "height": 844,
+    "status": 200,
+    "font": "Geist, \"Geist Fallback\", Geist, system-ui, sans-serif",
+    "primary": "#1b8ce8",
+    "lang": "en",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "target": "/petugas/riwayat",
+    "width": 1440,
+    "height": 900,
+    "status": 200,
+    "font": "Geist, \"Geist Fallback\", Geist, system-ui, sans-serif",
+    "primary": "#1b8ce8",
+    "lang": "en",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "target": "/petugas/riwayat",
+    "width": 390,
+    "height": 844,
+    "status": 200,
+    "font": "Geist, \"Geist Fallback\", Geist, system-ui, sans-serif",
+    "primary": "#1b8ce8",
+    "lang": "en",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "target": "/petugas/riwayat/LI-2026-10-29-DT07",
+    "width": 1440,
+    "height": 900,
+    "status": 200,
+    "font": "Geist, \"Geist Fallback\", Geist, system-ui, sans-serif",
+    "primary": "#1b8ce8",
+    "lang": "en",
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "target": "/petugas/riwayat/LI-2026-10-29-DT07",
     "width": 390,
     "height": 844,
     "status": 200,

@@ -1,0 +1,20 @@
+[
+  {
+    "run": 1,
+    "pages": 5,
+    "items": 8,
+    "photos": 8,
+    "a4": true,
+    "allItemNames": true,
+    "verdict": true
+  },
+  {
+    "run": 2,
+    "pages": 5,
+    "items": 8,
+    "photos": 9,
+    "a4": true,
+    "allItemNames": true,
+    "verdict": true
+  }
+]

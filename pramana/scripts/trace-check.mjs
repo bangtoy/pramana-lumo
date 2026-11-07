@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
+import { readFileSync, writeFileSync } from 'node:fs';
+const integration = JSON.parse(readFileSync('../docs/verification/integration-check.json', 'utf8'));
+const ids = integration.runs.flatMap(r => [r.generatedPlan, r.reportId]);
+const script = `const fs=require('node:fs');const ids=JSON.parse(process.argv[1]);const rows=fs.readFileSync('/data/traces.jsonl','utf8').trim().split('\\n').map(JSON.parse);const allowed=new Set(['at','event','trace_id','span_id','type','failed','group_id','name']);if(rows.some(r=>Object.keys(r).some(k=>!allowed.has(k))))process.exit(1);console.log(JSON.stringify(ids.map(id=>{const starts=rows.filter(r=>r.event==='trace_start'&&r.group_id===id);const traces=new Set(starts.map(r=>r.trace_id));return {groupId:id,started:starts.length,ended:rows.filter(r=>r.event==='trace_end'&&traces.has(r.trace_id)).length,spans:rows.filter(r=>r.event==='span_end'&&traces.has(r.trace_id)).length,failedSpans:rows.filter(r=>r.failed&&traces.has(r.trace_id)).length}})))`;
+const groups = JSON.parse(execFileSync('docker', ['compose', 'exec', '-T', 'app', 'node', '-e', script, JSON.stringify(ids)], { encoding: 'utf8' }));
+assert.ok(groups.every(g => g.started > 0 && g.started === g.ended && g.spans > 0 && g.failedSpans === 0));
+const result = { metadataOnly: true, groups };
+writeFileSync('../docs/verification/trace-check.json', JSON.stringify(result, null, 2));
+console.log(JSON.stringify(result, null, 2));

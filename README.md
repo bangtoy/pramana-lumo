@@ -1,4 +1,26 @@
-# Pramana — kit desain & dokumen
+# Pramana
+
+Aplikasi Next.js berada di [`pramana/`](pramana/README.md), menggunakan OpenAI
+Agents SDK JavaScript/TypeScript, SQLite, dan model kendaraan interaktif Anatomy.
+Antarmuka aplikasi berbahasa Inggris. Implementasi inti mengikuti tiket P0-00
+sampai P0-13; P1–P3 tetap menjadi tahap berikutnya.
+
+```sh
+cd pramana
+docker compose up -d --build
+docker compose logs tunnel
+```
+
+Isi `pramana/.env.local` dengan konfigurasi model. Buka `http://localhost:3000`
+atau URL HTTPS dari log tunnel untuk HP. Composer Petugas menerima foto kamera
+maupun lampiran gambar dari galeri/file. Bila port 3000 terpakai, atur
+`PRAMANA_PORT` sesuai [panduan aplikasi](pramana/README.md).
+
+Lihat [hasil verifikasi](docs/verification/P0.md) dan
+[naskah demo P0](docs/verification/DEMO-P0.md) untuk bukti pengujian, laporan
+cadangan, dan batas lingkup demo.
+
+## Kit desain & dokumen
 
 Pramana: P2H dump truck yang dipandu agent **Lumo** dan dibuktikan dengan foto. Supervisor menyusun Rencana Inspeksi dari Spec Sheet, Petugas mengisinya di HP, laporan masuk ke dashboard, temuan dijadikan work order, dan Supervisor bisa bertanya soal laporan ke Lumo.
 

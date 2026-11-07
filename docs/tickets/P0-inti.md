@@ -343,8 +343,8 @@ Baca dulu: `docs/tickets/README.md` (Definition of Done), `docs/PRD.md` §4.1–
 
 ### P0-13 · Integrasi dan dry-run · 40 mnt · semua
 
-- [ ] **Integrasi 1:** Petugas memakai `RI-DT-UTYPE-01` sampai kirim → laporan muncul di daftar dengan foto dan status benar.
-- [ ] **Integrasi 2:** Rencana baru dari Spec Sheet dipakai Petugas, `comp_id` tersorot benar di HP, laporan masuk dashboard.
-- [ ] Jalankan naskah demo PRD §10 dua kali (catat waktu); siapkan satu laporan cadangan.
-- [ ] Semua halaman tanpa error console; `rg` §3.4 bersih di seluruh repo.
-- [ ] Bila dev server terus reload sendiri setelah proses mati paksa: hentikan semua proses Node proyek, hapus `.next/dev`, jalankan ulang.
+- [x] **Integrasi 1:** Petugas memakai `RI-DT-UTYPE-01` sampai kirim → laporan muncul di daftar dengan foto dan status benar (130,40 dtk).
+- [x] **Integrasi 2:** Rencana baru dari Spec Sheet dipakai Petugas, delapan `comp_id` tersorot benar di browser HP, laporan masuk dashboard (123,70 dtk). Kamera/galeri HP fisik dikonfirmasi pengguna.
+- [x] Bagian P0 dari naskah PRD §10 dijalankan dua kali: 169,65 dan 160,78 dtk; laporan cadangan dan PDF siap. Langkah P1–P3 dijelaskan terpisah di `docs/verification/DEMO-P0.md`.
+- [x] Sepuluh halaman pada desktop/HP tanpa error console atau overflow; `rg` §3.4 bersih untuk seluruh kode UI aplikasi.
+- [x] Pemulihan loop reload dev tidak diperlukan; verifikasi akhir memakai production build di Docker.

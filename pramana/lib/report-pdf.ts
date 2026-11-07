@@ -14,9 +14,9 @@ export async function reportPdf(report: ReportView) {
   let page: PDFPage, y = 0;
   const addPage = () => { page = pdf.addPage(PageSizes.A4); y = 785; page.drawText('PRAMANA / INSPECTION RECORD', { x: 40, y: 808, font, size: 9, color: blue }); };
   const ensure = (height: number) => { if (y - height < 55) addPage(); };
-  function text(value: string, size = 10, color = ink, width = 515) {
-    const words = printable(value).split(/\s+/); let line = '';
-    const draw = () => { ensure(size * 1.5); page.drawText(line, { x: 40, y, font, size, color }); y -= size * 1.5; };
+  function lines(value: string, size = 10, width = 515) {
+    const words = printable(value).split(/\s+/), output: string[] = []; let line = '';
+    const draw = () => { output.push(line); };
     for (const word of words) {
       if (line && font.widthOfTextAtSize(`${line} ${word}`, size) > width) { draw(); line = ''; }
       // Split long unbroken identifiers instead of drawing past the page edge.
@@ -24,6 +24,12 @@ export async function reportPdf(report: ReportView) {
       line += ' ';
     }
     if (line.trim()) draw();
+    return output;
+  }
+  function text(value: string, size = 10, color = ink) {
+    for (const line of lines(value, size)) {
+      ensure(size * 1.5); page.drawText(line, { x: 40, y, font, size, color }); y -= size * 1.5;
+    }
   }
   addPage(); text(verdict(report), 20, counts(report).stop ? red : ink); y -= 8;
   text(`Unit: ${report.unit} | Inspector: ${report.petugas} | Location: ${report.lokasi}`);
@@ -34,11 +40,18 @@ export async function reportPdf(report: ReportView) {
   const labels = { baik: 'Good', tidak_baik: 'Not good', tidak_bisa_diperiksa: 'Unable to inspect' };
   const embedded = new Map<string, Awaited<ReturnType<typeof pdf.embedJpg>>>();
   for (const item of itemsOf(report)) {
-    const finding = report.hasil[item.id]; ensure(finding?.bukti_ids.length ? 250 : 110);
+    const finding = report.hasil[item.id];
+    const heading = `${item.urutan}. ${item.nama}`;
+    const status = finding ? `${labels[finding.status]}${finding.stop ? ' / STOP' : ''}${finding.ditangani ? ' / Handled (original inspection verdict retained)' : ''}` : 'Not recorded';
+    // Measure the real wrapped notes so a normal finding keeps its first photo.
+    // Very long findings can still continue naturally across multiple pages.
+    const introHeight = lines(heading, 13).length * 19.5 + lines(status).length * 15
+      + (finding ? lines(finding.catatan).length * 15 + (finding.alasan ? lines(`Reason: ${finding.alasan}`, 9).length * 13.5 : 0) : 0);
+    ensure(Math.min(730, introHeight + (finding?.bukti_ids.length ? 188 : 30)));
     page!.drawLine({ start: { x: 40, y: y + 17 }, end: { x: 555, y: y + 17 }, thickness: .5, color: rgb(.88, .89, .9) });
-    text(`${item.urutan}. ${item.nama}`, 13);
+    text(heading, 13);
     if (!finding) { text('Not recorded', 10, muted); y -= 15; continue; }
-    text(`${labels[finding.status]}${finding.stop ? ' / STOP' : ''}${finding.ditangani ? ' / Handled (original inspection verdict retained)' : ''}`, 10, finding.stop ? red : muted);
+    text(status, 10, finding.stop ? red : muted);
     text(finding.catatan); if (finding.alasan) text(`Reason: ${finding.alasan}`, 9, muted);
     y -= 8;
     for (const fileId of finding.bukti_ids) {

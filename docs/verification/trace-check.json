@@ -1,0 +1,33 @@
+{
+  "metadataOnly": true,
+  "groups": [
+    {
+      "groupId": "RI-827599b2-6929-4950-b409-43ba710d3351",
+      "started": 1,
+      "ended": 1,
+      "spans": 7,
+      "failedSpans": 0
+    },
+    {
+      "groupId": "LI-ee9abbcb-7a1d-470a-beb0-d716984c73db",
+      "started": 12,
+      "ended": 12,
+      "spans": 105,
+      "failedSpans": 0
+    },
+    {
+      "groupId": "RI-272e42d8-61a5-495a-a77f-1a50ff68e3a2",
+      "started": 1,
+      "ended": 1,
+      "spans": 10,
+      "failedSpans": 0
+    },
+    {
+      "groupId": "LI-dfcb81e2-232f-4eca-8dad-12f0d16da30b",
+      "started": 13,
+      "ended": 13,
+      "spans": 112,
+      "failedSpans": 0
+    }
+  ]
+}
