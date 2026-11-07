@@ -15,7 +15,7 @@ Prasyarat: P0 dan P1. Acuan layar: `design/screens/01-supervisor-ringkasan.png`,
 - `jakartaDay(daysAgo = 0)` (negatif = masa depan), `jakartaIso(daysAgo, hh, mm)` (menit boleh meluap), `lastDays(n)` (terlama dulu), `dayLabel("2026-11-06")` → "6 Nov".
 
 **Selesai bila**
-- [ ] `dayKey("2026-11-05T23:30:00Z") === "2026-11-06"`; `dayLabel` memakai nama bulan Indonesia (Jan…Mei…Agu…Okt…Des).
+- [x] `dayKey("2026-11-05T23:30:00Z") === "2026-11-06"`; label bulan mengikuti instruksi aplikasi berbahasa Inggris (Jan…May…Aug…Oct…Dec), menggantikan contoh Indonesia.
 
 ---
 
