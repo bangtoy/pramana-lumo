@@ -41,26 +41,26 @@ await page.keyboard.press('n');expect(await page.locator('#notesPanel').isVisibl
 await page.keyboard.press('n');expect(!await page.locator('#notesPanel').isVisible(),'Speaker notes close with N');
 await page.locator('#fullScreenToggle').click();await page.waitForFunction(()=>!!document.fullscreenElement);expect(await page.evaluate(()=>!!document.fullscreenElement),'Fullscreen button');
 await page.locator('#fullScreenToggle').click();await page.waitForFunction(()=>!document.fullscreenElement);
-await page.goto(index+'#4');await page.waitForTimeout(200);
+await page.goto(index+'#5');await page.waitForTimeout(200);
 const inner=page.frameLocator('#frame');
 await inner.locator('[data-demo="clarify"]').click();expect(await inner.locator('#demoStatus').innerText()==='Evidence detail supplied','Missing detail resolved in preview');
 await inner.locator('[data-demo="report"]').click();expect(await inner.locator('#demoStatus').innerText()==='Structured report','Supervisor report stage');
 await inner.locator('[data-demo="input"]').click();expect(await inner.locator('#demoStatus').innerText()==='Required detail missing','Demo preview resets');
 expect((await inner.locator('a').filter({hasText:'Open field operator app'}).getAttribute('href')).endsWith('/petugas'),'Field operator app link');
 expect((await inner.locator('a').filter({hasText:'Open supervisor reports'}).getAttribute('href')).endsWith('/supervisor/laporan'),'Supervisor reports link');
-await inner.locator('[data-demo="clarify"]').focus();await page.keyboard.press('ArrowRight');await page.waitForTimeout(100);expect(new URL(page.url()).hash==='#5','Keyboard works after focus enters iframe');
+await inner.locator('[data-demo="clarify"]').focus();await page.keyboard.press('ArrowRight');await page.waitForTimeout(100);expect(new URL(page.url()).hash==='#6','Keyboard works after focus enters iframe');
 await page.keyboard.press('Escape');await page.waitForFunction(()=>document.body.dataset.mode==='overview');expect(await page.locator('body').getAttribute('data-mode')==='overview','Escape returns to overview from iframe');
 await page.goto(index+'?ov=gallery');await page.waitForTimeout(250);expect(await page.locator('#gallery .card').count()>manifest.length,'3D gallery builds from thumbnails');
 await page.evaluate(()=>Promise.all([...document.images].map(img=>img.decode().catch(()=>{}))));
 expect(await page.locator('#gallery img').evaluateAll(images=>images.every(img=>img.naturalWidth>0)),'3D gallery thumbnails load');
 await page.screenshot({path:path.join(out,'overview-gallery.png')});
 for(const viewport of [{width:1440,height:900},{width:1280,height:720},{width:390,height:844}]){
-  await page.setViewportSize(viewport);await page.goto(index+'#4');await page.waitForTimeout(100);
+  await page.setViewportSize(viewport);await page.goto(index+'#5');await page.waitForTimeout(100);
   const bounds=await page.locator('#stage').boundingBox();
   expect(bounds.x>=-1&&bounds.y>=-1&&bounds.x+bounds.width<=viewport.width+1&&bounds.y+bounds.height<=viewport.height+1,`Presentation fits ${viewport.width}x${viewport.height}`);
 }
 await page.setViewportSize({width:1440,height:900});await page.goto(index+'?ov=grid');await page.waitForTimeout(200);await page.screenshot({path:path.join(out,'overview-grid.png')});
-await page.context().setOffline(true);await page.goto(index+'#4');await page.frameLocator('#frame').locator('#demoScreen').waitFor();
+await page.context().setOffline(true);await page.goto(index+'#5');await page.frameLocator('#frame').locator('#demoScreen').waitFor();
 expect(await page.frameLocator('#frame').locator('#demoScreen').evaluate(img=>img.complete&&img.naturalWidth>0),'Local presentation and images work offline');
 await browser.close();
 const thumbW=480,thumbH=270,gap=16,columns=3,rows=Math.ceil(manifest.length/columns);

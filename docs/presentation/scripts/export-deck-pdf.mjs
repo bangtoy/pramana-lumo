@@ -84,9 +84,9 @@ async function main() {
 
   // 2) Merge into a single PDF
   const merged = await PDFDocument.create();
-  merged.setTitle('Pramana + Lumo · Hackathon pitch');
+  merged.setTitle('Pramana + Lumo · README presentation');
   merged.setAuthor('Pramana');
-  merged.setSubject('Pre-operational inspection · 8 pitch slides + 3 Q&A appendices');
+  merged.setSubject('What if, problem, solution, capabilities, demonstration, technology');
   for (const buf of pageBuffers) {
     const src = await PDFDocument.load(buf);
     const copied = await merged.copyPages(src, src.getPageIndices());

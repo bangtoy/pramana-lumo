@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Pramana + Lumo · Hackathon pitch</title>
+<title>Pramana + Lumo · README presentation</title>
 <!--
   deck_index.html — 多文件 slide deck 拼接器 · 双概览模式
 
@@ -19,136 +19,74 @@
 <script>
   window.DECK_MANIFEST = [
   {
-    "file": "slides/01-cover.html",
-    "label": "Complete reports. Less follow-up",
-    "thumb": "thumbs/01-cover.jpg",
-    "seconds": 15,
+    "file": "slides/01-what-if.html",
+    "label": "What if inspections, surveys, and reporting were supported by a proactive AI agent?",
+    "thumb": "thumbs/01-what-if.jpg",
+    "seconds": 40,
     "appendix": false,
-    "notes": "00:00–00:15. “Pramana helps field operators turn pre-operational inspections into complete, structured reports. Lumo asks for missing evidence and generates Work Orders, giving supervisors a clear view of what needs attention.” Introduce the team by name in one short phrase. The product screenshot is a supplied UI reference.",
+    "notes": "00:00–00:40. “What if inspections, surveys, and reporting were supported by a proactive AI agent? An agent that helps prepare the right checks, asks for missing evidence, and brings important findings to your attention as you work. One that keeps observations, photos, reports, and follow-up connected from start to finish. That is the idea behind Pramana and Lumo.” Use the inspection workspace image to introduce the concrete product.",
     "criteria": [
       "Problem & Solution Fit"
     ]
   },
   {
     "file": "slides/02-problem.html",
-    "label": "Incomplete reports create more work for supervisors",
+    "label": "The problem",
     "thumb": "thumbs/02-problem.jpg",
-    "seconds": 45,
+    "seconds": 55,
     "appendix": false,
-    "notes": "00:15–01:00. “Sometimes an operator sends a message like ‘Truck checked, all good.’ But which components were checked? Where are the photos? If something is wrong, what needs attention? Reports can arrive in different formats, with missing details or evidence. The supervisor then spends time asking follow-up questions and reconstructing the inspection. Our problem is the work needed to turn that incomplete field input into a report that can actually be reviewed.” The message is an illustrative example, not a customer quotation. Do not attach invented frequency or time-saving figures.",
+    "notes": "00:40–01:35. “Inspection and survey work often spans a checklist, a photo gallery, chat messages, and a spreadsheet. People collect information in the field, explain it elsewhere, and then assemble the report. Reviewers have to work out whether a check is complete and whether its evidence supports the finding. The work continues after submission. Missing photos can mean another trip. Recurring problems can be missed. A finding can remain in a report without a clear owner or next step.” Explain the operator and supervisor effort using the README’s problem framing.",
     "criteria": [
-      "Problem & Solution Fit"
+      "Problem & Solution Fit",
+      "Real-World Value"
     ]
   },
   {
     "file": "slides/03-solution.html",
-    "label": "Lumo turns field input into reports and Work Orders",
+    "label": "The solution",
     "thumb": "thumbs/03-solution.jpg",
-    "seconds": 30,
+    "seconds": 55,
     "appendix": false,
-    "notes": "01:00–01:30. “The field operator reports through Lumo. Instead of passing missing information to the supervisor, Lumo asks for the required details and evidence, then organizes the result into a structured report. When a finding requires action, it also generates a Work Order. For example, a flat tyre can produce a task to purchase a replacement. The supervisor can monitor both the report and the Work Order.” Work Order generation is the user-confirmed product workflow. Do not describe generation of a purchasing task as an executed purchase.",
+    "notes": "01:35–02:30. “Pramana brings this idea to an evidence-based inspection workflow. Lumo helps turn requirements into checks, guides the inspection in conversation, and asks for the evidence needed to complete the checks. Interactive visual models connect each check to the relevant part. Findings and photos stay attached to reports. Work Orders give the follow-up an owner and deadline. Supervisors can ask Lumo about the evidence, follow its source links, and review recommendations grounded in the recorded data. People remain responsible for review and action.”",
     "criteria": [
       "Problem & Solution Fit",
       "Insight & Originality"
     ]
   },
   {
-    "file": "slides/04-demo.html",
-    "label": "One report, completed before supervisor review",
-    "thumb": "thumbs/04-demo.jpg",
+    "file": "slides/04-capabilities.html",
+    "label": "What you can do",
+    "thumb": "thumbs/04-capabilities.jpg",
+    "seconds": 55,
+    "appendix": false,
+    "notes": "02:30–03:25. “There are five things you can do. Build a plan from a specification sheet and locate the checks on the model. Inspect on a phone and submit photo evidence. Review results, urgent findings, and trends, with searchable reports and PDF export. Manage follow-up through Work Orders with assigned responsibility and deadlines. And ask Lumo questions across reports and Work Orders with source links and recommendations. The analyst is read-only and can use a clearly labelled data-based fallback.” Transition directly to the application demonstration.",
+    "criteria": [
+      "Build Quality",
+      "Real-World Value"
+    ]
+  },
+  {
+    "file": "slides/05-demonstration.html",
+    "label": "Demonstration",
+    "thumb": "thumbs/05-demonstration.jpg",
     "seconds": 90,
     "appendix": false,
-    "notes": "01:30–03:00. Open the app in pre-positioned tabs. 0–15 seconds: identify the vehicle and selected inspection item. 15–55 seconds: show a missing or unclear piece of evidence, Lumo’s request for clarification, and the operator’s response. 55–80 seconds: show the structured report and evidence in the supervisor view. 80–90 seconds: return to the pitch and say, “The supervisor receives the context and evidence together, with less information left to chase.” End here; do not add Work Order creation to this 90-second sequence. The slide buttons are a scripted preview with sample photos and a prepared report capture, not a live model call. If the app flow is unavailable, explicitly use the preview as the fallback. A clearer label only resolves that evidence gap; other required checks still apply.",
+    "notes": "03:25–04:55. Use pre-positioned application tabs. Spend 15 seconds identifying the vehicle and inspection item, 40 seconds showing evidence collection and a clarification request, 25 seconds reviewing the report with supporting evidence, and 10 seconds returning to the presentation. The slide buttons provide a prepared preview using sample photos and a saved report screenshot. Identify the prepared preview when using it. Finish on the supervisor report and proceed directly to Technology.",
     "criteria": [
       "Problem & Solution Fit",
       "Build Quality"
     ]
   },
   {
-    "file": "slides/05-difference.html",
-    "label": "Inspection context connects evidence to action",
-    "thumb": "thumbs/05-difference.jpg",
-    "seconds": 40,
+    "file": "slides/06-technology.html",
+    "label": "Technology",
+    "thumb": "thumbs/06-technology.jpg",
+    "seconds": 35,
     "appendix": false,
-    "notes": "03:00–03:40. “The difference is the context carried through the workflow. The vehicle and component define the questions. The quality of the evidence determines the follow-up. The finding then supplies context for a generated Work Order, such as purchasing a replacement tyre. Code enforces required results and evidence, while the supervisor monitors reports and tasks. This is why we fit Deep Domain AI and AI-Native Products & Operations.” Keep the technical explanation brief. A complete report is not an automatic assurance that the vehicle is safe.",
+    "notes": "04:55–05:30. “Pramana uses Next.js App Router, React, TypeScript, Tailwind CSS, and TanStack Query. The agents run through the OpenAI Agents SDK for JavaScript and TypeScript, with Zod validation and server-enforced inspection rules. SQLite stores application data, alongside uploads, generated models, and local agent traces. The Anatomy skill supplies the geometry workflow for interactive SVG models. The interface and assistant replies use English, and operational dates use Jakarta time.” Reserve the remaining 30 seconds for app transitions or response time.",
     "criteria": [
-      "Insight & Originality",
       "Build Quality",
       "Alignment with Build Direction"
-    ]
-  },
-  {
-    "file": "slides/06-value.html",
-    "label": "Less chasing, more time for review and follow-up",
-    "thumb": "thumbs/06-value.jpg",
-    "seconds": 40,
-    "appendix": false,
-    "notes": "03:40–04:20. “For the operator, the benefit is knowing what information to provide. For the supervisor, it is a report ready for review and visibility into the Work Orders that follow. The intended time saving comes from reducing repeated questions and manual report cleanup. We will test that in a pilot by measuring completeness at submission, supervisor review time, clarification requests, and the time from a finding to a Work Order. These are proposed measures, not results we have already achieved.”",
-    "criteria": [
-      "Real-World Value"
-    ]
-  },
-  {
-    "file": "slides/07-codex.html",
-    "label": "Codex works from domain context and verifiable tasks",
-    "thumb": "thumbs/07-codex.jpg",
-    "seconds": 40,
-    "appendix": false,
-    "notes": "04:20–05:00. “Our Codex workflow begins with the domain documents, data contracts, and design system. We divide the work into tickets with completion criteria. A concrete example is preventing report submission when required item results are missing. The task has a defined expected behavior, and changes are checked against it. This gives us a repeatable way to build around the inspection workflow.” Reference the available tickets and artifacts. Use an original session log for specific implementation attribution if the team has one; do not invent a session, productivity figure, code percentage, or development result.",
-    "criteria": [
-      "Use of Codex",
-      "Build Quality"
-    ]
-  },
-  {
-    "file": "slides/08-closing.html",
-    "label": "Complete reports, connected follow-up",
-    "thumb": "thumbs/08-closing.jpg",
-    "seconds": 30,
-    "appendix": false,
-    "notes": "05:00–05:30. “Pramana turns field input into complete reports and connected follow-up. Lumo helps the operator resolve missing information and generates Work Orders from findings. The supervisor can monitor both without reconstructing the report from scattered messages. Our next step is a fleet pilot to measure report completeness and supervisor review time. Thank you.” Planned content ends at 05:30. Keep the remaining 30 seconds as a reserve for switching to the app, waiting for a response, or returning to the deck. The total slot remains six minutes.",
-    "criteria": [
-      "Problem & Solution Fit",
-      "Real-World Value"
-    ]
-  },
-  {
-    "file": "slides/09-architecture.html",
-    "label": "Appendix: agent and code responsibilities",
-    "thumb": "thumbs/09-architecture.jpg",
-    "seconds": 0,
-    "appendix": true,
-    "notes": "Q&A only, outside the timed pitch. Explain that the agent gathers and structures input while code enforces required results and evidence. An unable-to-inspect result records an exception with a reason; do not claim that every component was verified. The team’s clarified product story includes generated Work Orders. A purchasing Work Order records a requested task, not an executed procurement transaction. Prior source review and current hosted behavior are different evidence.",
-    "criteria": [
-      "Build Quality"
-    ]
-  },
-  {
-    "file": "slides/10-validation.html",
-    "label": "Appendix: evidence and scope",
-    "thumb": "thumbs/10-validation.jpg",
-    "seconds": 0,
-    "appendix": true,
-    "notes": "Q&A only. Distinguish product intent confirmed by the team, supplied design references, original deployment captures, and current live demo behavior. The old captured Work Order list was empty. Those captures do not prove that the flat-tyre purchasing example has run on the deployment. Report completeness, vehicle roadworthiness, Work Order generation, and purchase execution are different concepts. Do not turn intended time savings into measured results.",
-    "criteria": [
-      "Build Quality",
-      "Real-World Value"
-    ]
-  },
-  {
-    "file": "slides/11-judging-map.html",
-    "label": "Appendix: judging criteria map",
-    "thumb": "thumbs/11-judging-map.jpg",
-    "seconds": 0,
-    "appendix": true,
-    "notes": "Q&A only. Use the numbered pitch segments to locate evidence. Do not assume equal weights for the six judging criteria. The intended supervisor benefit needs a pilot, and specific Codex implementation attribution needs original session evidence.",
-    "criteria": [
-      "Problem & Solution Fit",
-      "Build Quality",
-      "Insight & Originality",
-      "Real-World Value",
-      "Alignment with Build Direction",
-      "Use of Codex"
     ]
   }
 ];
@@ -257,7 +195,7 @@ window.DECK_TIMING = {"totalSeconds":360,"contentSeconds":330,"demoSeconds":90,"
 <body data-mode="overview">
 
 <div id="ov-grid" class="overview">
-  <div class="overview-title">Pramana + Lumo · 8 pitch slides / 6 minutes · click a slide to start</div>
+  <div class="overview-title">Pramana + Lumo · 6 sections / 6 minutes · click a slide to start</div>
   <div class="wall-wrap"><div class="wall" id="wall"></div></div>
 </div>
 

@@ -10,7 +10,7 @@ The team clarified the core problem: field operators sometimes provide unstructu
 
 The clarified product workflow includes agents generating Work Orders from report findings. A flat tyre is the illustrative example: the agent generates a Work Order to purchase a replacement tyre, and the supervisor monitors both reports and Work Orders. This is a statement of the team's intended workflow, not evidence that the original captured deployment executed that example. Generating a Work Order is distinct from executing a purchase.
 
-The main application demonstration lasts 90 seconds and ends at the supervisor's structured report and evidence view. The deck's local buttons are a scripted fallback preview, not an application implementation or a live model call. The pitch has eight main slides with 330 seconds of planned content and a 30-second reserve, plus three Q&A appendices.
+The current presentation follows the root README through its opening question, problem, solution, capabilities, and technology stack. A 90-second demonstration sits immediately before Technology. The six sections use 330 seconds of planned content and a 30-second reserve. Existing English application screenshots support the workspace, dashboard, and demonstration views.
 
 ## Sources reviewed
 
