@@ -1,6 +1,6 @@
 [
   {
-    "target": "/ui-preview",
+    "target": "/model-preview",
     "width": 1440,
     "height": 900,
     "status": 200,
@@ -11,7 +11,7 @@
     "errors": []
   },
   {
-    "target": "/ui-preview",
+    "target": "/model-preview",
     "width": 390,
     "height": 844,
     "status": 200,

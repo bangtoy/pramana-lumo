@@ -126,9 +126,9 @@ Baca dulu: `docs/tickets/README.md` (Definition of Done), `docs/PRD.md` §4.1–
 - Tanpa model: teks `.t-body-sm.muted` "Belum ada model" (kecuali `quiet`).
 
 **Selesai bila**
-- [ ] `focus="ban_roda"` menyalakan semua roda biru, bagian lain pudar.
-- [ ] `statuses={{ban_roda:"tidak_baik"}}` membuat roda merah.
-- [ ] Tombol Angkat bak menggerakkan bak secara halus.
+- [x] `focus="ban_roda"` menyalakan semua roda biru, bagian lain pudar.
+- [x] `statuses={{ban_roda:"tidak_baik"}}` membuat roda merah.
+- [x] Tombol Angkat bak menggerakkan bak secara halus.
 
 **Prompt /goal**
 ```

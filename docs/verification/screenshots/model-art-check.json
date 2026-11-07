@@ -1,0 +1,196 @@
+[
+  {
+    "model": "dump-truck",
+    "theme": "light",
+    "frame": 0,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "dump-truck",
+    "theme": "light",
+    "frame": 1,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "dump-truck",
+    "theme": "light",
+    "frame": 2,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "dump-truck",
+    "theme": "light",
+    "frame": 3,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "dump-truck",
+    "theme": "light",
+    "frame": 4,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "dump-truck",
+    "theme": "light",
+    "frame": 5,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "dump-truck",
+    "theme": "light",
+    "frame": 6,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "dump-truck",
+    "theme": "light",
+    "frame": 7,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "dump-truck",
+    "theme": "light",
+    "frame": 8,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "dump-truck",
+    "theme": "light",
+    "frame": 9,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "dump-truck",
+    "theme": "light",
+    "frame": 10,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "dump-truck",
+    "theme": "light",
+    "frame": 11,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "dump-truck",
+    "theme": "light",
+    "frame": 12,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "box-truck",
+    "theme": "light",
+    "ends": 384,
+    "problems": []
+  },
+  {
+    "model": "dump-truck",
+    "theme": "dark",
+    "frame": 0,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "dump-truck",
+    "theme": "dark",
+    "frame": 1,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "dump-truck",
+    "theme": "dark",
+    "frame": 2,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "dump-truck",
+    "theme": "dark",
+    "frame": 3,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "dump-truck",
+    "theme": "dark",
+    "frame": 4,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "dump-truck",
+    "theme": "dark",
+    "frame": 5,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "dump-truck",
+    "theme": "dark",
+    "frame": 6,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "dump-truck",
+    "theme": "dark",
+    "frame": 7,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "dump-truck",
+    "theme": "dark",
+    "frame": 8,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "dump-truck",
+    "theme": "dark",
+    "frame": 9,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "dump-truck",
+    "theme": "dark",
+    "frame": 10,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "dump-truck",
+    "theme": "dark",
+    "frame": 11,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "dump-truck",
+    "theme": "dark",
+    "frame": 12,
+    "ends": 488,
+    "problems": []
+  },
+  {
+    "model": "box-truck",
+    "theme": "dark",
+    "ends": 384,
+    "problems": []
+  }
+]
