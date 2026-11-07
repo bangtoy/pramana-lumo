@@ -1,4 +1,5 @@
 "use client";
+import { MAX_INSPECTION_PHOTO_BYTES } from './inspection-photos';
 
 export async function api<T>(url: string, init?: RequestInit): Promise<T> {
   const response = await fetch(url, init);
@@ -31,19 +32,24 @@ export async function compressImage(file: File, maxSize = 1280): Promise<File> {
   if (!file.type.startsWith("image/")) return file;
   const bitmap = await createImageBitmap(file);
   try {
-    const scale = Math.min(1, maxSize / Math.max(bitmap.width, bitmap.height));
+    let scale = Math.min(1, maxSize / Math.max(bitmap.width, bitmap.height));
     const canvas = document.createElement("canvas");
     canvas.width = Math.max(1, Math.round(bitmap.width * scale));
     canvas.height = Math.max(1, Math.round(bitmap.height * scale));
     const ctx = canvas.getContext("2d");
     if (!ctx) throw new Error("This device could not process the photo.");
-    ctx.fillStyle = "white";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-    const blob = await new Promise<Blob>((resolve, reject) => canvas.toBlob(
-      result => result ? resolve(result) : reject(new Error("Photo compression failed.")), "image/jpeg", 0.8,
-    ));
-    return new File([blob], file.name.replace(/\.[^.]+$/, "") + ".jpg", { type: "image/jpeg" });
+    for (let attempt = 0; attempt < 4; attempt++) {
+      canvas.width = Math.max(1, Math.round(bitmap.width * scale));
+      canvas.height = Math.max(1, Math.round(bitmap.height * scale));
+      ctx.fillStyle = "white"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+      const blob = await new Promise<Blob>((resolve, reject) => canvas.toBlob(
+        result => result ? resolve(result) : reject(new Error("Photo compression failed.")), 'image/jpeg', 0.8 - attempt * 0.1,
+      ));
+      if (blob.size < MAX_INSPECTION_PHOTO_BYTES) return new File([blob], file.name.replace(/\.[^.]+$/, '') + '.jpg', { type: 'image/jpeg' });
+      scale *= 0.8;
+    }
+    throw new Error('This photo is too large. Try a smaller image.');
   } finally { bitmap.close(); }
 }
 

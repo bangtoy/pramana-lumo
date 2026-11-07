@@ -3,16 +3,18 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { ArrowLeft, ArrowRight, Camera, Check, ChevronDown, ChevronUp, Paperclip, Plus, RotateCcw, Send } from "lucide-react";
+import { ArrowLeft, ArrowRight, Camera, Check, ChevronDown, ChevronUp, Paperclip, Plus, RotateCcw, Send, X } from "lucide-react";
 import { api, compressImage, fmtDate, postJson, postTurn } from "@/lib/client";
-import { counts, itemsOf, nextItem, progress, unitCode, verdict, type ReportView } from "@/lib/rules";
+import { counts, headerMissing, itemsOf, nextItem, progress, unitCode, verdict, type ReportView } from "@/lib/rules";
 import type { ChatMessage, StatusItem, TurnResponse } from "@/lib/contracts";
 import { ChatPill, ErrorState, MascotAvatar, MascotHero, ProgressSegments, ResultPills, Spinner, TypingBubble } from "@/components/ui";
 import { VehicleModel } from "@/components/vehicle-model/VehicleModel";
 import { InspectionPlanSelect } from "./InspectionPlanSelect";
 import { LocalPlannerAttachment } from "@/components/supervisor/PlannerAttachment";
+import { InspectionChecklist } from "./InspectionChecklist";
+import { MAX_INSPECTION_PHOTOS } from "@/lib/inspection-photos";
 import "./inspector-chat.css";
-type InspectorMessage = ChatMessage & { pendingFile?: File };
+type InspectorMessage = ChatMessage & { pendingFiles?: File[] };
 const draftKey = 'pramana.inspection-draft';
 const iconButton = 'btn btn-secondary w-11 h-11 p-0 shrink-0';
 export function InspectorChat() {
@@ -34,24 +36,26 @@ export function InspectorChat() {
 }
 function Conversation({ id, create }: { id: string; create: () => Promise<void> }) {
   const cache = useQueryClient(), end = useRef<HTMLDivElement>(null), input = useRef<HTMLInputElement>(null), attachment = useRef<HTMLInputElement>(null), composer = useRef<HTMLTextAreaElement>(null), submitting = useRef(false);
-  const [text, setText] = useState(''), [photo, setPhotoState] = useState<File>(), [preparing, setPreparing] = useState(false), [photoError, setPhotoError] = useState<string | null>(null);
+  const [text, setText] = useState(''), [photos, setPhotosState] = useState<File[]>([]), [photoUrls, setPhotoUrls] = useState<string[]>([]), [preparing, setPreparing] = useState(false), [photoError, setPhotoError] = useState<string | null>(null);
   const draftText = useRef('');
-  const draftPhoto = useRef<File | undefined>(undefined);
+  const draftPhotos = useRef<File[]>([]);
   function setDraft(value: string) { draftText.current = value; setText(value); }
-  function setPhoto(value: File | undefined) { draftPhoto.current = value; setPhotoState(value); }
+  function setPhotos(value: File[]) { draftPhotos.current = value; setPhotosState(value); }
+  function samePhotos(left: File[], right: File[] = []) { return left.length === right.length && left.every((file, index) => file === right[index]); }
   const [showModel, setShowModel] = useState(true), [status, setStatus] = useState(''), [optimistic, setOptimistic] = useState<InspectorMessage[]>([]);
   const query = useQuery({ queryKey: ['laporan', id], queryFn: () => api<ReportView>(`/api/laporan/${encodeURIComponent(id)}`) });
   const report = query.data;
-  const turn = useMutation({ mutationFn: async ({ text, photo, planId, retry }: { text: string; photo?: File; planId?: string; draftText: string; retry?: boolean }) => {
+  const turn = useMutation({ mutationFn: async ({ text, photos, planId, retry }: { text: string; photos: File[]; planId?: string; draftText: string; retry?: boolean }) => {
     if (retry && planId) {
       const latest = await api<ReportView>(`/api/laporan/${encodeURIComponent(id)}`);
       if (latest.rencana_id === planId) planId = undefined;
     }
-    const body = new FormData(); body.set('text', text); if (photo) body.set('file', photo); if (planId) body.set('planId', planId);
+    const body = new FormData(); body.set('text', text); photos.forEach(photo => body.append('file', photo)); if (planId) body.set('planId', planId);
     return postTurn<TurnResponse<ReportView>>(`/api/laporan/${id}/turn`, body, setStatus);
-  }, onMutate: ({ text, photo }) => { setOptimistic([{ id: 'pending', role: 'user', text, pendingFile: photo, created_at: new Date().toISOString() }]); setStatus(photo ? 'Examining the photo…' : 'Lumo is reading…'); }, onSuccess: reply => {
+  }, onMutate: ({ text, photos }) => { setOptimistic([{ id: 'pending', role: 'user', text, pendingFiles: photos, created_at: new Date().toISOString() }]); setStatus(photos.length ? `Examining ${photos.length === 1 ? 'the photo' : `${photos.length} photos`}…` : 'Lumo is reading…'); }, onSuccess: reply => {
     setOptimistic([]); cache.setQueryData(['laporan', id], reply.data);
-  }, onError: (_error, draft) => { if (!draftText.current && !draftPhoto.current) { setDraft(draft.draftText); setPhoto(draft.photo); } }, onSettled: () => { submitting.current = false; setOptimistic([]); void cache.invalidateQueries({ queryKey: ['laporan', id] }); } });
+  }, onError: (_error, draft) => { if (!draftText.current && !draftPhotos.current.length) { setDraft(draft.draftText); setPhotos(draft.photos); } }, onSettled: () => { submitting.current = false; setOptimistic([]); void cache.invalidateQueries({ queryKey: ['laporan', id] }); } });
+  useEffect(() => { const urls = photos.length > 1 ? photos.map(photo => URL.createObjectURL(photo)) : []; setPhotoUrls(urls); return () => urls.forEach(url => URL.revokeObjectURL(url)); }, [photos]);
   useLayoutEffect(() => {
     const field = composer.current;
     if (!field) return;
@@ -78,17 +82,23 @@ function Conversation({ id, create }: { id: string; create: () => Promise<void> 
     return () => media.removeEventListener('change', adapt);
   }, []);
   useEffect(() => { end.current?.scrollIntoView({ block: 'end', behavior: 'instant' }); }, [report?.messages.length, turn.isPending]);
-  async function choosePhoto(file?: File) {
-    if (!file) return; setPreparing(true); setPhotoError(null);
-    try { if (!file.type.startsWith('image/')) throw new Error('Choose a photo.'); setPhoto(await compressImage(file)); }
+  async function choosePhotos(files: File[]) {
+    if (!files.length || preparing || turn.isPending) return; setPhotoError(null);
+    if (photos.length + files.length > MAX_INSPECTION_PHOTOS) { setPhotoError(`Choose up to ${MAX_INSPECTION_PHOTOS} photos per message. Remove a photo before adding more.`); return; }
+    setPreparing(true);
+    try {
+      const compressed: File[] = [];
+      for (const file of files) { if (!file.type.startsWith('image/')) throw new Error('Choose photos only.'); compressed.push(await compressImage(file)); }
+      setPhotos([...draftPhotos.current, ...compressed]);
+    }
     catch (error) { setPhotoError(error instanceof Error ? error.message : 'The photo could not be prepared.'); }
     finally { setPreparing(false); }
   }
   function send(value = text, planId?: string) {
-    if ((!value.trim() && !photo) || submitting.current || turn.isPending || preparing) return;
+    if ((!value.trim() && !photos.length) || submitting.current || turn.isPending || preparing) return;
     submitting.current = true;
-    const draft = { text: value.trim(), photo, planId, draftText: text || value };
-    setDraft(''); setPhoto(undefined); setPhotoError(null);
+    const draft = { text: value.trim(), photos, planId, draftText: text || value };
+    setDraft(''); setPhotos([]); setPhotoError(null);
     if (input.current) input.current.value = ''; if (attachment.current) attachment.current.value = '';
     turn.mutate(draft);
   }
@@ -96,14 +106,14 @@ function Conversation({ id, create }: { id: string; create: () => Promise<void> 
     const draft = turn.variables;
     if (!draft || submitting.current || turn.isPending || preparing) return;
     submitting.current = true;
-    if (text === draft.draftText && photo === draft.photo) { setDraft(''); setPhoto(undefined); }
+    if (text === draft.draftText && samePhotos(photos, draft.photos)) { setDraft(''); setPhotos([]); }
     turn.mutate({ ...draft, retry: true });
   }
   async function startNew() {
     if (turn.isPending || preparing) return;
-    const unsent = !!text.trim() || !!photo;
+    const unsent = !!text.trim() || !!photos.length;
     const action = 'Start a new inspection?';
-    if (report?.status === 'berjalan' && (Object.keys(report.hasil).length || unsent) && !window.confirm(unsent ? `${action} Your unsent message and photo will be discarded. Recorded findings stay saved.` : `${action} Your recorded findings stay saved, but this device will resume the new inspection.`)) return;
+    if (report?.status === 'berjalan' && (Object.keys(report.hasil).length || unsent) && !window.confirm(unsent ? `${action} Your unsent message and photos will be discarded. Recorded findings stay saved.` : `${action} Your recorded findings stay saved, but this device will resume the new inspection.`)) return;
     await create();
   }
   if (query.isLoading) return <div className="p-5"><Spinner/></div>;
@@ -117,14 +127,14 @@ function Conversation({ id, create }: { id: string; create: () => Promise<void> 
   ].filter(Boolean).join(' ');
   const statuses = Object.fromEntries(items.filter(i => i.comp_id && report.hasil[i.id]).map(i => [i.comp_id!, report.hasil[i.id].status])) as Record<string, StatusItem>;
   const messages: InspectorMessage[] = [...report.messages, ...optimistic];
-  const hasNextDraft = (!!text && text !== turn.variables?.draftText) || (!!photo && photo !== turn.variables?.photo);
+  const hasNextDraft = (!!text && text !== turn.variables?.draftText) || (!!photos.length && !samePhotos(photos, turn.variables?.photos));
   return <div className="inspector-chat h-dvh flex flex-col overflow-hidden">
     <header className="shrink-0 sticky top-0 z-10 px-4 pt-3 pb-2 bg-[var(--color-surface)] border-b border-[var(--color-line)]">
       <div className="flex items-center gap-2"><Link href="/petugas/riwayat" aria-label="Back to inspection history" className={iconButton}><ArrowLeft size={18}/></Link><div className="flex-1 min-w-0"><h1 className="t-heading truncate">{report.unit ? unitCode(report.unit) : 'New P2H'}</h1><p className="t-caption-data muted truncate">{report.unit?.split('·')[1]?.trim() || 'Daily vehicle inspection'}</p></div><button className={iconButton} aria-label="New inspection" disabled={turn.isPending} onClick={() => void startNew()}><Plus size={18}/></button><button className={iconButton} aria-label="Restart inspection" disabled={turn.isPending} onClick={() => void startNew()}><RotateCcw size={16}/></button></div>
-      {!!items.length && <div className="mt-3 space-y-2"><ProgressSegments items={items.map(i => report.hasil[i.id]?.status || null)} active={items.findIndex(i => i.id === active?.id)}/><p className="t-caption-data muted truncate">{done.done}/{done.total} recorded{active ? ` · ${active.nama}` : report.status === 'terkirim' ? ' · Submitted' : ' · Ready to submit'}</p></div>}
+      {!!items.length && <div className="mt-3 space-y-2"><ProgressSegments items={items.map(i => report.hasil[i.id]?.status || null)} active={items.findIndex(i => i.id === active?.id)}/><p className="t-caption-data muted truncate">{done.done}/{done.total} recorded{headerMissing(report).length ? ' · Complete inspection details' : active ? ` · ${active.nama}` : report.status === 'terkirim' ? ' · Submitted' : ' · Ready to submit'}</p></div>}
     </header>
     {report.status === 'terkirim' ? <div className="inspector-scroll flex-1 overflow-y-auto p-5 flex flex-col items-center text-center gap-4 py-10"><MascotHero pose={resultCounts.stop ? 'mencatat' : 'jempol'} size={112}/><h2 className="t-heading">Inspection submitted</h2><p className={`inspector-completion-verdict t-body-lg ${resultCounts.stop ? 'text-[var(--color-status-tidak-baik)]' : ''}`}>{verdict(report)}</p><ResultPills counts={resultCounts}/><p className="t-body muted">{completionSummary}</p><Link href={`/petugas/riwayat/${report.id}`} className="btn btn-primary">View report</Link><Link href="/petugas/riwayat" className="btn btn-secondary">Inspection history</Link></div> : <>
-      {report.rencana_snapshot?.model_id && <div className="inspector-model border-b border-[var(--color-line)]"><button className="t-body-sm muted w-full flex shrink-0 items-center justify-between px-4 py-2" aria-expanded={showModel} onClick={() => setShowModel(!showModel)}>Vehicle model{showModel ? <ChevronUp size={16}/> : <ChevronDown size={16}/>}</button>{showModel && <VehicleModel className="inspector-model-canvas px-4 pb-2" modelId={report.rencana_snapshot.model_id} focus={active?.comp_id} statuses={statuses} tiltControl={false}/>}</div>}
+      {report.rencana_snapshot?.model_id && !headerMissing(report).length && <div className="inspector-model border-b border-[var(--color-line)]"><button className="t-body-sm muted w-full flex shrink-0 items-center justify-between px-4 py-2" aria-expanded={showModel} onClick={() => setShowModel(!showModel)}>Vehicle model{showModel ? <ChevronUp size={16}/> : <ChevronDown size={16}/>}</button>{showModel && <VehicleModel className="inspector-model-canvas px-4 pb-2" modelId={report.rencana_snapshot.model_id} focus={active?.comp_id} statuses={statuses} tiltControl={false}/>}</div>}
       <div className="inspector-scroll inspector-thread flex-1 min-h-0 overflow-y-auto p-4 space-y-4" role="log" aria-label="Inspection conversation" aria-live="polite">
         <div className="flex flex-col items-center gap-1 pb-3"><MascotHero pose="menyapa" size={96}/><h2 className="t-heading">Lumo</h2><p className="t-body-sm muted">Your P2H companion · {fmtDate(report.started_at)}</p></div>
         {messages.map((message, index) => {
@@ -136,11 +146,14 @@ function Conversation({ id, create }: { id: string; create: () => Promise<void> 
           const disabled = !current || turn.isPending || preparing;
           return <div key={message.id} className={`flex gap-2 ${message.role === 'user' ? 'justify-end' : ''}`}>
           {message.role === 'pramana' && <MascotAvatar size={28} mood={message.mood}/>}
-          <div className={`min-w-0 max-w-[88%] space-y-2 ${message.pendingFile ? 'inspector-photo-message' : ''}`}><div className={`p-3 t-body-lg break-words space-y-2 ${message.role === 'user' ? 'bubble-petugas' : 'bubble-pramana'}`}>
+          <div className={`min-w-0 max-w-[88%] space-y-2 ${message.pendingFiles?.length ? 'inspector-photo-message' : ''}`}>
+            {message.inspection_checklist?.kind === 'overview' && <InspectionChecklist checklist={message.inspection_checklist}/>}
+            <div className={`p-3 t-body-lg break-words space-y-2 ${message.role === 'user' ? 'bubble-petugas' : 'bubble-pramana'}`}>
             {message.text && <p className="whitespace-pre-wrap">{message.text}</p>}
-            {message.pendingFile && <LocalPlannerAttachment file={message.pendingFile} pending/>}
-            {message.files?.map(file => <a key={file.id} href={`/api/files/${encodeURIComponent(file.id)}`} target="_blank" rel="noreferrer" className="block"><img src={`/api/files/${encodeURIComponent(file.id)}`} alt={file.caption || 'Inspection photo'} className="inspector-evidence rounded-lg max-h-48 w-full object-cover" onLoad={() => end.current?.scrollIntoView({ block: 'end' })}/></a>)}
-          </div>{!!message.pills?.length && <div className="flex flex-wrap gap-1.5">{message.pills.map((pill, i) => <ChatPill key={i} pill={pill}/>)}</div>}
+            {message.pendingFiles?.map((file, photoIndex) => <LocalPlannerAttachment key={photoIndex} file={file} pending/>)}
+              {!!message.files?.length && <div className={`mt-2 grid gap-2 ${message.files.length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>{message.files.map((file, photoIndex) => <a key={file.id} href={`/api/files/${encodeURIComponent(file.id)}`} target="_blank" rel="noreferrer" aria-label={`Open photo ${photoIndex + 1}`}><img src={`/api/files/${encodeURIComponent(file.id)}`} alt={file.caption || `Inspection photo ${photoIndex + 1}`} className={`inspector-evidence rounded-lg w-full object-cover ${message.files!.length > 1 ? 'h-24' : 'max-h-48'}`} onLoad={() => end.current?.scrollIntoView({ block: 'end' })}/></a>)}</div>}
+          </div>{!!message.pills?.length && !message.inspection_checklist && <div className="flex flex-wrap gap-1.5">{message.pills.map((pill, i) => <ChatPill key={i} pill={pill}/>)}</div>}
+            {message.inspection_checklist?.kind === 'progress' && <InspectionChecklist checklist={message.inspection_checklist}/>}
             {current && message.plan_choices && !report.rencana_id && <InspectionPlanSelect plans={message.plan_choices} disabled={disabled} onChoose={plan => send(plan.title, plan.id)}/>}
             {!!choices.length && !message.plan_choices && <div role="group" aria-label={current ? 'Reply choices' : 'Selected reply'} className="space-y-2" data-inspection-choices>
               <p className="t-label muted font-normal pt-1">{current ? 'Choose an option' : 'Selected option'}</p>
@@ -153,14 +166,21 @@ function Conversation({ id, create }: { id: string; create: () => Promise<void> 
       <div className="shrink-0 p-3 border-t border-[var(--color-line)] bg-[var(--color-surface)] pb-[max(12px,env(safe-area-inset-bottom))]">
         <div className="inspector-draft-tools inspector-scroll">
           {(turn.error || photoError) && <div className="inspector-scroll mb-2 max-h-28 overflow-y-auto"><ErrorState error={photoError || turn.error!}/><p className="t-body-sm muted mt-1">{photoError ? 'Choose another photo and try again.' : hasNextDraft ? 'Your next draft is preserved. Retry the failed message, or continue with this draft.' : 'Your draft is ready to retry. Send it again, or choose another photo.'}</p>{turn.error && <button type="button" className="btn btn-secondary t-body-sm mt-2" onClick={retryFailed} disabled={turn.isPending || preparing}>Retry failed message</button>}</div>}
-          {photo && <div className="mb-2"><LocalPlannerAttachment file={photo} disabled={turn.isPending || preparing} onRemove={() => { setPhoto(undefined); if (input.current) input.current.value = ''; if (attachment.current) attachment.current.value = ''; }} removeLabel="Remove photo"/></div>}
-          {preparing && <Spinner label="Preparing photo…"/>}
+        {!!photos.length && <div className="mb-2 space-y-2" data-photo-previews>
+          <p className="t-label muted font-normal">{photos.length}/{MAX_INSPECTION_PHOTOS} photos ready · {Math.ceil(photos.reduce((total, photo) => total + photo.size, 0) / 1024)} KB total</p>
+          {photos.length === 1 ? <LocalPlannerAttachment file={photos[0]} disabled={turn.isPending || preparing} onRemove={() => { setPhotos([]); setPhotoError(null); }} removeLabel="Remove photo 1"/> : <div className="grid grid-cols-5 gap-2 pb-1">{photos.map((photo, photoIndex) => <div key={`${photoIndex}-${photo.name}`} className="relative min-w-0">
+            <img src={photoUrls[photoIndex]} alt={`Photo ${photoIndex + 1} ready to send`} className="h-16 w-full rounded-lg object-cover"/>
+            <button type="button" className="absolute right-0 top-0 flex h-11 w-11 items-center justify-center rounded-lg bg-[var(--color-surface)] text-[var(--color-text-strong)] border border-[var(--color-line)]" aria-label={`Remove photo ${photoIndex + 1}`} disabled={turn.isPending || preparing} onClick={() => { setPhotos(photos.filter((_, index) => index !== photoIndex)); setPhotoError(null); }}><X size={16}/></button>
+            <p className="t-caption-data muted mt-1">{Math.ceil(photo.size / 1024)} KB</p>
+          </div>)}</div>}
+        </div>}
+          {preparing && <Spinner label="Preparing photos…"/>}
         </div>
         <form className="space-y-2" onSubmit={e => { e.preventDefault(); send(); }}>
-          <input ref={input} type="file" accept="image/*" capture="environment" aria-label="Take an inspection photo" tabIndex={-1} className="sr-only" disabled={turn.isPending || preparing} onChange={e => { void choosePhoto(e.target.files?.[0]); e.target.value = ''; }}/>
-          <input ref={attachment} type="file" accept="image/*" aria-label="Attach an image" tabIndex={-1} className="sr-only" disabled={turn.isPending || preparing} onChange={e => { void choosePhoto(e.target.files?.[0]); e.target.value = ''; }}/>
+          <input ref={input} type="file" accept="image/*" capture="environment" aria-label="Take an inspection photo" tabIndex={-1} className="sr-only" disabled={turn.isPending || preparing} onChange={e => { void choosePhotos(Array.from(e.target.files || [])); e.target.value = ''; }}/>
+          <input ref={attachment} type="file" accept="image/*" multiple aria-label="Attach inspection photos" tabIndex={-1} className="sr-only" disabled={turn.isPending || preparing} onChange={e => { void choosePhotos(Array.from(e.target.files || [])); e.target.value = ''; }}/>
           <textarea ref={composer} rows={1} className="inspector-composer inspector-scroll input t-body-lg w-full resize-none min-h-12" aria-label="Message Lumo" placeholder="Tell Lumo what you found…" value={text} onChange={e => setDraft(e.target.value)} onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) { e.preventDefault(); send(); } }}/>
-          <div className="flex items-center gap-2"><button type="button" className={`${iconButton} !w-12 !h-12`} aria-label="Take a photo" title="Take a photo" disabled={turn.isPending || preparing} onClick={() => input.current?.click()}><Camera size={21}/></button><button type="button" className={`${iconButton} !w-12 !h-12`} aria-label="Choose an image from gallery or files" title="Attach an image" disabled={turn.isPending || preparing} onClick={() => attachment.current?.click()}><Paperclip size={20}/></button><span className="t-label muted font-normal">Camera or image</span><button className="btn btn-primary w-12 h-12 p-0 shrink-0 ml-auto" aria-label="Send message" disabled={turn.isPending || preparing || (!text.trim() && !photo)}><Send size={18}/></button></div>
+          <div className="flex items-center gap-2"><button type="button" className={`${iconButton} !w-12 !h-12`} aria-label="Take a photo" title="Take a photo" disabled={turn.isPending || preparing || photos.length >= MAX_INSPECTION_PHOTOS} onClick={() => input.current?.click()}><Camera size={21}/></button><button type="button" className={`${iconButton} !w-12 !h-12`} aria-label="Choose photos from gallery or files" title="Attach photos" disabled={turn.isPending || preparing || photos.length >= MAX_INSPECTION_PHOTOS} onClick={() => attachment.current?.click()}><Paperclip size={20}/></button><span className="t-label muted font-normal">Up to 5 photos</span><button className="btn btn-primary w-12 h-12 p-0 shrink-0 ml-auto" aria-label="Send message" disabled={turn.isPending || preparing || (!text.trim() && !photos.length)}><Send size={18}/></button></div>
         </form>
       </div>
     </>}

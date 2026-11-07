@@ -4,11 +4,16 @@ import { getFile, insertFile, newId, now, type FileRecord } from "./db.ts";
 import { resolveRef, UPLOAD_DIR } from "./paths.ts";
 import { fail } from "./http.ts";
 
-export async function saveUpload(file: File): Promise<FileRecord> {
+export async function inspectUpload(file: File, imagesOnly = false) {
   if (!file.size || file.size > 20*1024*1024) fail("Choose a file between 1 byte and 20 MB.",413);
   const bytes=Buffer.from(await file.arrayBuffer());
   const detected=bytes.subarray(0,3).equals(Buffer.from([255,216,255]))?"image/jpeg":bytes.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10]))?"image/png":bytes.toString("ascii",0,4)==="RIFF"&&bytes.toString("ascii",8,12)==="WEBP"?"image/webp":bytes.toString("ascii",0,5)==="%PDF-"?"application/pdf":null;
   if (!detected || (file.type && file.type!==detected)) fail("Use a valid JPEG, PNG, WebP image or PDF file.",415);
+  if (imagesOnly && !detected.startsWith('image/')) fail('Attach photos for this inspection.', 415);
+  return { bytes, mime: detected };
+}
+export async function saveUpload(file: File): Promise<FileRecord> {
+  const { bytes, mime: detected } = await inspectUpload(file);
   const id=newId("FILE");
   const extension=({"image/jpeg":"jpg","image/png":"png","image/webp":"webp","application/pdf":"pdf"})[detected];
   const ref=`data:uploads/${id}.${extension}`;

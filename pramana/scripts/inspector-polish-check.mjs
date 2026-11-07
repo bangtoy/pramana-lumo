@@ -16,7 +16,7 @@ let reportCreates = 0;
 page.on('pageerror', error => errors.push(error.message));
 page.on('console', message => { if (message.type() === 'error') errors.push(`${message.text()} (${message.location().url})`); });
 page.on('request', request => { if (request.method() === 'POST' && new URL(request.url()).pathname === '/api/laporan') reportCreates++; });
-const turns = [];
+const turns = [], payloads = [];
 const quick = ['Please explain the complete safety check before I continue with this inspection.', 'The vehicle is safely isolated', 'I need help with this photo'];
 const result = {};
 
@@ -26,7 +26,7 @@ async function awaitTurn(count) {
   assert.equal(turns.length, count, 'A send action creates exactly one request');
   return turns[count - 1];
 }
-const screenshot = name => page.screenshot({ path: join(shots, name), animations: 'disabled' });
+const screenshot = async name => { await page.evaluate(async () => { await document.fonts.ready; await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))); }); await page.screenshot({ path: join(shots, name), animations: 'disabled' }); };
 const metrics = element => {
   const style = getComputedStyle(element);
   return { height: element.getBoundingClientRect().height, line: parseFloat(style.lineHeight), padding: parseFloat(style.paddingTop) + parseFloat(style.paddingBottom), borders: parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth), scrollHeight: element.scrollHeight, clientHeight: element.clientHeight, overflow: style.overflowY, scrollbar: style.scrollbarWidth, font: style.fontSize };
@@ -46,20 +46,30 @@ try {
   const id = 'LI-MOBILE-POLISH';
   let report = { ...seed, id, status: 'berjalan', submitted_at: null, hasil: {}, rencana_snapshot: seed.rencana_snapshot ? { ...seed.rencana_snapshot, model_id: null } : null, messages: [{ id: 'greeting', role: 'pramana', text: 'Tell me what you found, or attach a clear inspection photo.', quick_replies: quick, created_at: seed.started_at }] };
   const image = await readFile('public/demo/apar-label.jpg');
+  await page.exposeBinding('captureInspectionTurn', (_source, payload) => payloads.push(payload));
+  await page.addInitScript(() => {
+    const originalFetch = window.fetch.bind(window);
+    window.fetch = async (input, init) => {
+      if (typeof input === 'string' && /\/api\/laporan\/[^/]+\/turn$/.test(input) && init?.body instanceof FormData) {
+        const body = init.body;
+        await window.captureInspectionTurn({ text: body.get('text'), planId: body.get('planId'), photos: body.getAll('file').map(file => ({ name: file.name, size: file.size, type: file.type })) });
+      }
+      return originalFetch(input, init);
+    };
+  });
   await page.route('**/api/laporan**', async route => {
     const path = new URL(route.request().url()).pathname;
     if (path === `/api/laporan/${id}/turn`) {
-      const body = route.request().postDataBuffer()?.toString() || '';
-      const text = (body.match(/name="text"\r\n\r\n([\s\S]*?)\r\n--/)?.[1] || '').replace(/\r\n/g, '\n');
-      const hasPhoto = body.includes('name="file";');
-      const photoName = body.match(/name="file"; filename="([^"]*)"/)?.[1] || null;
-      const planId = body.match(/name="planId"\r\n\r\n([^\r\n]*)/)?.[1] || null;
+      const payload = payloads.shift();
+      assert.ok(payload, 'Each request contains a captured FormData payload');
+      const { text, planId, photos } = payload;
+      const hasPhoto = photos.length > 0, photoName = photos[0]?.name || null;
       const gate = Promise.withResolvers();
-      turns.push({ gate, text, hasPhoto, photoName, planId });
+      turns.push({ gate, text, hasPhoto, photoName, photos, planId });
       const fail = await gate.promise;
       if (fail) return route.fulfill({ contentType: 'application/x-ndjson', body: `${JSON.stringify({ error: 'The photo could not be processed. Please try again.' })}\n` });
       const number = turns.length;
-      const user = { id: `user-${number}`, role: 'user', text, created_at: new Date().toISOString(), files: hasPhoto ? [{ id: `FILE-MOBILE-${number}`, mime: 'image/jpeg', caption: 'Inspection evidence photo' }] : [] };
+      const user = { id: `user-${number}`, role: 'user', text, created_at: new Date().toISOString(), files: photos.map((photo, index) => ({ id: `FILE-MOBILE-${number}-${index}`, mime: photo.type, caption: 'Inspection evidence photo' })) };
       const reply = { id: `reply-${number}`, role: 'pramana', text: `Saved inspection message ${number}. Continue when you are ready.`, quick_replies: quick, created_at: new Date().toISOString() };
       report = { ...report, ...(planId ? { rencana_id: planId } : {}), messages: [...report.messages, user, reply] };
       return route.fulfill({ contentType: 'application/x-ndjson', body: `${JSON.stringify({ status: hasPhoto ? 'Examining the photo…' : 'Lumo is reading…' })}\n${JSON.stringify({ reply: { data: report, messages: report.messages } })}\n` });
@@ -82,7 +92,7 @@ try {
   await composer.waitFor();
   assert.equal((await composer.evaluate(metrics)).font, '16px');
   assert.equal(await page.getByLabel('Take an inspection photo', { exact: true }).getAttribute('capture'), 'environment');
-  assert.equal(await page.getByLabel('Attach an image', { exact: true }).getAttribute('capture'), null);
+  assert.equal(await page.getByLabel('Attach inspection photos', { exact: true }).getAttribute('capture'), null);
   assert.equal(await log.evaluate(node => getComputedStyle(node).scrollbarWidth), 'thin');
   const choiceGroups = page.locator('[data-inspector-reply-choices], [data-inspection-choices]').filter({ has: page.getByRole('button', { name: quick[0], exact: true }) });
   if (await choiceGroups.count()) {
@@ -130,8 +140,8 @@ try {
     const original = window.createImageBitmap.bind(window);
     window.createImageBitmap = async (...args) => { await new Promise(resolve => { window.releasePhotoPreparation = resolve; }); window.createImageBitmap = original; return original(...args); };
   });
-  await page.getByLabel('Attach an image', { exact: true }).setInputFiles('public/demo/apar-label.jpg');
-  await page.getByText('Preparing photo…', { exact: true }).waitFor();
+  await page.getByLabel('Attach inspection photos', { exact: true }).setInputFiles('public/demo/apar-label.jpg');
+  await page.getByText('Preparing photos…', { exact: true }).waitFor();
   assert.equal(await composer.isDisabled(), false);
   assert.equal(await send.isDisabled(), true);
   const preparingCaption = 'I can prepare a caption while the image is being processed.';
@@ -182,7 +192,7 @@ try {
   assert.equal(await composer.isDisabled(), false);
   assert.equal(await send.isDisabled(), true);
   assert.equal(await page.getByRole('button', { name: 'Take a photo', exact: true }).isDisabled(), true);
-  assert.equal(await page.getByRole('button', { name: 'Choose an image from gallery or files', exact: true }).isDisabled(), true);
+  assert.equal(await page.getByRole('button', { name: 'Choose photos from gallery or files', exact: true }).isDisabled(), true);
   const pendingPreview = log.getByRole('img', { name: 'Preview of apar-label.jpg', exact: true });
   await pendingPreview.evaluate(node => node.decode());
   assert.ok(await pendingPreview.evaluate(node => node.naturalWidth > 0 && node.src.startsWith('blob:')));
@@ -198,7 +208,7 @@ try {
   await log.getByText('Saved inspection message 1. Continue when you are ready.', { exact: true }).waitFor();
   await waitForIdleActions();
   await expectValue(composer, nextDraft);
-  await log.locator('img[src*="/api/files/FILE-MOBILE-1"]').evaluate(node => node.decode());
+  await log.locator('img[src="/api/files/FILE-MOBILE-1-0"]').evaluate(node => node.decode());
   assert.equal(await page.getByText('Ready to send', { exact: true }).count(), 0);
   await page.waitForFunction(() => window.previewUrls.created.length === window.previewUrls.revoked.length);
   const urls = await page.evaluate(() => window.previewUrls);
@@ -207,7 +217,7 @@ try {
   await screenshot('inspector-photo-saved-390.png');
 
   await composer.fill('');
-  await page.getByLabel('Attach an image', { exact: true }).setInputFiles('public/demo/apar-label.jpg');
+  await page.getByLabel('Attach inspection photos', { exact: true }).setInputFiles('public/demo/apar-label.jpg');
   await page.getByText('Ready to send', { exact: true }).waitFor();
   await send.click();
   const fileOnly = await awaitTurn(2);
@@ -268,7 +278,7 @@ try {
   await log.getByText('Saved inspection message 6. Continue when you are ready.', { exact: true }).waitFor();
   await waitForIdleActions();
   result.retry = { fileOnlyPending: true, emptyDraftRestoresFailedPhoto: true, failurePreservesNextDraft: true, explicitRetryUsesFailedTextAndPhoto: true, failedRetryPreservesNextDraft: true, successfulRetryPreservesNextDraft: true, textOnlySuccess: true };
-  await page.getByLabel('Attach an image', { exact: true }).setInputFiles('public/demo/apar-label.jpg');
+  await page.getByLabel('Attach inspection photos', { exact: true }).setInputFiles('public/demo/apar-label.jpg');
   await page.getByText('Ready to send', { exact: true }).waitFor();
   const photoAText = 'Photo A must remain the captured retry payload.';
   await composer.fill(photoAText);
@@ -278,7 +288,8 @@ try {
   photoA.gate.resolve(true);
   await retryButton.waitFor();
   await waitForIdleActions();
-  await page.getByLabel('Attach an image', { exact: true }).setInputFiles('public/demo/ban-benjol.jpg');
+  await page.getByRole('button', { name: 'Remove photo 1', exact: true }).click();
+  await page.getByLabel('Attach inspection photos', { exact: true }).setInputFiles('public/demo/ban-benjol.jpg');
   await page.getByRole('img', { name: 'Preview of ban-benjol.jpg', exact: true }).waitFor();
   await waitForIdleActions();
   await composer.fill('');
@@ -291,14 +302,14 @@ try {
     assert.equal(attempt.photoName, 'apar-label.jpg');
     await expectValue(composer, '');
     assert.equal(await photoB.getAttribute('src'), photoBUrl);
-    assert.equal(await page.getByRole('button', { name: 'Remove photo', exact: true }).isDisabled(), true);
+    assert.equal(await page.getByRole('button', { name: 'Remove photo 1', exact: true }).isDisabled(), true);
     attempt.gate.resolve(fail);
     await waitForIdleActions();
     if (!fail) await log.getByText(`Saved inspection message ${number}. Continue when you are ready.`, { exact: true }).waitFor();
     await expectValue(composer, '');
     assert.equal(await photoB.getAttribute('src'), photoBUrl, 'A photo-only next draft survives both retry outcomes');
   }
-  await page.getByRole('button', { name: 'Remove photo', exact: true }).click();
+  await page.getByRole('button', { name: 'Remove photo 1', exact: true }).click();
   await page.waitForFunction(() => window.previewUrls.created.length === window.previewUrls.revoked.length);
   result.retry.photoOnlyNextDraftPreservedOnRetryFailureAndSuccess = true;
   result.retry.retryUsesCapturedPhotoFilename = true;
@@ -306,6 +317,42 @@ try {
   await composer.press('Enter');
   assert.equal(turns.length, 9);
   await composer.fill('');
+  const batchPhotos = Array.from({ length: 5 }, (_, index) => ({ name: `batch-${index + 1}.jpg`, mimeType: 'image/jpeg', buffer: image }));
+  await page.getByLabel('Attach inspection photos', { exact: true }).setInputFiles(batchPhotos);
+  await page.getByText(/5\/5 photos ready/).waitFor();
+  assert.equal(await page.locator('[data-photo-previews] img').count(), 5);
+  assert.equal(await page.locator('[data-photo-previews]').evaluate(node => node.scrollWidth <= node.clientWidth), true);
+  const batchGrid = page.locator('[data-photo-previews] .grid');
+  assert.equal(await batchGrid.evaluate(node => getComputedStyle(node).gridTemplateColumns.split(' ').length), 5, 'Five photo thumbnails remain in one row');
+  await screenshot('inspector-batch-ready-390.png');
+  await send.click();
+  const batchAttempt = await awaitTurn(10);
+  assert.deepEqual(batchAttempt.photos.map(photo => photo.name), batchPhotos.map(photo => photo.name));
+  assert.ok(batchAttempt.photos.every(photo => photo.size < 300 * 1024));
+  await page.waitForFunction(() => document.querySelectorAll('[role="log"] img[src^="blob:"]').length === 5);
+  assert.equal(await page.locator('[data-photo-previews]').count(), 0);
+  await screenshot('inspector-batch-processing-390.png');
+  batchAttempt.gate.resolve(true);
+  await retryButton.waitFor();
+  await page.getByText(/5\/5 photos ready/).waitFor();
+  assert.equal(await page.locator('[data-photo-previews] img').count(), 5, 'Failure restores every photo in the batch');
+  await retryButton.click();
+  const batchRetry = await awaitTurn(11);
+  assert.deepEqual(batchRetry.photos, batchAttempt.photos, 'Retry uses every original compressed photo');
+  await expectValue(composer, '');
+  const batchNextDraft = 'Please keep this next observation while checking all five photos.';
+  await composer.fill(batchNextDraft);
+  await composer.press('Enter');
+  assert.equal(turns.length, 11);
+  batchRetry.gate.resolve(false);
+  await log.getByText('Saved inspection message 11. Continue when you are ready.', { exact: true }).waitFor();
+  await waitForIdleActions();
+  await expectValue(composer, batchNextDraft);
+  assert.equal(await log.locator('img[src*="/api/files/FILE-MOBILE-11-"]').count(), 5);
+  await page.waitForFunction(() => window.previewUrls.created.length === window.previewUrls.revoked.length);
+  await screenshot('inspector-batch-saved-390.png');
+  await composer.fill('');
+  result.batch = { fiveCompressedPhotos: true, pendingPreviews: 5, restoresAllAfterFailure: true, retriesSamePayload: true, nextDraftPreserved: true, savedPhotos: 5, objectUrlsRevoked: true };
   for (const viewport of [{ width: 320, height: 568 }, { width: 390, height: 600 }, { width: 390, height: 844 }, { width: 1440, height: 900 }]) {
     await page.setViewportSize(viewport);
     await page.waitForFunction(() => { const button = document.querySelector('button[aria-label="Send message"]'); const box = button?.getBoundingClientRect(); return box && box.bottom <= innerHeight + 1; });
@@ -315,7 +362,7 @@ try {
     if (viewport.width === 1440) await screenshot('inspector-desktop-1440.png');
   }
   await page.reload({ waitUntil: 'networkidle' });
-  await log.locator('img[src*="/api/files/FILE-MOBILE-1"]').evaluate(node => node.decode());
+  await log.locator('img[src="/api/files/FILE-MOBILE-1-0"]').evaluate(node => node.decode());
   await expectValue(composer, '');
   report = { ...report, rencana_snapshot: seed.rencana_snapshot };
   await page.reload({ waitUntil: 'networkidle' });
@@ -326,7 +373,7 @@ try {
     await page.waitForFunction(() => document.querySelector('button[aria-expanded]')?.getAttribute('aria-expanded') === 'false');
     assert.equal(await toggle.getAttribute('aria-expanded'), 'false');
     await composer.fill('First line\nSecond line\nThird line');
-    await page.getByLabel('Attach an image', { exact: true }).setInputFiles('public/demo/apar-label.jpg');
+    await page.getByLabel('Attach inspection photos', { exact: true }).setInputFiles('public/demo/apar-label.jpg');
     await page.getByText('Ready to send', { exact: true }).waitFor();
     await page.waitForFunction(() => { const box = document.querySelector('button[aria-label="Send message"]')?.getBoundingClientRect(); return box && box.bottom <= innerHeight + 1; });
     const fieldBounds = await composer.boundingBox(), sendBounds = await send.boundingBox(), threadBounds = await log.boundingBox();
@@ -340,7 +387,7 @@ try {
     const visibleImageHeight = Math.min(imageBounds.y + imageBounds.height, toolsBounds.y + toolsBounds.height) - Math.max(imageBounds.y, toolsBounds.y);
     assert.ok(visibleImageHeight >= 48, JSON.stringify({ viewport, imageBounds, toolsBounds }));
     await screenshot(`inspector-short-with-model-${viewport.width}x${viewport.height}.png`);
-    await page.getByRole('button', { name: /Remove (photo|attachment)/, exact: true }).click();
+    await page.getByRole('button', { name: /Remove (photo \d+|attachment)/, exact: true }).click();
     shortLayouts.push(`${viewport.width}×${viewport.height}`);
   }
   result.shortViewports = { modelCollapses: true, threeLineComposerAndPhotoRemainReachable: true, threadRemainsVisible: true, viewports: shortLayouts };
@@ -375,6 +422,25 @@ try {
     await expectValue(composer, '');
   }
   result.planRetry = { exactIdSearchSelectsIntendedPlan: true, persistedSelectionOmitsPlanId: true, unpersistedSelectionRetainsExactPlanId: true };
+  const checklistItems = seed.rencana_snapshot.items.map(item => ({ id: item.id, name: item.nama, photo_required: item.bukti.some(evidence => evidence.jenis === 'foto' && evidence.wajib), state: 'pending' }));
+  report = { ...seed, id, status: 'berjalan', submitted_at: null, unit: null, hasil: {}, messages: [{ id: 'checklist-overview', role: 'pramana', text: 'Here are the components to inspect. What is the unit code?', created_at: seed.started_at, inspection_checklist: { kind: 'overview', items: checklistItems } }] };
+  await page.reload({ waitUntil: 'networkidle' });
+  const overview = page.locator('[data-inspection-checklist="overview"]');
+  assert.equal(await overview.locator('li').count(), 8);
+  assert.equal(await page.getByRole('button', { name: 'Vehicle model', exact: true }).count(), 0);
+  await page.getByText(/Complete inspection details/).waitFor();
+  await overview.scrollIntoViewIfNeeded();
+  await screenshot('inspector-checklist-overview-390.png');
+  const remainingIds = ['ITEM-1', 'ITEM-2', 'ITEM-8'];
+  const progressItems = checklistItems.map(item => remainingIds.includes(item.id) ? item : { ...item, state: 'recorded', status: 'baik' });
+  report = { ...report, unit: seed.unit, rencana_snapshot: { ...seed.rencana_snapshot, model_id: null }, messages: [{ id: 'checklist-progress', role: 'pramana', text: 'Five checks are recorded. Please inspect the remaining components.', created_at: seed.started_at, inspection_checklist: { kind: 'progress', items: progressItems } }] };
+  await page.reload({ waitUntil: 'networkidle' });
+  const progressCard = page.locator('[data-inspection-checklist="progress"]');
+  assert.equal(await progressCard.locator('[data-state="recorded"]').count(), 5);
+  assert.equal(await progressCard.locator('[data-state="pending"]').count(), 3);
+  assert.deepEqual(await progressCard.locator('li').evaluateAll(items => items.slice(0, 3).map(item => item.dataset.checklistItem)), remainingIds);
+  await screenshot('inspector-checklist-progress-390.png');
+  result.checklist = { eightComponentsBeforeUnit: true, modelHiddenUntilHeaderComplete: true, progressAfterBatch: true, unfinishedComponentsFirst: true };
   report = { ...seed, id, status: 'terkirim', rencana_snapshot: seed.rencana_snapshot ? { ...seed.rencana_snapshot, model_id: null } : null };
   await page.reload({ waitUntil: 'networkidle' });
   const completion = page.getByRole('heading', { name: 'Inspection submitted', exact: true }).locator('..');

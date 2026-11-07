@@ -1,0 +1,239 @@
+{
+  "case": "photo_only",
+  "reportId": "LI-834d5396-1f85-480c-b15a-6cdc3bf89af5",
+  "note": "Actual agent and original photos. Operator accounts are simulation inputs, not physical checks by the test runner.",
+  "turns": [
+    {
+      "text": "I am Batch photo_only, at Riau. Use RI-DT-UTYPE-01 for QA-BATCH-photo_only. The truck is safely parked, isolated and chocked; inspections are from a safe position with the mechanical body prop engaged where required.",
+      "seconds": 5.302,
+      "photos": [],
+      "reply": "Thank you, Batch photo_only—I’ll guide you through the eight-item U-type dump truck checklist. Please upload up to five photos, starting with cabin safety equipment and a close-up of the extinguisher gauge and expiry label.",
+      "quickReplies": [],
+      "checklist": {
+        "kind": "overview",
+        "items": [
+          {
+            "id": "ITEM-1",
+            "name": "Cabin & safety equipment",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-2",
+            "name": "Brakes & air system",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-3",
+            "name": "Tyres & wheel nuts",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-4",
+            "name": "Dump body",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-5",
+            "name": "Hydraulic cylinder",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-6",
+            "name": "Body safety prop",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-7",
+            "name": "Tailgate & latch",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-8",
+            "name": "Lights & reflectors",
+            "photo_required": true,
+            "state": "pending"
+          }
+        ]
+      },
+      "findings": {},
+      "status": "berjalan"
+    },
+    {
+      "text": "",
+      "seconds": 19.21,
+      "photos": [
+        {
+          "source": "Normal/07-Pintu-Dump.jpg",
+          "bytes": 217073,
+          "sha256": "2e8a9d6ffecf6a23bc19a19db97bb8d5be02455091f36887a6713f7bfa091f41",
+          "fileId": "FILE-ab47169a-adbb-42e9-89a3-e228c615401e"
+        },
+        {
+          "source": "Normal/03-Ban-dan-Roda.jpg",
+          "bytes": 261149,
+          "sha256": "d8fb3df3579907e6bd84db792910ffe089002ababaffeb7fa6d562fa90fbbe90",
+          "fileId": "FILE-31bd2961-9077-464e-8387-4d18e4fb4421"
+        },
+        {
+          "source": "Normal/06-Safety-Bak.jpg",
+          "bytes": 211431,
+          "sha256": "c88fb85616172bcb9b569a5fecb10a810416480ef6cd6f0ceef6bb8e03fbfa10",
+          "fileId": "FILE-6fb0375d-c883-4fbe-a7e2-291156fba223"
+        },
+        {
+          "source": "Normal/04-Bak-Dump.jpg",
+          "bytes": 175255,
+          "sha256": "29d7094ce5ecaa25d6901f1363ca41a5a9288a569fc966b4d795ccf57da95205",
+          "fileId": "FILE-145be7ff-d676-4436-87ed-2d52adcb8a27"
+        },
+        {
+          "source": "Normal/05-Silinder-Hidraulik.jpg",
+          "bytes": 167184,
+          "sha256": "1f47f937ed1022a3166ceb16e75fe5ee4beeefc926cb138cab4ef5b68949c78b",
+          "fileId": "FILE-681f5559-a87d-4b21-a57b-41d247de8565"
+        }
+      ],
+      "reply": "Batch photo_only, I reviewed all five photos and recorded the dump body, hydraulic cylinder and safety prop as good within the visible areas. Tyre coverage and secure tailgate locking still need confirmation. Please upload cabin safety equipment photos, including the extinguisher gauge and expiry label; you can send up to five photos.",
+      "quickReplies": [],
+      "checklist": {
+        "kind": "progress",
+        "items": [
+          {
+            "id": "ITEM-1",
+            "name": "Cabin & safety equipment",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-2",
+            "name": "Brakes & air system",
+            "photo_required": true,
+            "state": "pending"
+          },
+          {
+            "id": "ITEM-3",
+            "name": "Tyres & wheel nuts",
+            "photo_required": true,
+            "state": "photo_received"
+          },
+          {
+            "id": "ITEM-4",
+            "name": "Dump body",
+            "photo_required": true,
+            "state": "recorded",
+            "status": "baik",
+            "stop": false
+          },
+          {
+            "id": "ITEM-5",
+            "name": "Hydraulic cylinder",
+            "photo_required": true,
+            "state": "recorded",
+            "status": "baik",
+            "stop": false
+          },
+          {
+            "id": "ITEM-6",
+            "name": "Body safety prop",
+            "photo_required": true,
+            "state": "recorded",
+            "status": "baik",
+            "stop": false
+          },
+          {
+            "id": "ITEM-7",
+            "name": "Tailgate & latch",
+            "photo_required": true,
+            "state": "photo_received"
+          },
+          {
+            "id": "ITEM-8",
+            "name": "Lights & reflectors",
+            "photo_required": true,
+            "state": "pending"
+          }
+        ]
+      },
+      "findings": {
+        "ITEM-4": {
+          "status": "baik",
+          "stop": false,
+          "catatan": "Photos show body floor, sidewalls, underside stiffeners and visible mounting areas with surface rust, dirt and wear; no obvious structural crack, major deformation or displaced mounting visible in these views. Assessment limited to visible areas.",
+          "bukti_ids": [
+            "FILE-145be7ff-d676-4436-87ed-2d52adcb8a27",
+            "FILE-6fb0375d-c883-4fbe-a7e2-291156fba223",
+            "FILE-681f5559-a87d-4b21-a57b-41d247de8565"
+          ],
+          "alasan": null,
+          "dicatat_at": "2026-11-07T08:34:19.759Z",
+          "ditangani": false
+        },
+        "ITEM-5": {
+          "status": "baik",
+          "stop": false,
+          "catatan": "Photo shows hydraulic cylinder, exposed rod, hose connections and mounting bolts; no obvious active leakage or hose damage in the photographed area. Visual assessment only; no operating test reported.",
+          "bukti_ids": [
+            "FILE-681f5559-a87d-4b21-a57b-41d247de8565"
+          ],
+          "alasan": null,
+          "dicatat_at": "2026-11-07T08:34:19.761Z",
+          "ditangani": false
+        },
+        "ITEM-6": {
+          "status": "baik",
+          "stop": false,
+          "catatan": "Photo shows mechanical safety prop contacting the raised body's upper support, with retaining pin, clip and bolted base present; no obvious break or bending. Inspector reports mechanical prop engaged where required and inspection from a safe position with truck isolated and chocked.",
+          "bukti_ids": [
+            "FILE-6fb0375d-c883-4fbe-a7e2-291156fba223"
+          ],
+          "alasan": null,
+          "dicatat_at": "2026-11-07T08:34:19.763Z",
+          "ditangani": false
+        }
+      },
+      "photoMatches": {
+        "FILE-ab47169a-adbb-42e9-89a3-e228c615401e": {
+          "item_ids": [
+            "ITEM-7"
+          ],
+          "usable": true
+        },
+        "FILE-31bd2961-9077-464e-8387-4d18e4fb4421": {
+          "item_ids": [
+            "ITEM-3"
+          ],
+          "usable": true
+        },
+        "FILE-6fb0375d-c883-4fbe-a7e2-291156fba223": {
+          "item_ids": [
+            "ITEM-6",
+            "ITEM-4"
+          ],
+          "usable": true
+        },
+        "FILE-145be7ff-d676-4436-87ed-2d52adcb8a27": {
+          "item_ids": [
+            "ITEM-4"
+          ],
+          "usable": true
+        },
+        "FILE-681f5559-a87d-4b21-a57b-41d247de8565": {
+          "item_ids": [
+            "ITEM-5",
+            "ITEM-4"
+          ],
+          "usable": true
+        }
+      },
+      "status": "berjalan"
+    }
+  ],
+  "passed": true
+}

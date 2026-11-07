@@ -1,0 +1,20 @@
+{
+  "reportId": "LI-0431d130-2f86-4fc7-b4cc-f870be6d79d2",
+  "checklistBeforeUnit": true,
+  "checklistItems": 8,
+  "multipleGallery": true,
+  "cameraAvailable": true,
+  "addRemoveAndLimit": true,
+  "photoSizes": [
+    155468,
+    201372,
+    162330,
+    196381,
+    242125
+  ],
+  "findingsRecorded": 5,
+  "remaining": 3,
+  "survivedReload": true,
+  "errors": [],
+  "pendingItemsFirst": true
+}

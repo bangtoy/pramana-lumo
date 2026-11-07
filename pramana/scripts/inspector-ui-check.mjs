@@ -12,7 +12,7 @@ try {
   const id = await page.evaluate(() => localStorage.getItem('pramana.inspection-draft'));
   assert.equal(await composer.evaluate(el => getComputedStyle(el).fontSize), '16px');
   assert.equal(await page.getByLabel('Take an inspection photo').getAttribute('capture'), 'environment');
-  assert.equal(await page.getByLabel('Attach an image').getAttribute('capture'), null);
+  assert.equal(await page.getByLabel('Attach inspection photos').getAttribute('capture'), null);
   await page.screenshot({ path: '../docs/verification/screenshots/inspector-opening-390.png' });
   async function send(text) {
     await composer.fill(text);
@@ -26,9 +26,9 @@ try {
   await page.screenshot({ path: '../docs/verification/screenshots/inspector-active-390.png' });
   await page.getByRole('button', { name: 'Vehicle model' }).click(); assert.equal(await page.locator('.truck-svg').count(), 0);
   await page.getByRole('button', { name: 'Vehicle model' }).click();
-  await page.getByLabel(process.env.PHOTO_SOURCE === 'gallery' ? 'Attach an image' : 'Take an inspection photo').setInputFiles('public/demo/apar-label.jpg');
-  await page.getByText('Ready to send', { exact: true }).waitFor();
-  const previewText = await page.getByRole('img', { name: 'Preview of apar-label.jpg', exact: true }).locator('..').locator('..').innerText();
+  await page.getByLabel(process.env.PHOTO_SOURCE === 'gallery' ? 'Attach inspection photos' : 'Take an inspection photo').setInputFiles('public/demo/apar-label.jpg');
+  await page.getByText(/1\/5 photos ready ·/).waitFor();
+  const previewText = await page.getByText(/1\/5 photos ready ·/).innerText();
   await page.screenshot({ path: '../docs/verification/screenshots/inspector-photo-390.png' });
   await send('Record cabin safety as cannot inspect, STOP pending safe reinspection: access and functional safety checks are unavailable. This photo only documents the extinguisher label, not a complete cabin inspection.');
   const report = await (await fetch(`${base}/api/laporan/${id}`)).json(); assert.ok(report.hasil['ITEM-1']);

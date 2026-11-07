@@ -86,6 +86,11 @@ export const ChatMessage = z.object({
   quick_replies: z.array(z.string()).optional(),
   /** Complete active plan catalog for the searchable inspector picker. */
   plan_choices: z.array(z.object({ id: z.string(), title: z.string(), vehicle: z.string() })).optional(),
+  /** Server-derived checklist shown after plan selection and photo-batch review. */
+  inspection_checklist: z.object({
+    kind: z.enum(['overview', 'progress']),
+    items: z.array(z.object({ id: z.string(), name: z.string(), photo_required: z.boolean(), state: z.enum(['pending', 'photo_received', 'recorded']), status: StatusItem.optional(), stop: z.boolean().optional() })),
+  }).optional(),
   evidence_request: z.string().nullable().optional(),
   mood: z.enum(["netral", "serius"]).optional(),
   /** Report / work-order IDs an answer is based on (Tanya Lumo on the dashboard). */
@@ -112,6 +117,8 @@ export const LaporanInspeksi = z.object({
   hasil: z.record(z.string(), HasilItem),
   messages: z.array(ChatMessage),
   agent_history: z.array(z.unknown()),
+  /** Visual review links; an attached image is not a completed finding by itself. */
+  photo_matches: z.record(z.string(), z.object({ item_ids: z.array(z.string()), usable: z.boolean() })).optional(),
   ringkasan: z.string().nullable().optional(),
   /** Tanya Pramana threads from the dashboard, per item. */
   tanya: z.record(z.string(), z.array(ChatMessage)).optional(),
