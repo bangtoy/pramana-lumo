@@ -332,7 +332,7 @@ Baca dulu: `docs/tickets/README.md` (Definition of Done), `docs/PRD.md` §4.1–
 - `.dockerignore`: `node_modules`, `.next`, `data`.
 
 **Selesai bila**
-- [ ] `docker compose up -d --build` → `localhost:3000` jalan dengan data seed; URL tunnel ada di `docker compose logs tunnel` dan terbuka di HP.
+- [x] `docker compose up -d --build` → app jalan dengan data seed (port 3002 dipakai karena 3000 sudah terpakai); URL tunnel ada di log. Pengguna mengonfirmasi halaman dan lampiran galeri berhasil di HP fisik.
 
 **Prompt /goal**
 ```

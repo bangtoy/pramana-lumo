@@ -7,7 +7,7 @@ COPY . .
 RUN npm run build
 ENV NODE_ENV=production DATA_DIR=/data OPENAI_AGENTS_PYTHON=/usr/bin/python3 \
     OPENAI_BASE_URL=http://host.docker.internal:20128/v1
-RUN mkdir -p /data && chown node:node /data
+RUN mkdir -p /data /app/.next/cache && chown -R node:node /data /app/.next/cache
 USER node
 EXPOSE 3000
 CMD ["sh", "-c", "npm run seed:if-empty && npm start"]
