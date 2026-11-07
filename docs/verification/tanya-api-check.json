@@ -1,0 +1,92 @@
+[
+  {
+    "mode": "offline",
+    "id": "TL-7b29cb6c-a680-4c66-9ced-aaf88f84fa1a",
+    "elapsedMs": 15906,
+    "suggestions": {
+      "rekomendasi": [
+        "Create a work order for DT-07: STOP today with no work order yet.",
+        "Follow up on 3 overdue work orders (DT-08, DT-07, DT-02).",
+        "Remind the inspectors for DT-05, DT-08: no P2H submitted today.",
+        "Investigate recurring tyres & wheel nuts findings on DT-07 (7× in 14 days)."
+      ]
+    },
+    "lastMessage": {
+      "id": "MSG-203bea9c-273d-4e2d-bde6-3a724e09c75b",
+      "role": "pramana",
+      "text": "Today (2026-11-07, WIB), 6 of 8 units have a submitted P2H: 4 roadworthy and 2 STOP. 2 units await inspection. There are 6 open work orders, including 3 overdue.",
+      "sumber": [
+        "LI-RW-42",
+        "LI-RW-45"
+      ],
+      "rekomendasi": [
+        "Create a work order for DT-07: STOP today with no work order yet.",
+        "Follow up on 3 overdue work orders (DT-08, DT-07, DT-02).",
+        "Remind the inspectors for DT-05, DT-08: no P2H submitted today.",
+        "Investigate recurring tyres & wheel nuts findings on DT-07 (7× in 14 days)."
+      ],
+      "fallback": true,
+      "created_at": "2026-11-07T05:32:59.535Z"
+    },
+    "historyOmitted": true,
+    "invalidInputRejected": true,
+    "missing404": true,
+    "sourcesResolve": true,
+    "readOnly": true,
+    "concurrency": [
+      200,
+      409
+    ],
+    "restartPersists": true
+  },
+  {
+    "mode": "online",
+    "id": "TL-c2591e52-a8de-4c8b-b169-7f09f8d18944",
+    "elapsedMs": 9798,
+    "suggestions": {
+      "rekomendasi": [
+        "Follow up on 3 overdue work orders (DT-08, DT-07, DT-02).",
+        "Remind the inspectors for DT-05, DT-08: no P2H submitted today.",
+        "Investigate recurring tyres and wheel nuts findings on DT-07 (7× in 14 days)."
+      ]
+    },
+    "lastMessage": {
+      "id": "MSG-0e405695-6171-4d6b-9927-709dfb459428",
+      "role": "pramana",
+      "text": "There are 10 open work orders, including 3 overdue.\nOverdue: WO-RW-07 — DT-08, air brake leak, due Nov 5, Hendra; WO-RW-08 — DT-07, hydraulic coupling seal, due Nov 6, Rahmat; WO-RW-06 — DT-02, rear right indicator, due Nov 4, unassigned.\nDue today (Nov 7), all high priority and unassigned on DT-07: WO-52cddfb6-d5c2-41a1-824b-6ecff89ae03d — left cylinder hose coupling leak; WO-08334739-a07a-4b06-810f-de6248d4f1f9 — left rear outer tyre; WO-544919ca-5847-4de4-a661-004a55523c34 — left brake light; WO-9b84ad45-b8b7-49ea-9303-101ea66dfe32 — left rear tyre.\nAlso due today and high priority: WO-RW-10 — DT-03, air brake leak, Hendra; WO-RW-09 — DT-05, damaged left rear tyre, Joko.\nDue Nov 8: WO-RW-05 — DT-07, hydraulic coupling seal, medium priority, Rahmat.",
+      "sumber": [
+        "WO-RW-07",
+        "LI-RW-26",
+        "WO-RW-08",
+        "LI-RW-32",
+        "WO-RW-06",
+        "LI-RW-19",
+        "WO-52cddfb6-d5c2-41a1-824b-6ecff89ae03d",
+        "LI-RW-45",
+        "WO-08334739-a07a-4b06-810f-de6248d4f1f9",
+        "WO-544919ca-5847-4de4-a661-004a55523c34",
+        "LI-2026-10-29-DT07",
+        "WO-9b84ad45-b8b7-49ea-9303-101ea66dfe32",
+        "WO-RW-10",
+        "LI-RW-42",
+        "WO-RW-09",
+        "LI-RW-38",
+        "WO-RW-05",
+        "LI-RW-16"
+      ],
+      "rekomendasi": [
+        "On the Work Orders page, prioritize overdue repairs and assign owners to the five unassigned orders.",
+        "Review the DT-07 tyre and coupling orders for potentially overlapping scope before scheduling repairs."
+      ],
+      "fallback": false,
+      "created_at": "2026-11-07T05:33:22.439Z"
+    },
+    "historyOmitted": true,
+    "invalidInputRejected": true,
+    "missing404": true,
+    "sourcesResolve": true,
+    "readOnly": true,
+    "concurrency": null,
+    "restartPersists": false
+  }
+]
