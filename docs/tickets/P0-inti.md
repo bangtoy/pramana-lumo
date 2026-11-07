@@ -101,8 +101,8 @@ Baca dulu: `docs/tickets/README.md` (Definition of Done), `docs/PRD.md` §4.1–
 **Desain:** §4 tabel komponen, §6 Lumo.
 
 **Selesai bila**
-- [ ] Halaman uji sementara menampilkan semua komponen; tidak ada border/latar putih di sekitar Lumo.
-- [ ] `rg` §3.4 bersih.
+- [x] Halaman uji sementara menampilkan semua komponen; tidak ada border/latar putih di sekitar Lumo.
+- [x] `rg` §3.4 bersih.
 
 **Prompt /goal**
 ```
