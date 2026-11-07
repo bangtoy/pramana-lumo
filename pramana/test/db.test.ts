@@ -30,7 +30,7 @@ test("SQLite seeds once, persists validated documents, and recovers interrupted 
   assert.equal(child.status,0,child.stderr);
   assert.deepEqual(JSON.parse(child.stdout.trim()),{plans:1,status:"gagal",messages:1});
   assert.equal(db.listModels().length,3);
-  assert.equal(db.listLaporan("terkirim").length,1);
+  assert.equal(db.listLaporan("terkirim").length,47);
   const temporary={...plan,id:db.newId("RI")};
   db.saveRencana(temporary);db.deleteRencana(temporary.id);
   assert.equal(db.getRencana(temporary.id),null);

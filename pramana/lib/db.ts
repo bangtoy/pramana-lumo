@@ -4,6 +4,7 @@ import { randomUUID } from "node:crypto";
 import { z } from "zod";
 import { DATA_DIR, DB_PATH } from "./paths.ts";
 import { seedDatabase } from "./seed.ts";
+import { seedRiwayat } from './seed-riwayat.ts';
 import { RencanaInspeksi, LaporanInspeksi, ModelKendaraan, WorkOrder, Percakapan, ChatMessage } from "./contracts.ts";
 
 export const now = () => new Date().toISOString();
@@ -24,6 +25,7 @@ export function database(): DatabaseSync {
     CREATE INDEX IF NOT EXISTS work_order_laporan ON work_order(laporan_id);`);
   try {
     if (!(db.prepare("SELECT 1 FROM rencana LIMIT 1").get())) seedDatabase(db);
+    seedRiwayat(db);
     for (const row of db.prepare("SELECT id,data FROM model").all()) {
       const model = ModelKendaraan.parse(JSON.parse(String(row.data)));
       if (model.status === "proses") {
