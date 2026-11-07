@@ -10,7 +10,7 @@ import { invalidateWorkOrderQueries } from '@/lib/work-order-client';
 import { ErrorState, Legend, ResultPills, Spinner, StatusPill, StopPill } from "@/components/ui";
 import { VehicleModel } from "@/components/vehicle-model/VehicleModel";
 import { FindingActions } from './FindingActions';
-import { Download, Wrench } from 'lucide-react';
+import { ChevronDown, Download, Wrench } from 'lucide-react';
 function EvidencePhoto({ id }: { id: string }) {
   const meta = useQuery({ queryKey: ['file', id], queryFn: () => api<{ caption: string | null; name: string }>(`/api/files/${id}/meta`) });
   const caption = meta.data?.caption || meta.data?.name || 'Inspection photo';
@@ -40,7 +40,14 @@ export function LaporanDetail({ id, stacked = false }: { id: string; stacked?: b
       <section className="min-w-0"><div className="panel p-3"><VehicleModel modelId={report.rencana_snapshot?.model_id || null} statuses={statuses} focus={items.find(i => i.id === selected)?.comp_id} onPick={pick} className={stacked ? 'h-56' : 'h-[min(60vh,580px)]'} tiltControl={!stacked}/></div><div className="mt-3"><Legend/></div></section>
       <section className="space-y-3 min-w-0" aria-label="Inspection findings"><h2 className="t-heading">Findings by item</h2>{findings.map(item => {
         const finding = report.hasil[item.id]; if (!finding) return null;
-        return <article id={`finding-${item.id}`} key={item.id} className={`panel p-4 space-y-3 scroll-mt-4 ${selected === item.id ? '!border-[var(--color-primary)]' : ''}`}><button className="w-full text-left flex items-start justify-between gap-2" onClick={() => setSelected(selected === item.id ? null : item.id)}><h3 className="t-heading">{item.nama}</h3>{finding.stop && <StopPill/>}</button><StatusPill status={finding.status}/><p className="t-body">{finding.catatan}</p>{finding.alasan && <p className="t-body-sm muted">Reason: {finding.alasan}</p>}<div className="grid grid-cols-2 gap-2">{finding.bukti_ids.map(fileId => <EvidencePhoto id={fileId} key={fileId}/>)}</div>{finding.ditangani && <span className="pill pill-baik t-label">Handled</span>}{!stacked && <FindingActions report={report} itemId={item.id} order={orders.data?.find(w => w.item_id === item.id)}/>}</article>;
+        const expanded = selected === item.id;
+        return <article id={`finding-${item.id}`} key={item.id} className={`panel p-4 scroll-mt-4 ${expanded ? '!border-[var(--color-primary)]' : ''}`}>
+          <button type="button" className="w-full text-left flex items-start justify-between gap-3" aria-expanded={expanded} aria-controls={`finding-detail-${item.id}`} onClick={() => setSelected(expanded ? null : item.id)}>
+            <span className="min-w-0 flex-1"><span className="t-heading block">{item.nama}</span><span className="mt-2 flex flex-wrap items-center gap-2"><StatusPill status={finding.status}/>{finding.stop && <StopPill/>}{finding.ditangani && <span className="pill pill-baik t-label">Handled</span>}</span></span>
+            <ChevronDown size={18} aria-hidden="true" className={`shrink-0 mt-1 muted transition-transform ${expanded ? 'rotate-180' : ''}`}/>
+          </button>
+          <div id={`finding-detail-${item.id}`} hidden={!expanded} className="space-y-3 border-t border-[var(--color-line)] mt-3 pt-3">{expanded && <><p className="t-body">{finding.catatan}</p>{finding.alasan && <p className="t-body-sm muted">Reason: {finding.alasan}</p>}<div className="grid grid-cols-2 gap-2">{finding.bukti_ids.map(fileId => <EvidencePhoto id={fileId} key={fileId}/>)}</div>{!stacked && <FindingActions report={report} itemId={item.id} order={orders.data?.find(w => w.item_id === item.id)}/>}</>}</div>
+        </article>;
       })}</section>
     </div>
   </div>;

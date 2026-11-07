@@ -1,11 +1,12 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight, ClipboardCheck, LayoutDashboard } from "lucide-react";
 
 export default function Home() {
   return <main className="min-h-dvh bg-[var(--color-rail)] px-6 py-10 flex items-center justify-center">
     <div className="w-full max-w-2xl">
       <header className="mb-8 flex items-center gap-3">
-        <span aria-hidden="true" className="t-body-sm font-medium grid place-items-center h-7 w-7 rounded-[7px] bg-[image:var(--gradient-primary)] text-[var(--color-on-primary)] shadow-[var(--shadow-primary-rest)]">P</span>
+        <Image src="/icon.svg" alt="" width={28} height={28} className="rounded-[7px] shadow-[var(--shadow-primary-rest)]" />
         <h1 className="t-title">Pramana</h1>
       </header>
       <p className="t-body muted mb-6 max-w-prose">Complete inspections, backed by evidence. Choose your role to get started with Lumo.</p>

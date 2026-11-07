@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -32,7 +33,7 @@ export default function SupervisorLayout({ children }: { children: React.ReactNo
   const labelClass = collapsed ? "hidden" : "max-md:hidden";
   return <div className="flex h-dvh overflow-hidden">
     <aside aria-label="Supervisor navigation" data-collapsed={collapsed} style={{ width: collapsed ? 64 : 240 }} className={`shrink-0 max-md:!w-[64px] bg-[var(--color-rail)] border-r border-[var(--color-line)] py-5 flex flex-col gap-6 ${collapsed ? "px-2" : "px-4 max-md:px-2"}`}>
-      <Link href="/" className="flex items-center gap-2.5" aria-label="Pramana — choose role"><span className="t-body-sm font-medium grid place-items-center h-[28px] w-[28px] shrink-0 rounded-[7px] bg-[image:var(--gradient-primary)] text-[var(--color-on-primary)] shadow-[var(--shadow-primary-rest)]">P</span><span className={labelClass}><span className="t-heading block">Pramana</span><span className="t-label muted font-normal block">Site Tanjung Enim</span></span></Link>
+      <Link href="/" className="flex items-center gap-2.5" aria-label="Pramana — choose role"><Image src="/icon.svg" alt="" width={28} height={28} className="shrink-0 rounded-[7px] shadow-[var(--shadow-primary-rest)]" /><span className={labelClass}><span className="t-heading block">Pramana</span><span className="t-label muted font-normal block">Site Tanjung Enim</span></span></Link>
       <nav aria-label="Workspace" className={`p-[3px] rounded-[10px] bg-[var(--color-seg-rail)] flex ${collapsed ? "flex-col" : "max-md:flex-col"}`}>
         {[{ href: "/supervisor/laporan", label: "Dashboard", active: !agent, Icon: ChartNoAxesCombined }, { href: "/supervisor/agent", label: "Agent", active: agent, Icon: Sparkles }].map(({ href, label, active, Icon }) => <Link key={label} href={href} aria-label={label} aria-current={active ? "page" : undefined} className={`t-body flex-1 flex justify-center items-center gap-2 rounded-[7px] px-2 py-1.5 ${active ? "bg-[var(--color-surface)] shadow-[var(--shadow-active)]" : "text-[var(--color-text-secondary)]"}`}><Icon size={16} strokeWidth={1.5} aria-hidden="true" className={collapsed ? "" : "md:hidden"}/><span className={labelClass}>{label}</span></Link>)}
       </nav>

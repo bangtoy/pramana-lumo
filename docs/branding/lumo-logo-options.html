@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lumo — logo concepts v2</title>
+<style>
+  :root { font-family: Inter, Arial, sans-serif; color: #172335; background: #f3f6fa; }
+  * { box-sizing: border-box; }
+  body { max-width: 1160px; margin: auto; padding: 42px 22px 72px; }
+  .eyebrow { color: #367fc2; font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+  h1 { font-size: clamp(28px, 4vw, 42px); letter-spacing: -.04em; margin: 10px 0; }
+  .intro { max-width: 700px; color: #66758a; line-height: 1.55; margin: 0 0 32px; }
+  h2 { font-size: 15px; margin: 32px 0 14px; text-transform: uppercase; letter-spacing: .1em; color: #738198; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 18px; }
+  article { overflow: hidden; border: 1px solid #dde5ef; border-radius: 18px; background: white; box-shadow: 0 8px 24px #203f6610; }
+  .stage { display: grid; grid-template-columns: 1fr 1fr; height: 178px; }
+  .light, .dark { display: flex; align-items: center; justify-content: center; gap: 18px; }
+  .light { color: #162c48; background: #eaf2fb; }
+  .dark { color: white; background: #17283f; }
+  .stage svg.main { width: 88px; height: 88px; }
+  .stage svg.mini { width: 28px; height: 28px; }
+  .copy { padding: 18px 20px 21px; }
+  .copy strong { font-size: 17px; letter-spacing: -.02em; }
+  .copy span { font-size: 12px; color: #3687c7; margin-right: 9px; font-weight: 700; }
+  .copy p { color: #66758a; line-height: 1.45; margin: 7px 0 0; font-size: 14px; }
+  .note { font-size: 13px; color: #78869a; margin-top: 25px; }
+</style>
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+    <symbol id="bot-lens" viewBox="0 0 100 100">
+      <path d="M50 16C29 16 17 30 17 51s12 35 33 35 33-14 33-35S71 16 50 16Z" fill="none" stroke="currentColor" stroke-width="8"/>
+      <path d="M29 26c10-10 32-12 44 0" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+      <circle cx="39" cy="52" r="5.5" fill="currentColor"/><circle cx="61" cy="52" r="5.5" fill="currentColor"/>
+      <path d="M71 76l12 12" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="visor" viewBox="0 0 100 100">
+      <path d="M22 58V45c0-17 12-28 28-28s28 11 28 28v13c0 16-12 27-28 27S22 74 22 58Z" fill="none" stroke="currentColor" stroke-width="8"/>
+      <path d="M22 42h56" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+      <circle cx="39" cy="59" r="6" fill="currentColor"/><circle cx="61" cy="59" r="6" fill="currentColor"/>
+      <path d="M43 16l7-7 7 7" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="scout" viewBox="0 0 100 100">
+      <path d="M16 44c0-20 14-31 34-31s34 11 34 31v16c0 18-14 29-34 29S16 78 16 60V44Z" fill="none" stroke="currentColor" stroke-width="8"/>
+      <path d="M20 37c17-8 43-8 60 0" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+      <path d="M31 57h12m14 0h12" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+      <circle cx="50" cy="72" r="3.5" fill="currentColor"/>
+    </symbol>
+    <symbol id="dot-lens" viewBox="0 0 100 100">
+      <g fill="currentColor">
+        <circle cx="50" cy="17" r="7"/><circle cx="69" cy="24" r="7"/><circle cx="79" cy="43" r="7"/>
+        <circle cx="72" cy="62" r="7"/><circle cx="53" cy="73" r="7"/><circle cx="34" cy="66" r="7"/>
+        <circle cx="22" cy="48" r="7"/><circle cx="30" cy="28" r="7"/>
+        <circle cx="80" cy="79" r="6"/><circle cx="91" cy="91" r="4.5"/>
+      </g>
+    </symbol>
+    <symbol id="dot-p" viewBox="0 0 100 100">
+      <g fill="currentColor">
+        <circle cx="26" cy="18" r="7"/><circle cx="26" cy="38" r="7"/><circle cx="26" cy="58" r="7"/><circle cx="26" cy="78" r="7"/>
+        <circle cx="47" cy="18" r="7"/><circle cx="68" cy="23" r="7"/><circle cx="78" cy="41" r="7"/>
+        <circle cx="69" cy="59" r="7"/><circle cx="48" cy="63" r="7"/>
+      </g>
+    </symbol>
+    <symbol id="dot-scan" viewBox="0 0 100 100">
+      <g fill="currentColor">
+        <circle cx="19" cy="23" r="5"/><circle cx="39" cy="18" r="6"/><circle cx="61" cy="18" r="6"/><circle cx="81" cy="23" r="5"/>
+        <circle cx="17" cy="47" r="6"/><circle cx="39" cy="46" r="9"/><circle cx="62" cy="46" r="9"/><circle cx="83" cy="47" r="6"/>
+        <circle cx="19" cy="72" r="5"/><circle cx="39" cy="76" r="6"/><circle cx="61" cy="76" r="6"/><circle cx="81" cy="72" r="5"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+<div class="eyebrow">Logo study / second round</div>
+<h1>Lumo, simplified.</h1>
+<p class="intro">Six original symbols exploring a minimal robot and a dot based mark. Each is shown in light and dark, at full size and at 28 px. These are previews only; the app icon and in-app P are unchanged.</p>
+<h2>Robot direction</h2>
+<div class="grid">
+  <article><div class="stage"><div class="light"><svg class="main"><use href="#bot-lens"/></svg><svg class="mini"><use href="#bot-lens"/></svg></div><div class="dark"><svg class="main"><use href="#bot-lens"/></svg><svg class="mini"><use href="#bot-lens"/></svg></div></div><div class="copy"><strong><span>01</span>Lens Bot</strong><p>Wajah robot bulat dengan gagang kaca pembesar. Paling dekat dengan karakter Lumo.</p></div></article>
+  <article><div class="stage"><div class="light"><svg class="main"><use href="#visor"/></svg><svg class="mini"><use href="#visor"/></svg></div><div class="dark"><svg class="main"><use href="#visor"/></svg><svg class="mini"><use href="#visor"/></svg></div></div><div class="copy"><strong><span>02</span>Visor Bot</strong><p>Kepala robot dan dua mata; garis atas memberi kesan topi detektif tanpa detail ilustrasi.</p></div></article>
+  <article><div class="stage"><div class="light"><svg class="main"><use href="#scout"/></svg><svg class="mini"><use href="#scout"/></svg></div><div class="dark"><svg class="main"><use href="#scout"/></svg><svg class="mini"><use href="#scout"/></svg></div></div><div class="copy"><strong><span>03</span>Scout Bot</strong><p>Robot paling tegas dan simetris; cocok bila identitas aplikasi ingin terasa lebih teknis.</p></div></article>
+</div>
+<h2>Dot direction</h2>
+<div class="grid">
+  <article><div class="stage"><div class="light"><svg class="main"><use href="#dot-lens"/></svg><svg class="mini"><use href="#dot-lens"/></svg></div><div class="dark"><svg class="main"><use href="#dot-lens"/></svg><svg class="mini"><use href="#dot-lens"/></svg></div></div><div class="copy"><strong><span>04</span>Dot Lens</strong><p>Rangkaian titik membentuk kaca pembesar; abstrak, tetapi masih mengacu pada Lumo.</p></div></article>
+  <article><div class="stage"><div class="light"><svg class="main"><use href="#dot-p"/></svg><svg class="mini"><use href="#dot-p"/></svg></div><div class="dark"><svg class="main"><use href="#dot-p"/></svg><svg class="mini"><use href="#dot-p"/></svg></div></div><div class="copy"><strong><span>05</span>Dot P</strong><p>Huruf P dari titik untuk menjaga hubungan dengan ikon aplikasi sebelumnya.</p></div></article>
+  <article><div class="stage"><div class="light"><svg class="main"><use href="#dot-scan"/></svg><svg class="mini"><use href="#dot-scan"/></svg></div><div class="dark"><svg class="main"><use href="#dot-scan"/></svg><svg class="mini"><use href="#dot-scan"/></svg></div></div><div class="copy"><strong><span>06</span>Dot Scan</strong><p>Medan titik dengan dua titik pusat sebagai mata; rujukan Lumo paling halus.</p></div></article>
+</div>
+<p class="note">All six marks are original sketches. Select a direction for refinement before it is applied to the app.</p>
+</html>

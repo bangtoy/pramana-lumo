@@ -7,7 +7,7 @@ const geist = Geist({ variable: "--font-geist", subsets: ["latin"] });
 const mono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 export const metadata: Metadata = {
   icons: { icon: "/icon.svg" },
-  title: "Pramana · Evidence-led P2H",
+  title: "Proactive Agentic Inspection",
   description: "Build inspection plans and complete P2H with Lumo.",
 };
 export const viewport: Viewport = { themeColor: "#FFFFFF" };
