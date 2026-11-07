@@ -38,6 +38,7 @@ function PlanWorkspace({ id, chatMode }: { id: string; chatMode: string | null }
   const models = useQuery({ queryKey: ["models"], queryFn: () => api<ModelKendaraan[]>("/api/models") });
   const modelQuery = useQuery({ queryKey: ["model", plan?.model_id], queryFn: () => api<ModelKendaraan>(`/api/models/${encodeURIComponent(plan!.model_id!)}`), enabled: !!plan?.model_id, refetchInterval: query => query.state.data?.status === "proses" ? 2000 : false });
   const model = modelQuery.data;
+  useEffect(() => { if (model?.status === "siap" || model?.status === "gagal") void cache.invalidateQueries({ queryKey: ["rencana", id] }); }, [model?.id, model?.status, cache, id]);
   const [selected, setSelected] = useState<string | null>(null), [hovered, setHovered] = useState<string | null>(null);
   const [tab, setTab] = useState("items"), [menu, setMenu] = useState(false), [picker, setPicker] = useState(false);
   const [pinPreference, setPinPreference] = useState(false), [wide, setWide] = useState(false);
@@ -59,6 +60,9 @@ function PlanWorkspace({ id, chatMode }: { id: string; chatMode: string | null }
   const patch = useMutation({ mutationFn: (body: unknown) => postJson<RencanaInspeksi>(`/api/rencana/${encodeURIComponent(id)}`, body, "PATCH"), onSuccess: result => {
     cache.setQueryData<PlanDetail>(["rencana", id], old => ({ ...result, messages: old?.messages || [] })); void cache.invalidateQueries({ queryKey: ["rencana"], exact: true });
   } });
+  const generate = useMutation({ mutationFn: () => postJson<ModelKendaraan>(`/api/rencana/${encodeURIComponent(id)}/model`, {}), onSuccess: result => {
+    cache.setQueryData(["model", result.id], result); void cache.invalidateQueries({ queryKey: ["rencana", id] }); setNotice(null);
+  } });
   const turn = useMutation({ mutationFn: async ({ text, file }: { text: string; file?: File }) => {
     const form = new FormData(); form.set("text", text); if (file) form.set("file", file);
     return postTurn<TurnResponse<RencanaInspeksi>>(`/api/rencana/${encodeURIComponent(id)}/turn`, form, setStatus);
@@ -78,14 +82,14 @@ function PlanWorkspace({ id, chatMode }: { id: string; chatMode: string | null }
       <div className="min-w-0 flex-1"><p className="t-data muted truncate">Inspection plans / {plan.id}</p><h1 className="sr-only">Inspection plan editor</h1><input aria-label="Plan title" className="t-title mt-1 bg-transparent w-full min-w-0 rounded focus:bg-[var(--color-surface-muted)]" key={plan.judul} defaultValue={plan.judul} maxLength={160} disabled={busy} onKeyDown={e => { if (e.key === "Enter") e.currentTarget.blur(); if (e.key === "Escape") { e.currentTarget.value = plan.judul; e.currentTarget.blur(); } }} onBlur={e => { const judul = e.target.value.trim(); if (judul && judul !== plan.judul) patch.mutate({ judul }); else e.target.value = plan.judul; }}/></div>
       <div className="text-right"><p className="t-body-sm muted">{plan.tipe_kendaraan}</p><p className="t-label muted font-normal mt-1">{plan.items.length} items · {patch.isPending ? "Saving…" : turn.isPending ? "Lumo is working…" : "Saved automatically"}</p></div>
     </header>
-    {patch.error && <div className="px-4 pt-2"><ErrorState error={patch.error}/></div>}
+    {(patch.error || generate.error) && <div className="px-4 pt-2"><ErrorState error={patch.error || generate.error!}/></div>}
     {plan.diarsipkan && <div className="p-3 flex gap-3 items-center bg-[var(--color-warning-subtle)]"><p className="t-body">This plan is archived.</p><button className="btn btn-secondary" onClick={() => patch.mutate({ diarsipkan: false })}>Restore plan</button></div>}
     <div className={`flex-1 min-h-0 flex ${pinned ? "flex-row" : "flex-col"}`}>
       <div className="flex-1 min-h-0 min-w-0 overflow-y-auto @container">
         <div className={`grid grid-cols-1 min-h-full ${pinned ? "@2xl:grid-cols-[minmax(0,1.1fr)_minmax(340px,1fr)]" : "@2xl:grid-cols-[minmax(0,1.35fr)_minmax(380px,1fr)]"}`}>
           <section className="p-5 min-w-0" aria-label="Vehicle model">
             <div className="flex flex-wrap gap-2 items-center mb-4"><h2 className="t-label-caps muted mr-auto">Vehicle model</h2>{model && <span className={`pill t-label ${model.status === "siap" ? "pill-baik" : "pill-warning"}`}>{model.status === "siap" ? "Ready" : model.status === "proses" ? "Generating" : "Failed"}</span>}
-              <div className="relative" ref={menuRef}><button className="btn btn-secondary t-body" aria-expanded={menu} disabled={busy} onClick={() => setMenu(!menu)}>Change model<ChevronDown size={14}/></button>{menu && <div className="panel floating pop-in absolute right-0 top-full mt-2 w-56 z-20 p-1"><button className="t-body w-full text-left flex gap-2 items-center p-2 rounded hover:bg-[var(--color-surface-muted)]" onClick={() => { setPicker(true); setMenu(false); }}><Box size={16}/>Use an existing model</button><button className="t-body w-full text-left flex gap-2 items-center p-2 rounded hover:bg-[var(--color-surface-muted)]" onClick={() => { setNotice("Model generation is not connected yet. You can use an existing model now."); setMenu(false); }}><Sparkles size={16}/>Generate a new model</button></div>}</div>
+              <div className="relative" ref={menuRef}><button className="btn btn-secondary t-body" aria-expanded={menu} disabled={busy} onClick={() => setMenu(!menu)}>Change model<ChevronDown size={14}/></button>{menu && <div className="panel floating pop-in absolute right-0 top-full mt-2 w-56 z-20 p-1"><button className="t-body w-full text-left flex gap-2 items-center p-2 rounded hover:bg-[var(--color-surface-muted)]" onClick={() => { setPicker(true); setMenu(false); }}><Box size={16}/>Use an existing model</button><button className="t-body w-full text-left flex gap-2 items-center p-2 rounded hover:bg-[var(--color-surface-muted)]" onClick={() => { generate.mutate(); setMenu(false); }}><Sparkles size={16}/>Generate a new model</button></div>}</div>
             </div>
             {notice && <p role="status" className="t-body-sm muted mb-3">{notice}</p>}
             {picker && <div className="panel p-3 mb-3 space-y-2"><div className="flex justify-between items-center"><h3 className="t-heading">Choose a vehicle model</h3><button className="t-body-sm muted" onClick={() => setPicker(false)}>Cancel</button></div>{models.isLoading && <Spinner/>}{models.error && <ErrorState error={models.error}/>}<div className="grid gap-2">{models.data?.map(m => <button key={m.id} className="btn btn-secondary t-body justify-start !whitespace-normal text-left" disabled={busy} onClick={async () => { try { await patch.mutateAsync({ model_id: m.id }); setPicker(false); setNotice("Model linked. Open an item to map it to a component, or ask Lumo to map the plan."); } catch {} }}><Box size={16} className="shrink-0"/><span>{m.nama}<span className="t-body-sm muted block">{m.komponen.length} components</span></span></button>)}</div></div>}

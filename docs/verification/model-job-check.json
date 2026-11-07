@@ -1,0 +1,325 @@
+{
+  "planId": "RI-48ee9f27-fe3f-491b-93d2-e6ed24cf9081",
+  "modelId": "MDL-e1f1323f-56dd-40f3-9c75-51b92c1a44ae",
+  "status": "siap",
+  "seconds": 145.32,
+  "message": "Model ready. Select an inspection item to highlight its component.",
+  "log": [
+    {
+      "at": "2026-11-07T03:42:51.048Z",
+      "jenis": "fase",
+      "teks": "Queued for model generation"
+    },
+    {
+      "at": "2026-11-07T03:42:51.092Z",
+      "jenis": "fase",
+      "teks": "Building the vehicle from its specification and inspection items"
+    },
+    {
+      "at": "2026-11-07T03:42:55.391Z",
+      "jenis": "fase",
+      "teks": "Reviewing the model and component mapping"
+    },
+    {
+      "at": "2026-11-07T03:42:55.400Z",
+      "jenis": "aksi",
+      "teks": "Running exec_command"
+    },
+    {
+      "at": "2026-11-07T03:42:55.436Z",
+      "jenis": "hasil",
+      "teks": "exec_command finished"
+    },
+    {
+      "at": "2026-11-07T03:42:55.687Z",
+      "jenis": "hasil",
+      "teks": "Preview 1 rendered"
+    },
+    {
+      "at": "2026-11-07T03:42:58.166Z",
+      "jenis": "aksi",
+      "teks": "Running exec_command"
+    },
+    {
+      "at": "2026-11-07T03:42:58.413Z",
+      "jenis": "hasil",
+      "teks": "exec_command finished"
+    },
+    {
+      "at": "2026-11-07T03:43:00.965Z",
+      "jenis": "aksi",
+      "teks": "Running view_image"
+    },
+    {
+      "at": "2026-11-07T03:43:01.055Z",
+      "jenis": "hasil",
+      "teks": "view_image finished"
+    },
+    {
+      "at": "2026-11-07T03:43:04.450Z",
+      "jenis": "aksi",
+      "teks": "Running exec_command"
+    },
+    {
+      "at": "2026-11-07T03:43:05.462Z",
+      "jenis": "hasil",
+      "teks": "exec_command finished"
+    },
+    {
+      "at": "2026-11-07T03:43:05.626Z",
+      "jenis": "hasil",
+      "teks": "Preview 2 rendered"
+    },
+    {
+      "at": "2026-11-07T03:43:08.154Z",
+      "jenis": "aksi",
+      "teks": "Running write_stdin"
+    },
+    {
+      "at": "2026-11-07T03:43:09.162Z",
+      "jenis": "hasil",
+      "teks": "write_stdin finished"
+    },
+    {
+      "at": "2026-11-07T03:43:12.386Z",
+      "jenis": "aksi",
+      "teks": "Running exec_command"
+    },
+    {
+      "at": "2026-11-07T03:43:12.411Z",
+      "jenis": "hasil",
+      "teks": "exec_command finished"
+    },
+    {
+      "at": "2026-11-07T03:43:16.374Z",
+      "jenis": "aksi",
+      "teks": "Running write_stdin"
+    },
+    {
+      "at": "2026-11-07T03:43:17.383Z",
+      "jenis": "hasil",
+      "teks": "write_stdin finished"
+    },
+    {
+      "at": "2026-11-07T03:43:17.559Z",
+      "jenis": "hasil",
+      "teks": "Preview 3 rendered"
+    },
+    {
+      "at": "2026-11-07T03:43:22.681Z",
+      "jenis": "fase",
+      "teks": "Reviewing the model and component mapping"
+    },
+    {
+      "at": "2026-11-07T03:43:22.688Z",
+      "jenis": "aksi",
+      "teks": "Running exec_command"
+    },
+    {
+      "at": "2026-11-07T03:43:22.883Z",
+      "jenis": "hasil",
+      "teks": "exec_command finished"
+    },
+    {
+      "at": "2026-11-07T03:43:27.709Z",
+      "jenis": "aksi",
+      "teks": "Running view_image"
+    },
+    {
+      "at": "2026-11-07T03:43:27.829Z",
+      "jenis": "hasil",
+      "teks": "view_image finished"
+    },
+    {
+      "at": "2026-11-07T03:43:31.745Z",
+      "jenis": "aksi",
+      "teks": "Running write_stdin"
+    },
+    {
+      "at": "2026-11-07T03:43:32.776Z",
+      "jenis": "hasil",
+      "teks": "write_stdin finished"
+    },
+    {
+      "at": "2026-11-07T03:43:36.748Z",
+      "jenis": "aksi",
+      "teks": "Running exec_command"
+    },
+    {
+      "at": "2026-11-07T03:43:36.780Z",
+      "jenis": "hasil",
+      "teks": "exec_command finished"
+    },
+    {
+      "at": "2026-11-07T03:43:41.419Z",
+      "jenis": "aksi",
+      "teks": "Running exec_command"
+    },
+    {
+      "at": "2026-11-07T03:43:41.440Z",
+      "jenis": "hasil",
+      "teks": "exec_command finished"
+    },
+    {
+      "at": "2026-11-07T03:43:44.276Z",
+      "jenis": "aksi",
+      "teks": "Running write_stdin"
+    },
+    {
+      "at": "2026-11-07T03:43:44.296Z",
+      "jenis": "hasil",
+      "teks": "write_stdin finished"
+    },
+    {
+      "at": "2026-11-07T03:43:57.245Z",
+      "jenis": "fase",
+      "teks": "Reviewing the model and component mapping"
+    },
+    {
+      "at": "2026-11-07T03:43:57.253Z",
+      "jenis": "aksi",
+      "teks": "Running apply_patch"
+    },
+    {
+      "at": "2026-11-07T03:43:57.299Z",
+      "jenis": "hasil",
+      "teks": "apply_patch finished"
+    },
+    {
+      "at": "2026-11-07T03:44:00.836Z",
+      "jenis": "aksi",
+      "teks": "Running exec_command"
+    },
+    {
+      "at": "2026-11-07T03:44:01.849Z",
+      "jenis": "hasil",
+      "teks": "exec_command finished"
+    },
+    {
+      "at": "2026-11-07T03:44:02.012Z",
+      "jenis": "hasil",
+      "teks": "Preview 4 rendered"
+    },
+    {
+      "at": "2026-11-07T03:44:09.585Z",
+      "jenis": "aksi",
+      "teks": "Running apply_patch"
+    },
+    {
+      "at": "2026-11-07T03:44:09.630Z",
+      "jenis": "hasil",
+      "teks": "apply_patch finished"
+    },
+    {
+      "at": "2026-11-07T03:44:13.287Z",
+      "jenis": "aksi",
+      "teks": "Running write_stdin"
+    },
+    {
+      "at": "2026-11-07T03:44:14.296Z",
+      "jenis": "hasil",
+      "teks": "write_stdin finished"
+    },
+    {
+      "at": "2026-11-07T03:44:14.468Z",
+      "jenis": "hasil",
+      "teks": "Preview 5 rendered"
+    },
+    {
+      "at": "2026-11-07T03:44:17.797Z",
+      "jenis": "aksi",
+      "teks": "Running exec_command"
+    },
+    {
+      "at": "2026-11-07T03:44:17.816Z",
+      "jenis": "hasil",
+      "teks": "exec_command finished"
+    },
+    {
+      "at": "2026-11-07T03:44:21.800Z",
+      "jenis": "aksi",
+      "teks": "Running write_stdin"
+    },
+    {
+      "at": "2026-11-07T03:44:22.809Z",
+      "jenis": "hasil",
+      "teks": "write_stdin finished"
+    },
+    {
+      "at": "2026-11-07T03:44:27.732Z",
+      "jenis": "aksi",
+      "teks": "Running exec_command"
+    },
+    {
+      "at": "2026-11-07T03:44:27.753Z",
+      "jenis": "hasil",
+      "teks": "exec_command finished"
+    },
+    {
+      "at": "2026-11-07T03:44:31.679Z",
+      "jenis": "aksi",
+      "teks": "Running write_stdin"
+    },
+    {
+      "at": "2026-11-07T03:44:31.686Z",
+      "jenis": "hasil",
+      "teks": "write_stdin finished"
+    },
+    {
+      "at": "2026-11-07T03:44:36.090Z",
+      "jenis": "fase",
+      "teks": "Reviewing the model and component mapping"
+    },
+    {
+      "at": "2026-11-07T03:44:36.097Z",
+      "jenis": "aksi",
+      "teks": "Running exec_command"
+    },
+    {
+      "at": "2026-11-07T03:44:36.207Z",
+      "jenis": "hasil",
+      "teks": "exec_command finished"
+    },
+    {
+      "at": "2026-11-07T03:44:41.337Z",
+      "jenis": "aksi",
+      "teks": "Running view_image"
+    },
+    {
+      "at": "2026-11-07T03:44:41.389Z",
+      "jenis": "hasil",
+      "teks": "view_image finished"
+    },
+    {
+      "at": "2026-11-07T03:44:45.248Z",
+      "jenis": "aksi",
+      "teks": "Running apply_patch"
+    },
+    {
+      "at": "2026-11-07T03:44:45.300Z",
+      "jenis": "hasil",
+      "teks": "apply_patch finished"
+    },
+    {
+      "at": "2026-11-07T03:44:49.171Z",
+      "jenis": "fase",
+      "teks": "Reviewing the model and component mapping"
+    },
+    {
+      "at": "2026-11-07T03:44:49.181Z",
+      "jenis": "fase",
+      "teks": "Refining and validating the final model"
+    },
+    {
+      "at": "2026-11-07T03:45:14.443Z",
+      "jenis": "hasil",
+      "teks": "Model ready — SVG and inspection mappings validated"
+    }
+  ],
+  "mappedItems": 10,
+  "count": 10,
+  "concurrentChat": {
+    "passed": true,
+    "seconds": 3.37
+  }
+}

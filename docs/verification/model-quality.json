@@ -1,0 +1,20 @@
+{
+  "part_count": 78,
+  "world_space_audit": {
+    "ran": true,
+    "problems": 0,
+    "passed": true,
+    "report": "audit.log"
+  },
+  "notes": [
+    "Illustrative 500 mm shoe option; installed configuration unconfirmed.",
+    "Working pose, not the dimensioned transport pose.",
+    "Minor detail shapes are illustrative, not certified manufacturer dimensions."
+  ],
+  "validation": {
+    "xml": "pending",
+    "mapping": "pending",
+    "preview": "pending",
+    "browser_line_check": "not run; time budget"
+  }
+}

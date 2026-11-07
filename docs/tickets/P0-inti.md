@@ -237,8 +237,8 @@ Baca dulu: `docs/tickets/README.md` (Definition of Done), `docs/PRD.md` §4.1–
 - **Tangga pemotongan:** bila sandbox tidak jalan sampai integrasi 1, hentikan di sini — demo memakai figure siap pakai lewat "Pakai model yang ada".
 
 **Selesai bila**
-- [ ] Di Docker: `jcb-js120-spec.png` → figure excavator `siap` dengan semua item tersorot, < 5 menit.
-- [ ] Chat tetap bisa dipakai selama job berjalan.
+- [x] Di Docker: `jcb-js120-spec.png` → figure excavator `siap` dengan semua item tersorot, < 5 menit (job perbaikan 145,32 dtk; riwayat percobaan dicatat di verifikasi).
+- [x] Chat tetap bisa dipakai selama job berjalan.
 
 **Prompt /goal**
 ```

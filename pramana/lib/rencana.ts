@@ -55,7 +55,7 @@ export function patchPlan(id: string, input: unknown) {
   const patch = PlanPatch.parse(input);
   const plan = requirePlan(id);
   const modelId = patch.model_id === undefined ? plan.model_id : patch.model_id;
-  if (modelId && getModel(modelId)?.status !== "siap") fail("Choose a ready vehicle model.");
+  if (patch.model_id !== undefined && modelId && getModel(modelId)?.status !== "siap") fail("Choose a ready vehicle model.");
   saveRencana({ ...plan, ...patch, items: normalizeItems(patch.items ?? plan.items, modelId) });
   return requirePlan(id);
 }

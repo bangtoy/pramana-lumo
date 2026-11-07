@@ -1,0 +1,20 @@
+[
+  {
+    "mode": "reduced",
+    "activityVisible": true,
+    "composerEnabled": true,
+    "errors": []
+  },
+  {
+    "mode": "no-webgl",
+    "activityVisible": true,
+    "composerEnabled": true,
+    "errors": []
+  },
+  {
+    "mode": "failed",
+    "activityVisible": true,
+    "composerEnabled": true,
+    "errors": []
+  }
+]
