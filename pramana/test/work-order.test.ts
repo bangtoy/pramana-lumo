@@ -7,6 +7,22 @@ process.env.DATA_DIR = mkdtempSync(path.join(tmpdir(), 'pramana-wo-'));
 const { database, getLaporan, saveLaporan, listWorkOrders, getWorkOrder } = await import('../lib/db.ts');
 const { createWorkOrders, updateWorkOrder, syncItemDitangani } = await import('../lib/work-order.ts');
 const { jakartaDay } = await import('../lib/waktu.ts');
+const { isWorkOrderOverdue, sortWorkOrders } = await import('../lib/work-order-rules.ts');
+
+test('work-order urgency uses Jakarta dates and keeps open overdue work first', async () => {
+  const [base] = await createWorkOrders('LI-2026-10-29-DT07', async () => []);
+  const closed = { ...base, id: 'closed', status: 'selesai' as const, target: '2026-11-01' };
+  const today = { ...base, id: 'today', target: '2026-11-07' };
+  const overdue = { ...base, id: 'overdue', prioritas: 'sedang' as const, target: '2026-11-06' };
+  const urgent = { ...overdue, id: 'urgent', prioritas: 'tinggi' as const };
+  assert.equal(isWorkOrderOverdue(today, '2026-11-07'), false);
+  assert.equal(isWorkOrderOverdue(closed, '2026-11-07'), false);
+  assert.equal(isWorkOrderOverdue({ ...today, target: null }, '2026-11-07'), false);
+  assert.equal(isWorkOrderOverdue(today, jakartaDay(0, new Date('2026-11-07T17:00:00Z'))), true);
+  const original = [closed, today, overdue, urgent];
+  assert.deepEqual(sortWorkOrders(original, '2026-11-07').map(w => w.id), ['urgent', 'overdue', 'today', 'closed']);
+  assert.equal(original[0].id, 'closed');
+});
 
 test('Jakarta deadlines cross midnight, month and leap-year boundaries', () => {
   assert.equal(jakartaDay(0, new Date('2026-11-07T16:59:59Z')), '2026-11-07');

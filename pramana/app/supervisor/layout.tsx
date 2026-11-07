@@ -18,7 +18,7 @@ const menus = [
 export default function SupervisorLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname(), agent = pathname.startsWith("/supervisor/agent");
   const [collapsed, setCollapsed] = useState(false);
-  const workOrders = useQuery({ queryKey: ["work-orders"], queryFn: () => api<WorkOrder[]>("/api/work-order"), refetchInterval: 5000 });
+  const workOrders = useQuery({ queryKey: ["work-order"], queryFn: () => api<WorkOrder[]>("/api/work-order"), refetchInterval: 5000 });
   const open = workOrders.data?.filter(w => w.status === "terbuka").length;
   useEffect(() => {
     try { setCollapsed(localStorage.getItem("pramana.sidebar") === "collapsed"); } catch { /* Storage is optional. */ }

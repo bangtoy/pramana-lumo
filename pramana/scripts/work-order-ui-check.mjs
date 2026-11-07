@@ -1,0 +1,83 @@
+import assert from 'node:assert/strict';
+import { writeFileSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
+import { jakartaDay } from '../lib/waktu.ts';
+const { chromium } = await import(pathToFileURL(process.env.PLAYWRIGHT_MODULE).href);
+const base = `http://localhost:${process.env.PORT || 3002}`, reportId = 'LI-2026-10-29-DT07';
+async function api(path, body) {
+  const response = await fetch(base + path, body ? { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) } : undefined);
+  assert.equal(response.status, 200); return response.json();
+}
+const original = (await api(`/api/work-order?laporan_id=${reportId}`)).find(w => w.item_id === 'ITEM-3');
+assert.ok(original);
+await api(`/api/work-order/${original.id}`, { status: 'terbuka', mekanik: null, target: jakartaDay() });
+const initial = await api('/api/work-order');
+const openCount = initial.filter(w => w.status === 'terbuka').length;
+const overdueCount = initial.filter(w => w.status === 'terbuka' && w.target && w.target < jakartaDay()).length;
+const browser = await chromium.launch({ channel: 'chrome', headless: true });
+const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+const errors = []; page.on('pageerror', e => errors.push(e.message)); page.on('console', e => { if (e.type() === 'error') errors.push(e.text()); });
+const row = page.locator(`[data-work-order="${original.id}"]`);
+const patched = () => page.waitForResponse(r => r.url().endsWith(`/api/work-order/${original.id}`) && r.request().method() === 'PATCH' && r.ok());
+async function snapshot(name) {
+  await page.waitForFunction(() => document.querySelector('aside').getBoundingClientRect().width === (innerWidth < 768 ? 64 : 240));
+  await page.evaluate(async () => { await document.fonts.ready; await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))); });
+  await page.screenshot({ path: `../docs/verification/screenshots/${name}.png`, animations: 'disabled' });
+}
+try {
+  await page.goto(`${base}/supervisor/work-order`, { waitUntil: 'networkidle' });
+  assert.equal(await page.getByRole('button', { name: `Open ${openCount}`, exact: true }).getAttribute('aria-pressed'), 'true');
+  await row.getByRole('textbox', { name: /^Mechanic/ }).fill('Hendra');
+  await Promise.all([patched(), row.getByRole('textbox', { name: /^Mechanic/ }).press('Tab')]);
+  await page.reload({ waitUntil: 'networkidle' });
+  assert.equal(await row.getByRole('textbox', { name: /^Mechanic/ }).inputValue(), 'Hendra');
+  await Promise.all([patched(), row.locator('input[type="date"]').fill(jakartaDay(1))]);
+  await row.getByText('Overdue', { exact: true }).waitFor();
+  await page.getByRole('button', { name: `Overdue ${overdueCount + 1}`, exact: true }).click();
+  await page.waitForURL(/filter=terlambat/); assert.ok(await row.isVisible());
+  await page.getByRole('button', { name: /^All \d/ }).click();
+  await page.waitForURL(/filter=semua/);
+  await row.getByRole('button', { name: 'Mark complete' }).click();
+  const note = page.getByRole('textbox', { name: 'Completion note (optional)' });
+  await note.press('Escape'); assert.equal(await note.count(), 0);
+  await row.getByRole('button', { name: 'Mark complete' }).click();
+  await note.fill('Tyre replaced; pressure and wheel nuts checked.');
+  await Promise.all([patched(), page.getByRole('button', { name: 'Save', exact: true }).click()]);
+  await row.getByText('Completed', { exact: true }).waitFor();
+  assert.equal(await row.evaluate(el => getComputedStyle(el).opacity), '0.6');
+  assert.equal(await row.getByRole('textbox', { name: /^Mechanic/ }).isDisabled(), true);
+  assert.ok(await row.getByText('Tyre replaced; pressure and wheel nuts checked.', { exact: true }).isVisible());
+  const report = await api(`/api/laporan/${reportId}`); assert.equal(report.hasil[original.item_id].ditangani, true); assert.equal(report.hasil[original.item_id].stop, true);
+  const badge = page.locator('nav[aria-label="Dashboard pages"] a[href="/supervisor/work-order"] .t-label');
+  await page.waitForFunction(expected => document.querySelector('nav[aria-label="Dashboard pages"] a[href="/supervisor/work-order"] .t-label')?.textContent === String(expected), openCount - 1);
+  assert.equal(await badge.textContent(), String(openCount - 1));
+  await snapshot('work-order-1440');
+  await page.goto(`${base}/supervisor/laporan/${reportId}`, { waitUntil: 'networkidle' });
+  await page.locator(`#finding-${original.item_id}`).getByText('Handled', { exact: true }).waitFor();
+  await page.goto(`${base}/supervisor/work-order?wo=${original.id}`, { waitUntil: 'networkidle' });
+  assert.equal(await page.getByRole('button', { name: /^All \d/ }).getAttribute('aria-pressed'), 'true');
+  assert.equal(await row.evaluate(el => getComputedStyle(el).backgroundColor), 'rgb(239, 248, 255)');
+  await row.getByRole('button', { name: 'Reopen' }).click();
+  await row.getByRole('button', { name: 'Mark complete' }).waitFor();
+  const reopened = await api(`/api/work-order/${original.id}`); assert.equal(reopened.catatan_selesai, null); assert.equal(reopened.selesai_at, null);
+  await page.goto(`${base}/supervisor/work-order?laporan=${reportId}`, { waitUntil: 'networkidle' });
+  assert.equal(await page.locator('[data-work-order]').count(), 2);
+  assert.equal(await page.getByRole('button', { name: 'All 2', exact: true }).getAttribute('aria-pressed'), 'true');
+  await page.getByRole('combobox', { name: 'Priority', exact: true }).selectOption('sedang');
+  await page.getByRole('heading', { name: 'No work orders in this view' }).waitFor();
+  await page.getByRole('combobox', { name: 'Priority', exact: true }).selectOption('');
+  await row.waitFor();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await snapshot('work-order-390');
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+  assert.equal(await page.locator('#supervisor-content').evaluate(el => el.scrollWidth <= el.clientWidth), true);
+  assert.equal(await page.locator('h1.t-display').count(), 1);
+  await page.getByRole('link', { name: 'Show all', exact: true }).click();
+  await page.waitForURL(url => !url.searchParams.has('laporan'));
+  assert.deepEqual(errors, []);
+  const result = { mechanicPersists: true, overdueWib: true, filtersPersistInUrl: true, completionNote: true, findingHandled: true, sidebarUpdates: true, reopenClearsCompletion: true, reportScopeAndHighlight: true, priorityFilter: true, responsiveOverflowContained: true, errors };
+  writeFileSync('../docs/verification/work-order-ui-check.json', JSON.stringify(result, null, 2)); console.log(result);
+} finally {
+  await browser.close();
+  await api(`/api/work-order/${original.id}`, { status: original.status, mekanik: original.mekanik ?? null, target: original.target ?? null, catatan_selesai: original.catatan_selesai ?? null });
+}

@@ -70,10 +70,10 @@ curl -s localhost:3000/api/laporan/<laporan_id> | jq '.hasil.<item_id>.ditangani
 - Kosong → `EmptyState pose="jempol"`.
 
 **Selesai bila**
-- [ ] Screenshot 1440×900 setara `screens/04`.
-- [ ] Isi mekanik → refresh → tetap; ubah target ke kemarin → pill Terlambat + hitungan filter berubah.
-- [ ] Tandai selesai dengan catatan → baris pudar, catatan hijau tampil, temuan di laporan "Selesai".
-- [ ] `rg` DESIGN_SYSTEM §3.4 bersih.
+- [x] Screenshot 1440×900 setara `screens/04` untuk lingkup P1; panel kanan menunggu P3.
+- [x] Isi mekanik → refresh → tetap; ubah target ke kemarin → pill Terlambat + hitungan filter berubah.
+- [x] Tandai selesai dengan catatan → baris pudar, catatan hijau tampil, temuan di laporan "Handled".
+- [x] `rg` DESIGN_SYSTEM §3.4 bersih.
 
 **Prompt /goal**
 ```

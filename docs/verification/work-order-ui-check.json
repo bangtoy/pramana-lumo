@@ -1,0 +1,13 @@
+{
+  "mechanicPersists": true,
+  "overdueWib": true,
+  "filtersPersistInUrl": true,
+  "completionNote": true,
+  "findingHandled": true,
+  "sidebarUpdates": true,
+  "reopenClearsCompletion": true,
+  "reportScopeAndHighlight": true,
+  "priorityFilter": true,
+  "responsiveOverflowContained": true,
+  "errors": []
+}
