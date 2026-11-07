@@ -1,0 +1,70 @@
+{
+  "reportId": "LI-0e14a05c-28e2-4b2c-a7b0-9e3b8d3e91e1",
+  "seconds": 104.28,
+  "count": 8,
+  "status": "terkirim",
+  "photoRejection": true,
+  "incompleteSubmissionRejected": true,
+  "turns": [
+    {
+      "seconds": 8.08,
+      "reply": "Alex, I’ve saved your inspection details and will start with cabin safety equipment. Please check the seat belt, mirrors, horn and extinguisher, report their condition—including the gauge reading and expiry date—and attach clear photos of the equipment and extinguisher label.",
+      "recorded": 0
+    },
+    {
+      "seconds": 5.4,
+      "reply": "Alex, I can’t record cabin safety as good without the required evidence; keep the truck out of service until safety equipment is verified. Please attach clear photos of the cabin safety equipment and extinguisher label, and report the gauge reading and expiry date.",
+      "recorded": 0
+    },
+    {
+      "seconds": 3.71,
+      "reply": "Alex, I can’t submit yet: all eight inspection items remain incomplete, and unverified safety equipment means the truck must stay out of service. Please provide cabin safety photos, including the extinguisher label and gauge, together with the equipment check results, gauge reading and expiry date.",
+      "recorded": 0
+    },
+    {
+      "seconds": 10.88,
+      "reply": "Alex, I’ve recorded cabin safety as cannot inspect, with STOP pending safe reinspection because safe access and functional testing are unavailable. Keep the truck out of service; no unsafe approach or testing is needed. Can brakes and air-system checks be completed safely, or are they also blocked?",
+      "recorded": 1
+    },
+    {
+      "seconds": 10.43,
+      "reply": "Alex, I’ve recorded brakes and air system as cannot inspect, with STOP pending safe reinspection. Keep the truck out of service; no unsafe approach or testing is needed. Can tyres and wheel nuts on both sides be inspected safely, or is that also blocked?",
+      "recorded": 2
+    },
+    {
+      "seconds": 10.86,
+      "reply": "Alex, I’ve recorded the tyre sidewall bulge as a defect requiring STOP; keep the truck out of service pending qualified replacement and reinspection. Can the dump body be inspected safely without approaching beneath an unsupported raised body, or is safe access unavailable?",
+      "recorded": 3
+    },
+    {
+      "seconds": 10.28,
+      "reply": "Alex, I’ve recorded the dump body as cannot inspect, with STOP pending safe reinspection. Keep the truck out of service; do not approach beneath an unsupported body. Is safe inspection of the hydraulic cylinder, hoses, couplings and seals also blocked?",
+      "recorded": 4
+    },
+    {
+      "seconds": 9.2,
+      "reply": "Alex, I’ve recorded the hydraulic cylinder as cannot inspect, with STOP pending safe reinspection. Keep the truck out of service and never enter beneath an unsupported body. Is safe inspection of the body safety prop also blocked?",
+      "recorded": 5
+    },
+    {
+      "seconds": 8.63,
+      "reply": "Alex, I’ve recorded the body safety prop as cannot inspect, with STOP pending safe reinspection. Keep the truck out of service and never enter beneath an unsupported body. Is safe inspection of the tailgate hinges, locking pins and latch also blocked?",
+      "recorded": 6
+    },
+    {
+      "seconds": 11.34,
+      "reply": "Alex, I’ve recorded the tailgate and latch as cannot inspect, with STOP pending safe reinspection. Keep the truck out of service; no unsafe approach or testing is needed. Is safe inspection of the headlights, brake lights, indicators and reflectors also blocked?",
+      "recorded": 7
+    },
+    {
+      "seconds": 9.96,
+      "reply": "Alex, I’ve recorded lights and reflectors as cannot inspect, with STOP pending safe reinspection. All eight items are recorded; the truck must remain out of service. Would you like me to submit the report?",
+      "recorded": 8
+    },
+    {
+      "seconds": 5.06,
+      "reply": "Alex, I’ve submitted the report: DT-09 is not roadworthy, with a tyre sidewall bulge and seven items that could not be safely inspected. The truck must remain out of service pending qualified tyre replacement and safe reinspection; the wide-view photo also leaves unit identity unconfirmed.",
+      "recorded": 8
+    }
+  ]
+}

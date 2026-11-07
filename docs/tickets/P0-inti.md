@@ -261,8 +261,8 @@ Baca dulu: `docs/tickets/README.md` (Definition of Done), `docs/PRD.md` §4.1–
 - `withTrace` group = ID laporan; history ringkas; foto lama di history diganti `[foto id: caption]`.
 
 **Selesai bila**
-- [ ] Skrip/tes: rekam item tanpa foto wajib → ditolak dengan alasan; submit dengan item kosong → ditolak.
-- [ ] Alur lengkap 8 item lewat curl menghasilkan laporan `terkirim`.
+- [x] Skrip/tes: rekam item tanpa foto wajib → ditolak dengan alasan; submit dengan item kosong → ditolak.
+- [x] Alur lengkap 8 item lewat HTTP menghasilkan laporan `terkirim` (104,28 dtk, agent nyata).
 
 **Prompt /goal**
 ```
