@@ -1,0 +1,88 @@
+{
+  "apiChecks": [
+    {
+      "filter": {},
+      "count": 49
+    },
+    {
+      "filter": {
+        "unit": "dt-07"
+      },
+      "count": 10
+    },
+    {
+      "filter": {
+        "unit": "9123"
+      },
+      "count": 10
+    },
+    {
+      "filter": {
+        "petugas": "Sinta Aryani"
+      },
+      "count": 12
+    },
+    {
+      "filter": {
+        "dari": "2026-11-07",
+        "sampai": "2026-11-07"
+      },
+      "count": 8
+    },
+    {
+      "filter": {
+        "stop": "1"
+      },
+      "count": 16
+    },
+    {
+      "filter": {
+        "wo": "1"
+      },
+      "count": 8
+    },
+    {
+      "filter": {
+        "item": "Tyres"
+      },
+      "count": 10
+    },
+    {
+      "filter": {
+        "item": "ban_roda"
+      },
+      "count": 10
+    },
+    {
+      "filter": {
+        "unit": "DT-07",
+        "petugas": "Sinta Aryani",
+        "dari": "2026-11-07",
+        "sampai": "2026-11-07",
+        "stop": "1",
+        "wo": "1",
+        "item": "Tyres"
+      },
+      "count": 1
+    },
+    {
+      "filter": {
+        "unit": "NO-SUCH-UNIT"
+      },
+      "count": 0
+    }
+  ],
+  "invalidFiltersRejected": true,
+  "summaryLinks": true,
+  "allInspectorOptions": true,
+  "combinedFilters": true,
+  "urlReplaceAndScrollPreserved": true,
+  "refreshPersists": true,
+  "blurAndTogglePreserveBothChanges": true,
+  "removableComponent": true,
+  "dateOrderChronological": true,
+  "resetWorks": true,
+  "mobileOverflowContained": true,
+  "emptyAndErrorStates": true,
+  "errors": []
+}

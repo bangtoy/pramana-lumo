@@ -4,6 +4,7 @@ import { mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import type { LaporanInspeksi, WorkOrder } from '../lib/contracts.ts';
+import { itemsOf } from '../lib/rules.ts';
 process.env.DATA_DIR = mkdtempSync(path.join(tmpdir(), 'pramana-dashboard-'));
 const { listLaporan, listWorkOrders, getLaporan } = await import('../lib/db.ts');
 const { buildRingkasan, ringkasan, cariLaporan } = await import('../lib/dashboard.ts');
@@ -78,4 +79,13 @@ test('filter input rejects invalid calendar dates, reversed ranges and unsupport
   assert.throws(() => parseLaporanFilter(new URLSearchParams('stop=true')));
   assert.equal(parseLaporanFilter(new URLSearchParams('wo=1')).wo_terbuka, true);
   assert.equal(parseLaporanFilter(new URLSearchParams('stop=0')).hanya_stop, false);
+});
+
+test('component links include earlier labels for the same component without matching good findings', () => {
+  const earlier = makeReport('earlier', 'DT-07', '2026-11-05T23:30:00Z', true);
+  const renamed = makeReport('renamed', 'DT-08', '2026-11-06T00:30:00Z', true);
+  itemsOf(renamed).find(item => item.id === 'ITEM-3')!.nama = 'Wheel and tyre assembly';
+  const good = makeReport('good', 'DT-09', '2026-11-06T01:30:00Z', false);
+  const result = filterLaporan([earlier, renamed, good], [], { item: 'Wheel and tyre assembly' });
+  assert.deepEqual(result.map(report => report.id), ['renamed', 'earlier']);
 });

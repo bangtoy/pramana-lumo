@@ -115,8 +115,8 @@ Prasyarat: P0 dan P1. Acuan layar: `design/screens/01-supervisor-ringkasan.png`,
 - Kosong dengan filter → `EmptyState pose="berpikir"` "Tidak ada laporan yang cocok" + "Coba longgarkan filter di atas."
 
 **Selesai bila**
-- [ ] Tautan "Komponen bermasalah" dari Ringkasan membuka daftar tersaring; `?stop=1` dari KPI STOP.
-- [ ] Refresh mempertahankan filter.
+- [x] Tautan "Komponen bermasalah" dari Ringkasan membuka daftar tersaring; `?stop=1` dari KPI STOP.
+- [x] Refresh mempertahankan filter.
 
 **Prompt /goal**
 ```

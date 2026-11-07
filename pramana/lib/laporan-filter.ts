@@ -35,6 +35,9 @@ export function filterLaporan(reports: LaporanInspeksi[], orders: WorkOrder[], i
   const filter = LaporanFilter.parse(input);
   const normalize = (value: string | null | undefined) => (value || '').trim().toLowerCase();
   const openReports = new Set(orders.filter(order => order.status === 'terbuka').map(order => order.laporan_id));
+  const itemMatches = (item: ReturnType<typeof itemsOf>[number]) => normalize(item.nama).includes(normalize(filter.item)) || normalize(item.comp_id).includes(normalize(filter.item));
+  // A component keeps its identity when a newer inspection plan renames its label.
+  const matchingComponents = new Set(filter.item ? reports.filter(report => report.status === 'terkirim').flatMap(report => itemsOf(report).filter(itemMatches).map(item => item.comp_id).filter(Boolean)) : []);
   const matches = reports.filter(report => {
     if (report.status !== 'terkirim') return false;
     if (filter.unit && !normalize(report.unit).includes(normalize(filter.unit))) return false;
@@ -46,7 +49,7 @@ export function filterLaporan(reports: LaporanInspeksi[], orders: WorkOrder[], i
       if ((filter.dari && day < filter.dari) || (filter.sampai && day > filter.sampai)) return false;
     }
     if (filter.item && !itemsOf(report).some(item => report.hasil[item.id]?.status === 'tidak_baik' && (
-      normalize(item.nama).includes(normalize(filter.item)) || normalize(item.comp_id).includes(normalize(filter.item))
+      itemMatches(item) || (!!item.comp_id && matchingComponents.has(item.comp_id))
     ))) return false;
     return true;
   });
