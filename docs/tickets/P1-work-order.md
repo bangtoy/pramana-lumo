@@ -18,9 +18,9 @@ Prasyarat: P0 selesai. Acuan layar: `design/screens/04-supervisor-work-order.png
 - `GET /api/work-order?laporan_id=` dan `POST /api/work-order {laporan_id}` (mengembalikan WO baru; memanggil ulang tidak menggandakan).
 
 **Selesai bila**
-- [ ] `POST` untuk `LI-2026-10-29-DT07` membuat 2 WO prioritas tinggi bertarget hari ini.
-- [ ] Dengan `OPENAI_BASE_URL` diarahkan ke port mati, `POST` tetap membuat 2 WO (judul fallback).
-- [ ] `POST` kedua mengembalikan `[]`.
+- [x] `POST` untuk `LI-2026-10-29-DT07` membuat 2 WO prioritas tinggi bertarget hari ini (agent nyata, 6,75 dtk).
+- [x] Dengan `OPENAI_BASE_URL` diarahkan ke port mati, `POST` tetap membuat 2 WO (judul fallback, 2,42 dtk).
+- [x] `POST` kedua mengembalikan `[]`.
 
 **Prompt /goal**
 ```
