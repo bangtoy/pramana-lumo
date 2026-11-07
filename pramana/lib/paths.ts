@@ -1,6 +1,7 @@
 import path from "node:path";
 
-export const DATA_DIR = path.resolve(process.env.DATA_DIR || "./data");
+// Runtime volume; never bundle its contents into the deployment.
+export const DATA_DIR = path.resolve(/* turbopackIgnore: true */ process.env.DATA_DIR || "./data");
 export const DB_PATH = path.join(DATA_DIR, "pramana.sqlite");
 export const UPLOAD_DIR = path.join(DATA_DIR, "uploads");
 export const MODELS_DIR = path.join(DATA_DIR, "models");

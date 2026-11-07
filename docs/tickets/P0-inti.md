@@ -75,9 +75,9 @@ Baca dulu: `docs/tickets/README.md` (Definition of Done), `docs/PRD.md` §4.1–
 - `npm run seed` membuat ulang DB; `npm run seed:if-empty` hanya bila kosong.
 
 **Selesai bila**
-- [ ] DB baru terisi otomatis saat request pertama.
-- [ ] `curl localhost:3000/api/files/FILE-DT07-BAN -o x.jpg` menghasilkan foto.
-- [ ] Restart dev server tidak menduplikasi seed.
+- [x] DB baru terisi otomatis saat request pertama.
+- [x] `curl localhost:3000/api/files/FILE-DT07-BAN -o x.jpg` menghasilkan foto.
+- [x] Restart dev server tidak menduplikasi seed.
 
 **Prompt /goal**
 ```

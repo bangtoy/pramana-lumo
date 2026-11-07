@@ -2,13 +2,15 @@
   "name": "pramana",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "seed": "node scripts/seed.mjs",
     "seed:if-empty": "node scripts/seed.mjs --if-empty",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test test/*.test.ts"
   },
   "dependencies": {
     "@openai/agents": "^0.21.0",
