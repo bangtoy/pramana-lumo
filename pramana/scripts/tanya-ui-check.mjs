@@ -41,12 +41,13 @@ try {
   assert.equal(await panel.locator('img[src*="avatar-serius"]').count(), 1);
   await page.getByText('Data-based fallback · agent is currently unavailable', { exact: true }).waitFor();
   const firstSources = first.messages.at(-1).sumber;
-  assert.equal(await panel.getByRole('link').count(), firstSources.length);
+  assert.equal(await panel.locator('[data-answer-sources]').getByRole('link').count(), firstSources.length);
   await snapshot(page, 'tanya-fallback-1440');
   assert.equal(await page.evaluate(() => localStorage.getItem('pramana.tanya-id')), first.id);
   await page.reload({ waitUntil: 'networkidle' }); await ready(page);
   await page.locator(`[data-analyst-message="${first.messages.at(-1).id}"]`).waitFor();
   const reportLink = panel.getByRole('link', { name: `Open report ${firstSources[0]}`, exact: true });
+  await panel.locator('[data-answer-sources] summary').click();
   await reportLink.click(); await page.waitForURL(url => url.pathname.endsWith('/laporan/' + firstSources[0]));
   await page.getByRole('heading', { name: 'Findings by item' }).waitFor();
   await page.getByRole('button', { name: 'Collapse Lumo panel' }).click();
@@ -67,6 +68,7 @@ try {
   assert.match(await composer.inputValue(), /\n/); assert.equal(requests.filter(request => request.method === 'POST').length, posts);
   const work = await waitAnswer(page, () => composer.press('Enter'));
   const workId = work.messages.at(-1).sumber.find(id => id.startsWith('WO-')); assert.ok(workId);
+  await panel.locator('[data-answer-sources] summary').click();
   await panel.getByRole('link', { name: `Open work order ${workId}`, exact: true }).click();
   await page.waitForURL(url => url.searchParams.get('wo') === workId);
   const row = page.locator(`[data-work-order="${workId}"]`); await row.waitFor(); assert.match(await row.getAttribute('class'), /accent-subtle/);

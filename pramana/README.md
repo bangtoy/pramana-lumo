@@ -90,6 +90,13 @@ work without a model and refresh every 30 seconds while the panel is open.
 Conversations persist on the server; this browser remembers the current one and
 whether the panel is expanded. **New conversation** starts a separate thread.
 On a report, **Ask Lumo** prepares a question about that report for review/send.
+Answers use short paragraphs and lists, with readable source labels in an
+expandable section. Ask for a bar chart, line chart, pie chart, table or KPI to
+compare inspection report counts by unit or day; the server computes the values
+for the requested period (up to 31 days). You can switch compatible views using
+the chart selector and open the matching reports. Saved charts retain the data
+from the answer's creation time. Drag the panel's left edge to resize it, or focus
+that edge and use arrow keys. Double-click the edge to restore the default width.
 
 From a submitted inspection report, choose **Create work orders** to draft one
 repair instruction per unassigned Not good finding. If the model is unavailable,

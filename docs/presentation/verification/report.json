@@ -1,17 +1,17 @@
 {
-  "verifiedAt": "2026-11-07T04:50:16.860Z",
+  "verifiedAt": "2026-11-07T06:21:56.372Z",
   "scope": "HTML presentation, not end-to-end verification of the hosted app.",
-  "slideCount": 11,
-  "mainSlides": 8,
+  "slideCount": 6,
+  "mainSlides": 6,
   "totalSeconds": 360,
   "contentSeconds": 330,
   "reserveSeconds": 30,
   "demoSeconds": 90,
   "pages": [
     {
-      "file": "slides/01-cover.html",
+      "file": "slides/01-what-if.html",
       "errors": [],
-      "title": "Pramana · Complete reports. Less follow-up",
+      "title": "Pramana · What if inspections, surveys, and reporting were supported by a proactive AI agent?",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -23,7 +23,7 @@
     {
       "file": "slides/02-problem.html",
       "errors": [],
-      "title": "Pramana · Incomplete reports create more work for supervisors",
+      "title": "Pramana · The problem",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -35,7 +35,7 @@
     {
       "file": "slides/03-solution.html",
       "errors": [],
-      "title": "Pramana · Lumo turns field input into reports and Work Orders",
+      "title": "Pramana · The solution",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -45,9 +45,9 @@
       "overflow": []
     },
     {
-      "file": "slides/04-demo.html",
+      "file": "slides/04-capabilities.html",
       "errors": [],
-      "title": "Pramana · One report, completed before supervisor review",
+      "title": "Pramana · What you can do",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -57,9 +57,9 @@
       "overflow": []
     },
     {
-      "file": "slides/05-difference.html",
+      "file": "slides/05-demonstration.html",
       "errors": [],
-      "title": "Pramana · Inspection context connects evidence to action",
+      "title": "Pramana · Demonstration",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -69,69 +69,9 @@
       "overflow": []
     },
     {
-      "file": "slides/06-value.html",
+      "file": "slides/06-technology.html",
       "errors": [],
-      "title": "Pramana · Less chasing, more time for review and follow-up",
-      "images": [],
-      "headingCount": 1,
-      "fonts": {
-        "geist": true,
-        "mono": true
-      },
-      "overflow": []
-    },
-    {
-      "file": "slides/07-codex.html",
-      "errors": [],
-      "title": "Pramana · Codex works from domain context and verifiable tasks",
-      "images": [],
-      "headingCount": 1,
-      "fonts": {
-        "geist": true,
-        "mono": true
-      },
-      "overflow": []
-    },
-    {
-      "file": "slides/08-closing.html",
-      "errors": [],
-      "title": "Pramana · Complete reports, connected follow-up",
-      "images": [],
-      "headingCount": 1,
-      "fonts": {
-        "geist": true,
-        "mono": true
-      },
-      "overflow": []
-    },
-    {
-      "file": "slides/09-architecture.html",
-      "errors": [],
-      "title": "Pramana · Appendix: agent and code responsibilities",
-      "images": [],
-      "headingCount": 1,
-      "fonts": {
-        "geist": true,
-        "mono": true
-      },
-      "overflow": []
-    },
-    {
-      "file": "slides/10-validation.html",
-      "errors": [],
-      "title": "Pramana · Appendix: evidence and scope",
-      "images": [],
-      "headingCount": 1,
-      "fonts": {
-        "geist": true,
-        "mono": true
-      },
-      "overflow": []
-    },
-    {
-      "file": "slides/11-judging-map.html",
-      "errors": [],
-      "title": "Pramana · Appendix: judging criteria map",
+      "title": "Pramana · Technology",
       "images": [],
       "headingCount": 1,
       "fonts": {

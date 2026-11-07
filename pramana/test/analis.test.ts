@@ -25,13 +25,14 @@ test('analyst readers expose bounded evidence and leave reports, work orders and
   assert.throws(() => analisReads.cari_laporan({ ...noFilter, dari: '2026-02-30' }));
 });
 
-test('analyst output removes invented sources, caps sentences and supplies two data recommendations', () => {
+test('analyst output removes invented sources, preserves complete answers and supplies two data recommendations', () => {
   const result = cleanAnalisOutput({ message: 'One. Two. Three. Four. Five. Six.', sumber: ['LI-RW-45', 'LI-invented', 'WO-RW-10', 'WO-invented', 'LI-RW-45'], rekomendasi: [] }, ['First action.', 'Second action.', 'Third action.']);
-  assert.equal(result.message, 'One. Two. Three. Four. Five.');
+  assert.equal(result.message, 'One. Two. Three. Four. Five. Six.');
+  assert.throws(() => cleanAnalisOutput({ message: 'x'.repeat(2001), sumber: [], rekomendasi: [] }));
   assert.deepEqual(result.sumber, ['LI-RW-45', 'WO-RW-10']); assert.deepEqual(result.rekomendasi, ['First action.', 'Second action.']);
   assert.throws(() => cleanAnalisOutput({ message: ' ', sumber: [], rekomendasi: [] }));
   const agent = analis(); assert.equal(agent.name, 'Analis (Lumo)'); assert.equal(agent.modelSettings.reasoning?.effort, 'low');
-  assert.deepEqual(agent.tools.map(tool => tool.name), ['ringkasan', 'cari_laporan', 'get_laporan', 'list_work_order']);
+  assert.deepEqual(agent.tools.map(tool => tool.name), ['ringkasan', 'cari_laporan', 'get_laporan', 'list_work_order', 'chart_reports']);
 });
 
 test('fallback follows unit/repair/component/missing/STOP/summary order with four grounded suggestions', () => {
@@ -44,10 +45,12 @@ test('fallback follows unit/repair/component/missing/STOP/summary order with fou
     assert.equal(reply.fallback, true); assert.equal(reply.rekomendasi?.length, 4);
   }
   assert.match(jawabCadangan('Why is DT-99 not roadworthy?').text, /No submitted inspection reports match DT-99/);
-  assert.match(jawabCadangan('Which work orders are still open?').text, /6 work orders.*overdue/);
+  assert.match(jawabCadangan('Which work orders are still open?').text, /6 work orders[\s\S]*overdue/);
   assert.match(jawabCadangan('What components fail most often?').text, /Tyres.*DT-07/);
-  assert.match(jawabCadangan('Who has not been inspected? Please remind them.').text, /DT-05.*DT-08/);
+  assert.match(jawabCadangan('Who has not been inspected? Please remind them.').text, /DT-05[\s\S]*DT-08/);
   assert.match(jawabCadangan('Which units had STOP this week?').text, /last seven Jakarta days/);
+  assert.equal(jawabCadangan('Which units had STOP this week?').chart?.view, 'bar');
+  assert.doesNotMatch(jawabCadangan('Why is DT-07 not roadworthy?').text, /LI-RW-45/);
   assert.match(jawabCadangan('Give me a summary.').text, /6 of 8 units/);
   assert.match(jawabCadangan('Close all work orders for DT-07.').text, /I can only read.*DT-07 is not roadworthy/);
   assert.ok(jawabCadangan('Explain inspection report LI-RW-45.').sumber?.includes('LI-RW-45'));

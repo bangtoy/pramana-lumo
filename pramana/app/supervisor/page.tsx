@@ -1,6 +1,7 @@
 "use client";
 import Link from 'next/link';
-import { useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { ArrowRight, Check, LoaderCircle } from 'lucide-react';
 import { api, fmtDateTime, fmtTime } from '@/lib/client';
@@ -10,10 +11,21 @@ import { KpiCard } from '@/components/dashboard/KpiCard';
 import { UnitTile } from '@/components/dashboard/UnitTile';
 import { TrenChart } from '@/components/dashboard/TrenChart';
 
-export default function Page() {
+function Summary() {
+  const params = useSearchParams();
+  const status = ['stop', 'belum', 'layak'].includes(params.get('unit_status') || '') ? params.get('unit_status')! : '';
+  const units = [...new Set(params.getAll('unit').map(unit => unit.trim().slice(0, 120)).filter(Boolean))].slice(0, 30);
+  const selection = units.join('|');
   const [days, setDays] = useState(14);
   const query = useQuery({ queryKey: ['dashboard', days], queryFn: () => api<Ringkasan>(`/api/dashboard?hari=${days}`), refetchInterval: 10000, placeholderData: keepPreviousData });
   const data = query.data;
+  const ready = !!data;
+  const visibleUnits = (data?.units || []).filter(unit => (!status || unit.vonis === status) && (!units.length || units.some(code => code.toLowerCase() === unit.unit.toLowerCase())));
+  useEffect(() => {
+    if (!ready || (!status && !selection)) return;
+    const frame = requestAnimationFrame(() => document.getElementById('units-today')?.scrollIntoView({ block: 'start' }));
+    return () => cancelAnimationFrame(frame);
+  }, [ready, status, selection]);
   const hour = data ? Number(new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Jakarta', hour: 'numeric', hourCycle: 'h23' }).format(new Date(data.diperbarui_at))) : 8;
   const greeting = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening';
   const k = data?.kpi, todayReports = `/supervisor/laporan?dari=${data?.hari_ini}&sampai=${data?.hari_ini}`;
@@ -28,7 +40,7 @@ export default function Page() {
         <KpiCard id="work-orders" label="Open work orders" value={data.kpi.wo_terbuka} note={data.kpi.wo_terlambat ? `${data.kpi.wo_terlambat} overdue` : `${data.kpi.wo_tinggi} high priority`} noteColor={data.kpi.wo_terlambat ? 'var(--color-status-tidak-baik)' : 'var(--color-on-surface-muted)'} color="var(--color-chart-orange)" bars={data.sparkline.wo} href="/supervisor/work-order"/>
       </section>
       <div className="grid grid-cols-1 @4xl:grid-cols-[minmax(0,1fr)_300px] gap-3.5 items-start">
-        <section className="panel p-4 @container/unit min-w-0"><div className="flex flex-wrap justify-between gap-2 items-center mb-3"><h2 className="t-heading">Units today</h2><p className="t-body-sm muted">STOP → not inspected → roadworthy</p></div>{data.units.length ? <div className="grid grid-cols-1 @lg/unit:grid-cols-2 @3xl/unit:grid-cols-3 gap-2.5">{data.units.map((unit, index) => <UnitTile key={unit.unit} unit={unit} index={index}/>)}</div> : <p className="t-body muted">No unit has been inspected in the last 14 days.</p>}</section>
+        <section id="units-today" className="panel p-4 @container/unit min-w-0 scroll-mt-4"><div className="flex flex-wrap justify-between gap-2 items-center mb-3"><h2 className="t-heading">Units today</h2><p className="t-body-sm muted">STOP → not inspected → roadworthy</p></div>{(status || units.length > 0) && <div className="mb-3 flex flex-wrap items-center gap-2 t-body-sm" data-unit-selection><span className="muted">{status === 'belum' ? 'Not inspected today' : status === 'stop' ? 'STOP units' : status === 'layak' ? 'Roadworthy units' : 'Selected units'}{units.length > 0 && (' · ' + units.join(', '))}</span><Link href="/supervisor#units-today" className="text-[var(--color-primary)] hover:underline">Show all units</Link></div>}{visibleUnits.length ? <div className="grid grid-cols-1 @lg/unit:grid-cols-2 @3xl/unit:grid-cols-3 gap-2.5">{visibleUnits.map((unit, index) => <UnitTile key={unit.unit} unit={unit} index={index}/>)}</div> : <p className="t-body muted">{status || units.length ? 'No units match this selection today.' : 'No unit has been inspected in the last 14 days.'}</p>}</section>
         <section className="panel p-4 space-y-3"><div><h2 className="t-heading">Needs action</h2><p className="t-body-sm muted mt-0.5">{data.kpi.stop} STOP · {data.kpi.belum_p2h} not inspected · {data.kpi.wo_terlambat} overdue</p></div>{data.units.some(u => u.vonis !== 'layak') ? <div className="space-y-2">{data.units.filter(u => u.vonis !== 'layak').map(unit => <Link key={unit.unit} href={`/supervisor/laporan/${unit.laporan_id}`} className={`flex gap-2 items-center rounded-[10px] border px-3 py-2 t-body-sm ${unit.vonis === 'stop' ? 'bg-[var(--color-status-tidak-baik-subtle)] border-[var(--color-stop-border)]' : 'border-[var(--color-line)]'}`}><span className={`shrink-0 w-1.5 h-1.5 rounded-full ${unit.vonis === 'stop' ? 'live-pulse bg-[var(--color-status-tidak-baik)]' : 'bg-[var(--color-border-strong)]'}`}/><span className="t-data shrink-0">{unit.unit}</span><span className="muted min-w-0 truncate" title={unit.catatan}>{unit.vonis === 'stop' ? unit.stop_tanpa_wo ? 'STOP · no WO yet' : 'STOP · WO created' : unit.catatan}</span><ArrowRight size={14} className="muted shrink-0 ml-auto"/></Link>)}</div> : <p className="rounded-lg p-3 t-body-sm bg-[var(--color-status-baik-subtle)] text-[var(--color-status-baik)]">No units are waiting for a decision.</p>}<Link className="t-body-sm text-[var(--color-primary)] inline-flex items-center gap-1" href="/supervisor/work-order?filter=terlambat">View overdue work orders<ArrowRight size={14}/></Link></section>
       </div>
       <div className="grid grid-cols-1 @4xl:grid-cols-[minmax(0,1fr)_300px] gap-3.5 items-start">
@@ -39,3 +51,5 @@ export default function Page() {
     </>}
   </div>;
 }
+
+export default function Page() { return <Suspense fallback={<Spinner label="Loading dashboard…"/>}><Summary/></Suspense>; }

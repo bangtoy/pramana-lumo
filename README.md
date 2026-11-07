@@ -47,6 +47,11 @@ People remain responsible for reviewing findings and carrying out actions.
 - **Ask Lumo:** ask questions across reports and work orders, open the cited
   sources, and receive recommendations. This analyst is read-only and provides
   a clearly labeled data-based fallback when the model is unavailable.
+  Compare report counts with bar, line or pie charts, tables and KPI cards, and
+  drag the panel's left edge to adjust its width. Click a recommendation to open
+  the relevant work orders, units or inspection reports with filters already
+  applied. Recommendations that need more context can continue the conversation
+  with Lumo.
 
 ## Technology
 
