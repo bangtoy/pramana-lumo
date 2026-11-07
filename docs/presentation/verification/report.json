@@ -1,14 +1,17 @@
 {
-  "verifiedAt": "2026-11-07T04:08:18.384Z",
+  "verifiedAt": "2026-11-07T04:50:16.860Z",
   "scope": "HTML presentation, not end-to-end verification of the hosted app.",
-  "slideCount": 15,
-  "mainSlides": 12,
+  "slideCount": 11,
+  "mainSlides": 8,
   "totalSeconds": 360,
+  "contentSeconds": 330,
+  "reserveSeconds": 30,
+  "demoSeconds": 90,
   "pages": [
     {
       "file": "slides/01-cover.html",
       "errors": [],
-      "title": "Pramana · P2H backed by evidence",
+      "title": "Pramana · Complete reports. Less follow-up",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -20,7 +23,7 @@
     {
       "file": "slides/02-problem.html",
       "errors": [],
-      "title": "Pramana · A checkmark does not show what was inspected",
+      "title": "Pramana · Incomplete reports create more work for supervisors",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -32,7 +35,7 @@
     {
       "file": "slides/03-solution.html",
       "errors": [],
-      "title": "Pramana · One workflow from specifications to action",
+      "title": "Pramana · Lumo turns field input into reports and Work Orders",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -42,9 +45,9 @@
       "overflow": []
     },
     {
-      "file": "slides/04-plan.html",
+      "file": "slides/04-demo.html",
       "errors": [],
-      "title": "Pramana · The plan follows the vehicle being inspected",
+      "title": "Pramana · One report, completed before supervisor review",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -54,9 +57,9 @@
       "overflow": []
     },
     {
-      "file": "slides/05-evidence.html",
+      "file": "slides/05-difference.html",
       "errors": [],
-      "title": "Pramana · Clearer evidence while the inspector is still on site",
+      "title": "Pramana · Inspection context connects evidence to action",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -66,9 +69,9 @@
       "overflow": []
     },
     {
-      "file": "slides/06-follow-up.html",
+      "file": "slides/06-value.html",
       "errors": [],
-      "title": "Pramana · One finding through to follow-up",
+      "title": "Pramana · Less chasing, more time for review and follow-up",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -78,9 +81,9 @@
       "overflow": []
     },
     {
-      "file": "slides/07-quality.html",
+      "file": "slides/07-codex.html",
       "errors": [],
-      "title": "Pramana · Agents assess input, code enforces rules",
+      "title": "Pramana · Codex works from domain context and verifiable tasks",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -90,9 +93,9 @@
       "overflow": []
     },
     {
-      "file": "slides/08-originality.html",
+      "file": "slides/08-closing.html",
       "errors": [],
-      "title": "Pramana · Evidence, components, and actions share context",
+      "title": "Pramana · Complete reports, connected follow-up",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -102,9 +105,9 @@
       "overflow": []
     },
     {
-      "file": "slides/09-value.html",
+      "file": "slides/09-architecture.html",
       "errors": [],
-      "title": "Pramana · Benefits that can be assessed and measured",
+      "title": "Pramana · Appendix: agent and code responsibilities",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -114,9 +117,9 @@
       "overflow": []
     },
     {
-      "file": "slides/10-direction.html",
+      "file": "slides/10-validation.html",
       "errors": [],
-      "title": "Pramana · Deep Domain AI for dump truck P2H",
+      "title": "Pramana · Appendix: evidence and scope",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -126,57 +129,9 @@
       "overflow": []
     },
     {
-      "file": "slides/11-codex.html",
+      "file": "slides/11-judging-map.html",
       "errors": [],
-      "title": "Pramana · Context, contracts, and verification for Codex",
-      "images": [],
-      "headingCount": 1,
-      "fonts": {
-        "geist": true,
-        "mono": true
-      },
-      "overflow": []
-    },
-    {
-      "file": "slides/12-closing.html",
-      "errors": [],
-      "title": "Pramana · Actionable evidence beyond the checkmark",
-      "images": [],
-      "headingCount": 1,
-      "fonts": {
-        "geist": true,
-        "mono": true
-      },
-      "overflow": []
-    },
-    {
-      "file": "slides/13-architecture.html",
-      "errors": [],
-      "title": "Pramana · Appendix: agent and code boundaries",
-      "images": [],
-      "headingCount": 1,
-      "fonts": {
-        "geist": true,
-        "mono": true
-      },
-      "overflow": []
-    },
-    {
-      "file": "slides/14-validation.html",
-      "errors": [],
-      "title": "Pramana · Appendix: what the evidence establishes",
-      "images": [],
-      "headingCount": 1,
-      "fonts": {
-        "geist": true,
-        "mono": true
-      },
-      "overflow": []
-    },
-    {
-      "file": "slides/15-judging-map.html",
-      "errors": [],
-      "title": "Pramana · Appendix: all six judging criteria",
+      "title": "Pramana · Appendix: judging criteria map",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -224,27 +179,27 @@
       "passed": true
     },
     {
-      "label": "Evidence photo retake stage",
+      "label": "Missing detail resolved in preview",
       "passed": true
     },
     {
-      "label": "Evidence STOP stage",
+      "label": "Supervisor report stage",
       "passed": true
     },
     {
-      "label": "Evidence reset",
+      "label": "Demo preview resets",
+      "passed": true
+    },
+    {
+      "label": "Field operator app link",
+      "passed": true
+    },
+    {
+      "label": "Supervisor reports link",
       "passed": true
     },
     {
       "label": "Keyboard works after focus enters iframe",
-      "passed": true
-    },
-    {
-      "label": "Work Order tab",
-      "passed": true
-    },
-    {
-      "label": "Ask Lumo tab",
       "passed": true
     },
     {

@@ -2,6 +2,16 @@
 
 Review date: 7 November 2026. This document supports the presentation content. It is not a production readiness report.
 
+## Pitch scope clarified by the team
+
+The presentation uses **pre-operational inspection** and **field operator**. Older source documents, URLs, screenshots, and capture records retain their original identifiers and labels.
+
+The team clarified the core problem: field operators sometimes provide unstructured or incomplete reports, including reports without required evidence. The intended benefit is to reduce the supervisor's effort spent requesting missing information and reconstructing the report. No measured baseline or time-saving result has been supplied.
+
+The clarified product workflow includes agents generating Work Orders from report findings. A flat tyre is the illustrative example: the agent generates a Work Order to purchase a replacement tyre, and the supervisor monitors both reports and Work Orders. This is a statement of the team's intended workflow, not evidence that the original captured deployment executed that example. Generating a Work Order is distinct from executing a purchase.
+
+The main application demonstration lasts 90 seconds and ends at the supervisor's structured report and evidence view. The deck's local buttons are a scripted fallback preview, not an application implementation or a live model call. The pitch has eight main slides with 330 seconds of planned content and a 30-second reserve, plus three Q&A appendices.
+
 ## Sources reviewed
 
 - `../../README.md`: Pramana design kit and documentation.

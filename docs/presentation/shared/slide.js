@@ -16,42 +16,24 @@
     if (action) { event.preventDefault(); notify(action); }
     if (event.key === ' ' && event.target.tagName !== 'BUTTON') { event.preventDefault(); notify('next'); }
   });
-  // Labels are scenario states; no live model request or inspection is submitted.
-  const evidence = {
-    distant: { file: 'apar-jauh.jpg', caption: 'Initial evidence · fire extinguisher too far away', status: 'Photo retake needed', style: 'warning', message: 'I can’t read the label yet. Could you take a closer photo?', rule: 'A visible component ≠ enough information.', hint: 'A distant photo prompts a request for clearer evidence.' },
-    label: { file: 'apar-label.jpg', caption: 'New evidence · closer view of the extinguisher label', status: 'Clearer label', style: 'ok', message: 'The label is visible now. The extinguisher’s condition still needs checking against the Inspection Plan.', rule: 'A label photo does not establish the extinguisher’s overall condition.', hint: 'Improve evidence quality before recording the result.' },
-    tire: { file: 'ban-benjol.jpg', caption: 'Sample finding · bulge in the tire sidewall', status: 'STOP', style: 'stop', message: 'There is a bulge in the tire sidewall. In this scenario, the Inspection Plan requires marking the vehicle STOP.', rule: 'STOP conditions come from the Inspection Plan.', hint: 'Finding + evidence → report → supervisor decision.' }
+  // Prepared presentation states only; these controls do not call the app or a model.
+  const demo = {
+    input: { src: '../../../design/assets/demo/apar-jauh.jpg', alt: 'Sample operator photo with an unreadable extinguisher label', imageLabel: 'Scripted preview · sample photo', role: 'Guided evidence collection', status: 'Required detail missing', style: 'warning', title: 'The photo needs more detail.', text: 'The extinguisher is visible, but its label is unreadable. Lumo asks the operator for a closer photo.', rule: 'Required evidence is requested while the operator is still at the vehicle.' },
+    clarify: { src: '../../../design/assets/demo/apar-label.jpg', alt: 'Sample closer photo showing the extinguisher label', imageLabel: 'Scripted preview · sample photo', role: 'Guided evidence collection', status: 'Evidence detail supplied', style: 'ok', title: 'The operator resolves the gap.', text: 'The closer photo makes the label readable. Lumo records the evidence with its inspection item.', rule: 'This resolves one evidence gap. The remaining required checks still apply.' },
+    report: { src: '../assets/live/report-detail.png', alt: 'Prepared supervisor inspection report with component findings and photo evidence', imageLabel: 'App capture · prepared demo report', role: 'Supervisor view', status: 'Structured report', style: 'ok', title: 'Evidence and exceptions together.', text: 'The report brings together the vehicle, component results, photos, and inspection exceptions for supervisor review.', rule: 'The supervisor can monitor the report and the Work Orders linked to its findings.' }
   };
-  function selectEvidence(key) {
-    const item = evidence[key]; if (!item) return;
-    const photo = document.getElementById('evidencePhoto'); if (!photo) return;
-    photo.src = `../../../design/assets/demo/${item.file}`;
-    photo.alt = item.caption;
-    document.getElementById('photoCaption').textContent = item.caption;
-    const status = document.getElementById('evidenceStatus'); status.textContent = item.status; status.className = `pill ${item.style}`;
-    document.getElementById('evidenceMessage').textContent = item.message;
-    document.getElementById('evidenceRule').textContent = item.rule;
-    document.getElementById('evidenceHint').textContent = item.hint;
-    document.querySelectorAll('[data-evidence]').forEach(button => { const selected = button.dataset.evidence === key; button.classList.toggle('active', selected); button.setAttribute('aria-pressed', String(selected)); });
-  }
-  document.querySelectorAll('[data-evidence]').forEach(button => button.addEventListener('click', () => selectEvidence(button.dataset.evidence)));
-  const operations = {
-    report: { file: '03-supervisor-laporan-detail.png', title: 'Findings keep their evidence.', text: 'One Inspection Report shows photos, components, notes, and STOP conditions.', label: 'Inspection Report', code: 'LI-RW-45 · DT-07' },
-    wo: { file: '04-supervisor-work-order.png', title: 'Each repair has an owner.', text: 'The supervisor creates a Work Order from the finding, then assigns a mechanic and a deadline.', label: 'Work Order', code: 'Finding → Work Order' },
-    analysis: { file: '10-tanya-lumo-jawaban.png', title: 'Answers cite their sources.', text: 'Ask Lumo reads reports and Work Orders. Recommendations refer to source IDs.', label: 'Ask Lumo', code: 'Sources + recommendations' }
-  };
-  const operationOverrides = JSON.parse(document.getElementById('operationSources')?.textContent || '{}');
-  for (const [key, value] of Object.entries(operationOverrides)) Object.assign(operations[key], value);
-  document.querySelectorAll('[data-operation]').forEach(button => button.addEventListener('click', () => {
-    const value = operations[button.dataset.operation];
-    const image = document.getElementById('operationScreen'); image.src = value.src || `../../../design/screens/${value.file}`; image.alt = value.title;
-    document.querySelector('.operations .screenshot-label').textContent = value.src ? value.label : 'UI reference · sample data';
-    document.getElementById('operationTitle').textContent = value.title;
-    document.getElementById('operationText').textContent = value.text;
-    document.getElementById('operationCode').textContent = value.code;
-    document.querySelectorAll('[data-operation]').forEach(other => { const selected = other === button; other.classList.toggle('active', selected); other.setAttribute('aria-pressed', String(selected)); });
+  document.querySelectorAll('[data-demo]').forEach(button => button.addEventListener('click', () => {
+    const value = demo[button.dataset.demo];
+    if (!value) return;
+    const image = document.getElementById('demoScreen');
+    image.src = value.src; image.alt = value.alt;
+    document.getElementById('demoImageLabel').textContent = value.imageLabel;
+    document.getElementById('demoRole').textContent = value.role;
+    const status = document.getElementById('demoStatus'); status.textContent = value.status; status.className = `pill ${value.style}`;
+    document.getElementById('demoTitle').textContent = value.title;
+    document.getElementById('demoText').textContent = value.text;
+    document.getElementById('demoRule').textContent = value.rule;
+    document.querySelectorAll('[data-demo]').forEach(other => { const selected = other === button; other.classList.toggle('active', selected); other.setAttribute('aria-pressed', String(selected)); });
   }));
-  // Live captures are used only on pages that actually exist on the deployment.
-  document.querySelectorAll('img[data-live]').forEach(img => { const probe = new Image(); probe.onload = () => { img.src = probe.src; }; probe.src = img.dataset.live; });
   document.fonts.ready.then(() => { window.__ready = true; notify('ready'); });
 })();
