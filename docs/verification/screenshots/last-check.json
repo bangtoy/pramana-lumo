@@ -1,6 +1,6 @@
 [
   {
-    "target": "/supervisor/laporan",
+    "target": "/supervisor/agent?rencana=RI-DT-UTYPE-01&chat=dock",
     "width": 1440,
     "height": 900,
     "status": 200,
@@ -11,7 +11,7 @@
     "errors": []
   },
   {
-    "target": "/supervisor/laporan",
+    "target": "/supervisor/agent?rencana=RI-DT-UTYPE-01&chat=dock",
     "width": 390,
     "height": 844,
     "status": 200,
@@ -22,7 +22,7 @@
     "errors": []
   },
   {
-    "target": "/supervisor/agent",
+    "target": "/supervisor/agent?rencana=RI-DT-UTYPE-01&chat=pin",
     "width": 1440,
     "height": 900,
     "status": 200,
@@ -33,51 +33,7 @@
     "errors": []
   },
   {
-    "target": "/supervisor/agent",
-    "width": 390,
-    "height": 844,
-    "status": 200,
-    "font": "Geist, \"Geist Fallback\", Geist, system-ui, sans-serif",
-    "primary": "#1b8ce8",
-    "lang": "en",
-    "overflow": false,
-    "errors": []
-  },
-  {
-    "target": "/petugas",
-    "width": 1440,
-    "height": 900,
-    "status": 200,
-    "font": "Geist, \"Geist Fallback\", Geist, system-ui, sans-serif",
-    "primary": "#1b8ce8",
-    "lang": "en",
-    "overflow": false,
-    "errors": []
-  },
-  {
-    "target": "/petugas",
-    "width": 390,
-    "height": 844,
-    "status": 200,
-    "font": "Geist, \"Geist Fallback\", Geist, system-ui, sans-serif",
-    "primary": "#1b8ce8",
-    "lang": "en",
-    "overflow": false,
-    "errors": []
-  },
-  {
-    "target": "/petugas/riwayat",
-    "width": 1440,
-    "height": 900,
-    "status": 200,
-    "font": "Geist, \"Geist Fallback\", Geist, system-ui, sans-serif",
-    "primary": "#1b8ce8",
-    "lang": "en",
-    "overflow": false,
-    "errors": []
-  },
-  {
-    "target": "/petugas/riwayat",
+    "target": "/supervisor/agent?rencana=RI-DT-UTYPE-01&chat=pin",
     "width": 390,
     "height": 844,
     "status": 200,

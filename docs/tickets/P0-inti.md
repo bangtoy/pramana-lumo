@@ -211,9 +211,9 @@ Baca dulu: `docs/tickets/README.md` (Definition of Done), `docs/PRD.md` §4.1–
 - Status agent selama giliran tampil di bawah `TypingBubble` ("Membaca lampiran…").
 
 **Selesai bila**
-- [ ] Screenshot 1440×900 setara `screens/06` (minimize), `07` (pin), `08` (item terpilih, roda menyala), `09` (percakapan terbuka).
-- [ ] Spec Sheet di chat → item muncul tanpa reload; edit manual tersimpan.
-- [ ] Hanya satu `.t-title` di header; tidak ada `.t-display` di halaman ini; `rg` §3.4 bersih.
+- [x] Screenshot 1440×900 untuk minimize, pin, item terpilih/roda menyala, dan percakapan terbuka ditinjau; referensi screens/06–09 masih placeholder.
+- [x] Spec Sheet di chat → item muncul tanpa reload; edit manual tersimpan.
+- [x] Hanya satu `.t-title` di header; tidak ada `.t-display` di halaman ini; `rg` §3.4 bersih.
 
 **Prompt /goal**
 ```
