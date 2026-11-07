@@ -6,7 +6,7 @@ import "./globals.css";
 const geist = Geist({ variable: "--font-geist", subsets: ["latin"] });
 const mono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 export const metadata: Metadata = {
-  icons: { icon: "/icon-lens-bot.svg" },
+  icons: { icon: "/icon-lumo-face.png", apple: "/icon-lumo-face.png" },
   title: "Proactive Agentic Inspection",
   description: "Build inspection plans and complete P2H with Lumo.",
 };
