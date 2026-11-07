@@ -1,0 +1,23 @@
+{
+  "config": {
+    "endpoint": "https://api.openai.com/v1",
+    "model": "gpt-6.1-sol",
+    "keyConfigured": true,
+    "dataDir": "/data",
+    "uid": 1000
+  },
+  "localPort": "3002",
+  "tunnel": "https://brush-featured-window-lat.trycloudflare.com",
+  "persistenceAfterRestart": true,
+  "seedPlan": true,
+  "seedReport": true,
+  "evidenceReadable": true,
+  "mobileViewport": "390x844",
+  "cameraAndGallery": true,
+  "errors": [],
+  "freshImage": {
+    "seedItems": 8,
+    "endpoint": "http://host.docker.internal:20128/v1",
+    "keyConfigured": false
+  }
+}

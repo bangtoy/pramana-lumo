@@ -5,7 +5,8 @@ COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
 RUN npm run build
-ENV NODE_ENV=production DATA_DIR=/data OPENAI_AGENTS_PYTHON=/usr/bin/python3
+ENV NODE_ENV=production DATA_DIR=/data OPENAI_AGENTS_PYTHON=/usr/bin/python3 \
+    OPENAI_BASE_URL=http://host.docker.internal:20128/v1
 RUN mkdir -p /data && chown node:node /data
 USER node
 EXPOSE 3000
