@@ -1,0 +1,179 @@
+[
+  {
+    "file": "slides/01-cover.html",
+    "label": "P2H backed by evidence",
+    "thumb": "thumbs/01-cover.jpg",
+    "seconds": 20,
+    "appendix": false,
+    "notes": "00:00–00:20. “Before a dump truck starts its shift, we need to know its condition. Pramana connects inspections, photo evidence, and follow-up. Lumo guides the conversation.” Do not read out the entire workflow. The cover uses a Lumo UI reference from the design system rather than a deployment capture.",
+    "criteria": [
+      "Problem & Solution Fit"
+    ]
+  },
+  {
+    "file": "slides/02-problem.html",
+    "label": "A checkmark does not show what was inspected",
+    "thumb": "thumbs/02-problem.jpg",
+    "seconds": 25,
+    "appendix": false,
+    "notes": "00:20–00:45. “A completed form may not provide enough information for a decision. Each vehicle has specific components. Photos can be too distant. And each finding needs someone responsible for follow-up. These are the three gaps we focus on.” The problem comes from the PRD. Do not cite error rates, accident statistics, or interview findings that are not available.",
+    "criteria": [
+      "Problem & Solution Fit"
+    ]
+  },
+  {
+    "file": "slides/03-solution.html",
+    "label": "One workflow from specifications to action",
+    "thumb": "thumbs/03-solution.jpg",
+    "seconds": 25,
+    "appendix": false,
+    "notes": "00:45–01:10. “The supervisor prepares a plan from the specifications and P2H Standard. The inspector receives guidance on collecting evidence. The results become a report and a Work Order. Lumo helps assess input, while code enforces completeness. The supervisor remains responsible for actions.” Guide the audience from left to right without reading every box.",
+    "criteria": [
+      "Problem & Solution Fit",
+      "Insight & Originality"
+    ]
+  },
+  {
+    "file": "slides/04-plan.html",
+    "label": "The plan follows the vehicle being inspected",
+    "thumb": "thumbs/04-plan.jpg",
+    "seconds": 35,
+    "appendix": false,
+    "notes": "01:10–01:45. “Here, the supervisor prepares a dump truck inspection plan. Selecting the tire item can highlight the component on the Vehicle Model. Each item explains what to check, which photos to collect, and when to STOP. The supervisor can complete and edit the plan.” For a live demo, use an existing seeded plan. Latency for generating a new plan has not been measured. Keep tab switching brief to stay within 35 seconds.",
+    "criteria": [
+      "Problem & Solution Fit",
+      "Build Quality",
+      "Deep Domain AI"
+    ]
+  },
+  {
+    "file": "slides/05-evidence.html",
+    "label": "Clearer evidence while the inspector is still on site",
+    "thumb": "thumbs/05-evidence.jpg",
+    "seconds": 50,
+    "appendix": false,
+    "notes": "01:45–02:35. Click 1, then 2, then 3. “The fire extinguisher is visible, but its label is unreadable. The conversation asks for a closer photo. The label photo improves the evidence, but does not establish that the extinguisher is safe. The tire bulge matches a STOP rule. The finding needs evidence and escalation to the supervisor.” State that this is a scripted workflow simulation with sample photos. Allow about 12 seconds per stage and 14 seconds to explain the code safeguards.",
+    "criteria": [
+      "Build Quality",
+      "Insight & Originality"
+    ]
+  },
+  {
+    "file": "slides/06-follow-up.html",
+    "label": "One finding through to follow-up",
+    "thumb": "thumbs/06-follow-up.jpg",
+    "seconds": 40,
+    "appendix": false,
+    "notes": "02:35–03:15. Show the report, click Work Order, then the Ask Lumo reference if time permits. “The supervisor sees the component, photo, and reason for STOP. A Work Order assigns the finding to a mechanic with a deadline. Handling status stays synchronized with the report. In the P3 design, Ask Lumo includes sources.” Do not create or close WOs on the shared deployment just for the presentation. Closing a WO does not automatically establish roadworthiness. The live version may use the name Pak Pramana. Lumo branding and some dashboard features come from the supplied design references.",
+    "criteria": [
+      "Build Quality",
+      "Real-World Value"
+    ]
+  },
+  {
+    "file": "slides/07-quality.html",
+    "label": "Agents assess input, code enforces rules",
+    "thumb": "thumbs/07-quality.jpg",
+    "seconds": 30,
+    "appendix": false,
+    "notes": "03:15–03:45. “Reliability extends beyond the prompt. Code rejects results without required photos, tracks progress, and blocks incomplete submissions. If the Analyst fails, fallback answers still refer to the data. The supervisor controls actions.” Source evidence comes from the lumo-design branch. Do not claim that all these scenarios have just passed end-to-end testing on the live server.",
+    "criteria": [
+      "Build Quality"
+    ]
+  },
+  {
+    "file": "slides/08-originality.html",
+    "label": "Evidence, components, and actions share context",
+    "thumb": "thumbs/08-originality.jpg",
+    "seconds": 25,
+    "appendix": false,
+    "notes": "03:45–04:10. “Our insight is that useful evidence depends on the component under inspection. The plan, follow-up questions, and corrective actions therefore share the same vehicle context. We build report quality during the inspection, while the inspector is still on site.” Do not claim that no other product does this.",
+    "criteria": [
+      "Insight & Originality"
+    ]
+  },
+  {
+    "file": "slides/09-value.html",
+    "label": "Benefits that can be assessed and measured",
+    "thumb": "thumbs/09-value.jpg",
+    "seconds": 25,
+    "appendix": false,
+    "notes": "04:10–04:35. “The benefits differ by role: guidance for inspectors, evidence ready for supervisor review, and clear repair tasks for mechanics. The PRD targets plan creation in under 30 seconds and eight-item P2H in under four minutes. Both remain targets, with operational impact still to be measured.”",
+    "criteria": [
+      "Real-World Value"
+    ]
+  },
+  {
+    "file": "slides/10-direction.html",
+    "label": "Deep Domain AI for dump truck P2H",
+    "thumb": "thumbs/10-direction.jpg",
+    "seconds": 20,
+    "appendix": false,
+    "notes": "04:35–04:55. “Our strongest fit is Deep Domain AI because we model the actual P2H workflow. The AI-native approach appears in conversations that guide evidence collection. We deliberately limit autonomy: the supervisor still reviews plans and decides on actions.”",
+    "criteria": [
+      "Alignment with Build Direction"
+    ]
+  },
+  {
+    "file": "slides/11-codex.html",
+    "label": "Context, contracts, and verification for Codex",
+    "thumb": "thumbs/11-codex.jpg",
+    "seconds": 30,
+    "appendix": false,
+    "notes": "04:55–05:25. “Our Codex workflow starts with clear context: domain terms, data contracts, the design system, and tickets with a Definition of Done. Important rules belong in code, and changes require verification. The repo contains these workflow artifacts.” Session attribution evidence is not available. Do not claim code percentages, prompt counts, token usage, or development speed gains. If the team has original session logs, add one concrete task, diff, and test example before judging.",
+    "criteria": [
+      "Use of Codex"
+    ]
+  },
+  {
+    "file": "slides/12-closing.html",
+    "label": "Actionable evidence beyond the checkmark",
+    "thumb": "thumbs/12-closing.jpg",
+    "seconds": 35,
+    "appendix": false,
+    "notes": "05:25–06:00. “Pramana starts with a simple need: inspections should produce useful evidence. Plans fit the vehicle, Lumo helps complete the evidence, and findings connect to repairs. Next comes a pilot to measure evidence quality and follow-up time. You can open the app at p2h.apta.works. Thank you.” Finish at 06:00. Use the appendix for Q&A, outside the six-minute pitch.",
+    "criteria": [
+      "Problem & Solution Fit",
+      "Real-World Value"
+    ]
+  },
+  {
+    "file": "slides/13-architecture.html",
+    "label": "Appendix: agent and code boundaries",
+    "thumb": "thumbs/13-architecture.jpg",
+    "seconds": 0,
+    "appendix": true,
+    "notes": "Appendix for architecture questions. Name one agent per responsibility and explain the separation between dialogue and deterministic rules. Do not present configured model versions as public release facts: repo model names may be local endpoint aliases. Generating a Vehicle Model requires a Linux runtime according to the ADR. Ready-made models support the demo.",
+    "criteria": [
+      "Build Quality"
+    ]
+  },
+  {
+    "file": "slides/14-validation.html",
+    "label": "Appendix: what the evidence establishes",
+    "thumb": "thumbs/14-validation.jpg",
+    "seconds": 0,
+    "appendix": true,
+    "notes": "Describe the status precisely: read-only captures establish page accessibility and visible content. They do not establish that the entire agent workflow works. Design references, branch source, and deployment captures are different types of evidence. Closing a Work Order records handling, without automatically authorizing vehicle operation.",
+    "criteria": [
+      "Build Quality",
+      "Real-World Value"
+    ]
+  },
+  {
+    "file": "slides/15-judging-map.html",
+    "label": "Appendix: all six judging criteria",
+    "thumb": "thumbs/15-judging-map.jpg",
+    "seconds": 0,
+    "appendix": true,
+    "notes": "Use when judges ask how the presentation maps to the rubric. Do not assume equal weights across criteria. The weakest evidence for the team to strengthen is user needs research or pilot results, and concrete Codex session logs.",
+    "criteria": [
+      "Problem & Solution Fit",
+      "Build Quality",
+      "Insight & Originality",
+      "Real-World Value",
+      "Alignment with Build Direction",
+      "Use of Codex"
+    ]
+  }
+]

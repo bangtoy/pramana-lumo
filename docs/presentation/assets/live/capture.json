@@ -1,0 +1,302 @@
+{
+  "capturedAt": "2026-11-07T03:16:20.099Z",
+  "baseURL": "https://p2h.apta.works",
+  "policy": "Read-only navigation of existing records; no chat, report, or work order submitted. Avoid /supervisor/agent without a rencana ID because that page creates a draft on load.",
+  "pages": [
+    {
+      "name": "home",
+      "route": "/",
+      "status": 200,
+      "finalURL": "https://p2h.apta.works/",
+      "title": "Pramana · P2H",
+      "text": "P\nPramana\nP2H dump truck yang dipandu agent, lengkap dengan bukti.\nMasuk sebagai Supervisor\n\nSusun Rencana Inspeksi bersama agent, pantau laporan, dan buat work order.\n\nWEBSITE · DESKTOP\nMasuk sebagai Petugas\n\nLakukan P2H lewat chat dengan Pak Pramana, kirim bukti foto per komponen.\n\nTAMPILAN HP\nTanpa login. Buka tampilan Petugas di HP lewat URL tunnel.",
+      "errors": [],
+      "links": [
+        {
+          "text": "Masuk sebagai Supervisor\n\nSusun Rencana Inspeksi bersama agent, pantau laporan, dan buat work order.\n\nWEBSITE · DESKTOP",
+          "href": "/supervisor/laporan"
+        },
+        {
+          "text": "Masuk sebagai Petugas\n\nLakukan P2H lewat chat dengan Pak Pramana, kirim bukti foto per komponen.\n\nTAMPILAN HP",
+          "href": "/petugas"
+        }
+      ],
+      "screenshot": "assets/live/home.png"
+    },
+    {
+      "name": "laporan",
+      "route": "/supervisor/laporan",
+      "status": 200,
+      "finalURL": "https://p2h.apta.works/supervisor/laporan",
+      "title": "Pramana · P2H",
+      "text": "P\nPramana\nSite Tanjung Enim\nDashboard\nAgent\nRencana Inspeksi\nLaporan Inspeksi\nWork order\nSupervisor · Rina Hartono\nDashboard\nLaporan Inspeksi\n\nLaporan P2H yang dikirim Petugas. Unit dengan kondisi STOP selalu di atas.\n\nUnit\tVonis\tHasil\tPetugas\tDikirim\tLaporan\nDT-07 · B 9123 KD\t\nSTOP\nDT-07 tidak layak jalan\n\t\n5\n2\n1\n\tBudi Santoso\t29 Okt 2026, 06:58\tLI-2026-10-29-DT07",
+      "errors": [],
+      "links": [
+        {
+          "text": "P\nPramana\nSite Tanjung Enim",
+          "href": "/"
+        },
+        {
+          "text": "Dashboard",
+          "href": "/supervisor/laporan"
+        },
+        {
+          "text": "Agent",
+          "href": "/supervisor/agent"
+        },
+        {
+          "text": "Rencana Inspeksi",
+          "href": "/supervisor/rencana"
+        },
+        {
+          "text": "Laporan Inspeksi",
+          "href": "/supervisor/laporan"
+        },
+        {
+          "text": "Work order",
+          "href": "/supervisor/work-order"
+        },
+        {
+          "text": "DT-07 · B 9123 KD",
+          "href": "/supervisor/laporan/LI-2026-10-29-DT07"
+        },
+        {
+          "text": "LI-2026-10-29-DT07",
+          "href": "/supervisor/laporan/LI-2026-10-29-DT07"
+        }
+      ],
+      "screenshot": "assets/live/laporan.png"
+    },
+    {
+      "name": "report-detail",
+      "route": "/supervisor/laporan/LI-2026-10-29-DT07",
+      "status": 200,
+      "finalURL": "https://p2h.apta.works/supervisor/laporan/LI-2026-10-29-DT07",
+      "title": "Pramana · P2H",
+      "text": "P\nPramana\nSite Tanjung Enim\nDashboard\nAgent\nRencana Inspeksi\nLaporan Inspeksi\nWork order\nSupervisor · Rina Hartono\nLaporan Inspeksi / LI-2026-10-29-DT07\nDT-07 tidak layak jalan\nUnit DT-07 · B 9123 KD\nPetugas Budi Santoso\nWaktu 29 Okt 2026, 06:42–06:58\nRencana RI-DT-UTYPE-01\nUnduh PDF\nBuat work order (2 temuan)\nSTOP\n2 kondisi STOP: ban gandar 3 kiri luar benjol, sein kanan mati.\n5\nbaik\n2\ntidak baik\n1\ntidak bisa diperiksa\nMODEL KENDARAAN\nDump truck tronton 10 roda\nAngkat bak\nBaik\nTidak baik\nTidak bisa diperiksa\nTemuan per item\n8 item\n3\nBan & mur roda (10)\nSTOP\nTidak baik\nSisi kiri DT-07\nBenjol dinding ban, gandar 3 kiri luar\n\nBenjol terkonfirmasi, sekitar 6 cm di dinding ban belakang kiri luar, gandar 3. Ban harus diganti sebelum unit beroperasi.\n\nTandai selesai\nTanya Pramana\n8\nLampu & reflector\nSTOP\nTidak baik\n4\nBak dump (lantai & dinding)\nTidak bisa diperiksa\n1\nKabin & perlengkapan safety\nBaik\n2\nRem & sistem angin\nBaik\n5\nSilinder & selang hidraulik\nBaik\n6\nSafety bak (2)\nBaik\n7\nPintu dump & pengunci\nBaik",
+      "errors": [],
+      "links": [
+        {
+          "text": "P\nPramana\nSite Tanjung Enim",
+          "href": "/"
+        },
+        {
+          "text": "Dashboard",
+          "href": "/supervisor/laporan"
+        },
+        {
+          "text": "Agent",
+          "href": "/supervisor/agent"
+        },
+        {
+          "text": "Rencana Inspeksi",
+          "href": "/supervisor/rencana"
+        },
+        {
+          "text": "Laporan Inspeksi",
+          "href": "/supervisor/laporan"
+        },
+        {
+          "text": "Work order",
+          "href": "/supervisor/work-order"
+        },
+        {
+          "text": "Laporan Inspeksi",
+          "href": "/supervisor/laporan"
+        },
+        {
+          "text": "Unduh PDF",
+          "href": "/api/laporan/LI-2026-10-29-DT07/pdf"
+        },
+        {
+          "text": "",
+          "href": "/api/files/FILE-DT07-SISI-KIRI"
+        },
+        {
+          "text": "",
+          "href": "/api/files/FILE-DT07-BAN"
+        }
+      ],
+      "screenshot": "assets/live/report-detail.png"
+    },
+    {
+      "name": "rencana",
+      "route": "/supervisor/rencana",
+      "status": 200,
+      "finalURL": "https://p2h.apta.works/supervisor/rencana",
+      "title": "Pramana · P2H",
+      "text": "P\nPramana\nSite Tanjung Enim\nDashboard\nAgent\nRencana Inspeksi\nLaporan Inspeksi\nWork order\nSupervisor · Rina Hartono\nDashboard\nRencana Inspeksi\n\nDaftar item P2H per tipe kendaraan. Rencana langsung tersedia untuk Petugas begitu disimpan.\n\nSusun dengan agent\nAktif (2)\nArsip (0)\nRencana\tTipe kendaraan\tItem\tModel\tDiperbarui\nRencana Inspeksi P2H Kendaraan Angkut Tambang\nRI-MVUU2GOM9FU\n\tKendaraan angkut tambang — tipe belum ditentukan\t6\tForm saja\t30 Okt 2026, 17:32\nP2H Dump Truck Tronton U-Type\nRI-DT-UTYPE-01\n\tDump truck tronton 10 roda · bak U-type 24 m³\t8\tSiap pakai\t30 Okt 2026, 17:32",
+      "errors": [],
+      "links": [
+        {
+          "text": "P\nPramana\nSite Tanjung Enim",
+          "href": "/"
+        },
+        {
+          "text": "Dashboard",
+          "href": "/supervisor/laporan"
+        },
+        {
+          "text": "Agent",
+          "href": "/supervisor/agent"
+        },
+        {
+          "text": "Rencana Inspeksi",
+          "href": "/supervisor/rencana"
+        },
+        {
+          "text": "Laporan Inspeksi",
+          "href": "/supervisor/laporan"
+        },
+        {
+          "text": "Work order",
+          "href": "/supervisor/work-order"
+        },
+        {
+          "text": "Susun dengan agent",
+          "href": "/supervisor/agent"
+        },
+        {
+          "text": "Rencana Inspeksi P2H Kendaraan Angkut Tambang",
+          "href": "/supervisor/agent?rencana=RI-MVUU2GOM9FU"
+        },
+        {
+          "text": "P2H Dump Truck Tronton U-Type",
+          "href": "/supervisor/agent?rencana=RI-DT-UTYPE-01"
+        }
+      ],
+      "screenshot": "assets/live/rencana.png"
+    },
+    {
+      "name": "plan-detail",
+      "route": "/supervisor/agent?rencana=RI-DT-UTYPE-01",
+      "status": 200,
+      "finalURL": "https://p2h.apta.works/supervisor/agent?rencana=RI-DT-UTYPE-01",
+      "title": "Pramana · P2H",
+      "text": "P\nPramana\nSite Tanjung Enim\nDashboard\nAgent\nRencana Inspeksi\nLaporan Inspeksi\nWork order\nSupervisor · Rina Hartono\nAgent Perancang\nP2H Dump Truck Tronton U-Type\nRencana Inspeksi / RI-DT-UTYPE-01\nDump truck tronton 10 roda · bak U-type 24 m³\n8 item · tersedia untuk Petugas\nPerubahan tersimpan otomatis\nMODEL KENDARAAN\nSiap pakai\nAngkat bak\nDump truck tronton U-type · 8 komponen bisa disorot\nPakai model yang ada\nGenerate baru\nSPEC SHEET\nTipe\nDump truck tronton U-type\nDimensi luar\n6000 × 2500 × 1870 mm\nVolume\n24 m³\nHidraulik\nTensuky KRM 210, root 100 mm\nCATATAN AGENT\nSpec Sheet hanya mencakup karoseri. Kabin, rem, dan ban ditambahkan dari Standar Inspeksi P2H.\n10 roda: 2 depan + 8 belakang (ganda), semua ban dan mur roda diperiksa.\nSilinder hidraulik dan safety bak diurutkan berurutan karena keduanya butuh bak terangkat.\nItem rencana\n8 item\n1\nKabin & perlengkapan safety\nStandar P2H\nCek\nSabuk pengaman, klakson, alarm mundur, spion, kaca, APAR\nBukti\nFoto: Foto APAR dengan label tanggal terbaca · wajib\nJawaban: Sabuk, klakson, dan alarm mundur berfungsi? · wajib\nSTOP jika\nSabuk, klakson, atau alarm mundur rusak; APAR tidak ada atau kedaluwarsa\n2\nRem & sistem angin\nStandar P2H\nCek\nTekanan angin naik normal, tidak ada bocor terdengar, rem parkir menahan\nBukti\nFoto: Foto gauge tekanan angin di dashboard · wajib\nSTOP jika\nTekanan tidak naik atau rem parkir gagal menahan\n3\nBan & mur roda (10)\nStandar P2H\nCek\nKempis, sobek atau benjol, tapak gundul, mur hilang atau longgar\nBukti\nFoto: Foto sisi kiri dan kanan truk · wajib\nFoto: Close-up ban yang dicurigai\nSTOP jika\nBan kempis, sobek, atau benjol; mur roda hilang\n4\nBak dump (lantai & dinding)\nSpec Sheet\nCek\nRetak las, lubang, dinding melengkung (lantai plat 6 mm, dinding plat 4 mm)\nBukti\nFoto: Foto bak dari belakang dengan pintu terbuka · wajib\nSTOP jika\nRetak atau lubang yang membuat muatan bisa tumpah\n5\nSilinder & selang hidraulik\nSpec Sheet\nCek\nRembesan oli di silinder, selang, sambungan; bak naik-turun mulus\nBukti\nFoto: Foto silinder dengan bak terangkat · wajib\nSTOP jika\nBocor menetes atau selang retak\n6\nSafety bak (2)\nSpec Sheet\nCek\nAda, tidak bengkok, pin pengunci ada, bisa dipasang\nBukti\nFoto: Foto safety bak terpasang saat bak terangkat · wajib\nSTOP jika\nHilang, bengkok, atau tidak bisa dipasang\n7\nPintu dump & pengunci\nSpec Sheet\nCek\nEngsel utuh, pengunci menutup rapat, tidak ada celah\nBukti\nFoto: Foto pintu tertutup dan close-up pengunci · wajib\nSTOP jika\nPengunci tidak mengunci\n8\nLampu & reflector\nSpec Sheet\nCek\nLampu bak, rem, sein, mundur menyala; reflector utuh dan bersih\nBukti\nFoto: Foto belakang truk dengan lampu menyala · wajib\nSTOP jika\nLampu rem atau sein mati\nTambah item",
+      "errors": [],
+      "links": [
+        {
+          "text": "P\nPramana\nSite Tanjung Enim",
+          "href": "/"
+        },
+        {
+          "text": "Dashboard",
+          "href": "/supervisor/laporan"
+        },
+        {
+          "text": "Agent",
+          "href": "/supervisor/agent"
+        },
+        {
+          "text": "Rencana Inspeksi",
+          "href": "/supervisor/rencana"
+        },
+        {
+          "text": "Laporan Inspeksi",
+          "href": "/supervisor/laporan"
+        },
+        {
+          "text": "Work order",
+          "href": "/supervisor/work-order"
+        },
+        {
+          "text": "",
+          "href": "/api/files/FILE-SPEC-DT"
+        }
+      ],
+      "screenshot": "assets/live/plan-detail.png"
+    },
+    {
+      "name": "work-order",
+      "route": "/supervisor/work-order",
+      "status": 200,
+      "finalURL": "https://p2h.apta.works/supervisor/work-order",
+      "title": "Pramana · P2H",
+      "text": "P\nPramana\nSite Tanjung Enim\nDashboard\nAgent\nRencana Inspeksi\nLaporan Inspeksi\nWork order\nSupervisor · Rina Hartono\nDashboard\nWork order\n\nPerintah perbaikan yang disusun agent dari temuan P2H, dikelompokkan per laporan.\n\nBelum ada work order\n\nBuka Laporan Inspeksi yang punya temuan, lalu tekan “Buat work order”.",
+      "errors": [],
+      "links": [
+        {
+          "text": "P\nPramana\nSite Tanjung Enim",
+          "href": "/"
+        },
+        {
+          "text": "Dashboard",
+          "href": "/supervisor/laporan"
+        },
+        {
+          "text": "Agent",
+          "href": "/supervisor/agent"
+        },
+        {
+          "text": "Rencana Inspeksi",
+          "href": "/supervisor/rencana"
+        },
+        {
+          "text": "Laporan Inspeksi",
+          "href": "/supervisor/laporan"
+        },
+        {
+          "text": "Work order",
+          "href": "/supervisor/work-order"
+        }
+      ],
+      "screenshot": "assets/live/work-order.png"
+    },
+    {
+      "name": "ringkasan",
+      "route": "/supervisor",
+      "status": 200,
+      "finalURL": "https://p2h.apta.works/supervisor/laporan",
+      "title": "Pramana · P2H",
+      "text": "P\nPramana\nSite Tanjung Enim\nDashboard\nAgent\nRencana Inspeksi\nLaporan Inspeksi\nWork order\nSupervisor · Rina Hartono\nDashboard\nLaporan Inspeksi\n\nLaporan P2H yang dikirim Petugas. Unit dengan kondisi STOP selalu di atas.\n\nUnit\tVonis\tHasil\tPetugas\tDikirim\tLaporan\nDT-07 · B 9123 KD\t\nSTOP\nDT-07 tidak layak jalan\n\t\n5\n2\n1\n\tBudi Santoso\t29 Okt 2026, 06:58\tLI-2026-10-29-DT07",
+      "errors": [],
+      "links": [
+        {
+          "text": "P\nPramana\nSite Tanjung Enim",
+          "href": "/"
+        },
+        {
+          "text": "Dashboard",
+          "href": "/supervisor/laporan"
+        },
+        {
+          "text": "Agent",
+          "href": "/supervisor/agent"
+        },
+        {
+          "text": "Rencana Inspeksi",
+          "href": "/supervisor/rencana"
+        },
+        {
+          "text": "Laporan Inspeksi",
+          "href": "/supervisor/laporan"
+        },
+        {
+          "text": "Work order",
+          "href": "/supervisor/work-order"
+        },
+        {
+          "text": "DT-07 · B 9123 KD",
+          "href": "/supervisor/laporan/LI-2026-10-29-DT07"
+        },
+        {
+          "text": "LI-2026-10-29-DT07",
+          "href": "/supervisor/laporan/LI-2026-10-29-DT07"
+        }
+      ],
+      "screenshot": "assets/live/ringkasan.png"
+    },
+    {
+      "name": "petugas",
+      "route": "/petugas",
+      "status": 200,
+      "finalURL": "https://p2h.apta.works/petugas",
+      "title": "Pramana · P2H",
+      "text": "Menyiapkan P2H…",
+      "errors": [],
+      "links": [],
+      "screenshot": "assets/live/petugas.png"
+    }
+  ]
+}

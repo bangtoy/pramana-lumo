@@ -1,0 +1,17 @@
+{
+  "name": "pramana-lumo-presentation",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "slides": "node scripts/build-slides.mjs",
+    "capture": "node scripts/capture-app.mjs",
+    "verify": "node scripts/verify.mjs",
+    "export": "node scripts/export-deck-pdf.mjs --slides slides --out Pramana-Lumo.pdf",
+    "thumbs": "node scripts/gen-deck-thumbs.mjs --slides slides --out thumbs"
+  },
+  "devDependencies": {
+    "pdf-lib": "^1.17.1",
+    "playwright": "^1.61.0",
+    "sharp": "^0.34.0"
+  }
+}
