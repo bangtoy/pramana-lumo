@@ -1,0 +1,91 @@
+{
+  "replyChoices": {
+    "insideConversation": true,
+    "fullTextWraps": true
+  },
+  "composer": {
+    "fontSize": 16,
+    "growsAndShrinks": true,
+    "maxRenderedLines": 3,
+    "scrollAfterCap": true,
+    "wrapsAt320": true,
+    "shiftEnter": true,
+    "composingEnterDoesNotSend": true
+  },
+  "unsentDraft": {
+    "newInspectionRequiresConfirmation": true,
+    "dismissPreservesTextAndPhoto": true,
+    "createsNoReport": true
+  },
+  "photo": {
+    "preparingState": true,
+    "localDraftPreview": true,
+    "pendingPreviewBeforeResponse": true,
+    "clearsImmediatelyOnEnter": true,
+    "editableWhilePending": true,
+    "pendingEnterPreservesNextDraft": true,
+    "successPreservesNextDraft": true,
+    "photoActionsDisabledWhilePending": true,
+    "exactlyOneRequest": true,
+    "savedImageVisible": true,
+    "objectUrlsRevoked": true
+  },
+  "retry": {
+    "fileOnlyPending": true,
+    "emptyDraftRestoresFailedPhoto": true,
+    "failurePreservesNextDraft": true,
+    "explicitRetryUsesFailedTextAndPhoto": true,
+    "failedRetryPreservesNextDraft": true,
+    "successfulRetryPreservesNextDraft": true,
+    "textOnlySuccess": true,
+    "photoOnlyNextDraftPreservedOnRetryFailureAndSuccess": true,
+    "retryUsesCapturedPhotoFilename": true
+  },
+  "batch": {
+    "fiveCompressedPhotos": true,
+    "pendingPreviews": 5,
+    "restoresAllAfterFailure": true,
+    "retriesSamePayload": true,
+    "nextDraftPreserved": true,
+    "savedPhotos": 5,
+    "objectUrlsRevoked": true
+  },
+  "shortViewports": {
+    "modelCollapses": true,
+    "threeLineComposerAndPhotoRemainReachable": true,
+    "threadRemainsVisible": true,
+    "viewports": [
+      "390×450",
+      "320×422"
+    ]
+  },
+  "planRetry": {
+    "exactIdSearchSelectsIntendedPlan": true,
+    "persistedSelectionOmitsPlanId": true,
+    "unpersistedSelectionRetainsExactPlanId": true
+  },
+  "checklist": {
+    "eightComponentsBeforeUnit": true,
+    "modelHiddenUntilHeaderComplete": true,
+    "progressAfterBatch": true,
+    "unfinishedComponentsFirst": true
+  },
+  "scroll": {
+    "threadThin": true,
+    "composerThin": true,
+    "completionThin": true
+  },
+  "viewports": [
+    "320×568",
+    "320×640",
+    "390×600",
+    "390×844",
+    "1440×900"
+  ],
+  "agentCalls": "Mocked delayed NDJSON, with no real report writes",
+  "notVerified": [
+    "Physical-phone keyboard and camera hardware",
+    "Actual model response"
+  ],
+  "errors": []
+}

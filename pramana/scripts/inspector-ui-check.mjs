@@ -14,7 +14,13 @@ try {
   assert.equal(await page.getByLabel('Take an inspection photo').getAttribute('capture'), 'environment');
   assert.equal(await page.getByLabel('Attach inspection photos').getAttribute('capture'), null);
   await page.screenshot({ path: '../docs/verification/screenshots/inspector-opening-390.png' });
-  async function send(text) { await composer.fill(text); await page.getByRole('button', { name: 'Send message', exact: true }).click(); await page.waitForFunction(() => !document.querySelector('textarea')?.disabled, null, { timeout: 120000 }); }
+  async function send(text) {
+    await composer.fill(text);
+    const request = page.waitForRequest(request => /\/api\/laporan\/[^/]+\/turn$/.test(new URL(request.url()).pathname) && request.method() === 'POST');
+    await page.getByRole('button', { name: 'Send message', exact: true }).click();
+    await request;
+    await page.waitForFunction(() => { const camera = document.querySelector('button[aria-label="Take a photo"]'); return camera && !camera.disabled; }, null, { timeout: 120000 });
+  }
   await send('I am Alex at Tanjung Enim. Use RI-DT-UTYPE-01 for DT-11 · B 9111 KD. The truck is safely parked, isolated and chocked.');
   await page.locator('.truck-svg [data-comp="kabin"].is-focus').first().waitFor();
   await page.screenshot({ path: '../docs/verification/screenshots/inspector-active-390.png' });

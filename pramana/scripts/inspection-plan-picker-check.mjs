@@ -75,8 +75,9 @@ try {
   await trigger.waitFor(); await trigger.click();
   assert.equal(await page.getByRole('option').count(), 20, 'Draft reload keeps every plan available');
   await search.fill('U-type'); await search.press('ArrowDown');
-  await search.press('Enter');
-  await page.waitForFunction(() => !document.querySelector('textarea')?.disabled, null, { timeout: 120000 });
+  const selection = page.waitForRequest(request => /\/api\/laporan\/[^/]+\/turn$/.test(new URL(request.url()).pathname) && request.method() === 'POST');
+  await search.press('Enter'); await selection;
+  await page.waitForFunction(() => { const camera = document.querySelector('button[aria-label="Take a photo"]'); return camera && !camera.disabled; }, null, { timeout: 120000 });
   const after = await api(`/api/laporan/${id}`);
   assert.equal(after.rencana_id, seed.id);
   assert.equal(after.rencana_snapshot.items.length, 8);

@@ -14,11 +14,14 @@ try {
   page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
   await page.goto(`${base}/petugas?baru=1`, { waitUntil: 'networkidle' });
   const composer = page.getByRole('textbox', { name: 'Message Lumo' });
-  const send = async text => { await composer.fill(text); await page.getByRole('button', { name: 'Send message', exact: true }).click(); await page.waitForFunction(() => !document.querySelector('textarea')?.disabled, null, { timeout: 180000 }); };
+  const turnRequest = () => page.waitForRequest(request => /\/api\/laporan\/[^/]+\/turn$/.test(new URL(request.url()).pathname) && request.method() === 'POST');
+  const idle = () => page.waitForFunction(() => { const camera = document.querySelector('button[aria-label="Take a photo"]'); return camera && !camera.disabled; }, null, { timeout: 180000 });
+  const send = async text => { await composer.fill(text); const request = turnRequest(); await page.getByRole('button', { name: 'Send message', exact: true }).click(); await request; await idle(); };
   await send('My name is Batch UI. I am at Riau. Let me choose my inspection plan.');
   await page.getByRole('button', { name: 'Choose inspection plan', exact: true }).click();
+  const selection = turnRequest();
   await page.getByRole('option').filter({ hasText: 'P2H · U-type dump truck' }).click();
-  await page.waitForFunction(() => !document.querySelector('textarea')?.disabled, null, { timeout: 120000 });
+  await selection; await idle();
   const id = await page.evaluate(() => localStorage.getItem('pramana.inspection-draft'));
   output.reportId = id;
   const report = async () => (await fetch(`${base}/api/laporan/${id}`)).json();
