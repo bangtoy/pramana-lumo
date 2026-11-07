@@ -1,49 +1,51 @@
-# Fakta produk dan status bukti
+# Product facts and evidence status
 
-Pemeriksaan: 7 November 2026. Dokumen ini mendasari konten presentasi, bukan laporan kesiapan produksi.
+Review date: 7 November 2026. This document supports the presentation content. It is not a production readiness report.
 
-## Sumber yang diperiksa
+## Sources reviewed
 
-- `../../README.md`: kit desain dan dokumen Pramana.
-- `../PRD.md`: PRD v2.0, 6 November 2026; fokus P2H dump truck, prioritas P0–P3, naskah demo, target, dan non-tujuan.
-- `../CONTEXT.md`: istilah domain yang digunakan di deck.
-- `../../design/DESIGN_SYSTEM.md`, `tokens.css`, dan `design/screens/`: sumber visual.
-- Repo implementasi: `C:/Users/AndraApta/Desktop/projects/2026/next/pramana`, branch `lumo-design`, commit `c70e025`.
-- Source yang diperiksa: `pramana/lib/rules.ts`, `pramana/lib/agents/inspektor.ts`, `pramana/lib/agents/analis.ts`, dan `pramana/lib/work-order.ts` pada branch tersebut.
-- Deployment yang diberikan pengguna: [Pramana](https://p2h.apta.works/). Capture dan hasil navigasi ada di `assets/live/capture.json`.
-- [Panduan resmi hackathon Indonesia](https://seaxopenai-hackathon-id.sea.com/): sumber nama build direction. Halaman membutuhkan JavaScript; cuplikan indeks dan halaman penyelenggara menyebut Autonomous & Adaptive AI, AI-Native Products & Operations, serta Deep Domain AI. Pemetaan proyek ke track adalah penilaian editorial berdasarkan fitur PRD.
+- `../../README.md`: Pramana design kit and documentation.
+- `../PRD.md`: PRD v2.0, 6 November 2026, covering dump truck P2H, P0–P3 priorities, demo script, targets, and non-goals.
+- `../CONTEXT.md`: domain terms used in the deck.
+- `../../design/DESIGN_SYSTEM.md`, `tokens.css`, and `design/screens/`: visual sources.
+- Implementation repo: `C:/Users/AndraApta/Desktop/projects/2026/next/pramana`, branch `lumo-design`, commit `c70e025`.
+- Source reviewed: `pramana/lib/rules.ts`, `pramana/lib/agents/inspektor.ts`, `pramana/lib/agents/analis.ts`, and `pramana/lib/work-order.ts` on that branch.
+- User-supplied deployment: [Pramana](https://p2h.apta.works/). Captures and navigation results appear in `assets/live/capture.json`.
+- [Official Indonesia hackathon guide](https://seaxopenai-hackathon-id.sea.com/): source for build direction names. The page requires JavaScript. Indexed excerpts and organizer pages mention Autonomous & Adaptive AI, AI-Native Products & Operations, and Deep Domain AI. The project-to-track mapping is an editorial assessment based on PRD features.
 
-Pencarian publik atas nama tepat `pramana-lumo` tidak menghasilkan halaman produk terverifikasi yang lebih kuat daripada repo milik pengguna. Karena itu, status fitur didasarkan pada repo dan deployment yang ditunjuk pengguna; tidak diasumsikan dari nama produk atau ingatan model.
+A public search for the exact name `pramana-lumo` did not produce a verified product page with stronger evidence than the user's repo. Feature status therefore relies on the user-specified repo and deployment, rather than assumptions based on the product name or model memory.
 
-## Yang terlihat pada deployment
+## What was visible on the deployment
 
-| Halaman | Temuan |
+| Page | Observation |
 | --- | --- |
-| `/` | Halaman masuk peran Supervisor dan Petugas; judul Pramana · P2H. |
-| `/supervisor/laporan` | Contoh laporan `LI-2026-10-29-DT07` untuk DT-07; vonis tidak layak jalan. |
-| `/supervisor/laporan/LI-2026-10-29-DT07` | Delapan item: lima baik, dua tidak baik, satu tidak bisa diperiksa; dua kondisi STOP, foto bukti, dan tombol membuat Work Order. |
-| `/supervisor/rencana` | Rencana contoh dump truck U-type delapan item, dan satu rencana lain enam item. |
-| `/supervisor/agent?rencana=RI-DT-UTYPE-01` | Model Kendaraan, delapan item, sumber Standar P2H/Spec Sheet, bukti wajib, dan kondisi STOP. |
-| `/supervisor/work-order` | Halaman dapat dibuka; saat capture belum ada Work Order. |
-| `/supervisor` | Mengarah ke `/supervisor/laporan`; Ringkasan v2 tidak dibuktikan aktif. |
-| `/petugas` | Pada kunjungan awal terlihat sapaan Pak Pramana. Capture ulang dengan API mutation diblokir tertahan pada “Menyiapkan P2H…”. Tidak dilakukan chat atau pengiriman laporan. |
+| `/` | Role entry page for Supervisor and Inspector, with the title Pramana · P2H. |
+| `/supervisor/laporan` | Sample report `LI-2026-10-29-DT07` for DT-07, with a not-roadworthy verdict. |
+| `/supervisor/laporan/LI-2026-10-29-DT07` | Eight items: five good, two poor, and one unable to inspect. Two STOP conditions, photo evidence, and a button to create a Work Order. |
+| `/supervisor/rencana` | An eight-item sample U-type dump truck plan and another six-item plan. |
+| `/supervisor/agent?rencana=RI-DT-UTYPE-01` | Vehicle Model, eight items, P2H Standard / Spec Sheet sources, required evidence, and STOP conditions. |
+| `/supervisor/work-order` | Page accessible, with no Work Orders at capture time. |
+| `/supervisor` | Redirects to `/supervisor/laporan`. Summary v2 was not established as active. |
+| `/petugas` | The initial visit showed a Pak Pramana greeting. A recapture with API mutations blocked remained on “Menyiapkan P2H…” (“Preparing P2H…”). No chat or report submission took place. |
 
-Tidak ada error JavaScript `pageerror` pada halaman yang diperiksa. Ini tidak membuktikan bahwa seluruh interaksi, model, vision, atau penanganan kegagalan telah diuji end-to-end.
+No JavaScript `pageerror` errors occurred on the reviewed pages. This does not establish that all interactions, models, vision, or failure handling passed end-to-end tests.
 
-Pada kunjungan awal, `/supervisor/agent` tanpa ID menginisialisasi draf kosong `RI-MW4YVWW5CY0`. Draf tersebut diperiksa masih kosong dan berjudul “Rencana baru”, lalu diarsipkan. Skrip capture kemudian diubah untuk membuka rencana seed yang sudah ada dan memblokir API mutation. Tidak ada chat, inspeksi terkirim, atau Work Order yang dibuat selama pengambilan bukti.
+On the initial visit, `/supervisor/agent` without an ID initialized an empty draft, `RI-MW4YVWW5CY0`. The draft was confirmed empty with the title “Rencana baru” (“New plan”), then archived. The capture script was subsequently changed to open an existing seeded plan and block API mutations. No chat, inspection submission, or Work Order creation took place during evidence collection.
 
-## Source implementasi Lumo
+Product screenshots and capture records retain the application's original Indonesian labels. The presentation translates the surrounding explanations and interface controls into English.
 
-- `evidenceProblem()` menolak ID foto yang tidak dikenal dan hasil tanpa foto wajib. Status `tidak_bisa_diperiksa` membutuhkan alasan. Ini pemeriksaan kelengkapan; tidak membuktikan keaslian foto atau menjamin kebenaran penilaian vision.
-- Progres dan urutan item dihitung di kode. `submit_report` memeriksa kelengkapan sebelum mengubah status laporan.
-- `updateWorkOrder()` menyinkronkan status penanganan temuan dengan Work Order; penanganan bukan bukti otomatis kelayakan kendaraan.
-- Agent Analis menggunakan tool baca data. ID sumber disaring ke record yang benar-benar ada. `jawabCadangan()` menghasilkan respons dan rekomendasi dari data saat agent gagal.
-- Source Lumo yang diperiksa berbeda cakupannya dari deployment. Deck menyatakan perbedaan jenis bukti tersebut.
+## Lumo implementation source
 
-## Klaim yang tidak dibuat
+- `evidenceProblem()` rejects unknown photo IDs and results missing required photos. The `tidak_bisa_diperiksa` (unable to inspect) status requires a reason. These are completeness checks. They do not establish photo authenticity or guarantee vision assessment accuracy.
+- Code calculates progress and item order. `submit_report` checks completeness before changing report status.
+- `updateWorkOrder()` synchronizes finding handling status with the Work Order. Handling does not automatically establish vehicle roadworthiness.
+- The Analyst agent uses read-only data tools. Source IDs are filtered to records that actually exist. `jawabCadangan()` produces answers and recommendations from data when the agent fails.
+- The reviewed Lumo source differs in scope from the deployment. The deck distinguishes these types of evidence.
 
-- Target PRD: Rencana ≥8 item dalam <30 detik; P2H 8 item dalam <4 menit. Belum diukur dalam pekerjaan ini.
-- Tidak ada hasil pilot, statistik kecelakaan, tingkat akurasi, studi kompetitor, jumlah pengguna, pendapatan, atau hasil penghematan.
-- Tidak ada klaim bahwa konteks produk ini adalah yang pertama di pasar.
-- Tiket, prompt, kontrak, ADR, Definition of Done, dan source tersedia sebagai artefak workflow Codex. Log sesi dan atribusi setiap commit kepada Codex belum disediakan.
-- Nama model dan versi library yang tertulis di konfigurasi repo tidak dipromosikan menjadi klaim rilis publik dalam slide.
+## Claim limits
+
+- PRD targets: a plan with ≥8 items in <30 seconds and an 8-item P2H inspection in <4 minutes. These were not measured in this work.
+- No pilot results, accident statistics, accuracy rates, competitor study, user counts, revenue, or savings results.
+- No claim that this product concept is first in the market.
+- Tickets, prompts, contracts, ADRs, Definition of Done, and source are available as Codex workflow artifacts. Session logs and attribution of individual commits to Codex have not been provided.
+- Configured model names and library versions are not presented as public release claims in the slides.

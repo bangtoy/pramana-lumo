@@ -1,74 +1,77 @@
-# Pramana + Lumo — presentasi 6 menit
+# Pramana + Lumo — 6-minute presentation
 
-Buka **[index.html](index.html)** di Chrome atau Edge. Tidak perlu server, proses build, atau koneksi internet untuk membaca deck dan memainkan simulasi foto. Koneksi diperlukan saat membuka aplikasi demo.
+Open **[index.html](index.html)** in Chrome or Edge. Reading the deck and using the photo simulation require no server, build process, or internet connection. Opening the demo app requires a connection.
 
-- **12 slide utama**, alokasi **360 detik termasuk demo**.
-- **3 lampiran** untuk arsitektur, status bukti, dan pemetaan judging criteria.
-- **[Pramana-Lumo.pdf](Pramana-Lumo.pdf)** adalah salinan statis seluruh 15 slide.
-- **[presenter-notes.html](presenter-notes.html)** berisi naskah, durasi, dan arahan demo per slide.
-- Aplikasi: **https://p2h.apta.works/**.
+- **12 main slides**, with **360 seconds including the demo**.
+- **3 appendix slides** covering architecture, evidence status, and the judging criteria map.
+- **[Pramana-Lumo.pdf](Pramana-Lumo.pdf)** is a static copy of all 15 slides.
+- **[presenter-notes.html](presenter-notes.html)** contains the script, timing, and demo guidance for each slide.
+- App: **https://p2h.apta.works/**.
 
-## Cara presentasi
+## Presenting
 
-Saat pertama dibuka, deck menampilkan galeri 3D. Klik **Mulai presentasi** atau salah satu slide. Pilihan **Grid** dan **Galeri 3D** tersedia di bawah. Posisi slide disimpan saat berpindah dan dipulihkan saat refresh.
+The deck opens in the 3D gallery. Click **Start presentation** or any slide. **Grid** and **3D Gallery** options appear at the bottom. The current slide is saved as you navigate and restored on refresh.
 
-| Tombol | Fungsi |
+| Key | Action |
 | --- | --- |
-| `→` / `←`, `PageDown` / `PageUp` | Pindah slide |
-| `Space` | Slide berikutnya, kecuali ketika tombol interaktif sedang fokus |
-| `Home` / `End` | Awal / akhir deck |
-| `Esc` | Kembali ke galeri |
-| `F` | Layar penuh |
-| `N` | Buka / tutup catatan pembicara |
-| `T` | Mulai / jeda timer enam menit |
-| `R` | Reset timer |
+| `→` / `←`, `PageDown` / `PageUp` | Change slides |
+| `Space` | Next slide, except when an interactive button has focus |
+| `Home` / `End` | First / last slide |
+| `Esc` | Return to the gallery |
+| `F` | Fullscreen |
+| `N` | Open / close speaker notes |
+| `T` | Start / pause the six-minute timer |
+| `R` | Reset the timer |
 
-Timer dimulai ketika **Mulai presentasi** ditekan. Membuka satu slide dari galeri tidak otomatis memulai timer. Lampiran tidak termasuk alokasi enam menit.
+The timer starts when you click **Start presentation**. Opening an individual slide from the gallery does not automatically start the timer. Appendix slides sit outside the six-minute allocation.
 
-Slide bukti foto mempunyai tiga tombol: **Foto jauh → Foto ulang → Ban benjol**. Ini simulasi terprogram menggunakan foto contoh dari repo, bukan pemanggilan model vision langsung. Slide tindak lanjut dapat berganti antara capture laporan live, referensi Work Order, dan referensi Tanya Lumo.
+The photo evidence slide has three buttons: **Distant photo → Retake photo → Tire bulge**. This is a scripted simulation using sample photos from the repo, without a live vision model call. The follow-up slide switches between a live report capture, a Work Order reference, and an Ask Lumo reference.
 
-## Alur dan durasi
+The presentation copy, controls, and speaker notes use English. Product screenshots and the original capture records retain the application's Indonesian labels. P2H means Daily Inspection and Maintenance. In the screenshots, *Petugas* means Inspector, *Rencana Inspeksi* means Inspection Plan, *Laporan Inspeksi* means Inspection Report, and *Tanya Lumo* means Ask Lumo.
 
-| Slide utama | Isi | Durasi | Akhir |
+## Flow and timing
+
+| Main slide | Content | Duration | End |
 | --- | --- | ---: | ---: |
-| 1 | P2H yang bisa dibuktikan | 20 dtk | 00:20 |
-| 2 | Masalah centang tanpa bukti yang cukup | 25 dtk | 00:45 |
-| 3 | Alur Spec Sheet sampai tindakan | 25 dtk | 01:10 |
-| 4 | Demo Rencana Inspeksi | 35 dtk | 01:45 |
-| 5 | Demo bukti foto adaptif | 50 dtk | 02:35 |
-| 6 | Laporan dan tindak lanjut | 40 dtk | 03:15 |
-| 7 | Keandalan: aturan di kode | 30 dtk | 03:45 |
-| 8 | Insight: konteks yang berkesinambungan | 25 dtk | 04:10 |
-| 9 | Pengguna, manfaat, dan target validasi | 25 dtk | 04:35 |
-| 10 | Deep Domain AI dan AI-Native Products & Operations | 20 dtk | 04:55 |
-| 11 | Workflow pembangunan dengan Codex | 30 dtk | 05:25 |
-| 12 | Penutup dan tautan aplikasi | 35 dtk | 06:00 |
+| 1 | P2H backed by evidence | 20 sec | 00:20 |
+| 2 | The problem with checkmarks and insufficient evidence | 25 sec | 00:45 |
+| 3 | The workflow from Spec Sheet to action | 25 sec | 01:10 |
+| 4 | Inspection Plan demo | 35 sec | 01:45 |
+| 5 | Adaptive photo evidence demo | 50 sec | 02:35 |
+| 6 | Reports and follow-up | 40 sec | 03:15 |
+| 7 | Reliability: rules in code | 30 sec | 03:45 |
+| 8 | Insight: continuous context | 25 sec | 04:10 |
+| 9 | Users, benefits, and validation targets | 25 sec | 04:35 |
+| 10 | Deep Domain AI and AI-Native Products & Operations | 20 sec | 04:55 |
+| 11 | Development workflow with Codex | 30 sec | 05:25 |
+| 12 | Closing and app link | 35 sec | 06:00 |
 
-## Dasar konten dan batas klaim
+## Content sources and claim limits
 
-Konten mengikuti `../PRD.md`, `../CONTEXT.md`, ADR, dan tiket P0–P3. Desain memakai `../../design/`: Geist / Geist Mono, bobot 400/500, putih, biru, garis tipis, serta merah untuk STOP. Skala teks diperbesar khusus untuk proyektor 1920 × 1080; file design system aplikasi tidak diubah.
+Content follows `../PRD.md`, `../CONTEXT.md`, ADRs, and P0–P3 tickets. The design uses `../../design/`: Geist / Geist Mono, weights 400/500, white, blue, thin lines, and red for STOP. Text is scaled for 1920 × 1080 projection. The application's design system files are unchanged.
 
-Screenshot yang diambil dari deployment disimpan di `assets/live/`; referensi UI Lumo tetap dirujuk langsung dari `../../design/screens/`. Karena itu, salin **repo lengkap** bila ingin memindahkan versi HTML. PDF sudah menyertakan gambar dan font.
+Deployment screenshots live in `assets/live/`. Lumo UI references still link directly to `../../design/screens/`. Copy the **complete repo** when moving the HTML version. The PDF embeds images and fonts.
 
-Pada pemeriksaan deployment, label agent masih **Pak Pramana**, tersedia contoh laporan STOP dan Rencana Inspeksi, halaman Work Order kosong, dan `/supervisor` mengarah ke daftar laporan. Referensi Ringkasan, data Work Order terisi, dan Tanya Lumo dalam kit desain tidak dinyatakan sebagai bukti bahwa semuanya aktif di deployment. Detail status tercatat di [product-facts.md](product-facts.md).
+During deployment review, the agent still used the name **Pak Pramana**. A sample STOP report and Inspection Plans were available, the Work Order page was empty, and `/supervisor` redirected to the report list. The Summary reference, populated Work Orders, and Ask Lumo screens in the design kit do not establish that all those features were active on the deployment. See [product-facts.md](product-facts.md) for detailed status.
 
-Angka `<30 detik` dan `<4 menit` adalah **target PRD**, bukan hasil pengukuran. Tidak ada klaim akurasi vision, pengurangan insiden, jumlah pelanggan, penghematan, atau persentase kode buatan Codex. Artefak workflow Codex tersedia dalam repo, tetapi log sesi yang mengatribusikan implementasi tertentu belum disediakan. Tambahkan bukti sesi asli bila tim memilikinya.
+The figures `<30 seconds` and `<4 minutes` are **PRD targets**, not measured results. There are no claims about vision accuracy, incident reduction, customer counts, savings, or the percentage of code written by Codex. The repo includes Codex workflow artifacts, but session logs attributing specific implementations have not been provided. Add original session evidence if the team has it.
 
-## Mengubah atau membangun ulang
+## Editing or rebuilding
 
-`scripts/build-slides.mjs` adalah sumber konten. `shared/slides.css` mengatur tata letak; `shared/slide.js` mengatur interaksi dalam slide. `scripts/deck-template.html` adalah template galeri dari huashu-design; geometri galeri dan mekanisme fit dipertahankan.
+`scripts/build-slides.mjs` is the content source. `shared/slides.css` controls layout, and `shared/slide.js` controls slide interactions. `scripts/deck-template.html` is the gallery template from huashu-design. Its gallery geometry and fit behavior are preserved.
 
 ```powershell
-cd C:\Users\AndraApta\Desktop\projects\2026\next\pramana-lumo\docs\presentation
-npm install
+# From the repository root:
+cd docs/presentation
+npm ci
 npm run slides
 npm run thumbs
 npm run verify
 npm run export
 ```
 
-Skrip browser memakai Chrome yang terpasang. Untuk memakai Chromium Playwright, jalankan `npx playwright install chromium` lalu set `$env:PLAYWRIGHT_CHANNEL='chromium'` sebelum perintah. Dependency hanya diperlukan untuk pengembangan, screenshot, dan ekspor; membuka HTML tidak memerlukannya.
+The browser scripts use the installed Chrome browser. To use Playwright Chromium, run `npx playwright install chromium`, then set `$env:PLAYWRIGHT_CHANNEL='chromium'` before running the commands. Dependencies are only needed for development, screenshots, and export. Opening the HTML does not require them.
 
-`npm run capture` memperbarui screenshot deployment pada route contoh yang sudah ada. Skrip memblokir request API selain GET/HEAD/OPTIONS. Jangan membuka `/supervisor/agent` tanpa ID rencana untuk pengambilan screenshot: aplikasi menginisialisasi draf pada halaman tersebut.
+`npm run capture` refreshes deployment screenshots using existing sample routes. The script blocks API requests other than GET/HEAD/OPTIONS. Do not open `/supervisor/agent` without a plan ID for screenshots: that page initializes a draft on load.
 
-Hasil pemeriksaan deck ada di **[verification/report.json](verification/report.json)** dan **[contact-sheet.jpg](verification/contact-sheet.jpg)**. Pemeriksaan deck tidak sama dengan pengujian end-to-end aplikasi.
+Deck check results appear in **[verification/report.json](verification/report.json)** and **[verification/contact-sheet.jpg](verification/contact-sheet.jpg)**. Deck verification is separate from end-to-end application testing.

@@ -1,5 +1,5 @@
 {
-  "verifiedAt": "2026-11-07T03:23:44.568Z",
+  "verifiedAt": "2026-11-07T04:08:18.384Z",
   "scope": "HTML presentation, not end-to-end verification of the hosted app.",
   "slideCount": 15,
   "mainSlides": 12,
@@ -8,7 +8,7 @@
     {
       "file": "slides/01-cover.html",
       "errors": [],
-      "title": "Pramana · P2H yang bisa dibuktikan",
+      "title": "Pramana · P2H backed by evidence",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -20,7 +20,7 @@
     {
       "file": "slides/02-problem.html",
       "errors": [],
-      "title": "Pramana · Centang belum menjawab apa yang diperiksa",
+      "title": "Pramana · A checkmark does not show what was inspected",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -32,7 +32,7 @@
     {
       "file": "slides/03-solution.html",
       "errors": [],
-      "title": "Pramana · Satu alur dari spesifikasi sampai tindakan",
+      "title": "Pramana · One workflow from specifications to action",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -44,7 +44,7 @@
     {
       "file": "slides/04-plan.html",
       "errors": [],
-      "title": "Pramana · Rencana mengikuti kendaraan yang diperiksa",
+      "title": "Pramana · The plan follows the vehicle being inspected",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -56,7 +56,7 @@
     {
       "file": "slides/05-evidence.html",
       "errors": [],
-      "title": "Pramana · Bukti kurang jelas diperbaiki saat masih di lokasi",
+      "title": "Pramana · Clearer evidence while the inspector is still on site",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -68,7 +68,7 @@
     {
       "file": "slides/06-follow-up.html",
       "errors": [],
-      "title": "Pramana · Satu temuan sampai tindak lanjut",
+      "title": "Pramana · One finding through to follow-up",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -80,7 +80,7 @@
     {
       "file": "slides/07-quality.html",
       "errors": [],
-      "title": "Pramana · Agent menilai, kode memegang aturan",
+      "title": "Pramana · Agents assess input, code enforces rules",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -92,7 +92,7 @@
     {
       "file": "slides/08-originality.html",
       "errors": [],
-      "title": "Pramana · Bukti, komponen, dan tindakan berbagi konteks",
+      "title": "Pramana · Evidence, components, and actions share context",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -104,7 +104,7 @@
     {
       "file": "slides/09-value.html",
       "errors": [],
-      "title": "Pramana · Manfaat yang bisa dinilai dan diukur",
+      "title": "Pramana · Benefits that can be assessed and measured",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -116,7 +116,7 @@
     {
       "file": "slides/10-direction.html",
       "errors": [],
-      "title": "Pramana · Deep Domain AI untuk P2H dump truck",
+      "title": "Pramana · Deep Domain AI for dump truck P2H",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -128,7 +128,7 @@
     {
       "file": "slides/11-codex.html",
       "errors": [],
-      "title": "Pramana · Konteks, kontrak, dan verifikasi untuk Codex",
+      "title": "Pramana · Context, contracts, and verification for Codex",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -140,7 +140,7 @@
     {
       "file": "slides/12-closing.html",
       "errors": [],
-      "title": "Pramana · Dari centang menjadi bukti yang dapat ditindaklanjuti",
+      "title": "Pramana · Actionable evidence beyond the checkmark",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -152,7 +152,7 @@
     {
       "file": "slides/13-architecture.html",
       "errors": [],
-      "title": "Pramana · Lampiran: batas agent dan kode",
+      "title": "Pramana · Appendix: agent and code boundaries",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -164,7 +164,7 @@
     {
       "file": "slides/14-validation.html",
       "errors": [],
-      "title": "Pramana · Lampiran: apa yang sudah dan belum dibuktikan",
+      "title": "Pramana · Appendix: what the evidence establishes",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -176,7 +176,7 @@
     {
       "file": "slides/15-judging-map.html",
       "errors": [],
-      "title": "Pramana · Lampiran: pemetaan keenam judging criteria",
+      "title": "Pramana · Appendix: all six judging criteria",
       "images": [],
       "headingCount": 1,
       "fonts": {
@@ -244,7 +244,7 @@
       "passed": true
     },
     {
-      "label": "Tanya Lumo tab",
+      "label": "Ask Lumo tab",
       "passed": true
     },
     {

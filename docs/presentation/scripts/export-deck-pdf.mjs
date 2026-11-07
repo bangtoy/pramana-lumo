@@ -84,9 +84,9 @@ async function main() {
 
   // 2) Merge into a single PDF
   const merged = await PDFDocument.create();
-  merged.setTitle('Pramana + Lumo · Presentasi 6 menit');
+  merged.setTitle('Pramana + Lumo · 6-minute presentation');
   merged.setAuthor('Pramana');
-  merged.setSubject('P2H berbasis bukti · 12 slide utama + 3 lampiran');
+  merged.setSubject('Evidence-based P2H · 12 main slides + 3 appendix slides');
   for (const buf of pageBuffers) {
     const src = await PDFDocument.load(buf);
     const copied = await merged.copyPages(src, src.getPageIndices());

@@ -18,9 +18,9 @@
   });
   // Labels are scenario states; no live model request or inspection is submitted.
   const evidence = {
-    distant: { file: 'apar-jauh.jpg', caption: 'Bukti awal · APAR masih terlalu jauh', status: 'Perlu foto ulang', style: 'warning', message: 'Labelnya belum terbaca. Bisa difoto lebih dekat, Pak?', rule: 'Komponen terlihat ≠ informasi sudah cukup.', hint: 'Foto jarak jauh → permintaan bukti yang lebih jelas.' },
-    label: { file: 'apar-label.jpg', caption: 'Bukti ulang · label APAR terlihat lebih dekat', status: 'Label lebih jelas', style: 'ok', message: 'Label sudah terlihat. Kondisi APAR tetap perlu diperiksa sesuai Rencana Inspeksi.', rule: 'Foto label belum membuktikan seluruh kondisi APAR.', hint: 'Kualitas bukti diperbaiki sebelum hasil dicatat.' },
-    tire: { file: 'ban-benjol.jpg', caption: 'Temuan contoh · benjol pada dinding ban', status: 'STOP', style: 'stop', message: 'Ada benjol pada dinding ban. Pada skenario ini, unit ditandai STOP sesuai Rencana Inspeksi.', rule: 'Kondisi STOP berasal dari Rencana Inspeksi.', hint: 'Temuan + bukti → laporan → keputusan Supervisor.' }
+    distant: { file: 'apar-jauh.jpg', caption: 'Initial evidence · fire extinguisher too far away', status: 'Photo retake needed', style: 'warning', message: 'I can’t read the label yet. Could you take a closer photo?', rule: 'A visible component ≠ enough information.', hint: 'A distant photo prompts a request for clearer evidence.' },
+    label: { file: 'apar-label.jpg', caption: 'New evidence · closer view of the extinguisher label', status: 'Clearer label', style: 'ok', message: 'The label is visible now. The extinguisher’s condition still needs checking against the Inspection Plan.', rule: 'A label photo does not establish the extinguisher’s overall condition.', hint: 'Improve evidence quality before recording the result.' },
+    tire: { file: 'ban-benjol.jpg', caption: 'Sample finding · bulge in the tire sidewall', status: 'STOP', style: 'stop', message: 'There is a bulge in the tire sidewall. In this scenario, the Inspection Plan requires marking the vehicle STOP.', rule: 'STOP conditions come from the Inspection Plan.', hint: 'Finding + evidence → report → supervisor decision.' }
   };
   function selectEvidence(key) {
     const item = evidence[key]; if (!item) return;
@@ -36,16 +36,16 @@
   }
   document.querySelectorAll('[data-evidence]').forEach(button => button.addEventListener('click', () => selectEvidence(button.dataset.evidence)));
   const operations = {
-    report: { file: '03-supervisor-laporan-detail.png', title: 'Temuan tetap punya bukti.', text: 'Foto, komponen, catatan, dan kondisi STOP terbaca dalam satu Laporan Inspeksi.', label: 'Laporan Inspeksi', code: 'LI-RW-45 · DT-07' },
-    wo: { file: '04-supervisor-work-order.png', title: 'Perbaikan punya pemilik.', text: 'Supervisor membuat Work Order dari Temuan, lalu menentukan mekanik dan target.', label: 'Work Order', code: 'Temuan → Work Order' },
-    analysis: { file: '10-tanya-lumo-jawaban.png', title: 'Jawaban menyebut sumber.', text: 'Tanya Lumo membaca laporan dan Work Order. Rekomendasi merujuk ke ID sumber.', label: 'Tanya Lumo', code: 'Sumber + rekomendasi' }
+    report: { file: '03-supervisor-laporan-detail.png', title: 'Findings keep their evidence.', text: 'One Inspection Report shows photos, components, notes, and STOP conditions.', label: 'Inspection Report', code: 'LI-RW-45 · DT-07' },
+    wo: { file: '04-supervisor-work-order.png', title: 'Each repair has an owner.', text: 'The supervisor creates a Work Order from the finding, then assigns a mechanic and a deadline.', label: 'Work Order', code: 'Finding → Work Order' },
+    analysis: { file: '10-tanya-lumo-jawaban.png', title: 'Answers cite their sources.', text: 'Ask Lumo reads reports and Work Orders. Recommendations refer to source IDs.', label: 'Ask Lumo', code: 'Sources + recommendations' }
   };
   const operationOverrides = JSON.parse(document.getElementById('operationSources')?.textContent || '{}');
   for (const [key, value] of Object.entries(operationOverrides)) Object.assign(operations[key], value);
   document.querySelectorAll('[data-operation]').forEach(button => button.addEventListener('click', () => {
     const value = operations[button.dataset.operation];
     const image = document.getElementById('operationScreen'); image.src = value.src || `../../../design/screens/${value.file}`; image.alt = value.title;
-    document.querySelector('.operations .screenshot-label').textContent = value.src ? value.label : 'Referensi UI · data contoh';
+    document.querySelector('.operations .screenshot-label').textContent = value.src ? value.label : 'UI reference · sample data';
     document.getElementById('operationTitle').textContent = value.title;
     document.getElementById('operationText').textContent = value.text;
     document.getElementById('operationCode').textContent = value.code;

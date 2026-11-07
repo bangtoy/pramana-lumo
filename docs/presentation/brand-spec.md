@@ -1,41 +1,41 @@
-# Spesifikasi visual presentasi Pramana + Lumo
+# Pramana + Lumo presentation visual specification
 
-## Aset dan sumber
+## Assets and sources
 
-- Logo Pramana: huruf P pada kotak biru bergradasi, diambil dari `../../design/layouts/index.html` dan screenshot produk. Direproduksi sebagai markup `.brand-mark`, bukan konsep logo baru.
-- Lumo sapaan: `../../design/assets/lumo/lumo-menyapa.png`.
-- Lumo mengamati: `../../design/assets/lumo/lumo-mengamati.png`.
-- Lumo selesai: `../../design/assets/lumo/lumo-jempol.png`.
-- Avatar percakapan: `../../design/assets/lumo/lumo-avatar-netral.png`.
-- Screenshot desain: `../../design/screens/08-agent-item-terpilih.png`, `03-supervisor-laporan-detail.png`, `04-supervisor-work-order.png`, dan `10-tanya-lumo-jawaban.png`.
-- Capture produk: `assets/live/plan-detail.png`, `report-detail.png`, serta halaman lain yang dicatat di `assets/live/capture.json`.
-- Foto bukti skenario: `../../design/assets/demo/apar-jauh.jpg`, `apar-label.jpg`, dan `ban-benjol.jpg`. Gambar disertakan sebagai contoh, bukan bukti hasil inspeksi baru.
-- Logo OpenAI untuk konteks Codex: `assets/brand/openai.svg`; sumber unduhan tercatat di `assets/brand/source.json`. Mark yang sudah ada digunakan tanpa menggambar ulang logo baru.
+- Pramana logo: the letter P in a blue gradient square, sourced from `../../design/layouts/index.html` and product screenshots. Reproduced with `.brand-mark` markup using the existing logo concept.
+- Lumo greeting: `../../design/assets/lumo/lumo-menyapa.png`.
+- Lumo observing: `../../design/assets/lumo/lumo-mengamati.png`.
+- Lumo completion: `../../design/assets/lumo/lumo-jempol.png`.
+- Conversation avatar: `../../design/assets/lumo/lumo-avatar-netral.png`.
+- Design screenshots: `../../design/screens/08-agent-item-terpilih.png`, `03-supervisor-laporan-detail.png`, `04-supervisor-work-order.png`, and `10-tanya-lumo-jawaban.png`.
+- Product captures: `assets/live/plan-detail.png`, `report-detail.png`, and other pages recorded in `assets/live/capture.json`.
+- Scenario evidence photos: `../../design/assets/demo/apar-jauh.jpg`, `apar-label.jpg`, and `ban-benjol.jpg`. Images are examples, not evidence from a new inspection.
+- OpenAI logo for the Codex context: `assets/brand/openai.svg`. The download source is recorded in `assets/brand/source.json`. The existing mark is used without redrawing it.
 
-## Token
+## Tokens
 
-`shared/tokens.css` menyalin `../../design/tokens.css` dengan satu perubahan sintaks: `@theme` menjadi `:root` agar dapat dibaca browser tanpa Tailwind. File design system asli tidak diubah.
+`shared/tokens.css` copies `../../design/tokens.css` with one syntax change: `@theme` becomes `:root` so the browser can read it without Tailwind. The original design system file is unchanged.
 
-- Permukaan putih; rail `--color-rail`; garis `--color-border` dan `--color-line`.
-- Teks `--color-on-surface`, sekunder `--color-on-surface-muted`.
-- Biru merek `--color-primary`; biru teks `--color-on-accent-subtle`; bidang fokus `--color-accent-subtle`.
-- Merah hanya untuk STOP/tidak baik; hijau untuk keadaan bukti yang lebih baik; kuning untuk permintaan bukti ulang.
-- Gradasi hanya berasal dari `--gradient-primary`, untuk identitas dan aksi utama.
-- Typeface Geist dan Geist Mono, bobot 400/500. WOFF2 latin disimpan lokal dari distribusi Google Fonts agar deck tidak bergantung jaringan.
+- White surfaces, `--color-rail`, and `--color-border` / `--color-line` dividers.
+- Text uses `--color-on-surface`, with secondary text in `--color-on-surface-muted`.
+- Brand blue uses `--color-primary`, blue text uses `--color-on-accent-subtle`, and focused areas use `--color-accent-subtle`.
+- Red is reserved for STOP / poor condition, green for improved evidence, and yellow for photo retake requests.
+- Gradients come only from `--gradient-primary`, for identity and primary actions.
+- Geist and Geist Mono typefaces, weights 400/500. Latin WOFF2 files from the Google Fonts distribution are stored locally for offline use.
 
-## Komposisi presentasi
+## Presentation composition
 
-- Ukuran logis 1920 × 1080, fit dan letterboxing saat viewport berbeda.
-- Satu judul utama per halaman; body sekitar 30 px; judul 70–106 px sesuai peran naratif. Ini perluasan skala proyeksi dari hierarki app, bukan perubahan skala UI aplikasi.
-- Model dan bukti foto menjadi konten utama. Lumo mendampingi, tidak menggantikan bukti produk.
-- Putih → biru muda hanya pada penutup dan penekanan tertentu. Tidak ada tema ungu atau palet baru.
-- Variasi komposisi: cover dengan product bleed, pernyataan masalah, alur horizontal, screenshot produk, demonstrasi foto, tabel aturan, argumen tiga kolom, dan penutup.
-- Tidak memakai emoji sebagai ikon, gambar produk rekaan, statistik hiasan, testimoni rekaan, atau watermark skill.
+- Logical size: 1920 × 1080, with fitting and letterboxing for other viewports.
+- One main title per page, body text around 30 px, and titles at 70–106 px depending on their role. This extends the app hierarchy for projection without changing app UI sizing.
+- Models and photo evidence are the main content. Lumo supports the product evidence.
+- White to light blue appears only on the closing slide and selected emphasis areas. No purple theme or new palette.
+- Compositions include a cover with product bleed, problem statement, horizontal workflow, product screenshot, photo demonstration, rules table, three-column argument, and closing slide.
+- No emoji icons, invented product images, decorative statistics, fictional testimonials, or skill watermarks.
 
-## Sistem demonstrasi
+## Demonstration system
 
-Shell memakai template `deck_index.html` dari skill huashu-design. Mekanisme grid miring, infinite gallery, hit testing, dan scaling dipertahankan. Label diterjemahkan, warna disesuaikan dengan token Pramana, lalu ditambahkan timer, catatan pembicara, akses keyboard, dan pesan lintas iframe untuk penggunaan `file://`.
+The shell uses the `deck_index.html` template from the huashu-design skill. The tilted grid, infinite gallery, hit testing, and scaling are preserved. Labels use English, colors follow Pramana tokens, and the shell adds a timer, speaker notes, keyboard access, and cross-iframe messages for `file://` use. Product screenshots retain the original application's Indonesian labels.
 
-## Pemeriksaan visual
+## Visual review
 
-Cover dan halaman bukti disiapkan lebih dahulu sebagai dua jenis halaman contoh. Seluruh halaman kemudian dirender satu per satu di 1920 × 1080 dan dirangkum dalam contact sheet. Perubahan dari review: caption cover dipindahkan agar tidak terpotong; tinggi foto demo dikurangi untuk menjaga margin footer. Laporan interaksi dan batas viewport tersedia di `verification/report.json`.
+The cover and evidence slide were prepared first as two sample page types. All slides were then rendered individually at 1920 × 1080 and combined into a contact sheet. Review changes moved the cover caption to avoid clipping and reduced the demo photo height to preserve the footer margin. Interaction and viewport results appear in `verification/report.json`.
