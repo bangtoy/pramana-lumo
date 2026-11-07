@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pramana · Design system FlowPilot + Lumo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="kit.css">
+<style>
+  /* Only page scaffolding for this specimen; real components come from kit.css. */
+  body { margin: 0; }
+  .page { max-width: 1240px; margin: 0 auto; padding: 32px 24px 80px; display: flex; flex-direction: column; gap: 40px; }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .grid { display: grid; gap: 14px; }
+  .g2 { grid-template-columns: 1fr 1fr; } .g4 { grid-template-columns: repeat(4, 1fr); } .g3 { grid-template-columns: repeat(3, 1fr); }
+  section > h2 { margin: 0 0 4px; } section > p.lead { margin: 0 0 16px; }
+  .spec td, .spec th { padding: 10px 12px; border-bottom: 1px solid var(--color-line); text-align: left; vertical-align: middle; }
+  .spec th { font-weight: 400; }
+  .spec { border-collapse: collapse; width: 100%; }
+  .sw { width: 100%; height: 44px; border-radius: 10px; border: 1px solid var(--color-line); }
+  .kpi { position: relative; height: 128px; padding: 16px 20px 12px; display: flex; flex-direction: column; }
+  .kpi .hair { position: absolute; left: 14px; top: 8px; height: 80px; width: 1px; }
+  .bars { margin-top: auto; display: flex; align-items: flex-end; gap: 3px; height: 16px; }
+  .bars span { width: 3px; border-radius: 1px; }
+  .tile { position: relative; border: 1px solid var(--color-border); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 8px; background: #fff; }
+  .tile .edge { position: absolute; left: 0; top: 14px; height: 28px; width: 2px; border-radius: 0 2px 2px 0; }
+  .shell { display: grid; grid-template-columns: 200px 1fr 260px; height: 420px; border: 1px solid var(--color-line); border-radius: 12px; overflow: hidden; }
+  .side { background: var(--color-rail); border-right: 1px solid var(--color-line); padding: 16px 12px; display: flex; flex-direction: column; gap: 16px; }
+  .navi { display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 10px; border-radius: 6px; color: var(--color-text-nav); }
+  .navi.on { background: #fff; color: #000; box-shadow: var(--shadow-active); }
+  .tabs2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; padding: 3px; border-radius: 10px; background: #ebebee; text-align: center; }
+  .tabs2 span { padding: 5px 0; border-radius: 7px; color: var(--color-text-secondary); }
+  .tabs2 .on { background: #fff; color: var(--color-on-surface); box-shadow: var(--shadow-active); }
+  .main { padding: 18px 20px; overflow: hidden; display: flex; flex-direction: column; gap: 12px; }
+  .tanya { border-left: 1px solid var(--color-line); display: flex; flex-direction: column; }
+  .tanya .hd { height: 52px; display: flex; align-items: center; gap: 8px; padding: 0 12px; border-bottom: 1px solid var(--color-line); }
+  .box { border: 1px dashed var(--color-border-strong); border-radius: 12px; display: grid; place-items: center; color: var(--color-on-surface-muted); }
+  .agent { display: grid; grid-template-columns: 200px 1fr; height: 460px; border: 1px solid var(--color-line); border-radius: 12px; overflow: hidden; }
+  .agent .work { display: grid; grid-template-rows: 56px 1fr 84px; }
+  .agent .split { display: grid; grid-template-columns: 1.35fr 1fr; min-height: 0; }
+  .itemrow { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; }
+  .phone { width: 300px; height: 560px; border: 1px solid var(--color-line); border-radius: 28px; overflow: hidden; display: flex; flex-direction: column; background: #fff; }
+  .avatar { width: 30px; height: 30px; }
+  img.hero { width: 96px; height: 96px; object-fit: contain; }
+  .ok { color: var(--color-status-baik); } .bad { color: var(--color-status-tidak-baik); } .warn { color: var(--color-warning); }
+  code { font-family: var(--font-mono); font-size: 12px; background: var(--color-track); padding: 1px 5px; border-radius: 5px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <div class="t-data muted">Pramana · design system v2.0</div>
+  <h1 class="t-display" style="margin:2px 0 4px">FlowPilot + Lumo</h1>
+  <p class="t-body muted" style="margin:0;max-width:70ch">Spesimen hidup dari <code>tokens.css</code> + <code>globals.css</code>. Aturan lengkap ada di <code>../DESIGN_SYSTEM.md</code>; tampilan aplikasi jadi ada di <code>../screens/</code>.</p>
+</header>
+
+<section>
+  <h2 class="t-heading">1 · Komposisi teks</h2>
+  <p class="lead t-body-sm muted">Hanya class ini. Berat 400/500 saja. Satu <code>.t-display</code> per halaman, judul kartu selalu <code>.t-heading</code>.</p>
+  <div class="panel" style="overflow:hidden">
+    <table class="spec">
+      <thead><tr class="t-label muted"><th>Peran</th><th>Contoh</th><th>Class</th><th>Ukuran / baris / berat</th></tr></thead>
+      <tbody>
+        <tr><td class="t-body-sm muted">Judul halaman</td><td><span class="t-display">Selamat pagi, Rina</span></td><td><code>.t-display</code></td><td class="t-data">22 / 30 / 500</td></tr>
+        <tr><td class="t-body-sm muted">Angka KPI</td><td><span class="t-metric">6/9</span></td><td><code>.t-metric</code></td><td class="t-data">24 / 32 / 500 tabular</td></tr>
+        <tr><td class="t-body-sm muted">Judul kartu, judul editable</td><td><span class="t-heading">Unit hari ini</span></td><td><code>.t-heading</code> · <code>.t-title</code></td><td class="t-data">16 / 24 / 500</td></tr>
+        <tr><td class="t-body-sm muted">Bubble &amp; input HP</td><td><span class="t-body-lg">Boleh saya tahu nama Bapak?</span></td><td><code>.t-body-lg</code></td><td class="t-data">16 / 24 / 400</td></tr>
+        <tr><td class="t-body-sm muted">Isi, tabel, tombol</td><td><span class="t-body">Perintah perbaikan yang disusun agent.</span></td><td><code>.t-body</code></td><td class="t-data">14 / 20 / 400</td></tr>
+        <tr><td class="t-body-sm muted">Meta / keterangan</td><td><span class="t-body-sm muted">6 dari 9 unit sudah P2H hari ini.</span></td><td><code>.t-body-sm .muted</code></td><td class="t-data">13 / 18 / 400</td></tr>
+        <tr><td class="t-body-sm muted">Label, kepala tabel</td><td><span class="t-label muted">Unit diperiksa</span></td><td><code>.t-label</code></td><td class="t-data">12 / 16 / 500</td></tr>
+        <tr><td class="t-body-sm muted">ID, waktu data</td><td><span class="t-data">LI-RW-45 · 6 Nov 2026, 07:42</span></td><td><code>.t-data</code></td><td class="t-data">mono 13 / 20</td></tr>
+        <tr><td class="t-body-sm muted">Plat, caption foto</td><td><span class="t-caption-data muted">B 9123 KD</span></td><td><code>.t-caption-data</code></td><td class="t-data">mono 11 / 16</td></tr>
+        <tr><td class="t-body-sm muted">Judul blok mono</td><td><span class="t-label-caps muted">Model kendaraan</span></td><td><code>.t-label-caps</code></td><td class="t-data">mono 11 caps 500</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2 class="t-heading">2 · Warna</h2>
+  <p class="lead t-body-sm muted">Biru untuk aksi, merah hanya untuk STOP/tidak baik, kuning untuk terlambat dan saran.</p>
+  <div class="grid g4">
+    <div><div class="sw" style="background:var(--gradient-primary)"></div><div class="t-label" style="margin-top:6px">gradient-primary</div><div class="t-caption-data muted">#1b8ce8 → #4eb0ff</div></div>
+    <div><div class="sw" style="background:var(--color-rail)"></div><div class="t-label" style="margin-top:6px">rail / surface-muted</div><div class="t-caption-data muted">#f5f5f5</div></div>
+    <div><div class="sw" style="background:var(--color-track)"></div><div class="t-label" style="margin-top:6px">track</div><div class="t-caption-data muted">#f1f1f3</div></div>
+    <div><div class="sw" style="background:var(--color-accent-subtle)"></div><div class="t-label" style="margin-top:6px">accent-subtle</div><div class="t-caption-data muted">#eff8ff</div></div>
+    <div><div class="sw" style="background:var(--color-status-baik)"></div><div class="t-label" style="margin-top:6px">status-baik</div><div class="t-caption-data muted">#17a673 / #e9f8f0</div></div>
+    <div><div class="sw" style="background:var(--color-status-tidak-baik)"></div><div class="t-label" style="margin-top:6px">status-tidak-baik</div><div class="t-caption-data muted">#e5484d / #fdeeee</div></div>
+    <div><div class="sw" style="background:var(--color-warning)"></div><div class="t-label" style="margin-top:6px">warning</div><div class="t-caption-data muted">#d99a00 / #fff8e6</div></div>
+    <div><div class="sw" style="background:var(--color-on-surface)"></div><div class="t-label" style="margin-top:6px">on-surface / muted</div><div class="t-caption-data muted">#15171c / #697386</div></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="t-heading">3 · Komponen</h2>
+  <p class="lead t-body-sm muted">Arahkan kursor dan klik untuk melihat hover, tekan (skala .96), dan fokus.</p>
+  <div class="grid g2">
+    <div class="panel" style="padding:16px;display:flex;flex-direction:column;gap:14px">
+      <div class="t-label muted">Tombol &amp; segmented</div>
+      <div class="row">
+        <button class="btn btn-primary">Buat work order</button>
+        <button class="btn btn-secondary">Unduh PDF</button>
+        <button class="btn btn-primary" disabled>Disabled</button>
+      </div>
+      <div class="row">
+        <div class="seg"><button aria-pressed="true">Terbuka 9</button><button>Terlambat 3</button><button>Selesai 5</button></div>
+      </div>
+      <div class="t-label muted">Pill</div>
+      <div class="row">
+        <span class="pill pill-stop">STOP</span><span class="pill pill-baik">Baik</span><span class="pill pill-tidak-baik">Tidak baik</span><span class="pill pill-tidak-bisa-diperiksa">Tidak bisa diperiksa</span><span class="pill pill-warning">Terlambat</span><span class="pill pill-dugaan">Standar P2H</span>
+      </div>
+      <div class="t-label muted">Input</div>
+      <input class="input t-body" placeholder="Tanya soal unit, temuan, atau WO…" style="width:100%;box-sizing:border-box">
+    </div>
+    <div class="panel" style="padding:16px;display:flex;flex-direction:column;gap:12px;background:var(--color-background)">
+      <div class="t-label muted">Chat dengan Lumo</div>
+      <div style="display:flex;gap:8px;align-items:flex-end">
+        <span class="lumo-avatar avatar"><img src="../assets/lumo/lumo-avatar-netral.png" alt="" style="width:100%;height:100%;object-fit:contain"></span>
+        <div class="bubble-pramana t-body">Berikutnya ban &amp; mur roda. Boleh foto sisi kiri truk, semua roda kelihatan?</div>
+      </div>
+      <div class="bubble-petugas t-body" style="align-self:flex-end">Ban belakang kiri benjol</div>
+      <div style="display:flex;gap:8px;align-items:flex-end">
+        <span class="lumo-avatar avatar"><img src="../assets/lumo/lumo-avatar-serius.png" alt="" style="width:100%;height:100%;object-fit:contain"></span>
+        <div class="bubble-pramana t-body">Benjolnya kira-kira berapa cm? Saya catat sebagai <span class="pill pill-stop">STOP</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="grid g4" style="margin-top:14px">
+    <div class="panel kpi"><span class="hair" style="background:#1b8ce8"></span><span class="t-label muted">Unit diperiksa</span><span class="t-metric" style="margin-top:4px">6/9</span><span class="t-body-sm warn">3 belum P2H</span><span class="bars"><span style="height:40%;background:#1b8ce8;opacity:.4"></span><span style="height:60%;background:#1b8ce8;opacity:.5"></span><span style="height:45%;background:#1b8ce8;opacity:.6"></span><span style="height:80%;background:#1b8ce8;opacity:.7"></span><span style="height:70%;background:#1b8ce8;opacity:.85"></span><span style="height:100%;background:#1b8ce8"></span></span></div>
+    <div class="panel kpi"><span class="hair" style="background:#17a673"></span><span class="t-label muted">Layak jalan</span><span class="t-metric" style="margin-top:4px">4</span><span class="t-body-sm ok">19 laporan layak · 7 hari</span><span class="bars"><span style="height:60%;background:#17a673;opacity:.4"></span><span style="height:80%;background:#17a673;opacity:.6"></span><span style="height:70%;background:#17a673;opacity:.8"></span><span style="height:100%;background:#17a673"></span></span></div>
+    <div class="panel kpi"><span class="hair" style="background:#e5484d"></span><span class="t-label muted">Tidak layak (STOP)</span><span class="t-metric" style="margin-top:4px">2</span><span class="t-body-sm bad">1 tanpa work order</span><span class="bars"><span style="height:20%;background:#e5484d;opacity:.4"></span><span style="height:50%;background:#e5484d;opacity:.6"></span><span style="height:30%;background:#e5484d;opacity:.8"></span><span style="height:60%;background:#e5484d"></span></span></div>
+    <div class="tile"><span class="edge" style="background:#e5484d"></span><div style="display:flex;gap:8px"><div><div class="t-heading">DT-07</div><div class="t-caption-data muted">B 9123 KD</div></div><span class="t-body-sm bad" style="margin-left:auto">⚠ STOP</span></div><p class="t-body-sm muted" style="margin:0">Ban &amp; mur roda: benjol 6 cm di dinding ban.</p><div class="row" style="gap:8px"><button class="btn btn-secondary" style="flex:1">Laporan</button><button class="btn btn-primary" style="flex:1">Buat WO</button></div></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="t-heading">4 · Contoh layout</h2>
+  <p class="lead t-body-sm muted">Kerangka diperkecil. Ukuran asli: sidebar 240, panel Tanya 360 (lipat 48), chat pin 400. Bandingkan dengan <code>../screens/01, 06, 07, 11</code>.</p>
+
+  <div class="t-label muted" style="margin:6px 0">Supervisor · Dashboard (Ringkasan + panel Tanya Lumo)</div>
+  <div class="shell">
+    <div class="side">
+      <div class="row" style="gap:8px"><span style="width:24px;height:24px;border-radius:7px;background:var(--gradient-primary);box-shadow:var(--shadow-primary-rest);color:#fff;display:grid;place-items:center;font-size:12px">P</span><span class="t-heading">Pramana</span></div>
+      <div class="tabs2 t-body"><span class="on">Dashboard</span><span>Agent</span></div>
+      <div style="display:flex;flex-direction:column;gap:2px"><div class="navi on t-body">Ringkasan</div><div class="navi t-body">Laporan Inspeksi</div><div class="navi t-body">Work order <span style="margin-left:auto;background:#fff;color:var(--color-status-tidak-baik);border-radius:5px;padding:0 5px;box-shadow:0 0 1px #00000040" class="t-body-sm">9</span></div><div class="navi t-body">Rencana Inspeksi</div></div>
+    </div>
+    <div class="main">
+      <div><div class="t-data muted">Dashboard</div><div class="t-display">Selamat pagi, Rina</div><div class="t-body-sm muted">6 dari 9 unit sudah P2H. <span class="bad">2 unit STOP</span>.</div></div>
+      <div class="grid g4"><div class="box" style="height:64px">KPI</div><div class="box" style="height:64px">KPI</div><div class="box" style="height:64px">KPI</div><div class="box" style="height:64px">KPI</div></div>
+      <div class="grid" style="grid-template-columns:1fr 160px;flex:1"><div class="box">Unit hari ini</div><div class="box">Perlu tindakan</div></div>
+      <div class="grid" style="grid-template-columns:1fr 160px;height:70px"><div class="box">Tren P2H</div><div class="box">Komponen</div></div>
+    </div>
+    <div class="tanya">
+      <div class="hd"><span class="lumo-avatar avatar"><img src="../assets/lumo/lumo-avatar-netral.png" alt="" style="width:100%;height:100%;object-fit:contain"></span><div><div class="t-heading" style="line-height:18px">Tanya Lumo</div><div class="t-label muted" style="font-weight:400">hanya baca</div></div></div>
+      <div style="padding:12px;display:flex;flex-direction:column;gap:10px;flex:1">
+        <div style="border-radius:10px;background:var(--color-warning-subtle);padding:10px" class="t-body-sm"><div class="t-label warn">Saran Lumo hari ini</div>Buat WO untuk DT-07.</div>
+        <button class="btn btn-secondary" style="justify-content:flex-start">Kenapa DT-07 tidak layak?</button>
+      </div>
+      <div style="padding:10px;border-top:1px solid var(--color-line)"><div class="input t-body muted">Tanya…</div></div>
+    </div>
+  </div>
+
+  <div class="t-label muted" style="margin:22px 0 6px">Supervisor · Agent (truk + form, chat diminimalkan)</div>
+  <div class="agent">
+    <div class="side">
+      <div class="tabs2 t-body"><span>Dashboard</span><span class="on">Agent</span></div>
+      <button class="btn btn-primary">+ Rencana baru</button>
+      <div class="t-label muted">Riwayat rencana</div>
+      <div class="navi on t-body">P2H Dump Truck…</div><div class="navi t-body">P2H Excavator…</div>
+    </div>
+    <div class="work">
+      <div style="border-bottom:1px solid var(--color-line);padding:8px 18px"><div class="t-data muted">Rencana Inspeksi / RI-…</div><div class="t-title">P2H Dump Truck Tronton U-Type</div></div>
+      <div class="split">
+        <div style="padding:14px;display:flex;flex-direction:column;gap:8px"><div class="row"><span class="t-label-caps muted">Model kendaraan</span><button class="btn btn-secondary" style="margin-left:auto">Ganti model ▾</button></div><div class="box" style="flex:1;background:#fff">TRUK — area terbesar</div><span class="pill pill-dugaan">Ban &amp; mur roda</span></div>
+        <div style="border-left:1px solid var(--color-line);padding:14px;display:flex;flex-direction:column;gap:2px"><div class="seg" style="margin-bottom:8px"><button aria-pressed="true">Item · 10</button><button>Spec</button><button>Catatan</button></div>
+          <div class="itemrow"><span class="t-data muted">1</span><span class="t-body" style="font-weight:500;flex:1">Kabin &amp; safety</span><span class="t-label muted">Standar P2H</span></div>
+          <div class="itemrow" style="border:1px solid var(--color-accent);background:#eff8ff66"><span class="t-data muted">3</span><span class="t-body" style="font-weight:500;flex:1">Ban &amp; mur roda</span><span class="pill pill-dugaan">Standar P2H</span></div>
+          <div class="itemrow"><span class="t-data muted">4</span><span class="t-body" style="font-weight:500;flex:1">Kemudi</span><span class="t-label muted">Standar P2H</span></div>
+        </div>
+      </div>
+      <div style="border-top:1px solid var(--color-line);padding:10px 18px;display:flex;flex-direction:column;gap:8px"><div class="t-body-sm muted">Lumo: Model terpasang. 10 item dipetakan. <span style="color:var(--color-accent)">Lihat percakapan · 7</span></div><div class="row" style="gap:8px"><div class="input t-body muted" style="flex:1">Minta Lumo menambah, mengubah, atau menjelaskan item…</div><button class="btn btn-primary">Kirim</button></div></div>
+    </div>
+  </div>
+
+  <div class="t-label muted" style="margin:22px 0 6px">Petugas · HP (390 px; di sini 300 px)</div>
+  <div class="phone">
+    <div style="padding:10px 14px;border-bottom:1px solid var(--color-line)"><div class="t-heading">P2H baru</div><div class="t-caption-data muted">Pemeriksaan harian · P2H pagi</div></div>
+    <div style="flex:1;padding:14px;display:flex;flex-direction:column;gap:10px;align-items:stretch">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><img class="hero" src="../assets/lumo/lumo-menyapa.png" alt=""><div class="t-heading">Lumo</div><div class="t-body-sm muted">Pendamping P2H</div></div>
+      <div style="display:flex;gap:8px;align-items:flex-end"><span class="lumo-avatar avatar"><img src="../assets/lumo/lumo-avatar-netral.png" alt="" style="width:100%;height:100%;object-fit:contain"></span><div class="bubble-pramana t-body-lg">Selamat pagi! Saya Lumo. Boleh saya tahu nama Bapak/Ibu?</div></div>
+    </div>
+    <div style="padding:10px;border-top:1px solid var(--color-line)"><div class="input t-body-lg muted">Atau ketik jawaban…</div></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="t-heading">5 · Pose Lumo</h2>
+  <p class="lead t-body-sm muted">Avatar di setiap pesan; pose besar hanya untuk kosong, sapaan, dan selesai.</p>
+  <div class="row" style="gap:20px;align-items:flex-end">
+    <figure style="margin:0;text-align:center"><img class="hero" src="../assets/lumo/lumo-menyapa.png" alt=""><figcaption class="t-label muted">menyapa</figcaption></figure>
+    <figure style="margin:0;text-align:center"><img class="hero" src="../assets/lumo/lumo-berpikir.png" alt=""><figcaption class="t-label muted">berpikir</figcaption></figure>
+    <figure style="margin:0;text-align:center"><img class="hero" src="../assets/lumo/lumo-mencatat.png" alt=""><figcaption class="t-label muted">mencatat</figcaption></figure>
+    <figure style="margin:0;text-align:center"><img class="hero" src="../assets/lumo/lumo-mengamati.png" alt=""><figcaption class="t-label muted">mengamati</figcaption></figure>
+    <figure style="margin:0;text-align:center"><img class="hero" src="../assets/lumo/lumo-serius.png" alt=""><figcaption class="t-label muted">serius</figcaption></figure>
+    <figure style="margin:0;text-align:center"><img class="hero" src="../assets/lumo/lumo-jempol.png" alt=""><figcaption class="t-label muted">jempol</figcaption></figure>
+  </div>
+</section>
+
+</div>
+</body>
+</html>
