@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useId, useState } from 'react';
 import type { AnswerChart as Chart } from '@/lib/contracts';
 import { dayLabel } from '@/lib/waktu';
+import { Select } from '@/components/ui/Select';
 
 const palette = ['var(--color-chart-blue)', 'var(--color-chart-orange)', 'var(--color-chart-green)', 'var(--color-chart-red)', 'var(--color-chart-stop)', 'var(--color-on-surface-muted)'];
 function reportsHref(chart: Chart, row?: Chart['rows'][number]) {
@@ -29,7 +30,7 @@ export function AnswerChart({ chart }: { chart: Chart }) {
   if (other > 0) pieRows.push({ label: 'Other units', value: other, other: true });
   let accumulated = 0;
   return <figure aria-labelledby={titleId} className="rounded-[10px] border border-[var(--color-line)] bg-[var(--color-surface)] p-3 space-y-3" data-answer-chart={view}>
-    <figcaption><div className="flex flex-wrap items-center justify-between gap-2"><span id={titleId} className="t-body font-medium">{chart.title}</span><select aria-label="Chart view" className="input t-label !min-h-8 !h-8 !py-1 !px-2 !w-auto" value={view} onChange={event => setView(event.target.value as Chart['view'])}>{views.map(option => <option key={option} value={option}>{({ bar: 'Bar chart', line: 'Line chart', pie: 'Pie chart', table: 'Table', kpi: 'KPI' })[option]}</option>)}</select></div><p className="t-label muted font-normal mt-1">{dateRange}</p></figcaption>
+    <figcaption><div className="flex flex-wrap items-center justify-between gap-2"><span id={titleId} className="t-body font-medium">{chart.title}</span><Select aria-label="Chart view" size="compact" className="max-w-full" value={view} onChange={value => setView(value as Chart['view'])} options={views.map(option => ({ value: option, label: ({ bar: 'Bar chart', line: 'Line chart', pie: 'Pie chart', table: 'Table', kpi: 'KPI' })[option] }))}/></div><p className="t-label muted font-normal mt-1">{dateRange}</p></figcaption>
     {!chart.total ? <p className="t-body-sm muted">No matching reports in this period.</p> : <>
       {view === 'bar' && <ul className="space-y-2.5" aria-label={chart.title}>{chart.rows.map(row => <li key={row.label}><Link href={reportsHref(chart, row)} aria-label={`Show ${row.value} ${metric} for ${label(chart, row)}`} className="block rounded-sm hover:text-[var(--color-primary)]"><span className="flex justify-between gap-2 t-body-sm mb-1"><span>{label(chart, row)}</span><span className="t-caption-data">{row.value}</span></span><span aria-hidden="true" className="block h-2 rounded-full bg-[var(--color-table-head)] overflow-hidden"><span className="block h-full rounded-full" style={{ width: `${row.value / max * 100}%`, background: color }}/></span></Link></li>)}</ul>}
       {view === 'line' && <svg viewBox="0 0 280 132" role="img" aria-label={`${chart.title}. ${chart.rows.map(row => `${label(chart, row)}: ${row.value}`).join('; ')}`} className="w-full">

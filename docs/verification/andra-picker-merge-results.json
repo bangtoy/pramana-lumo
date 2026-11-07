@@ -1,0 +1,65 @@
+{
+  "date": "2026-11-07",
+  "source": "origin/andra",
+  "sourceCommit": "96fb2f7",
+  "mainBefore": "8513bdc",
+  "conflicts": [],
+  "typecheck": "passed",
+  "tests": {
+    "passed": 34,
+    "failed": 0
+  },
+  "productionBuild": "passed",
+  "isolatedPort": 3005,
+  "pickers": {
+    "reportFilters": {
+      "customInspector": true,
+      "blurPreservesUnit": true,
+      "datesPersistInUrl": true,
+      "keyboard": true,
+      "minMax": true,
+      "clear": true,
+      "responsive390": true
+    },
+    "workOrders": {
+      "customPriority": true,
+      "targetPatch": true,
+      "completedDisabled": true,
+      "writesMocked": true
+    },
+    "chart": {
+      "customViews": true,
+      "barPieTableKpi": true
+    },
+    "agentModel": {
+      "sticky": [
+        "pin",
+        "dock"
+      ],
+      "fitsComposerAndShortViewport": true,
+      "mobileStatic": true,
+      "emptyModelActionAccessible": true
+    },
+    "errors": []
+  },
+  "planner": {
+    "historyScroll": {
+      "height": 466,
+      "scroll": 1558,
+      "width": 223,
+      "scrollbar": "thin",
+      "overscroll": "contain"
+    },
+    "menuNotClipped": true,
+    "selectMouseKeyboardAndSave": true,
+    "attachmentHoverPressSelectedDisabled": true,
+    "fileOnlyPendingPreview": true,
+    "dockAndPin": true,
+    "savedPreviewAfterReload": true,
+    "objectUrlsRevoked": true,
+    "pdfAndRemoval": true,
+    "retryPreservesDraft": true,
+    "noHorizontalOverflow390": true,
+    "errors": []
+  }
+}

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { writeFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
+import { chooseOption } from './ui-controls.mjs';
 const { chromium } = await import(pathToFileURL(process.env.PLAYWRIGHT_MODULE).href);
 const base = 'http://localhost:3002', evidenceDir = '../docs/verification';
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
@@ -45,7 +46,7 @@ try {
   await page.getByRole('button', { name: 'Collapse Lumo panel' }).click(); await checkWidth(page, 48);
   await page.getByRole('button', { name: 'Expand Lumo panel' }).click(); await checkWidth(page, 520);
   for (const view of ['bar', 'pie', 'table', 'kpi']) {
-    await page.getByLabel('Chart view', { exact: true }).selectOption(view); await snapshot(page, `lumo-${view}-1440`);
+    await chooseOption(page, page.getByLabel('Chart view', { exact: true }), ({ bar: 'Bar chart', pie: 'Pie chart', table: 'Table', kpi: 'KPI' })[view]); await snapshot(page, `lumo-${view}-1440`);
     assert.equal(await page.locator(`[data-answer-chart="${view}"]`).count(), 1);
   }
   await panel.locator('[data-answer-sources] summary').click();
@@ -66,7 +67,7 @@ try {
   await mobile.goto(base + '/supervisor', { waitUntil: 'networkidle' }); await mobile.locator('[data-answer-chart]').waitFor();
   assert.equal((await mobile.locator('#supervisor-assistant-slot').boundingBox()).width, 390);
   assert.equal(await mobile.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true); await snapshot(mobile, 'lumo-chart-390');
-  await mobile.getByLabel('Chart view', { exact: true }).selectOption('table'); assert.equal(await mobile.locator('figure table tbody tr').count(), reply.chart.rows.length);
+  await chooseOption(mobile, mobile.getByLabel('Chart view', { exact: true }), 'Table'); assert.equal(await mobile.locator('figure table tbody tr').count(), reply.chart.rows.length);
   const legacy = await browser.newPage({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' }); observe(legacy);
   const legacyId = 'TL-readability-fixture';
   const oldReply = { ...reply, id: 'MSG-old', chart: undefined, text: `STOP findings were recorded this week.\nDT-03: LI-RW-21 (1 Nov); DT-07: LI-RW-45 (7 Nov).\nDEMO-1: LI-ee9abbcb-7a1d-470a-beb0-d716984c73db (7 Nov).\n\nThese historical records do not establish every unit’s current condition.`, sumber: ['LI-RW-21', 'LI-RW-45', 'LI-ee9abbcb-7a1d-470a-beb0-d716984c73db'] };

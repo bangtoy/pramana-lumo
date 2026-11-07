@@ -10,6 +10,8 @@ import type { WorkOrder } from '@/lib/contracts';
 import { REPORT_FILTER_KEYS } from '@/lib/laporan-filter';
 import { reportWorkOrderSummary } from '@/lib/work-order-rules';
 import { EmptyState, ErrorState, ResultPills, Spinner, StopPill } from '@/components/ui';
+import { Select } from '@/components/ui/Select';
+import { DatePicker } from '@/components/ui/DatePicker';
 
 function WorkOrderSummary({ report, orders }: { report: ReportView; orders: WorkOrder[] }) {
   const summary = reportWorkOrderSummary(report, orders);
@@ -49,8 +51,8 @@ function ReportList() {
     <header className="space-y-2"><p className="t-data muted">Dashboard</p><h1 className="t-display">Inspection reports</h1><p className="t-body muted">Vehicle condition, findings and photo evidence in one place.</p></header>
     <div className="flex flex-wrap items-center gap-2" role="search" aria-label="Filter inspection reports">
       <label className="relative w-[180px] max-w-full"><Search size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2 muted pointer-events-none" aria-hidden="true"/><input className="input t-body w-full pl-8" aria-label="Search unit" placeholder="Search unit…" value={unitDraft} maxLength={120} onChange={e => setUnitDraft(e.target.value)} onBlur={() => updateFilters({ unit: unitDraft })} onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); updateFilters({ unit: unitDraft }); } }}/></label>
-      <select className="input t-body w-[170px] max-w-full" aria-label="Inspector" value={inspector} onChange={e => updateFilters({ petugas: e.target.value })}><option value="">All inspectors</option>{inspectors.map(name => <option key={name} value={name}>{name}</option>)}</select>
-      <div className="flex flex-wrap items-center gap-2"><input type="date" className="input t-body w-[145px]" aria-label="From date (WIB)" value={from} max={to || undefined} onChange={e => updateFilters({ dari: e.target.value })}/><span className="t-body-sm muted">to</span><input type="date" className="input t-body w-[145px]" aria-label="To date (WIB)" value={to} min={from || undefined} onChange={e => updateFilters({ sampai: e.target.value })}/></div>
+      <Select className="w-[170px] max-w-full" aria-label="Inspector" value={inspector} onChange={value => updateFilters({ petugas: value })} options={[{ value: '', label: 'All inspectors' }, ...inspectors.map(name => ({ value: name, label: name }))]}/>
+      <div className="flex flex-wrap items-center gap-2"><DatePicker className="w-[160px] max-w-full" aria-label="From date (WIB)" placeholder="From date" value={from} max={to || undefined} onChange={value => updateFilters({ dari: value })}/><span className="t-body-sm muted">to</span><DatePicker className="w-[160px] max-w-full" aria-label="To date (WIB)" placeholder="To date" value={to} min={from || undefined} onChange={value => updateFilters({ sampai: value })}/></div>
       <div className="seg"><button className="t-body" aria-pressed={stop} onClick={() => updateFilters({ stop: stop ? '' : '1' })}>Only STOP</button><button className="t-body" aria-pressed={openWO} onClick={() => updateFilters({ wo: openWO ? '' : '1' })}>Open WO</button></div>
       {item && <span className="inline-flex items-center gap-1 max-w-full px-2 py-1 rounded-full bg-[var(--color-accent-subtle)] text-[var(--color-primary)] t-body-sm"><span className="truncate" title={item}>Component: {item}</span><button className="shrink-0 rounded-full p-1 hover:bg-[var(--color-surface)]" aria-label="Remove component filter" onClick={() => updateFilters({ item: '' })}><X size={13}/></button></span>}
       {hasFilters && <button className="px-2 py-1 t-body-sm muted hover:text-[var(--color-primary)]" onClick={resetFilters}>Reset filters</button>}
