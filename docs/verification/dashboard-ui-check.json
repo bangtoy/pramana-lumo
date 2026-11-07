@@ -1,0 +1,43 @@
+{
+  "initialKpi": {
+    "unit_total": 10,
+    "unit_diperiksa": 8,
+    "layak": 4,
+    "stop": 4,
+    "belum_p2h": 2,
+    "wo_terbuka": 8,
+    "wo_tinggi": 5,
+    "wo_terlambat": 3,
+    "stop_tanpa_wo": 1,
+    "laporan_7h": 27,
+    "stop_7h": 9
+  },
+  "afterKpi": {
+    "unit_total": 10,
+    "unit_diperiksa": 8,
+    "layak": 4,
+    "stop": 4,
+    "belum_p2h": 2,
+    "wo_terbuka": 10,
+    "wo_tinggi": 7,
+    "wo_terlambat": 3,
+    "stop_tanpa_wo": 0,
+    "laporan_7h": 27,
+    "stop_7h": 9
+  },
+  "workOrders": [
+    "WO-08334739-a07a-4b06-810f-de6248d4f1f9",
+    "WO-52cddfb6-d5c2-41a1-824b-6ecff89ae03d"
+  ],
+  "creationMs": 4723,
+  "panelPersists": true,
+  "chartResponsive": true,
+  "chartHoverAndKeyboard": true,
+  "sevenAndFourteenDays": true,
+  "pollingAndRefresh": true,
+  "kpiLinks": true,
+  "componentLinks": true,
+  "mobileOverflowContained": true,
+  "emptyAndErrorStates": true,
+  "errors": []
+}

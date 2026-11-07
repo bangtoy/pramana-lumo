@@ -92,10 +92,10 @@ Prasyarat: P0 dan P1. Acuan layar: `design/screens/01-supervisor-ringkasan.png`,
 - Sidebar: menu **Ringkasan** aktif hanya di `/supervisor` (exact).
 
 **Selesai bila**
-- [ ] Screenshot 1440×900 (panel Tanya terbuka dan terlipat) setara `screens/01`; tidak ada teks > 22 px kecuali `.t-metric`.
-- [ ] Klik **Buat WO** pada DT-07 → tombol hilang, KPI "tanpa work order" berkurang, WO baru di halaman Work order.
-- [ ] Hover grafik menampilkan tooltip; 7/14 hari mengganti data.
-- [ ] `rg` §3.4 bersih: kartu KPI memakai `var(--color-chart-*)`; hex literal hanya di `TrenChart.tsx`.
+- [x] Screenshot 1440×900 (panel Tanya terbuka dan terlipat) setara `screens/01`; tidak ada teks > 22 px kecuali `.t-metric`.
+- [x] Klik **Buat WO** pada DT-07 → tombol hilang, KPI "tanpa work order" berkurang, WO baru di halaman Work order.
+- [x] Hover grafik menampilkan tooltip; 7/14 hari mengganti data.
+- [x] `rg` §3.4 bersih: kartu KPI memakai `var(--color-chart-*)`; hex literal hanya di `TrenChart.tsx`.
 
 **Prompt /goal**
 ```
