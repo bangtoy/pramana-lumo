@@ -1,0 +1,197 @@
+{
+  "condition": "Normal",
+  "reportId": "LI-163aa412-82bc-4dff-a161-aab65016ef75",
+  "base": "http://localhost:3007",
+  "note": "Real agent and full eight-item plan. Direct checks are simulated operator reports, not measurements performed on a real vehicle.",
+  "turns": [
+    {
+      "input": "Nama saya Kandar, lokasi Riau. Pakai rencana RI-DT-UTYPE-01 untuk unit DT-09 · B 9129 KD. Kendaraan diparkir aman, terisolasi dan diganjal. Pemeriksaan dilakukan dari posisi aman, dengan petugas berwenang dan prop mekanis bila perlu.",
+      "photo": null,
+      "seconds": 5.751,
+      "reply": "Thank you, Kandar; I’ve saved your inspection details and noted your safety precautions. I’ll start with cabin and safety equipment: please upload clear photos showing the extinguisher gauge and expiry label, seat belt, mirrors and horn.",
+      "choices": [],
+      "count": 0,
+      "status": "berjalan"
+    },
+    {
+      "input": "Kabin normal. Saya sudah cek sabuk mengunci, spion utuh, klakson bunyi; APAR segel utuh, gauge hijau dan belum kedaluwarsa.",
+      "photo": "01-Kabin-dan-Safety.jpg",
+      "seconds": 10.799,
+      "reply": "Kandar, I’ve recorded cabin and safety equipment as good, with functional checks based on your report. Next, please upload a clear photo of the brakes and air system, such as the air-pressure gauge, taken from a safe position.",
+      "choices": [],
+      "count": 1,
+      "status": "berjalan"
+    },
+    {
+      "input": "Rem sudah dites diam sesuai SOP: tekanan udara rentang operasi normal, low air padam, tidak bocor, rem parkir menahan dan respons rem servis normal.",
+      "photo": "02-Rem.jpg",
+      "seconds": 9.628,
+      "reply": "Kandar, I’ve recorded brakes and air system as good, based on your reported stationary checks and dashboard photo. Next, please upload a clear photo showing tyre tread, sidewall and wheel nuts from a safe position.",
+      "choices": [],
+      "count": 2,
+      "status": "berjalan"
+    },
+    {
+      "input": "Semua ban dan mur kedua sisi sudah saya cek: normal, tidak ada benjolan atau sobekan besar, semua mur ada dan tidak longgar.",
+      "photo": "03-Ban-dan-Roda.jpg",
+      "seconds": 10.661,
+      "reply": "Kandar, I’ve recorded tyres and wheel nuts as good, based on your checks and photo. Please upload a clear photo of the dump body’s floor, welds or mounting points from a safe position. If raising the body is necessary, engage the mechanical safety prop before approaching it.",
+      "choices": [],
+      "count": 3,
+      "status": "berjalan"
+    },
+    {
+      "input": "Lantai bak, las dan dudukan sudah saya cek dari posisi aman: tidak retak, tidak deformasi atau longgar; hanya karat permukaan dan kotoran.",
+      "photo": "04-Bak-Dump.jpg",
+      "seconds": 9.287,
+      "reply": "Kandar, I’ve recorded the dump body as good based on your checks and photo. Please upload a clear photo of the hydraulic cylinder, hoses, couplings and seals from a safe position. If the body must be raised, engage the mechanical safety prop before approaching it.",
+      "choices": [],
+      "count": 4,
+      "status": "berjalan"
+    },
+    {
+      "input": "Silinder, selang, sambungan dan seal sudah saya cek: kering tanpa kebocoran atau kerusakan. Foto dari sisi aman; bak diisolasi dan prop mekanis terpasang.",
+      "photo": "05-Silinder-Hidraulik.jpg",
+      "seconds": 11.136,
+      "reply": "Kandar, I’ve recorded the hydraulic cylinder as good based on your checks and photo. Please upload a clear photo of the mechanical safety prop and its engagement points from a safe position. Never enter beneath an unsupported body.",
+      "choices": [],
+      "count": 5,
+      "status": "berjalan"
+    },
+    {
+      "input": "Prop mekanis normal, lurus, duduk pada kedua dudukan dan pin terkunci; saya cek dari samping dengan isolasi aman, tidak masuk ke bawah bak.",
+      "photo": "06-Safety-Bak.jpg",
+      "seconds": 11.739,
+      "reply": "Kandar, I’ve recorded the body safety prop as good based on your checks and photo. Please upload a clear photo of the tailgate hinges, locking pins and latch from a safe position.",
+      "choices": [],
+      "count": 6,
+      "status": "berjalan"
+    },
+    {
+      "input": "Engsel dan pin utuh; pintu sudah dites menutup rapat dan kedua pengunci mengunci baik. Hanya karat permukaan.",
+      "photo": "07-Pintu-Dump.jpg",
+      "seconds": 34.001,
+      "reply": "Kandar, I’ve recorded the tailgate and latch as good based on your checks and photo. Please upload a clear photo of the lights and reflectors from a safe position.",
+      "choices": [],
+      "count": 7,
+      "status": "berjalan"
+    },
+    {
+      "input": "Lampu depan, rem kiri-kanan dan semua sein sudah dites dengan bantuan rekan dari posisi aman: normal. Reflektor utuh. Foto hanya satu keadaan dari tes tersebut.",
+      "photo": "08-Lampu-dan-Reflektor.jpg",
+      "seconds": 12.177,
+      "reply": "Kandar, I’ve recorded lights and reflectors as good based on your checks and photo. All eight items are complete; the report is still a draft. Please confirm if you’d like me to submit it.",
+      "choices": [
+        "Submit report"
+      ],
+      "count": 8,
+      "status": "berjalan"
+    },
+    {
+      "input": "Submit the completed inspection report now.",
+      "photo": null,
+      "seconds": 4.609,
+      "reply": "Kandar, I’ve submitted your inspection report: DT-09 is roadworthy.",
+      "choices": [],
+      "count": 8,
+      "status": "terkirim"
+    }
+  ],
+  "result": {
+    "submitted": true,
+    "items": 8,
+    "stop": 0,
+    "findings": {
+      "ITEM-1": {
+        "status": "baik",
+        "stop": false,
+        "catatan": "Photo shows a mounted fire extinguisher, seat belt and buckle, exterior mirrors and steering wheel, with dust and surface wear. Gauge reading and expiry details are not legible in the photo. Kandar directly reports cabin normal, seat belt locks, mirrors intact, horn sounds, extinguisher seal intact, gauge green and extinguisher not expired. Functional checks and gauge/expiry assessment are based on the inspector's account, not the photo.",
+        "bukti_ids": [
+          "FILE-9722cbd6-9810-472c-bc63-ca008ce2d48d"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:47:48.678Z",
+        "ditangani": false
+      },
+      "ITEM-2": {
+        "status": "baik",
+        "stop": false,
+        "catatan": "Photo documents the dashboard with two round gauges and an illuminated orange/red indicator; gauge labels, exact readings and indicator function are not reliably identifiable. Dust and surface wear are visible. Kandar reports stationary tests per SOP: air pressure within normal operating range, low-air warning off, no leaks, parking brake holds and service brake response normal. Pressure, warning status, leakage and brake performance are based on the inspector's direct checks, not established by the photo.",
+        "bukti_ids": [
+          "FILE-bbe237d8-1986-405f-acdf-41bd7db63c86"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:47:58.633Z",
+        "ditangani": false
+      },
+      "ITEM-3": {
+        "status": "baik",
+        "stop": false,
+        "catatan": "Photo shows two wheels on one side with visible tread, sidewalls and wheel nuts with yellow markers; dirt and surface rust are present. No clear bulge, exposed cord or major cut is visible in the pictured areas. Kandar reports checking all tyres and wheel nuts on both sides: normal, no bulges or major cuts, all nuts present and not loose. Coverage of all tyres and nut tightness is based on the inspector's direct checks, not established by the photo.",
+        "bukti_ids": [
+          "FILE-971df605-9351-466d-8506-fefa32db61c6"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:48:08.856Z",
+        "ditangani": false
+      },
+      "ITEM-4": {
+        "status": "baik",
+        "stop": false,
+        "catatan": "Photo shows the dump body floor, inner sidewalls and front wall with surface rust, dirt and scrape marks; no clear structural crack is visible in the pictured areas. Shadow limits front detail, and weld integrity and mounting tightness cannot be established from this view. Kandar reports directly checking the floor, welds and mountings from a safe position: no cracks, deformation or looseness, only surface rust and dirt. Full structural condition and mounting security are based on the inspector's checks, not established by the photo alone.",
+        "bukti_ids": [
+          "FILE-890bad71-475e-462b-b6f0-320532b028cc"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:48:18.871Z",
+        "ditangani": false
+      },
+      "ITEM-5": {
+        "status": "baik",
+        "stop": false,
+        "catatan": "Photo shows an extended hydraulic cylinder, two hoses, couplings and base mounting beneath the raised body; no clear fluid drip, pooling or hose rupture is visible. Surrounding metalwork has dirt and surface rust. Kandar reports directly checking the cylinder, hoses, connections and seals: dry, without leaks or damage, from a safe side with isolation and mechanical prop engaged. Complete seal and hose condition, isolation and prop engagement are based on the inspector's account, not confirmed by this view.",
+        "bukti_ids": [
+          "FILE-7910a65c-c096-4e56-a100-4cc1d786d7a5"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:48:29.620Z",
+        "ditangani": false
+      },
+      "ITEM-6": {
+        "status": "baik",
+        "stop": false,
+        "catatan": "Photo shows a straight-appearing mechanical safety prop between the chassis and raised body, upper contact plate, bolted lower mounting and transverse pin with retaining clip. No clear break or deformation is visible; dirt, worn paint and surface rust are present. Kandar reports the prop is normal and straight, seated at both supports with the pin locked, checked from the side under safe isolation without entering beneath the body. Full seating, locking security and isolation are based on the inspector's direct account, not established by the photo alone.",
+        "bukti_ids": [
+          "FILE-fb183ee9-861f-484c-9ebf-a6b98c6664dc"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:48:40.772Z",
+        "ditangani": false
+      },
+      "ITEM-7": {
+        "status": "baik",
+        "stop": false,
+        "catatan": "Photo shows one tailgate corner with a horizontal latch arm, pivot bolt and hanging retaining loop; dirt, worn paint and surface rust are visible, with no clear break in the pictured latch. The opposite latch is outside the view, and hinge/pin integrity and secure closure cannot be established from the photo alone. Kandar reports hinges and pins intact and a completed closure test: tailgate closes tightly and both latches lock properly, with only surface rust. Functional closure and both latch checks are based on the inspector's direct account.",
+        "bukti_ids": [
+          "FILE-850ee30e-fef3-4aeb-ab13-85a2d87fa6e0"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:49:12.718Z",
+        "ditangani": false
+      },
+      "ITEM-8": {
+        "status": "baik",
+        "stop": false,
+        "catatan": "Photo shows illuminated red and amber lamps in both rear clusters, white lamps at the upper rear corners and visible side, and reflective strips around the tailgate, side and rear bar. Dirt, worn paint and surface rust are visible. A single photo does not establish brake-light response, indicator flashing, headlight operation or all reflector condition. Kandar reports testing headlights, both brake lights and all indicators with a colleague from safe positions: all normal, reflectors intact. Functional results and full reflector condition are based on the inspector's direct checks, not established by the photo alone.",
+        "bukti_ids": [
+          "FILE-aeaab015-22aa-42d6-a9bd-1b88ab7e00af"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:49:27.355Z",
+        "ditangani": false
+      }
+    },
+    "summary": "DT-09 is roadworthy.",
+    "turnCount": 10
+  }
+}

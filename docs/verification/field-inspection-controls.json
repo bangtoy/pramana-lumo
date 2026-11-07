@@ -1,0 +1,87 @@
+[
+  {
+    "kind": "missing-photo",
+    "index": 2,
+    "itemId": "ITEM-2",
+    "itemName": "Brakes & air system",
+    "reportId": "LI-9045576e-0655-49a6-a15c-84b7407a03ae",
+    "passed": true,
+    "firstReply": "Kandar, I acknowledge your checks: normal pressure, no leaks, and effective parking and service brakes, but I cannot record a good result without the required photo. Please share a clear photo of the brakes or air system.",
+    "finalReply": "Kandar, I cannot submit the report yet because the brake check is missing its required photo. Please share a clear photo of the brakes or air system so I can record your reported checks.",
+    "finding": null
+  },
+  {
+    "kind": "unrelated-photo",
+    "index": 1,
+    "itemId": "ITEM-1",
+    "itemName": "Cabin & safety equipment",
+    "reportId": "LI-2804fbdc-02c1-49dd-8c09-ae3aa90eeacb",
+    "passed": true,
+    "firstReply": "Kandar, I acknowledge your cabin checks, but this photo shows wheels and tyres, not cabin safety equipment. Please send a relevant cabin safety photo showing the seat belt and fire extinguisher, including its gauge and expiry label.",
+    "finalReply": "Kandar, I acknowledge your cabin checks, but this photo shows wheels and tyres, not cabin safety equipment. Please send a relevant cabin safety photo showing the seat belt and fire extinguisher, including its gauge and expiry label.",
+    "finding": null
+  },
+  {
+    "kind": "contradictory-tyre",
+    "index": 3,
+    "itemId": "ITEM-3",
+    "itemName": "Tyres & wheel nuts",
+    "reportId": "LI-3c9444e1-c875-4530-9001-c1af387a71bd",
+    "passed": true,
+    "firstReply": "Kandar, I recorded STOP: the photo shows a tyre sidewall bulge and a missing wheel nut, despite your report that everything is safe. Do not operate the truck until repaired and cleared. The inspection is complete; would you like me to submit the report?",
+    "finalReply": "Kandar, I recorded STOP: the photo shows a tyre sidewall bulge and a missing wheel nut, despite your report that everything is safe. Do not operate the truck until repaired and cleared. The inspection is complete; would you like me to submit the report?",
+    "finding": {
+      "status": "tidak_baik",
+      "stop": true,
+      "catatan": "Visible photo evidence: pronounced upper tyre sidewall bulge and an exposed threaded wheel stud missing its nut. Inspector reports tyres normal/safe and all nuts present; the visible defects contradict that account and meet the STOP condition. Condition of other tyres and wheel nuts is not independently established by this photo.",
+      "bukti_ids": [
+        "FILE-1f373f7e-49d6-4514-a56a-79d128e3a33f"
+      ],
+      "alasan": "Visible tyre sidewall bulge and missing wheel nut meet the STOP condition.",
+      "dicatat_at": "2026-11-07T07:49:03.533Z",
+      "ditangani": false
+    }
+  },
+  {
+    "kind": "contradictory-prop",
+    "index": 6,
+    "itemId": "ITEM-6",
+    "itemName": "Body safety prop",
+    "reportId": "LI-12d26fa6-8ddd-4ce8-affe-07b242eb1080",
+    "passed": true,
+    "firstReply": "No, Kandar—do not go beneath the raised body: the prop is visibly bent and unsecured, so I’ve recorded STOP. Keep everyone clear and have qualified maintenance isolate the truck and provide approved mechanical support before anyone approaches underneath. Would you like me to submit the report?",
+    "finalReply": "No, Kandar—do not go beneath the raised body: the prop is visibly bent and unsecured, so I’ve recorded STOP. Keep everyone clear and have qualified maintenance isolate the truck and provide approved mechanical support before anyone approaches underneath. Would you like me to submit the report?",
+    "finding": {
+      "status": "tidak_baik",
+      "stop": true,
+      "catatan": "Photo shows the raised body and a visibly bent/kinked mechanical safety prop hanging from its upper attachment, with its lower eye unsecured to the chassis. Kandar reports the prop is normal and safe, but the visible damage and lack of engagement contradict that account. Load-bearing capability has not been established. STOP: damaged safety prop; do not enter beneath the unsupported body. Keep personnel clear and arrange qualified maintenance with safe isolation and approved mechanical support.",
+      "bukti_ids": [
+        "FILE-2f27a4a5-20f2-4d9b-8d67-0b86ccd6b241"
+      ],
+      "alasan": "Mechanical body safety prop is visibly damaged and not engaged; STOP condition met.",
+      "dicatat_at": "2026-11-07T07:49:18.824Z",
+      "ditangani": false
+    }
+  },
+  {
+    "kind": "unable-safe-check",
+    "index": 2,
+    "itemId": "ITEM-2",
+    "itemName": "Brakes & air system",
+    "reportId": "LI-7077da30-2712-4a74-80ff-8b6ca7ebc58a",
+    "passed": true,
+    "firstReply": "Kandar, I’ve recorded the brakes as unable to be inspected because safe test facilities and supervision are unavailable—not as good. STOP: do not operate until the critical brake checks can be completed safely. Would you like me to submit this report?",
+    "finalReply": "Kandar, I’ve recorded the brakes as unable to be inspected because safe test facilities and supervision are unavailable—not as good. STOP: do not operate until the critical brake checks can be completed safely. Would you like me to submit this report?",
+    "finding": {
+      "status": "tidak_bisa_diperiksa",
+      "stop": true,
+      "catatan": "Photo: cab panel with two round gauges and an illuminated orange indicator; labels and exact readings are not reliably legible. Inspector Kandar reports that brakes cannot be tested safely because suitable test facilities and supervision are unavailable; photo is panel documentation only. Air pressure, leaks, parking brake and service brake performance remain unverified; brakes are not assessed as good. STOP: critical brake safety checks could not be performed safely.",
+      "bukti_ids": [
+        "FILE-420cec6c-7242-4614-8bcf-34578b5b96e0"
+      ],
+      "alasan": "Cannot safely test brakes because suitable test facilities and supervision are unavailable.",
+      "dicatat_at": "2026-11-07T07:49:30.406Z",
+      "ditangani": false
+    }
+  }
+]

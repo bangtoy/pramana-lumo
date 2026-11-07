@@ -1,0 +1,967 @@
+{
+  "label": "tuned-sol",
+  "base": "http://localhost:3007",
+  "note": "Controlled one-item snapshots of the real plan; operator confirmations are simulated scenario inputs, not real physical inspections.",
+  "cases": [
+    {
+      "condition": "Normal",
+      "index": 1,
+      "itemId": "ITEM-1",
+      "itemName": "Cabin & safety equipment",
+      "reportId": "LI-e2b1bb7d-8258-46a3-a692-26d099374ef0",
+      "asset": "Normal/01-Kabin-dan-Safety.jpg",
+      "bytes": 127648,
+      "sha256": "4a7c45980ea3c22beed331a2a47f30d2506bac8f64e01a9176a9c76a7b0f98a2",
+      "turns": [
+        {
+          "seconds": 7.375,
+          "text": "Ini foto Cabin & safety equipment. Kondisinya normal, lanjut.",
+          "reply": "Kandar, I can see the cabin equipment, but cannot read the extinguisher gauge or expiry label. Have you tested the horn and confirmed the extinguisher gauge is green and the expiry date is valid?",
+          "quickReplies": [
+            "I checked: horn works, gauge green, extinguisher in date",
+            "I checked and found a problem",
+            "I could not check safely"
+          ],
+          "statuses": [
+            "Examining the photo…",
+            "Labelling the photo…"
+          ],
+          "pills": [],
+          "finding": null
+        },
+        {
+          "seconds": 5.853,
+          "text": "I checked: horn works, gauge green, extinguisher in date",
+          "reply": "Kandar, I’ve recorded Cabin & safety equipment as good, and all checklist items are complete. Would you like me to submit the report?",
+          "quickReplies": [
+            "Submit report"
+          ],
+          "statuses": [
+            "Lumo is reading…",
+            "Recording the finding…"
+          ],
+          "pills": [
+            {
+              "kind": "baik",
+              "label": "Cabin & safety equipment: good"
+            }
+          ],
+          "finding": {
+            "status": "baik",
+            "stop": false,
+            "catatan": "Photo documents the seat belt and buckle, mirrors, and mounted fire extinguisher; gauge reading and expiry information are not legible. Dust, worn finishes and surface rust are visible, without a documented critical defect. Inspector reports cabin and safety equipment normal and directly confirms the horn works, the extinguisher gauge is green, and the extinguisher is in date.",
+            "bukti_ids": [
+              "FILE-2ca1ab1a-974a-43ba-ac81-6d5b0de15550"
+            ],
+            "alasan": null,
+            "dicatat_at": "2026-11-07T07:45:51.651Z",
+            "ditangani": false
+          }
+        }
+      ],
+      "confirmationMode": "agent quick reply (simulated completed direct check)",
+      "final": {
+        "status": "baik",
+        "stop": false,
+        "catatan": "Photo documents the seat belt and buckle, mirrors, and mounted fire extinguisher; gauge reading and expiry information are not legible. Dust, worn finishes and surface rust are visible, without a documented critical defect. Inspector reports cabin and safety equipment normal and directly confirms the horn works, the extinguisher gauge is green, and the extinguisher is in date.",
+        "bukti_ids": [
+          "FILE-2ca1ab1a-974a-43ba-ac81-6d5b0de15550"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:45:51.651Z",
+        "ditangani": false
+      }
+    },
+    {
+      "condition": "Normal",
+      "index": 2,
+      "itemId": "ITEM-2",
+      "itemName": "Brakes & air system",
+      "reportId": "LI-74ecff4b-4bdc-4d70-b5af-5c12360b00e6",
+      "asset": "Normal/02-Rem.jpg",
+      "bytes": 153512,
+      "sha256": "e7e5210bba3045cec4d7338414c4140a43ea18e88230b544f2e58f209cdcb8ab",
+      "turns": [
+        {
+          "seconds": 6.824,
+          "text": "Ini foto Brakes & air system. Kondisinya normal, lanjut.",
+          "reply": "Kandar, I can see the dashboard, but cannot read the gauges or verify brake performance from this photo. Can you confirm you checked adequate air pressure, no air leaks, and effective parking and service brakes while stationary?",
+          "quickReplies": [
+            "I checked: pressure adequate, no leaks, both brakes effective",
+            "I could not check safely"
+          ],
+          "statuses": [
+            "Examining the photo…",
+            "Labelling the photo…"
+          ],
+          "pills": [],
+          "finding": null
+        },
+        {
+          "seconds": 6.778,
+          "text": "I checked: pressure adequate, no leaks, both brakes effective",
+          "reply": "Kandar, I’ve recorded Brakes & air system as good based on your confirmed checks and the dashboard photo. All checklist items are complete; would you like me to submit the report?",
+          "quickReplies": [
+            "Submit report"
+          ],
+          "statuses": [
+            "Lumo is reading…",
+            "Recording the finding…"
+          ],
+          "pills": [
+            {
+              "kind": "baik",
+              "label": "Brakes & air system"
+            }
+          ],
+          "finding": {
+            "status": "baik",
+            "stop": false,
+            "catatan": "Photo documents the cab dashboard with steering wheel, two round gauges and an illuminated orange indicator; gauge labels and readings are not clearly readable. Inspector directly confirms adequate air pressure, no air leaks, and effective parking and service brakes while stationary. Brake performance and air leakage are not established by the photo.",
+            "bukti_ids": [
+              "FILE-c928e9b0-ec47-4272-aa2b-8c0eecc00c82"
+            ],
+            "alasan": null,
+            "dicatat_at": "2026-11-07T07:46:05.237Z",
+            "ditangani": false
+          }
+        }
+      ],
+      "confirmationMode": "agent quick reply (simulated completed direct check)",
+      "final": {
+        "status": "baik",
+        "stop": false,
+        "catatan": "Photo documents the cab dashboard with steering wheel, two round gauges and an illuminated orange indicator; gauge labels and readings are not clearly readable. Inspector directly confirms adequate air pressure, no air leaks, and effective parking and service brakes while stationary. Brake performance and air leakage are not established by the photo.",
+        "bukti_ids": [
+          "FILE-c928e9b0-ec47-4272-aa2b-8c0eecc00c82"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:46:05.237Z",
+        "ditangani": false
+      }
+    },
+    {
+      "condition": "Normal",
+      "index": 3,
+      "itemId": "ITEM-3",
+      "itemName": "Tyres & wheel nuts",
+      "reportId": "LI-ac5c4c96-56bc-411f-899d-3a01c7dce2b6",
+      "asset": "Normal/03-Ban-dan-Roda.jpg",
+      "bytes": 261149,
+      "sha256": "d8fb3df3579907e6bd84db792910ffe089002ababaffeb7fa6d562fa90fbbe90",
+      "turns": [
+        {
+          "seconds": 10.024,
+          "text": "Ini foto Tyres & wheel nuts. Kondisinya normal, lanjut.",
+          "reply": "Kandar, I’ve recorded the tyres and wheel nuts as good based on your report and photo. All inspection items are complete; would you like me to submit the report?",
+          "quickReplies": [
+            "Submit report"
+          ],
+          "statuses": [
+            "Examining the photo…",
+            "Labelling the photo…",
+            "Recording the finding…"
+          ],
+          "pills": [
+            {
+              "kind": "baik",
+              "label": "Tyres & wheel nuts: Good"
+            }
+          ],
+          "finding": {
+            "status": "baik",
+            "stop": false,
+            "catatan": "Kandar reports the tyres and wheel nuts are normal. Photo shows two wheels on one side with visible tread, sidewalls and wheel nuts with yellow markers; dirt and surface rust are present on the rims, with no clear bulge, exposed cord, major cut or missing nut visible. The opposite side and nut tightness are not independently verifiable from the photo; the good result relies on the inspector's current-item account for checks beyond this view.",
+            "bukti_ids": [
+              "FILE-97c4b057-3bcc-4e85-8d24-9b72780ee109"
+            ],
+            "alasan": null,
+            "dicatat_at": "2026-11-07T07:46:15.020Z",
+            "ditangani": false
+          }
+        }
+      ],
+      "final": {
+        "status": "baik",
+        "stop": false,
+        "catatan": "Kandar reports the tyres and wheel nuts are normal. Photo shows two wheels on one side with visible tread, sidewalls and wheel nuts with yellow markers; dirt and surface rust are present on the rims, with no clear bulge, exposed cord, major cut or missing nut visible. The opposite side and nut tightness are not independently verifiable from the photo; the good result relies on the inspector's current-item account for checks beyond this view.",
+        "bukti_ids": [
+          "FILE-97c4b057-3bcc-4e85-8d24-9b72780ee109"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:46:15.020Z",
+        "ditangani": false
+      }
+    },
+    {
+      "condition": "Normal",
+      "index": 4,
+      "itemId": "ITEM-4",
+      "itemName": "Dump body",
+      "reportId": "LI-c8940bd6-185a-44f0-b1ce-00a2187dc913",
+      "asset": "Normal/04-Bak-Dump.jpg",
+      "bytes": 175255,
+      "sha256": "29d7094ce5ecaa25d6901f1363ca41a5a9288a569fc966b4d795ccf57da95205",
+      "turns": [
+        {
+          "seconds": 10.42,
+          "text": "Ini foto Dump body. Kondisinya normal, lanjut.",
+          "reply": "Kandar, I’ve recorded the dump body as good based on your check and the photo. All inspection items are complete; would you like me to submit the report?",
+          "quickReplies": [
+            "Submit the report"
+          ],
+          "statuses": [
+            "Examining the photo…",
+            "Labelling the photo…",
+            "Recording the finding…"
+          ],
+          "pills": [
+            {
+              "kind": "baik",
+              "label": "Dump body: good"
+            }
+          ],
+          "finding": {
+            "status": "baik",
+            "stop": false,
+            "catatan": "Inspector reports the dump body condition is normal. Photo shows the body floor and inner sidewalls with dirt, surface rust and scrape marks; no obvious structural crack is visible. Welds and body mounting points are not fully visible in the photo; their condition relies on the inspector's normal-condition account.",
+            "bukti_ids": [
+              "FILE-db741df0-b3c4-44b3-bad3-6a425ec88621"
+            ],
+            "alasan": null,
+            "dicatat_at": "2026-11-07T07:46:25.321Z",
+            "ditangani": false
+          }
+        }
+      ],
+      "final": {
+        "status": "baik",
+        "stop": false,
+        "catatan": "Inspector reports the dump body condition is normal. Photo shows the body floor and inner sidewalls with dirt, surface rust and scrape marks; no obvious structural crack is visible. Welds and body mounting points are not fully visible in the photo; their condition relies on the inspector's normal-condition account.",
+        "bukti_ids": [
+          "FILE-db741df0-b3c4-44b3-bad3-6a425ec88621"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:46:25.321Z",
+        "ditangani": false
+      }
+    },
+    {
+      "condition": "Normal",
+      "index": 5,
+      "itemId": "ITEM-5",
+      "itemName": "Hydraulic cylinder",
+      "reportId": "LI-2db7c480-c894-43af-b018-d36fd3baa654",
+      "asset": "Normal/05-Silinder-Hidraulik.jpg",
+      "bytes": 167184,
+      "sha256": "1f47f937ed1022a3166ceb16e75fe5ee4beeefc926cb138cab4ef5b68949c78b",
+      "turns": [
+        {
+          "seconds": 10.424,
+          "text": "Ini foto Hydraulic cylinder. Kondisinya normal, lanjut.",
+          "reply": "Kandar, I’ve recorded the hydraulic cylinder as good based on your report and the visible photo evidence. All checklist items are complete; shall I submit the report?",
+          "quickReplies": [
+            "Submit report"
+          ],
+          "statuses": [
+            "Examining the photo…",
+            "Labelling the photo…",
+            "Recording the finding…"
+          ],
+          "pills": [
+            {
+              "kind": "baik",
+              "label": "Hydraulic cylinder: good"
+            }
+          ],
+          "finding": {
+            "status": "baik",
+            "stop": false,
+            "catatan": "Photo: visible cylinder rod, housing, hose connections and visible hose sections show no obvious damage or fluid leakage. Dirt and surface rust are visible on surrounding chassis/body. Inspector Kandar reports the hydraulic cylinder condition is normal. Full hose lengths and all seals are not visible; mechanical safety prop engagement cannot be confirmed from the photo.",
+            "bukti_ids": [
+              "FILE-8cb66e70-88c9-4f01-a8ee-01041492532e"
+            ],
+            "alasan": null,
+            "dicatat_at": "2026-11-07T07:46:35.651Z",
+            "ditangani": false
+          }
+        }
+      ],
+      "final": {
+        "status": "baik",
+        "stop": false,
+        "catatan": "Photo: visible cylinder rod, housing, hose connections and visible hose sections show no obvious damage or fluid leakage. Dirt and surface rust are visible on surrounding chassis/body. Inspector Kandar reports the hydraulic cylinder condition is normal. Full hose lengths and all seals are not visible; mechanical safety prop engagement cannot be confirmed from the photo.",
+        "bukti_ids": [
+          "FILE-8cb66e70-88c9-4f01-a8ee-01041492532e"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:46:35.651Z",
+        "ditangani": false
+      }
+    },
+    {
+      "condition": "Normal",
+      "index": 6,
+      "itemId": "ITEM-6",
+      "itemName": "Body safety prop",
+      "reportId": "LI-eb0048be-d16e-4c26-9200-9bbf401ea288",
+      "asset": "Normal/06-Safety-Bak.jpg",
+      "bytes": 211431,
+      "sha256": "c88fb85616172bcb9b569a5fecb10a810416480ef6cd6f0ceef6bb8e03fbfa10",
+      "turns": [
+        {
+          "seconds": 9.527,
+          "text": "Ini foto Body safety prop. Kondisinya normal, lanjut.",
+          "reply": "Kandar, I’ve recorded the body safety prop as good based on your report and photo. All checklist items are complete; would you like me to submit the report?",
+          "quickReplies": [
+            "Submit report"
+          ],
+          "statuses": [
+            "Examining the photo…",
+            "Labelling the photo…",
+            "Recording the finding…"
+          ],
+          "pills": [
+            {
+              "kind": "baik",
+              "label": "Body safety prop: good"
+            }
+          ],
+          "finding": {
+            "status": "baik",
+            "stop": false,
+            "catatan": "Photo shows the mechanical safety prop positioned between the chassis and raised body underside, with a visible pin and retaining clip. Dirt, worn paint and surface rust are visible, with no obvious break or bending in the shown prop. Kandar reports the body safety prop condition is normal. Assessment is based on the relevant photo and inspector's account; no separate physical engagement test was reported.",
+            "bukti_ids": [
+              "FILE-bd696d24-e833-4aa1-aaa2-a85451355b74"
+            ],
+            "alasan": null,
+            "dicatat_at": "2026-11-07T07:46:45.558Z",
+            "ditangani": false
+          }
+        }
+      ],
+      "final": {
+        "status": "baik",
+        "stop": false,
+        "catatan": "Photo shows the mechanical safety prop positioned between the chassis and raised body underside, with a visible pin and retaining clip. Dirt, worn paint and surface rust are visible, with no obvious break or bending in the shown prop. Kandar reports the body safety prop condition is normal. Assessment is based on the relevant photo and inspector's account; no separate physical engagement test was reported.",
+        "bukti_ids": [
+          "FILE-bd696d24-e833-4aa1-aaa2-a85451355b74"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:46:45.558Z",
+        "ditangani": false
+      }
+    },
+    {
+      "condition": "Normal",
+      "index": 7,
+      "itemId": "ITEM-7",
+      "itemName": "Tailgate & latch",
+      "reportId": "LI-51669fed-2bbd-4a27-bddc-e4105196b498",
+      "asset": "Normal/07-Pintu-Dump.jpg",
+      "bytes": 217073,
+      "sha256": "2e8a9d6ffecf6a23bc19a19db97bb8d5be02455091f36887a6713f7bfa091f41",
+      "turns": [
+        {
+          "seconds": 10.802,
+          "text": "Ini foto Tailgate & latch. Kondisinya normal, lanjut.",
+          "reply": "Kandar, I’ve recorded Tailgate & latch as good based on your report and photo. All inspection items are complete; would you like me to submit the report?",
+          "quickReplies": [
+            "Submit report"
+          ],
+          "statuses": [
+            "Examining the photo…",
+            "Labelling the photo…",
+            "Recording the finding…"
+          ],
+          "pills": [
+            {
+              "kind": "baik",
+              "label": "Tailgate & latch: good"
+            }
+          ],
+          "finding": {
+            "status": "baik",
+            "stop": false,
+            "catatan": "Photo shows the tailgate panel appearing closed, with a horizontal latch arm and hanging retaining loop visible; dirt, worn paint and surface rust are present. Kandar reports the Tailgate & latch condition is normal. Good result is based on the inspector's current-item account and relevant photo; secure locking and operation of every hinge and pin are not independently established by the photo.",
+            "bukti_ids": [
+              "FILE-76fe0a2b-30b0-441d-9f24-94baf4164609"
+            ],
+            "alasan": null,
+            "dicatat_at": "2026-11-07T07:46:56.037Z",
+            "ditangani": false
+          }
+        }
+      ],
+      "final": {
+        "status": "baik",
+        "stop": false,
+        "catatan": "Photo shows the tailgate panel appearing closed, with a horizontal latch arm and hanging retaining loop visible; dirt, worn paint and surface rust are present. Kandar reports the Tailgate & latch condition is normal. Good result is based on the inspector's current-item account and relevant photo; secure locking and operation of every hinge and pin are not independently established by the photo.",
+        "bukti_ids": [
+          "FILE-76fe0a2b-30b0-441d-9f24-94baf4164609"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:46:56.037Z",
+        "ditangani": false
+      }
+    },
+    {
+      "condition": "Normal",
+      "index": 8,
+      "itemId": "ITEM-8",
+      "itemName": "Lights & reflectors",
+      "reportId": "LI-ca0ce33f-a347-4481-a83a-36ec9d1952ab",
+      "asset": "Normal/08-Lampu-dan-Reflektor.jpg",
+      "bytes": 190173,
+      "sha256": "7aff5307ad87a4a888ccf740f07e6d05e21923869ee809837ecc0440d6e149b9",
+      "turns": [
+        {
+          "seconds": 7.937,
+          "text": "Ini foto Lights & reflectors. Kondisinya normal, lanjut.",
+          "reply": "Kandar, I can see illuminated rear lamps and reflective strips, but the photo cannot confirm all lighting functions. Have you tested the headlights, brake lights and indicators and confirmed they all work?",
+          "quickReplies": [
+            "I tested: headlights, brake lights and indicators all work",
+            "I tested: a light or indicator does not work",
+            "I could not check safely"
+          ],
+          "statuses": [
+            "Examining the photo…",
+            "Labelling the photo…"
+          ],
+          "pills": [],
+          "finding": null
+        },
+        {
+          "seconds": 6.245,
+          "text": "I tested: headlights, brake lights and indicators all work",
+          "reply": "Kandar, I’ve recorded Lights & reflectors as good, including your confirmed function tests. All inspection items are complete; would you like me to submit the report?",
+          "quickReplies": [
+            "Submit report"
+          ],
+          "statuses": [
+            "Lumo is reading…",
+            "Recording the finding…"
+          ],
+          "pills": [
+            {
+              "kind": "baik",
+              "label": "Lights & reflectors: good"
+            }
+          ],
+          "finding": {
+            "status": "baik",
+            "stop": false,
+            "catatan": "Photo documents illuminated red and amber rear lamp sections, illuminated white lamps, and red-and-white reflective strips with dirt and wear. Headlights are not visible; the still photo does not establish brake-light response or indicator flashing. Kandar reports the item is normal and confirms testing headlights, brake lights and indicators, all working.",
+            "bukti_ids": [
+              "FILE-0650586b-51b5-44f1-b547-1afe909c4fce"
+            ],
+            "alasan": null,
+            "dicatat_at": "2026-11-07T07:47:10.613Z",
+            "ditangani": false
+          }
+        }
+      ],
+      "confirmationMode": "agent quick reply (simulated completed direct check)",
+      "final": {
+        "status": "baik",
+        "stop": false,
+        "catatan": "Photo documents illuminated red and amber rear lamp sections, illuminated white lamps, and red-and-white reflective strips with dirt and wear. Headlights are not visible; the still photo does not establish brake-light response or indicator flashing. Kandar reports the item is normal and confirms testing headlights, brake lights and indicators, all working.",
+        "bukti_ids": [
+          "FILE-0650586b-51b5-44f1-b547-1afe909c4fce"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:47:10.613Z",
+        "ditangani": false
+      }
+    },
+    {
+      "condition": "Issue",
+      "index": 1,
+      "itemId": "ITEM-1",
+      "itemName": "Cabin & safety equipment",
+      "reportId": "LI-020693bd-b02d-4fa3-8f6d-9f57e01fa5fa",
+      "asset": "Issue/01-Kabin-dan-Safety.jpg",
+      "bytes": 176030,
+      "sha256": "ea02c8b0863cb5554f0ebfe6570bc67d1a643b7c60355d72e8abcf2bd4a0bae5",
+      "turns": [
+        {
+          "seconds": 12.721,
+          "text": "Ada masalah pada Cabin & safety equipment. Ini fotonya.",
+          "reply": "Kandar, I’ve recorded STOP for the visibly torn and frayed seat belt; do not operate the unit until it is repaired or replaced and safety is verified. Other unconfirmed safety checks remain noted as unknown. Would you like me to submit the report?",
+          "quickReplies": [
+            "Submit the report"
+          ],
+          "statuses": [
+            "Examining the photo…",
+            "Labelling the photo…",
+            "Recording the finding…"
+          ],
+          "pills": [
+            {
+              "kind": "tidak_baik",
+              "label": "Defective seat belt"
+            },
+            {
+              "kind": "stop",
+              "label": "STOP — do not operate"
+            }
+          ],
+          "finding": {
+            "status": "tidak_baik",
+            "stop": true,
+            "catatan": "Visible photo evidence: seat-belt webbing is extensively frayed and torn, with visible holes; this defective seat belt meets the STOP condition. A fire extinguisher and side mirror are visible. Inspector reports a problem with cabin and safety equipment, without specific direct-test results. Still unknown: horn operation, seat-belt latch operation, extinguisher pressure and expiry, and mirror condition/function. Do not operate the unit until the defective seat belt is repaired or replaced and safety is verified.",
+            "bukti_ids": [
+              "FILE-81bc62dd-cb3d-417b-bc1e-95b083ca69a8"
+            ],
+            "alasan": null,
+            "dicatat_at": "2026-11-07T07:47:22.625Z",
+            "ditangani": false
+          }
+        }
+      ],
+      "final": {
+        "status": "tidak_baik",
+        "stop": true,
+        "catatan": "Visible photo evidence: seat-belt webbing is extensively frayed and torn, with visible holes; this defective seat belt meets the STOP condition. A fire extinguisher and side mirror are visible. Inspector reports a problem with cabin and safety equipment, without specific direct-test results. Still unknown: horn operation, seat-belt latch operation, extinguisher pressure and expiry, and mirror condition/function. Do not operate the unit until the defective seat belt is repaired or replaced and safety is verified.",
+        "bukti_ids": [
+          "FILE-81bc62dd-cb3d-417b-bc1e-95b083ca69a8"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:47:22.625Z",
+        "ditangani": false
+      }
+    },
+    {
+      "condition": "Issue",
+      "index": 2,
+      "itemId": "ITEM-2",
+      "itemName": "Brakes & air system",
+      "reportId": "LI-6f64b285-fafb-4ea7-b13d-dbc370f6fed5",
+      "asset": "Issue/02-Rem.jpg",
+      "bytes": 123832,
+      "sha256": "a6f039b39498cafd2f33355fc44808c233ca0478dc88fb2f5f667dc6ff5fde37",
+      "turns": [
+        {
+          "seconds": 12.385,
+          "text": "Ada masalah pada Brakes & air system. Ini fotonya.",
+          "reply": "Kandar, I’ve recorded the illuminated LOW AIR warning as a STOP finding—do not operate until qualified personnel inspect and resolve it. All checklist items are recorded; would you like me to submit the report?",
+          "quickReplies": [
+            "Submit report"
+          ],
+          "statuses": [
+            "Examining the photo…",
+            "Labelling the photo…",
+            "Recording the finding…"
+          ],
+          "pills": [
+            {
+              "kind": "tidak_baik",
+              "label": "Brakes & air system: fault"
+            },
+            {
+              "kind": "stop",
+              "label": "STOP: LOW AIR warning"
+            }
+          ],
+          "finding": {
+            "status": "tidak_baik",
+            "stop": true,
+            "catatan": "Photo shows an illuminated red LOW AIR warning on the cab dashboard; exact brake air pressure cannot be reliably read. Kandar reports a problem with the brakes & air system but has not specified direct test results. Air leakage, parking brake response and service brake response remain unknown. STOP: low-air warning indicates a safety-critical air-pressure concern; do not operate pending qualified inspection and resolution.",
+            "bukti_ids": [
+              "FILE-d3484eef-c8a3-415c-b7d8-46ddf6117528"
+            ],
+            "alasan": "Illuminated LOW AIR warning with an inspector-reported brakes & air system problem.",
+            "dicatat_at": "2026-11-07T07:47:34.526Z",
+            "ditangani": false
+          }
+        }
+      ],
+      "final": {
+        "status": "tidak_baik",
+        "stop": true,
+        "catatan": "Photo shows an illuminated red LOW AIR warning on the cab dashboard; exact brake air pressure cannot be reliably read. Kandar reports a problem with the brakes & air system but has not specified direct test results. Air leakage, parking brake response and service brake response remain unknown. STOP: low-air warning indicates a safety-critical air-pressure concern; do not operate pending qualified inspection and resolution.",
+        "bukti_ids": [
+          "FILE-d3484eef-c8a3-415c-b7d8-46ddf6117528"
+        ],
+        "alasan": "Illuminated LOW AIR warning with an inspector-reported brakes & air system problem.",
+        "dicatat_at": "2026-11-07T07:47:34.526Z",
+        "ditangani": false
+      }
+    },
+    {
+      "condition": "Issue",
+      "index": 3,
+      "itemId": "ITEM-3",
+      "itemName": "Tyres & wheel nuts",
+      "reportId": "LI-a265a70f-7fa4-436a-b390-7d18dbaef32f",
+      "asset": "Issue/03-Ban-dan-Roda.jpg",
+      "bytes": 209212,
+      "sha256": "5ce491c552eea6bdb76e55ddd41e34c10f77c45ba8f6e8063a9984416e5d7a6f",
+      "turns": [
+        {
+          "seconds": 10.743,
+          "text": "Ada masalah pada Tyres & wheel nuts. Ini fotonya.",
+          "reply": "Kandar, I’ve recorded STOP: the photo shows a tyre sidewall bulge and a missing wheel nut. Do not operate the truck until repaired and cleared for use. Would you like me to submit the report?",
+          "quickReplies": [
+            "Submit report"
+          ],
+          "statuses": [
+            "Examining the photo…",
+            "Labelling the photo…",
+            "Recording the finding…"
+          ],
+          "pills": [
+            {
+              "kind": "tidak_baik",
+              "label": "Tyres & wheel nuts: defective"
+            },
+            {
+              "kind": "stop",
+              "label": "STOP — do not operate"
+            }
+          ],
+          "finding": {
+            "status": "tidak_baik",
+            "stop": true,
+            "catatan": "Photo shows a pronounced bulge on the foreground tyre's upper sidewall and one exposed threaded wheel stud with no nut fitted. Inspector reports a problem with tyres and wheel nuts. Condition of all remaining tyres and wheel nuts on both sides is not established. The visible sidewall bulge and missing wheel nut each meet the STOP condition.",
+            "bukti_ids": [
+              "FILE-3e258a9d-19db-4300-a400-c120196c3ac2"
+            ],
+            "alasan": "Visible tyre sidewall bulge and missing wheel nut meet the STOP condition.",
+            "dicatat_at": "2026-11-07T07:47:45.493Z",
+            "ditangani": false
+          }
+        }
+      ],
+      "final": {
+        "status": "tidak_baik",
+        "stop": true,
+        "catatan": "Photo shows a pronounced bulge on the foreground tyre's upper sidewall and one exposed threaded wheel stud with no nut fitted. Inspector reports a problem with tyres and wheel nuts. Condition of all remaining tyres and wheel nuts on both sides is not established. The visible sidewall bulge and missing wheel nut each meet the STOP condition.",
+        "bukti_ids": [
+          "FILE-3e258a9d-19db-4300-a400-c120196c3ac2"
+        ],
+        "alasan": "Visible tyre sidewall bulge and missing wheel nut meet the STOP condition.",
+        "dicatat_at": "2026-11-07T07:47:45.493Z",
+        "ditangani": false
+      }
+    },
+    {
+      "condition": "Issue",
+      "index": 4,
+      "itemId": "ITEM-4",
+      "itemName": "Dump body",
+      "reportId": "LI-8dd1e78d-ecab-454d-992f-a1afe32a6140",
+      "asset": "Issue/04-Bak-Dump.jpg",
+      "bytes": 159113,
+      "sha256": "cd7f29619d0439d3d787637cfe37a91b462287bf84d22859106d283a4ee0d84a",
+      "turns": [
+        {
+          "seconds": 9.36,
+          "text": "Ada masalah pada Dump body. Ini fotonya.",
+          "reply": "Kandar, I recorded the dump-body structural crack as STOP; do not operate the truck until repaired and cleared for service. All checklist items are recorded—would you like me to submit the report?",
+          "quickReplies": [
+            "Submit the report"
+          ],
+          "statuses": [
+            "Examining the photo…",
+            "Labelling the photo…",
+            "Recording the finding…"
+          ],
+          "pills": [
+            {
+              "kind": "tidak_baik",
+              "label": "Dump body: structural crack"
+            },
+            {
+              "kind": "stop",
+              "label": "STOP: do not operate"
+            }
+          ],
+          "finding": {
+            "status": "tidak_baik",
+            "stop": true,
+            "catatan": "Photo evidence: steel dump-body plate has a long open crack along a welded seam, a hole, and bent/separated plate edges. This structural crack meets the STOP condition. Inspector Kandar reports a problem with the dump body, without further direct-check details. Mounting-point condition remains unknown because it is not clearly shown or reported.",
+            "bukti_ids": [
+              "FILE-5267c5c6-5f60-43f5-ad13-c56b7440ac29"
+            ],
+            "alasan": null,
+            "dicatat_at": "2026-11-07T07:47:55.667Z",
+            "ditangani": false
+          }
+        }
+      ],
+      "final": {
+        "status": "tidak_baik",
+        "stop": true,
+        "catatan": "Photo evidence: steel dump-body plate has a long open crack along a welded seam, a hole, and bent/separated plate edges. This structural crack meets the STOP condition. Inspector Kandar reports a problem with the dump body, without further direct-check details. Mounting-point condition remains unknown because it is not clearly shown or reported.",
+        "bukti_ids": [
+          "FILE-5267c5c6-5f60-43f5-ad13-c56b7440ac29"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:47:55.667Z",
+        "ditangani": false
+      }
+    },
+    {
+      "condition": "Issue",
+      "index": 5,
+      "itemId": "ITEM-5",
+      "itemName": "Hydraulic cylinder",
+      "reportId": "LI-f6a35a48-9d90-4482-a7a6-76d697cccca0",
+      "asset": "Issue/05-Silinder-Hidraulik.jpg",
+      "bytes": 235544,
+      "sha256": "c59de1a9944f957bc738687b5dbd3bcfc05704d487ae5786bd0843610c5aee85",
+      "turns": [
+        {
+          "seconds": 10.985,
+          "text": "Ada masalah pada Hydraulic cylinder. Ini fotonya.",
+          "reply": "Kandar, I’ve recorded hydraulic leakage and a cracked hose coupling as STOP—do not operate the truck. Keep it isolated for repair and stay clear of the raised body; never go beneath it without an engaged mechanical safety prop. Would you like me to submit the report?",
+          "quickReplies": [
+            "Submit report"
+          ],
+          "statuses": [
+            "Examining the photo…",
+            "Labelling the photo…",
+            "Recording the finding…"
+          ],
+          "pills": [
+            {
+              "kind": "tidak_baik",
+              "label": "Hydraulic cylinder: defective"
+            },
+            {
+              "kind": "stop",
+              "label": "STOP: hydraulic leak"
+            }
+          ],
+          "finding": {
+            "status": "tidak_baik",
+            "stop": true,
+            "catatan": "Photo shows fluid coating the cylinder seal area and running down its housing, droplets beneath the hose connection, a dark wet patch on the ground, and a visibly cracked hose coupling: evidence of active hydraulic leakage and coupling damage. Inspector reports a problem with the hydraulic cylinder but provides no detailed direct checks. Body is raised; mechanical safety prop engagement cannot be confirmed from this view. STOP: isolate the truck for repair; keep clear of the raised body and do not approach beneath it without a properly engaged mechanical safety prop.",
+            "bukti_ids": [
+              "FILE-894a6a36-c021-45ce-a74c-cc7b1139b378"
+            ],
+            "alasan": null,
+            "dicatat_at": "2026-11-07T07:48:05.877Z",
+            "ditangani": false
+          }
+        }
+      ],
+      "final": {
+        "status": "tidak_baik",
+        "stop": true,
+        "catatan": "Photo shows fluid coating the cylinder seal area and running down its housing, droplets beneath the hose connection, a dark wet patch on the ground, and a visibly cracked hose coupling: evidence of active hydraulic leakage and coupling damage. Inspector reports a problem with the hydraulic cylinder but provides no detailed direct checks. Body is raised; mechanical safety prop engagement cannot be confirmed from this view. STOP: isolate the truck for repair; keep clear of the raised body and do not approach beneath it without a properly engaged mechanical safety prop.",
+        "bukti_ids": [
+          "FILE-894a6a36-c021-45ce-a74c-cc7b1139b378"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:48:05.877Z",
+        "ditangani": false
+      }
+    },
+    {
+      "condition": "Issue",
+      "index": 6,
+      "itemId": "ITEM-6",
+      "itemName": "Body safety prop",
+      "reportId": "LI-22cbe4b9-551d-4b07-8689-2a72e2df35a8",
+      "asset": "Issue/06-Safety-Bak.jpg",
+      "bytes": 213026,
+      "sha256": "443e3316197f1e324442dcf0daa0bb15d201456ef6e9347f26a3483b26c64add",
+      "turns": [
+        {
+          "seconds": 10.597,
+          "text": "Ada masalah pada Body safety prop. Ini fotonya.",
+          "reply": "Kandar, I’ve recorded STOP: the body safety prop is visibly bent and not engaged. Do not operate or go beneath the raised body; isolate the truck for qualified repair. Would you like me to submit the report?",
+          "quickReplies": [
+            "Submit report"
+          ],
+          "statuses": [
+            "Examining the photo…",
+            "Labelling the photo…",
+            "Recording the finding…"
+          ],
+          "pills": [
+            {
+              "kind": "stop",
+              "label": "STOP — damaged body safety prop"
+            }
+          ],
+          "finding": {
+            "status": "tidak_baik",
+            "stop": true,
+            "catatan": "Photo shows the raised dump body and a sharply bent mechanical safety prop, with its lower eye hanging free rather than engaged at a lower mounting. Inspector reports a problem with the body safety prop. No functional test reported; the visible damage meets the STOP condition. Do not operate or enter beneath the unsupported body; isolate the vehicle for qualified repair.",
+            "bukti_ids": [
+              "FILE-4b0a0b20-8fe1-4957-83d1-8a633850b6d8"
+            ],
+            "alasan": "Mechanical body safety prop is visibly damaged and not engaged; STOP condition met.",
+            "dicatat_at": "2026-11-07T07:48:17.090Z",
+            "ditangani": false
+          }
+        }
+      ],
+      "final": {
+        "status": "tidak_baik",
+        "stop": true,
+        "catatan": "Photo shows the raised dump body and a sharply bent mechanical safety prop, with its lower eye hanging free rather than engaged at a lower mounting. Inspector reports a problem with the body safety prop. No functional test reported; the visible damage meets the STOP condition. Do not operate or enter beneath the unsupported body; isolate the vehicle for qualified repair.",
+        "bukti_ids": [
+          "FILE-4b0a0b20-8fe1-4957-83d1-8a633850b6d8"
+        ],
+        "alasan": "Mechanical body safety prop is visibly damaged and not engaged; STOP condition met.",
+        "dicatat_at": "2026-11-07T07:48:17.090Z",
+        "ditangani": false
+      }
+    },
+    {
+      "condition": "Issue",
+      "index": 7,
+      "itemId": "ITEM-7",
+      "itemName": "Tailgate & latch",
+      "reportId": "LI-b9ac6091-5949-43e7-9234-2af49b45a6f7",
+      "asset": "Issue/07-Pintu-Dump.jpg",
+      "bytes": 200207,
+      "sha256": "53befa634533521a7ee1f2fbb8a2685c29f43c73e89d7c7faee86089fe580e08",
+      "turns": [
+        {
+          "seconds": 11.266,
+          "text": "Ada masalah pada Tailgate & latch. Ini fotonya.",
+          "reply": "Kandar, I’ve recorded STOP: the tailgate is unsecured, with the latch disengaged and material spilling out. Do not operate until repaired and verified safe. Would you like me to submit the report?",
+          "quickReplies": [
+            "Submit the report"
+          ],
+          "statuses": [
+            "Examining the photo…",
+            "Labelling the photo…",
+            "Recording the finding…"
+          ],
+          "pills": [
+            {
+              "kind": "tidak_baik",
+              "label": "Tailgate & latch: defective"
+            },
+            {
+              "kind": "stop",
+              "label": "STOP — unsecured tailgate"
+            }
+          ],
+          "finding": {
+            "status": "tidak_baik",
+            "stop": true,
+            "catatan": "Photo shows an open gap along the tailgate's lower edge, material spilling onto the ground, and the visible right-side latch arm not seated in its keeper. This is a visibly unsecured tailgate, meeting the STOP condition. Inspector reports a problem with the tailgate and latch; no specific functional test was reported. Condition of all hinges and locking pins remains unconfirmed.",
+            "bukti_ids": [
+              "FILE-8eea2e24-8035-4c5d-8cd9-ab3528b1f437"
+            ],
+            "alasan": "Tailgate visibly unsecured, with latch disengaged and material spilling through the lower gap.",
+            "dicatat_at": "2026-11-07T07:48:27.798Z",
+            "ditangani": false
+          }
+        }
+      ],
+      "final": {
+        "status": "tidak_baik",
+        "stop": true,
+        "catatan": "Photo shows an open gap along the tailgate's lower edge, material spilling onto the ground, and the visible right-side latch arm not seated in its keeper. This is a visibly unsecured tailgate, meeting the STOP condition. Inspector reports a problem with the tailgate and latch; no specific functional test was reported. Condition of all hinges and locking pins remains unconfirmed.",
+        "bukti_ids": [
+          "FILE-8eea2e24-8035-4c5d-8cd9-ab3528b1f437"
+        ],
+        "alasan": "Tailgate visibly unsecured, with latch disengaged and material spilling through the lower gap.",
+        "dicatat_at": "2026-11-07T07:48:27.798Z",
+        "ditangani": false
+      }
+    },
+    {
+      "condition": "Issue",
+      "index": 8,
+      "itemId": "ITEM-8",
+      "itemName": "Lights & reflectors",
+      "reportId": "LI-1d65ed24-e7bc-4435-9fd2-468f0d498403",
+      "asset": "Issue/08-Lampu-dan-Reflektor.jpg",
+      "bytes": 221736,
+      "sha256": "2e63ed3ad2328a00254b8b1bd45aa09ef3385f82d68c55a4da351f9a04dd5ee3",
+      "turns": [
+        {
+          "seconds": 7.338,
+          "text": "Ada masalah pada Lights & reflectors. Ini fotonya.",
+          "reply": "Kandar, I can see a cracked rear lamp lens with a hole, plus dirty, worn reflectors. After a safe check while parked, do the headlights, brake lights and indicators all work?",
+          "quickReplies": [
+            "I tested: all lights work",
+            "I tested: a brake light or indicator fails",
+            "I tested: a headlight fails; brake lights and indicators work",
+            "I could not check safely"
+          ],
+          "statuses": [
+            "Examining the photo…",
+            "Labelling the photo…"
+          ],
+          "pills": [],
+          "finding": null
+        },
+        {
+          "seconds": 8.426,
+          "text": "Tes diam dengan bantuan rekan: lampu rem kiri tidak menyala, kanan menyala, dan lensa kiri pecah. Kendaraan tidak dioperasikan. Catat temuan ini.",
+          "reply": "Kandar, I’ve recorded the failed left brake light and broken lens with STOP status; keep the vehicle out of operation until repaired and verified safe. All checklist items are recorded—would you like me to submit the report?",
+          "quickReplies": [
+            "Submit report"
+          ],
+          "statuses": [
+            "Lumo is reading…",
+            "Recording the finding…"
+          ],
+          "pills": [
+            {
+              "kind": "tidak_baik",
+              "label": "Left brake light failed; lens broken"
+            },
+            {
+              "kind": "stop",
+              "label": "STOP: do not operate"
+            }
+          ],
+          "finding": {
+            "status": "tidak_baik",
+            "stop": true,
+            "catatan": "Photo evidence shows the left rear red lamp lens cracked with a hole and dirty, worn rear reflective strips; the right rear red lamp is illuminated. Kandar reports a stationary test with a colleague: the left brake light does not illuminate, the right brake light works, and the left lens is broken. Kandar confirms the vehicle is not being operated. Headlight and indicator function remain unconfirmed. STOP: confirmed left brake-light failure.",
+            "bukti_ids": [
+              "FILE-37627ff7-279c-4854-97dc-22282495c87f"
+            ],
+            "alasan": null,
+            "dicatat_at": "2026-11-07T07:48:43.698Z",
+            "ditangani": false
+          }
+        }
+      ],
+      "confirmationMode": "detailed operator account",
+      "final": {
+        "status": "tidak_baik",
+        "stop": true,
+        "catatan": "Photo evidence shows the left rear red lamp lens cracked with a hole and dirty, worn rear reflective strips; the right rear red lamp is illuminated. Kandar reports a stationary test with a colleague: the left brake light does not illuminate, the right brake light works, and the left lens is broken. Kandar confirms the vehicle is not being operated. Headlight and indicator function remain unconfirmed. STOP: confirmed left brake-light failure.",
+        "bukti_ids": [
+          "FILE-37627ff7-279c-4854-97dc-22282495c87f"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:48:43.698Z",
+        "ditangani": false
+      }
+    }
+  ],
+  "summary": {
+    "Normal": {
+      "count": 8,
+      "firstTurnRecorded": 5,
+      "finallyRecorded": 8,
+      "good": 8,
+      "stop": 0,
+      "extraTurns": 3,
+      "errors": 0
+    },
+    "Issue": {
+      "count": 8,
+      "firstTurnRecorded": 7,
+      "finallyRecorded": 8,
+      "good": 0,
+      "stop": 8,
+      "extraTurns": 1,
+      "errors": 0
+    }
+  }
+}

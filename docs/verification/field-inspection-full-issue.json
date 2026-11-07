@@ -1,0 +1,201 @@
+{
+  "condition": "Issue",
+  "reportId": "LI-f0329dab-38f4-471e-b6e5-4f2c748d4ca0",
+  "base": "http://localhost:3007",
+  "note": "Real agent and full eight-item plan. Direct checks are simulated operator reports, not measurements performed on a real vehicle.",
+  "turns": [
+    {
+      "input": "Nama saya Kandar, lokasi Riau. Pakai rencana RI-DT-UTYPE-01 untuk unit DT-10 · B 9130 KD. Kendaraan diparkir aman, terisolasi dan diganjal. Pemeriksaan dilakukan dari posisi aman, dengan petugas berwenang dan prop mekanis bila perlu.",
+      "photo": null,
+      "seconds": 4.93,
+      "reply": "Kandar, I’ve saved your details for DT-10 · B 9130 KD and noted your safety precautions. We’ll start with the seat belt, mirrors, horn and extinguisher, including its pressure gauge and expiry label. Please upload clear photos of the cabin safety equipment and the extinguisher gauge and label.",
+      "choices": [],
+      "count": 0,
+      "status": "berjalan"
+    },
+    {
+      "input": "Sabuk pengaman robek dan label APAR sudah lewat masa berlaku. Kendaraan diparkir, tidak dioperasikan. Ini temuan pemeriksaan saya.",
+      "photo": "01-Kabin-dan-Safety.jpg",
+      "seconds": 11.938,
+      "reply": "Kandar, I’ve recorded STOP for the torn seat belt and your report of an expired extinguisher; keep the vehicle out of service. Please upload a clear photo of the brakes and air system, including the air-pressure gauge, from a safe position.",
+      "choices": [],
+      "count": 1,
+      "status": "berjalan"
+    },
+    {
+      "input": "LOW AIR menyala dan tekanan udara belum mencapai batas aman. Tes rem tidak dilanjutkan. Kendaraan tetap diam, rem parkir dan ganjal terpasang.",
+      "photo": "02-Rem.jpg",
+      "seconds": 10.064,
+      "reply": "Kandar, I’ve recorded STOP for insufficient air pressure; keep the vehicle out of service and do not continue brake testing. Please upload clear photos of the tyres, sidewalls, tread and wheel nuts on both sides from safe positions.",
+      "choices": [],
+      "count": 2,
+      "status": "berjalan"
+    },
+    {
+      "input": "Ada benjolan besar pada dinding ban dan satu mur roda hilang. Kendaraan tidak dioperasikan.",
+      "photo": "03-Ban-dan-Roda.jpg",
+      "seconds": 10.382,
+      "reply": "Kandar, I’ve recorded STOP for the tyre bulge and missing wheel nut; keep the vehicle out of service. Please upload clear photos of the dump-body floor, welds and mounting points from safe positions. Never approach beneath a raised body without its mechanical safety prop engaged.",
+      "choices": [],
+      "count": 3,
+      "status": "berjalan"
+    },
+    {
+      "input": "Foto ini bagian lantai bak kendaraan yang diperiksa: pelat dan sambungan las retak struktural, ada lubang tembus. Kendaraan tidak dioperasikan.",
+      "photo": "04-Bak-Dump.jpg",
+      "seconds": 11.436,
+      "reply": "Kandar, I’ve recorded STOP for structural cracking of the dump body; keep the vehicle out of service. Please upload a clear photo of the hydraulic cylinder, hoses, couplings and seals from a safe position. Do not approach beneath a raised body unless its mechanical safety prop is engaged.",
+      "choices": [],
+      "count": 4,
+      "status": "berjalan"
+    },
+    {
+      "input": "Oli hidraulik aktif menetes, coupling retak dan selang rusak. Sistem diisolasi; saya tidak menyentuh kebocoran atau masuk ke bawah bak.",
+      "photo": "05-Silinder-Hidraulik.jpg",
+      "seconds": 12.622,
+      "reply": "Kandar, I’ve recorded STOP for the hydraulic leak and damaged hose; keep the vehicle out of service and the system isolated. Please photograph the mechanical body safety prop from a safe position outside the raised body’s footprint. Never enter beneath an unsupported body.",
+      "choices": [],
+      "count": 5,
+      "status": "berjalan"
+    },
+    {
+      "input": "Prop bak bengkok, tidak bisa duduk atau dikunci pada dudukan bawah. Area dibatasi, tidak ada orang di bawah bak; tidak dioperasikan.",
+      "photo": "06-Safety-Bak.jpg",
+      "seconds": 13.63,
+      "reply": "Kandar, I’ve recorded STOP for the damaged, unengaged safety prop; keep everyone clear of the raised body and do not move it or attempt to engage the prop. Please photograph the tailgate hinges, locking pins and latch only if visible from outside the restricted area, without approaching or operating them.",
+      "choices": [
+        "I could not check safely"
+      ],
+      "count": 6,
+      "status": "berjalan"
+    },
+    {
+      "input": "Pengunci pintu bak rusak; pintu tidak menutup atau mengunci rapat dan material tercecer. Kendaraan tidak dioperasikan.",
+      "photo": "07-Pintu-Dump.jpg",
+      "seconds": 22.817,
+      "reply": "Kandar, I’ve recorded STOP for the unsecured tailgate; keep the vehicle isolated and everyone clear of the raised body and spilling material. Please photograph the lights and reflectors only from outside the restricted area, without moving the vehicle.",
+      "choices": [
+        "I could not check safely"
+      ],
+      "count": 7,
+      "status": "berjalan"
+    },
+    {
+      "input": "Tes diam dengan bantuan rekan: lampu rem kiri tidak menyala, kanan menyala; lensa kiri pecah. Kendaraan tidak dioperasikan.",
+      "photo": "08-Lampu-dan-Reflektor.jpg",
+      "seconds": 12.645,
+      "reply": "Kandar, I’ve recorded STOP for the failed left brake light; all eight items are now recorded. Keep the vehicle isolated and out of service, with everyone clear of the raised body. Would you like me to submit the report?",
+      "choices": [
+        "Submit the report"
+      ],
+      "count": 8,
+      "status": "berjalan"
+    },
+    {
+      "input": "Submit the completed inspection report now.",
+      "photo": null,
+      "seconds": 5.291,
+      "reply": "Kandar, I’ve submitted the report: DT-10 · B 9130 KD is not roadworthy, with STOP findings across all eight inspection items. Keep the vehicle isolated and out of service, with everyone clear of the unsupported raised body and spilling material.",
+      "choices": [],
+      "count": 8,
+      "status": "terkirim"
+    }
+  ],
+  "result": {
+    "submitted": true,
+    "items": 8,
+    "stop": 8,
+    "findings": {
+      "ITEM-1": {
+        "status": "tidak_baik",
+        "stop": true,
+        "catatan": "Visible photo evidence: seat-belt webbing is heavily frayed and torn; a mounted extinguisher has a worn label bearing 'OKT 2023', but the exact expiry field and pressure reading are not reliably readable. Inspector Kandar directly reports a torn seat belt and an expired extinguisher label, and confirms the vehicle is parked and not operated. Mirror condition, horn function and extinguisher pressure remain unconfirmed. STOP due to defective seat belt and inspector-reported expired extinguisher.",
+        "bukti_ids": [
+          "FILE-41908b77-3cb7-476b-9984-371e9e2a837d"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:47:48.400Z",
+        "ditangani": false
+      },
+      "ITEM-2": {
+        "status": "tidak_baik",
+        "stop": true,
+        "catatan": "Visible photo evidence: red LOW AIR warning illuminated on the dashboard; exact air pressure cannot be reliably read. Inspector Kandar reports air pressure below the safe threshold, brake testing not continued, and vehicle stationary with parking brake and wheel chocks applied. Air leaks and parking/service brake effectiveness remain unconfirmed. STOP due to reported insufficient air pressure; do not continue brake testing or operate the vehicle in this condition.",
+        "bukti_ids": [
+          "FILE-15dc3a1f-dd13-4b17-81ea-ed80687142d0"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:47:59.719Z",
+        "ditangani": false
+      },
+      "ITEM-3": {
+        "status": "tidak_baik",
+        "stop": true,
+        "catatan": "Visible photo evidence: a large outward tyre-sidewall bulge and one exposed threaded wheel stud without a nut. Inspector Kandar directly reports a large sidewall bulge and one missing wheel nut, and confirms the vehicle is not operated. Condition of all remaining tyres, tread, sidewalls and wheel nuts on both sides remains unconfirmed. STOP due to tyre sidewall bulge and missing wheel nut; keep vehicle out of service.",
+        "bukti_ids": [
+          "FILE-ec9f6d19-884b-4f4c-81cf-13143c51afd4"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:48:09.962Z",
+        "ditangani": false
+      },
+      "ITEM-4": {
+        "status": "tidak_baik",
+        "stop": true,
+        "catatan": "Visible photo evidence: metal plate and welded seam have long cracks, an open hole and separated, bent edges. Inspector Kandar identifies this as the inspected vehicle's dump-body floor and directly reports structural cracking of the plate and weld, with a through-hole; vehicle remains out of operation. Body mounting condition remains unconfirmed. STOP due to structural cracking of the dump body.",
+        "bukti_ids": [
+          "FILE-6a9443aa-08ab-4bab-a6cb-6d53453647c4"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:48:20.395Z",
+        "ditangani": false
+      },
+      "ITEM-5": {
+        "status": "tidak_baik",
+        "stop": true,
+        "catatan": "Visible photo evidence: oily wet streaks around the cylinder rod gland and barrel, droplets below the hose connection, a dark ground puddle, an open crack in the hose coupling and scuffed hose exterior. Inspector Kandar directly reports actively dripping hydraulic oil, a cracked coupling and damaged hose; the system is isolated, and Kandar has neither touched the leak nor entered beneath the body. Mechanical safety prop engagement and condition of other hydraulic components remain unconfirmed. STOP due to active hydraulic leakage and reported hose damage; keep vehicle out of service and hydraulic system isolated.",
+        "bukti_ids": [
+          "FILE-2f2be3c4-e295-48c3-aaeb-3476f44eb31a"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:48:33.308Z",
+        "ditangani": false
+      },
+      "ITEM-6": {
+        "status": "tidak_baik",
+        "stop": true,
+        "catatan": "Visible photo evidence: mechanical body safety prop is severely bent at multiple points, with its lower eye hanging free rather than seated or pinned to a lower mounting beneath the raised body. Inspector Kandar reports that the prop cannot seat or lock at the lower mounting; the area is restricted, nobody is beneath the body, and the vehicle is not operated. Integrity of other prop mounting components remains unconfirmed. STOP due to damaged, unengaged safety prop; keep vehicle isolated and everyone clear of the raised body, and do not attempt further body movement or prop engagement during inspection.",
+        "bukti_ids": [
+          "FILE-9db94dfc-c65e-49ae-b5f5-696771275cf4"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:48:46.214Z",
+        "ditangani": false
+      },
+      "ITEM-7": {
+        "status": "tidak_baik",
+        "stop": true,
+        "catatan": "Visible photo evidence: outward-projecting tailgate latch arm, bottom tailgate gap and aggregate spilling through the gap. Inspector Kandar directly reports a damaged latch and a tailgate that cannot close or lock securely, with material spilling; vehicle is not operated. Full hinge and locking-pin condition remains unconfirmed. STOP due to tailgate unable to close or lock securely; keep vehicle isolated and people clear of the tailgate and spilling material.",
+        "bukti_ids": [
+          "FILE-a2abd46d-bd74-4bdb-bcf9-97a9106e3199"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:49:09.659Z",
+        "ditangani": false
+      },
+      "ITEM-8": {
+        "status": "tidak_baik",
+        "stop": true,
+        "catatan": "Visible photo evidence: left rear red lamp lens is cracked with a central hole and is not illuminated; right rear red lamp is illuminated. Reflective markings appear worn, with mud and surface rust visible. Inspector Kandar reports a stationary test with a colleague: left brake light does not illuminate, right brake light works, and left lens is broken; vehicle is not operated. Headlight and indicator function and full reflector condition remain unconfirmed; the still photo alone does not establish lighting function. STOP due to inspector-confirmed failed left brake light; keep vehicle isolated and out of service.",
+        "bukti_ids": [
+          "FILE-ba10c7da-d7bd-4555-87d6-707e0eefe79f"
+        ],
+        "alasan": null,
+        "dicatat_at": "2026-11-07T07:49:22.431Z",
+        "ditangani": false
+      }
+    },
+    "summary": "DT-10 is not roadworthy. Cabin & safety equipment: Visible photo evidence: seat-belt webbing is heavily frayed and torn; a mounted extinguisher has a worn label bearing 'OKT 2023', but the exact expiry field and pressure reading are not reliably readable. Inspector Kandar directly reports a torn seat belt and an expired extinguisher label, and confirms the vehicle is parked and not operated. Mirror condition, horn function and extinguisher pressure remain unconfirmed. STOP due to defective seat belt and inspector-reported expired extinguisher. · Brakes & air system: Visible photo evidence: red LOW AIR warning illuminated on the dashboard; exact air pressure cannot be reliably read. Inspector Kandar reports air pressure below the safe threshold, brake testing not continued, and vehicle stationary with parking brake and wheel chocks applied. Air leaks and parking/service brake effectiveness remain unconfirmed. STOP due to reported insufficient air pressure; do not continue brake testing or operate the vehicle in this condition. · Tyres & wheel nuts: Visible photo evidence: a large outward tyre-sidewall bulge and one exposed threaded wheel stud without a nut. Inspector Kandar directly reports a large sidewall bulge and one missing wheel nut, and confirms the vehicle is not operated. Condition of all remaining tyres, tread, sidewalls and wheel nuts on both sides remains unconfirmed. STOP due to tyre sidewall bulge and missing wheel nut; keep vehicle out of service. · Dump body: Visible photo evidence: metal plate and welded seam have long cracks, an open hole and separated, bent edges. Inspector Kandar identifies this as the inspected vehicle's dump-body floor and directly reports structural cracking of the plate and weld, with a through-hole; vehicle remains out of operation. Body mounting condition remains unconfirmed. STOP due to structural cracking of the dump body. · Hydraulic cylinder: Visible photo evidence: oily wet streaks around the cylinder rod gland and barrel, droplets below the hose connection, a dark ground puddle, an open crack in the hose coupling and scuffed hose exterior. Inspector Kandar directly reports actively dripping hydraulic oil, a cracked coupling and damaged hose; the system is isolated, and Kandar has neither touched the leak nor entered beneath the body. Mechanical safety prop engagement and condition of other hydraulic components remain unconfirmed. STOP due to active hydraulic leakage and reported hose damage; keep vehicle out of service and hydraulic system isolated. · Body safety prop: Visible photo evidence: mechanical body safety prop is severely bent at multiple points, with its lower eye hanging free rather than seated or pinned to a lower mounting beneath the raised body. Inspector Kandar reports that the prop cannot seat or lock at the lower mounting; the area is restricted, nobody is beneath the body, and the vehicle is not operated. Integrity of other prop mounting components remains unconfirmed. STOP due to damaged, unengaged safety prop; keep vehicle isolated and everyone clear of the raised body, and do not attempt further body movement or prop engagement during inspection. · Tailgate & latch: Visible photo evidence: outward-projecting tailgate latch arm, bottom tailgate gap and aggregate spilling through the gap. Inspector Kandar directly reports a damaged latch and a tailgate that cannot close or lock securely, with material spilling; vehicle is not operated. Full hinge and locking-pin condition remains unconfirmed. STOP due to tailgate unable to close or lock securely; keep vehicle isolated and people clear of the tailgate and spilling material. · Lights & reflectors: Visible photo evidence: left rear red lamp lens is cracked with a central hole and is not illuminated; right rear red lamp is illuminated. Reflective markings appear worn, with mud and surface rust visible. Inspector Kandar reports a stationary test with a colleague: left brake light does not illuminate, right brake light works, and left lens is broken; vehicle is not operated. Headlight and indicator function and full reflector condition remain unconfirmed; the still photo alone does not establish lighting function. STOP due to inspector-confirmed failed left brake light; keep vehicle isolated and out of service.",
+    "turnCount": 10
+  }
+}

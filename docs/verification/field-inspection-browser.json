@@ -1,0 +1,26 @@
+{
+  "reportId": "LI-b6f07ed7-b58c-485f-8ed0-04c93b660bb8",
+  "source": "actual gallery upload via InspectorChat and compressImage; resumed after test harness could not read the streamed response body",
+  "originalPhotoBytes": 127648,
+  "uploadedPhotoBytes": 119186,
+  "clarification": "Kandar, I can see the cabin equipment, but the extinguisher gauge and expiry details are unreadable. Have you confirmed acceptable extinguisher pressure, a valid expiry date, and working horn and seat belt?",
+  "quickReplies": [
+    "I checked: pressure acceptable, extinguisher in date, horn and seat belt work",
+    "I found a fault",
+    "I could not check safely"
+  ],
+  "selected": "I checked: pressure acceptable, extinguisher in date, horn and seat belt work",
+  "recorded": {
+    "status": "baik",
+    "stop": false,
+    "catatan": "Photo documents the seat belt and buckle, mounted fire extinguisher, mirrors and steering wheel; dust and surface rust are visible. Extinguisher gauge and expiry details are not legible in the photo. Kandar reports cabin equipment normal and directly confirms acceptable extinguisher pressure, extinguisher in date, and working horn and seat belt.",
+    "bukti_ids": [
+      "FILE-bcebef65-6dca-4404-8ecc-6b142372e455"
+    ],
+    "alasan": null,
+    "dicatat_at": "2026-11-07T07:51:31.327Z",
+    "ditangani": false
+  },
+  "progress": "1/8",
+  "errors": []
+}

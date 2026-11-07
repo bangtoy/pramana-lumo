@@ -1,0 +1,165 @@
+{
+  "date": "2026-11-07",
+  "assets": 16,
+  "originalFilesUnchanged": true,
+  "focusedCases": 48,
+  "models": [
+    "gpt-6.1-sol",
+    "gpt-6-astra"
+  ],
+  "promptSourceHashes": {
+    "baseline": "a3c641f75df2dd56f2733154359c256e5fdb73a6b28f906288419d4cba7de552",
+    "revised": "e2b4bb76a2d57c1f9f672808fcf00e6e0dc9321f9ff5bff4a4c4fadf8a9373a0"
+  },
+  "comparison": [
+    {
+      "label": "baseline-sol",
+      "Normal": {
+        "count": 8,
+        "firstTurnRecorded": 3,
+        "finallyRecorded": 8,
+        "good": 8,
+        "stop": 0,
+        "extraTurns": 5,
+        "errors": 0
+      },
+      "Issue": {
+        "count": 8,
+        "firstTurnRecorded": 6,
+        "finallyRecorded": 8,
+        "good": 0,
+        "stop": 8,
+        "extraTurns": 2,
+        "errors": 0
+      },
+      "confirmationModes": [
+        {
+          "index": 1,
+          "mode": "detailed operator account"
+        },
+        {
+          "index": 2,
+          "mode": "detailed operator account"
+        },
+        {
+          "index": 5,
+          "mode": "detailed operator account"
+        },
+        {
+          "index": 7,
+          "mode": "detailed operator account"
+        },
+        {
+          "index": 8,
+          "mode": "detailed operator account"
+        }
+      ]
+    },
+    {
+      "label": "baseline-astra",
+      "Normal": {
+        "count": 8,
+        "firstTurnRecorded": 2,
+        "finallyRecorded": 8,
+        "good": 8,
+        "stop": 0,
+        "extraTurns": 6,
+        "errors": 0
+      },
+      "Issue": {
+        "count": 8,
+        "firstTurnRecorded": 6,
+        "finallyRecorded": 8,
+        "good": 0,
+        "stop": 8,
+        "extraTurns": 2,
+        "errors": 0
+      },
+      "confirmationModes": [
+        {
+          "index": 1,
+          "mode": "detailed operator account"
+        },
+        {
+          "index": 2,
+          "mode": "detailed operator account"
+        },
+        {
+          "index": 4,
+          "mode": "detailed operator account"
+        },
+        {
+          "index": 5,
+          "mode": "detailed operator account"
+        },
+        {
+          "index": 7,
+          "mode": "detailed operator account"
+        },
+        {
+          "index": 8,
+          "mode": "detailed operator account"
+        }
+      ]
+    },
+    {
+      "label": "tuned-sol",
+      "Normal": {
+        "count": 8,
+        "firstTurnRecorded": 5,
+        "finallyRecorded": 8,
+        "good": 8,
+        "stop": 0,
+        "extraTurns": 3,
+        "errors": 0
+      },
+      "Issue": {
+        "count": 8,
+        "firstTurnRecorded": 7,
+        "finallyRecorded": 8,
+        "good": 0,
+        "stop": 8,
+        "extraTurns": 1,
+        "errors": 0
+      },
+      "confirmationModes": [
+        {
+          "index": 1,
+          "mode": "agent quick reply (simulated completed direct check)"
+        },
+        {
+          "index": 2,
+          "mode": "agent quick reply (simulated completed direct check)"
+        },
+        {
+          "index": 8,
+          "mode": "agent quick reply (simulated completed direct check)"
+        }
+      ]
+    }
+  ],
+  "fullFlows": [
+    {
+      "condition": "Normal",
+      "reportId": "LI-163aa412-82bc-4dff-a161-aab65016ef75",
+      "submitted": true,
+      "items": 8,
+      "stop": 0,
+      "turns": 10
+    },
+    {
+      "condition": "Issue",
+      "reportId": "LI-f0329dab-38f4-471e-b6e5-4f2c748d4ca0",
+      "submitted": true,
+      "items": 8,
+      "stop": 8,
+      "turns": 10
+    }
+  ],
+  "controlCount": 5,
+  "controlsPassed": true,
+  "realMobilePhotoBytes": 119186,
+  "unitTests": 40,
+  "productionModel": "gpt-6.1-sol",
+  "evaluationScope": "One pass per focused case; scripted operator observations; not certification of physical vehicle condition."
+}
