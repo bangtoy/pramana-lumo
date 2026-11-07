@@ -1,0 +1,26 @@
+{
+  "base": "http://localhost:3002",
+  "conversationId": "TL-2c0ab6aa-734c-4a6f-b069-d06685ceeda5",
+  "clickableSavedConversation": true,
+  "overdueIds": [
+    "WO-RW-07",
+    "WO-RW-08",
+    "WO-RW-06"
+  ],
+  "awaitingUnits": [
+    "DT-05",
+    "DT-08"
+  ],
+  "filtersSurviveReload": true,
+  "clearFilters": true,
+  "emptySelection": true,
+  "dailyRecommendations": true,
+  "keyboardActivation": true,
+  "mobileNoOverflow": true,
+  "mobileClosesAfterNavigation": true,
+  "navigationMutations": 0,
+  "recordsUnchanged": true,
+  "genericFollowUp": "Browser route fixture; expected question posted once, disabled while pending",
+  "errors": [],
+  "failures": []
+}

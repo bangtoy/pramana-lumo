@@ -41,7 +41,7 @@ try {
   assert.equal(await panel.locator('img[src*="avatar-serius"]').count(), 1);
   await page.getByText('Data-based fallback · agent is currently unavailable', { exact: true }).waitFor();
   const firstSources = first.messages.at(-1).sumber;
-  assert.equal(await panel.getByRole('link').count(), firstSources.length);
+  assert.equal(await panel.locator('[data-answer-sources]').getByRole('link').count(), firstSources.length);
   await snapshot(page, 'tanya-fallback-1440');
   assert.equal(await page.evaluate(() => localStorage.getItem('pramana.tanya-id')), first.id);
   await page.reload({ waitUntil: 'networkidle' }); await ready(page);

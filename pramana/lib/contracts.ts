@@ -71,6 +71,12 @@ export const AnswerChart = z.object({
 });
 export type AnswerChart = z.infer<typeof AnswerChart>;
 
+export const RecommendationAction = z.discriminatedUnion('kind', [
+  z.object({ kind: z.literal('navigate'), label: z.string(), href: z.string().startsWith('/supervisor') }),
+  z.object({ kind: z.literal('ask'), label: z.string(), question: z.string() }),
+]);
+export type RecommendationAction = z.infer<typeof RecommendationAction>;
+
 export const ChatMessage = z.object({
   id: z.string(),
   role: z.enum(["pramana", "user"]),
@@ -88,6 +94,7 @@ export const ChatMessage = z.object({
   fallback: z.boolean().optional(),
   chart: AnswerChart.optional(),
   source_details: z.array(z.object({ id: z.string(), label: z.string() })).optional(),
+  recommendation_actions: z.array(RecommendationAction).optional(),
   created_at: z.string(),
 });
 export type ChatMessage = z.infer<typeof ChatMessage>;

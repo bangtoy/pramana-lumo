@@ -4,7 +4,9 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Lightbulb, MessageSquarePlus, PanelRightClose, PanelRightOpen, Send, Sparkles } from 'lucide-react';
 import { api, postJson } from '@/lib/client';
 import type { PublicPercakapan } from '@/lib/tanya';
+import type { RecommendationAction } from '@/lib/contracts';
 import { AnalystAnswer } from './AnalystAnswer';
+import { RecommendationLink } from './RecommendationLink';
 import { PanelResize, usePanelWidth } from './PanelResize';
 import { ErrorState, MascotAvatar, MascotHero, Spinner, TypingBubble } from '@/components/ui';
 
@@ -37,7 +39,7 @@ export function TanyaPanel() {
     queryKey: ['tanya', id], queryFn: () => api<PublicPercakapan>(`/api/tanya/${encodeURIComponent(id!)}`),
     enabled: hydrated && open && validId(id), staleTime: 30_000, retry: false,
   });
-  const suggestions = useQuery({ queryKey: ['tanya', 'saran'], queryFn: () => api<{ rekomendasi: string[] }>('/api/tanya/saran'), enabled: hydrated && open, refetchInterval: 30_000, staleTime: 30_000, retry: false });
+  const suggestions = useQuery({ queryKey: ['tanya', 'saran'], queryFn: () => api<{ rekomendasi: string[]; recommendation_actions?: RecommendationAction[] }>('/api/tanya/saran'), enabled: hydrated && open, refetchInterval: 30_000, staleTime: 30_000, retry: false });
   const ask = useMutation({
     mutationFn: (input: { percakapan_id: string | null; text: string }) => postJson<PublicPercakapan>('/api/tanya', input),
     onSuccess: result => {
@@ -72,6 +74,7 @@ export function TanyaPanel() {
     return () => { stop(); events.forEach(event => element.removeEventListener(event, stop)); };
   }, [open, id, messages.length, ask.isPending, conversation.error]);
   function toggle(next: boolean) { setOpen(next); remember('pramana.tanya-open', String(next)); }
+  function followRecommendation() { if (window.matchMedia('(max-width: 1023px)').matches) toggle(false); }
   function send(question = text) {
     const value = question.trim();
     if (!hydrated || !value || ask.isPending || (id && (conversation.isLoading || conversation.isError))) return;
@@ -91,10 +94,10 @@ export function TanyaPanel() {
       <div ref={scroll} className="flex-1 min-h-0 overflow-y-auto p-4 space-y-4 [overflow-anchor:none]" data-tanya-scroll>
         {waitingForConversation ? <Spinner label="Loading conversation…"/> : conversation.error ? <ErrorState error={conversation.error}><p className="t-body-sm muted">Retry, or start a new conversation using the header button.</p><button className="btn btn-secondary t-body-sm self-start" onClick={() => { if (validId(id)) void conversation.refetch(); }}>Retry conversation</button></ErrorState> : !messages.length && !ask.isPending ? <>
           <div className="flex items-center gap-3"><MascotHero pose="berpikir" size={64}/><p className="t-body text-[var(--color-text-strong)]">Ask about P2H reports and work orders. I’ll answer from the data and link the evidence.</p></div>
-          <section className="rounded-[10px] bg-[var(--color-warning-subtle)] p-3 space-y-2"><h3 className="t-label text-[var(--color-warning)] flex items-center gap-1"><Lightbulb size={13} aria-hidden="true"/>Lumo’s suggestions today</h3>{suggestions.isLoading ? <Spinner label="Reading today’s data…"/> : suggestions.error ? <><p className="t-body-sm text-[var(--color-text-strong)]">Suggestions could not be loaded.</p><button className="btn btn-secondary t-body-sm" onClick={() => void suggestions.refetch()}>Retry suggestions</button></> : suggestions.data?.rekomendasi.length ? suggestions.data.rekomendasi.map((suggestion, index) => <p key={index} className="t-body-sm text-[var(--color-text-strong)]">{suggestion}</p>) : <p className="t-body-sm text-[var(--color-text-strong)]">No follow-up recommendations in the available data.</p>}</section>
+          <section className="rounded-[10px] bg-[var(--color-warning-subtle)] p-3 space-y-2"><h3 className="t-label text-[var(--color-warning)] flex items-center gap-1"><Lightbulb size={13} aria-hidden="true"/>Lumo’s suggestions today</h3>{suggestions.isLoading ? <Spinner label="Reading today’s data…"/> : suggestions.error ? <><p className="t-body-sm text-[var(--color-text-strong)]">Suggestions could not be loaded.</p><button className="btn btn-secondary t-body-sm" onClick={() => void suggestions.refetch()}>Retry suggestions</button></> : suggestions.data?.rekomendasi.length ? <ul className="-mx-2 space-y-1">{suggestions.data.rekomendasi.map((suggestion, index) => <li key={index}><RecommendationLink text={suggestion} action={suggestions.data.recommendation_actions?.[index]} onAsk={send} onNavigate={followRecommendation} disabled={disabled}/></li>)}</ul> : <p className="t-body-sm text-[var(--color-text-strong)]">No follow-up recommendations in the available data.</p>}</section>
           <section className="space-y-2"><h3 className="t-label muted">Example questions</h3>{examples.map(question => <button key={question} className="btn btn-secondary t-body w-full !justify-start text-left" onClick={() => send(question)} disabled={disabled}><Sparkles size={14} className="text-[var(--color-primary)] shrink-0"/>{question}</button>)}</section>
         </> : <div role="log" aria-label="Lumo conversation" aria-live="polite" className="space-y-3">
-          {messages.map(message => message.role === 'user' ? <div key={message.id} className="flex justify-end"><p className="bubble-petugas t-body max-w-[88%] px-3 py-2.5 whitespace-pre-wrap break-words">{message.text}</p></div> : <AnalystAnswer key={message.id} message={message}/>)}
+          {messages.map(message => message.role === 'user' ? <div key={message.id} className="flex justify-end"><p className="bubble-petugas t-body max-w-[88%] px-3 py-2.5 whitespace-pre-wrap break-words">{message.text}</p></div> : <AnalystAnswer key={message.id} message={message} onAsk={send} onNavigate={followRecommendation} busy={disabled}/>)}
           {ask.isPending && <><div className="flex justify-end" data-pending-question><p className="bubble-petugas t-body max-w-[88%] px-3 py-2.5 whitespace-pre-wrap break-words">{ask.variables.text}</p></div><TypingBubble label="Reading the evidence…"/></>}
         </div>}
         {ask.error && <ErrorState error={ask.error}><p className="t-body-sm muted">Your question is restored below. Send it again to retry.</p></ErrorState>}
