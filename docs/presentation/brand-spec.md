@@ -25,6 +25,8 @@
 
 ## Presentation composition
 
+The hackathon pitch retains the existing Pramana styling with eight main slides and three Q&A appendices. Content focuses on incomplete operator reports, guided evidence collection, supervisor review effort, and generated Work Orders. Audience-facing terminology uses “pre-operational inspection” and “field operator.” Original product screenshots retain their labels. The local preview is explicitly scripted and supports a separate 90-second application demonstration.
+
 - Logical size: 1920 × 1080, with fitting and letterboxing for other viewports.
 - One main title per page, body text around 30 px, and titles at 70–106 px depending on their role. This extends the app hierarchy for projection without changing app UI sizing.
 - Models and photo evidence are the main content. Lumo supports the product evidence.

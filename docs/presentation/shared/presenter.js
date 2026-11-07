@@ -1,5 +1,6 @@
 (() => {
   const deck = window.DECK_MANIFEST || [];
+  const duration = window.DECK_TIMING?.totalSeconds || 360;
   const frame = document.getElementById('frame');
   const tools = document.createElement('nav'); tools.id='overviewTools'; tools.setAttribute('aria-label','Presentation options');
   tools.innerHTML='<a href="?ov=gallery">3D Gallery</a><a href="?ov=grid">Grid</a><a href="presenter-notes.html" target="_blank">6-minute script ↗</a><a href="Pramana-Lumo.pdf" target="_blank">PDF ↗</a>';
@@ -12,7 +13,7 @@
   const clock=document.getElementById('pitchClock');
   let elapsed=0, runningSince=null;
   const readElapsed=()=>elapsed+(runningSince===null?0:performance.now()-runningSince);
-  function displayTime(){const remaining=Math.max(0,Math.ceil(360-readElapsed()/1000));clock.textContent=String(Math.floor(remaining/60)).padStart(2,'0')+':'+String(remaining%60).padStart(2,'0');clock.classList.toggle('expired',remaining===0);clock.setAttribute('aria-label',(runningSince===null?'Start':'Pause')+' timer, remaining '+clock.textContent);}
+  function displayTime(){const remaining=Math.max(0,Math.ceil(duration-readElapsed()/1000));clock.textContent=String(Math.floor(remaining/60)).padStart(2,'0')+':'+String(remaining%60).padStart(2,'0');clock.classList.toggle('expired',remaining===0);clock.setAttribute('aria-label',(runningSince===null?'Start':'Pause')+' timer, remaining '+clock.textContent);}
   function timer(){if(runningSince===null)runningSince=performance.now();else{elapsed+=performance.now()-runningSince;runningSince=null;}displayTime();}
   function resetTimer(){elapsed=0;runningSince=null;displayTime();}
   function currentIndex(){const idx=parseInt(location.hash.slice(1),10)-1;return Number.isFinite(idx)&&idx>=0&&idx<deck.length?idx:0;}
