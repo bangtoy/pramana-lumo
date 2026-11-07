@@ -1,78 +1,182 @@
 # Pramana
 
-Aplikasi Next.js berada di [`pramana/`](pramana/README.md), menggunakan OpenAI
-Agents SDK JavaScript/TypeScript, SQLite, dan model kendaraan interaktif Anatomy.
-Antarmuka aplikasi berbahasa Inggris. Implementasi mencakup P0-00 sampai P0-13
-dan P1-01 sampai P1-04: pembuatan work order, penugasan mekanik, target, serta
-sinkronisasi penyelesaian dengan temuan. P2-01 sampai P2-05 menambahkan Ringkasan
-armada, riwayat inspeksi 14 hari, tren, dan filter laporan. P3-01 sampai P3-04
-menambahkan Ask Lumo: analisis laporan dan work order hanya-baca, sumber yang
-bisa dibuka, rekomendasi dari data, serta percakapan yang tersimpan.
+Pramana helps mining teams complete daily vehicle inspections, capture evidence,
+and follow up on repairs. Lumo, its AI assistant, guides supervisors and
+inspectors from an inspection plan to a report backed by photos and work orders.
+
+The app supports P2H (*Pemeriksaan dan Perawatan Harian*, daily inspection and
+maintenance). Its interface and assistant replies are in English, with dates
+and operational reporting in Asia/Jakarta (WIB).
+
+![Pramana fleet dashboard with the Ask Lumo panel](docs/verification/screenshots/tanya-empty-1440.png)
+
+## What you can do
+
+- **Build inspection plans:** describe a vehicle or upload a specification sheet,
+  then refine the checks with Lumo and an interactive isometric vehicle model.
+- **Inspect on a phone:** follow the inspection conversation, take photos or
+  attach images from the gallery, and submit findings with supporting evidence.
+- **Review the fleet:** see inspected, roadworthy and STOP units, inspection
+  trends, recurring component findings, and searchable reports with PDF export.
+- **Manage repairs:** create work orders from findings, assign mechanics, set
+  deadlines, and record completion. Repair follow-up preserves the original
+  inspection verdict.
+- **Ask Lumo:** ask questions across reports and work orders, open the cited
+  sources, and receive recommendations. This analyst is read-only and provides
+  a clearly labeled data-based fallback when the model is unavailable.
+
+## Technology
+
+Pramana uses Next.js App Router, React, TypeScript, Tailwind CSS and TanStack Query.
+Agents run through the OpenAI Agents SDK for JavaScript/TypeScript, with Zod
+validation and server-enforced inspection rules. SQLite stores application data;
+uploads, generated models and local agent traces are stored alongside it.
+The Anatomy skill supplies the geometry workflow for interactive SVG vehicle models.
+
+## Installation
+
+### 1. Get the source
+
+Install Git and either Docker with Compose 2.24 or newer, or Node.js 22.19 or
+newer with npm. Docker is recommended for the complete app, including vehicle
+model generation, which requires the Linux sandbox and its bundled tools.
 
 ```sh
-cd pramana
-docker compose up -d --build
+git clone https://github.com/bangtoy/pramana-lumo.git
+cd pramana-lumo/pramana
+```
+
+Run the following commands from this application directory.
+
+### 2. Configure the agents
+
+Create `.env.local` from the example on a fresh checkout:
+
+```sh
+# macOS / Linux
+cp .env.example .env.local
+```
+
+```powershell
+# Windows PowerShell
+Copy-Item .env.example .env.local
+```
+
+If `.env.local` already exists, edit it instead of replacing it. Set these values
+for your model provider:
+
+| Variable | Purpose |
+| --- | --- |
+| `OPENAI_BASE_URL` | API endpoint, including `/v1`; use `https://api.openai.com/v1` for OpenAI or your configured gateway URL. |
+| `OPENAI_API_KEY` | Your provider's API key. Keep it in `.env.local`, which is excluded from Git. |
+| `OPENAI_MODEL` | A model available through your endpoint for planning, inspection and analysis. Replace the example value if needed. |
+| `OPENAI_MODEL_HEAVY` | A model for vehicle-model generation; defaults to `OPENAI_MODEL` when omitted. |
+| `DATA_DIR` | Local data directory; defaults to `./data`. Docker sets this to `/data` in its persistent volume. |
+
+The agent client uses the Responses API by default. For a compatible gateway
+that uses Chat Completions, set `OPENAI_API_MODE=chat_completions`. The selected
+models must support the tools and image inputs used by the agents. When an API
+runs on your host computer, use `host.docker.internal` instead of `localhost`
+in its URL when running Pramana in Docker.
+
+You can browse the seeded dashboard without a model configuration. Planning,
+inspection conversations and model generation need a working provider;
+Ask Lumo can still answer through its labeled data-based fallback.
+
+### 3. Start the app
+
+**With Docker (recommended):**
+
+```sh
+docker compose up -d --build app
+docker compose ps
+```
+
+Open [http://localhost:3000](http://localhost:3000). Demo records are seeded
+automatically on first startup; subsequent starts preserve existing data.
+
+If port 3000 is already in use, choose a different host port:
+
+```sh
+# macOS / Linux
+export PRAMANA_PORT=3002
+docker compose up -d --build app
+```
+
+```powershell
+# Windows PowerShell
+$env:PRAMANA_PORT = '3002'
+docker compose up -d --build app
+```
+
+Then open `http://localhost:3002`.
+
+**With Node.js for local development:**
+
+```sh
+npm ci
+npm run dev
+```
+
+Open the address printed by Next.js. The database initializes automatically on
+the first data request. Use the Docker app to generate vehicle models; local
+development can display existing models.
+
+For a production Node.js build:
+
+```sh
+npm run build
+npm start
+```
+
+## Try the workflow
+
+1. Choose **Continue as supervisor** on the home page. Open **Agent** to create
+   an inspection plan, or explore an existing plan.
+2. Choose **Continue as inspector** to inspect a vehicle and submit photo evidence.
+3. Return to **Summary** and **Inspection reports** to review findings.
+4. Create work orders, assign repair follow-up, and ask **Lumo** about the evidence.
+
+For phone camera access, start the included HTTPS tunnel after the Docker app:
+
+```sh
+docker compose up -d tunnel
 docker compose logs tunnel
 ```
 
-Isi `pramana/.env.local` dengan konfigurasi model. Buka `http://localhost:3000`
-atau URL HTTPS dari log tunnel untuk HP. Composer Petugas menerima foto kamera
-maupun lampiran gambar dari galeri/file. Bila port 3000 terpakai, atur
-`PRAMANA_PORT` sesuai [panduan aplikasi](pramana/README.md).
+Open the `https://...trycloudflare.com` address shown in the logs on your phone.
+The tunnel makes this demo publicly accessible. The app currently has no login,
+so use demo data. The temporary URL may change when the tunnel is recreated.
+Stop public access with `docker compose stop tunnel`.
 
-Lihat [hasil verifikasi](docs/verification/P0.md) dan
-[naskah demo P0](docs/verification/DEMO-P0.md) untuk bukti pengujian, laporan
-cadangan, dan batas lingkup demo. [Verifikasi P1](docs/verification/P1.md)
-mencatat pengujian work order dan alur demo lanjutannya.
-[Verifikasi P2](docs/verification/P2.md) mencatat metrik WIB, seed riwayat,
-Ringkasan interaktif dan filter laporan yang tersimpan di URL.
-[Verifikasi P3](docs/verification/P3.md) mencatat uji model aktif, jawaban
-cadangan saat model tidak tersedia, API percakapan, dan panel Ask Lumo.
+## Data and maintenance
 
-## Kit desain & dokumen
+Docker stores the database, uploads, models and traces in the `pramana-data`
+volume. `docker compose down` stops the services and preserves that volume.
+`PRAMANA_VOLUME` can select an existing volume; keep it consistent across Compose
+commands. Local development stores data under `pramana/data/` by default.
 
-Pramana: P2H dump truck yang dipandu agent **Lumo** dan dibuktikan dengan foto. Supervisor menyusun Rencana Inspeksi dari Spec Sheet, Petugas mengisinya di HP, laporan masuk ke dashboard, temuan dijadikan work order, dan Supervisor bisa bertanya soal laporan ke Lumo.
+Demo history is seeded once with dates relative to its initial setup. It does
+not roll forward each day. See the [application guide](pramana/README.md) for
+seed/reset behavior and additional operational details.
 
-## Isi
+Useful commands from `pramana/`:
 
-```
-design/
-  DESIGN_SYSTEM.md      ← aturan desain, terutama §3 komposisi teks (wajib untuk Codex)
-  tokens.css            ← salin ke pramana/app/tokens.css
-  globals.css           ← salin ke pramana/app/globals.css (komponen FlowPilot)
-  layouts/index.html    ← spesimen hidup: teks, warna, komponen, kerangka layout (buka di browser)
-  layouts/kit.css       ← versi CSS biasa untuk spesimen (bukan untuk app)
-  screens/              ← 12 screenshot aplikasi jadi (1440×900, Petugas 390×844)
-  assets/lumo/          ← karakter Lumo (PNG transparan, README pose + microcopy, paket sumber)
-  assets/models/        ← figure Model Kendaraan siap pakai (SVG) + truck-model.css
-  assets/demo/          ← foto bukti contoh untuk seed
-  assets/uji/           ← Spec Sheet uji (dump truck, excavator JCB JS120)
-docs/
-  PRD.md                ← v2.0, prioritas P0–P3
-  CONTEXT.md            ← istilah domain (pakai di UI dan kode)
-  standar-p2h.md        ← Standar Inspeksi P2H (pengetahuan agent Perancang)
-  adr/                  ← keputusan arsitektur 0001–0007
-  tickets/
-    README.md           ← format tiket, Definition of Done, aturan Codex, peta aset
-    P0-inti.md          ← 14 tiket inti (repo kosong → demo jalan)
-    P1-work-order.md    ← 4 tiket
-    P2-dashboard.md     ← 5 tiket
-    P3-tanya-lumo.md    ← 4 tiket
-    lampiran/           ← contracts.ts final, package.json (versi teruji), standar-p2h.md
+```sh
+npm run typecheck
+npm test
+npm run build
+docker compose logs app
 ```
 
-## Urutan pakai saat hackathon
+## Repository guide
 
-1. Buat repo kode baru (atau branch dari `main`), lalu salin folder `design/` dan `docs/` ini ke dalamnya supaya Codex bisa membacanya.
-2. Baca `docs/PRD.md` dan `design/DESIGN_SYSTEM.md` §3 (5 menit, semua anggota).
-3. Jalankan tiket berurutan dengan Codex. Contoh:
-   ```
-   /goal Kerjakan P0-00 sampai P0-13 di docs/tickets/P0-inti.md berurutan di folder pramana/. Ikuti docs/tickets/README.md (Definition of Done) dan design/DESIGN_SYSTEM.md §3. Commit per tiket.
-   ```
-   Setelah P0-02, bagi tiga jalur paralel (lihat kepala `P0-inti.md`).
-4. Setelah P0-13 lolos: `P1-work-order.md` → `P2-dashboard.md` → `P3-tanya-lumo.md`.
-5. Setiap tiket UI ditutup dengan perintah `rg` di DESIGN_SYSTEM §3.4 dan perbandingan screenshot dengan `design/screens/`.
-
-## Kenapa komposisi teks diatur ketat
-
-Codex cenderung memilih ukuran dan berat teks sendiri per komponen (`text-lg font-semibold` di satu kartu, `text-xl` di kartu lain), sehingga halaman terlihat tidak seimbang. Di kit ini teks hanya boleh memakai 11 class `.t-*` dengan ukuran tetap, berat hanya 400/500, satu judul besar per halaman, dan judul kartu selalu 16 px. Aturannya bisa diperiksa mesin (`rg`) dan dibandingkan dengan screenshot.
+| Location | Contents |
+| --- | --- |
+| [`pramana/`](pramana/) | Next.js app, agents, database, tests and Docker configuration. |
+| [`design/`](design/) | Design system, reference screens, Lumo artwork and vehicle assets. |
+| [`docs/PRD.md`](docs/PRD.md) | Product requirements. |
+| [`docs/adr/`](docs/adr/) | Architecture decisions. |
+| [`docs/tickets/`](docs/tickets/) | Implementation tickets and Definition of Done. |
+| [`docs/verification/`](docs/verification/) | Verification results, screenshots and demo instructions. |
+| [`docs/README.md`](docs/README.md) | Original project README and design-kit instructions. |
