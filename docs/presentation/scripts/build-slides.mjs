@@ -27,8 +27,48 @@ const slides = [
   },
   {
     id:"02-problem", title:"The problem", seconds:55, criteria:["Problem & Solution Fit","Real-World Value"], className:"readme-problem",
-    body:`${head('The problem')}<p class="eyebrow">Scattered context and incomplete evidence</p><h1>The <span class="accent">problem</span></h1><div class="section-content cols readme-problem-columns"><div><h2>Collecting and assembling the report</h2><p class="body">Inspection and survey work spans checklists, photos, chat messages, and spreadsheets.</p><p class="body muted">People record observations in the field, explain them elsewhere, and manually assemble a report afterward. Scattered context makes completeness and supporting evidence hard to assess.</p></div><div><h2>Reviewing and acting on findings</h2><p class="body">Reviewers need to spot urgent issues, compare past results, and decide what needs attention.</p><p class="body muted">Missing photos create extra trips. Recurring problems are easy to overlook. Findings can sit in a report without a clear owner or next step.</p></div></div>${source(link('../../../README.md#the-problem','README.md · The problem'))}`,
-    notes:"00:40–01:35. “Inspection and survey work often spans a checklist, a photo gallery, chat messages, and a spreadsheet. People collect information in the field, explain it elsewhere, and then assemble the report. Reviewers have to work out whether a check is complete and whether its evidence supports the finding. The work continues after submission. Missing photos can mean another trip. Recurring problems can be missed. A finding can remain in a report without a clear owner or next step.” Explain the operator and supervisor effort using the README’s problem framing."
+    body:`${head('The problem')}
+      <p class="eyebrow">Scattered context and incomplete evidence</p>
+      <h1>The <span class="accent">problem</span></h1>
+      <div class="section-content problem-story">
+        <div class="problem-story-copy">
+          <div>
+            <h2>Collecting and assembling the report</h2>
+            <p>Checklists, photos, chat messages, and spreadsheets scatter the inspection context. Reports are assembled manually, with details and evidence still missing.</p>
+          </div>
+          <div>
+            <h2>Reviewing and acting on findings</h2>
+            <p>Supervisors ask again to understand the finding. Missing photos mean extra trips, recurring issues are easy to overlook, and follow-up needs an owner and next step.</p>
+          </div>
+        </div>
+        <figure class="problem-chat" aria-label="Illustrative conversation between a field operator and supervisor about an incomplete inspection report">
+          <figcaption>Illustrative conversation</figcaption>
+          <ol class="problem-chat-messages">
+            <li class="problem-message operator">
+              <p class="problem-message-sender">Field operator</p>
+              <p class="problem-message-bubble">Checked the truck. Tyre looks bad.</p>
+            </li>
+            <li class="problem-message supervisor">
+              <p class="problem-message-sender">Supervisor</p>
+              <p class="problem-message-bubble">Which truck and tyre? What did you find?</p>
+            </li>
+            <li class="problem-message operator">
+              <p class="problem-message-sender">Field operator</p>
+              <p class="problem-message-bubble">DT-07, rear left. Probably needs replacing.</p>
+            </li>
+            <li class="problem-message supervisor">
+              <p class="problem-message-sender">Supervisor</p>
+              <p class="problem-message-bubble">Is it flat or damaged? Can you send a close-up photo?</p>
+            </li>
+            <li class="problem-message operator">
+              <p class="problem-message-sender">Field operator</p>
+              <p class="problem-message-bubble">I didn’t take one. I’ll have to go back.</p>
+            </li>
+          </ol>
+        </figure>
+      </div>
+      ${source(link('../../../README.md#the-problem','README.md · The problem'))}`,
+    notes:"00:40–01:35. Start with the illustrative chat. “The operator says the tyre looks bad, but the supervisor still needs to know which vehicle, which tyre, and what the actual condition is. After another exchange, the photo is still missing and the operator has to go back.” Then connect the example to the wider problem. “Inspection context is scattered across checklists, photos, messages, and spreadsheets. Supervisors spend time requesting details and reconstructing the report before they can review findings and assign follow-up.” The conversation is an illustrative scenario."
   },
   {
     id:"03-solution", title:"The solution", seconds:55, criteria:["Problem & Solution Fit","Insight & Originality"], className:"",
