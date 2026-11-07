@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { ArrowLeft, Camera, ChevronDown, ChevronUp, Plus, RotateCcw, Send, X } from "lucide-react";
+import { ArrowLeft, Camera, ChevronDown, ChevronUp, Paperclip, Plus, RotateCcw, Send, X } from "lucide-react";
 import { api, compressImage, fmtDate, postJson, postTurn } from "@/lib/client";
 import { counts, itemsOf, nextItem, progress, unitCode, verdict, type ReportView } from "@/lib/rules";
 import type { ChatMessage, StatusItem, TurnResponse } from "@/lib/contracts";
@@ -29,7 +29,7 @@ export function InspectorChat() {
   return id ? <Conversation key={id} id={id} create={create}/> : <div className="p-5"><Spinner label="Opening your inspection…"/></div>;
 }
 function Conversation({ id, create }: { id: string; create: () => Promise<void> }) {
-  const cache = useQueryClient(), end = useRef<HTMLDivElement>(null), input = useRef<HTMLInputElement>(null);
+  const cache = useQueryClient(), end = useRef<HTMLDivElement>(null), input = useRef<HTMLInputElement>(null), attachment = useRef<HTMLInputElement>(null);
   const [text, setText] = useState(''), [photo, setPhoto] = useState<File>(), [photoUrl, setPhotoUrl] = useState(''), [preparing, setPreparing] = useState(false), [photoError, setPhotoError] = useState<string | null>(null);
   const [showModel, setShowModel] = useState(true), [status, setStatus] = useState(''), [optimistic, setOptimistic] = useState<ChatMessage[]>([]);
   const query = useQuery({ queryKey: ['laporan', id], queryFn: () => api<ReportView>(`/api/laporan/${encodeURIComponent(id)}`) });
@@ -38,7 +38,7 @@ function Conversation({ id, create }: { id: string; create: () => Promise<void> 
     const body = new FormData(); body.set('text', text); if (photo) body.set('file', photo);
     return postTurn<TurnResponse<ReportView>>(`/api/laporan/${id}/turn`, body, setStatus);
   }, onMutate: ({ text }) => { setOptimistic([{ id: 'pending', role: 'user', text: text || 'Photo attached', created_at: new Date().toISOString() }]); setStatus('Lumo is reading…'); }, onSuccess: reply => {
-    cache.setQueryData(['laporan', id], reply.data); setText(''); setPhoto(undefined); if (input.current) input.current.value = '';
+    cache.setQueryData(['laporan', id], reply.data); setText(''); setPhoto(undefined); if (input.current) input.current.value = ''; if (attachment.current) attachment.current.value = '';
   }, onSettled: () => { setOptimistic([]); void cache.invalidateQueries({ queryKey: ['laporan', id] }); } });
   useEffect(() => { if (!photo) { setPhotoUrl(''); return; } const url = URL.createObjectURL(photo); setPhotoUrl(url); return () => URL.revokeObjectURL(url); }, [photo]);
   useEffect(() => { end.current?.scrollIntoView({ block: 'end', behavior: 'instant' }); }, [report?.messages.length, turn.isPending]);
@@ -74,7 +74,12 @@ function Conversation({ id, create }: { id: string; create: () => Promise<void> 
         {!turn.isPending && !!last?.quick_replies?.length && <div className="flex gap-2 overflow-x-auto pb-3">{last.quick_replies.map(reply => <button key={reply} className="btn btn-secondary-field t-body-sm shrink-0 max-w-64 truncate" onClick={() => send(reply)} disabled={preparing}>{reply}</button>)}</div>}
         {photo && photoUrl && <div className="mb-2 flex items-center gap-2"><img src={photoUrl} alt="Photo ready to send" className="h-12 w-12 shrink-0 rounded object-cover"/><span className="t-caption-data muted flex-1">Photo ready · {Math.ceil(photo.size / 1024)} KB</span><button className={iconButton} aria-label="Remove photo" disabled={turn.isPending} onClick={() => { setPhoto(undefined); if (input.current) input.current.value = ''; }}><X size={16}/></button></div>}
         {preparing && <Spinner label="Preparing photo…"/>}
-        <form className="flex gap-2 items-end" onSubmit={e => { e.preventDefault(); send(); }}><input ref={input} type="file" accept="image/*" capture="environment" aria-label="Take an inspection photo" className="sr-only" disabled={turn.isPending || preparing} onChange={e => void choosePhoto(e.target.files?.[0])}/><button type="button" className={`${iconButton} !w-12 !h-12`} aria-label="Take a photo" disabled={turn.isPending || preparing} onClick={() => input.current?.click()}><Camera size={21}/></button><textarea rows={1} className="input t-body-lg min-w-0 flex-1 resize-none min-h-12 max-h-28" aria-label="Message Lumo" placeholder="Tell Lumo what you found…" value={text} disabled={turn.isPending || preparing} onChange={e => setText(e.target.value)} onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) { e.preventDefault(); send(); } }}/><button className="btn btn-primary w-12 h-12 p-0 shrink-0" aria-label="Send message" disabled={turn.isPending || preparing || (!text.trim() && !photo)}><Send size={18}/></button></form>
+        <form className="space-y-2" onSubmit={e => { e.preventDefault(); send(); }}>
+          <input ref={input} type="file" accept="image/*" capture="environment" aria-label="Take an inspection photo" className="sr-only" disabled={turn.isPending || preparing} onChange={e => { void choosePhoto(e.target.files?.[0]); e.target.value = ''; }}/>
+          <input ref={attachment} type="file" accept="image/*" aria-label="Attach an image" className="sr-only" disabled={turn.isPending || preparing} onChange={e => { void choosePhoto(e.target.files?.[0]); e.target.value = ''; }}/>
+          <textarea rows={1} className="input t-body-lg w-full resize-none min-h-12 max-h-28" aria-label="Message Lumo" placeholder="Tell Lumo what you found…" value={text} disabled={turn.isPending || preparing} onChange={e => setText(e.target.value)} onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) { e.preventDefault(); send(); } }}/>
+          <div className="flex items-center gap-2"><button type="button" className={`${iconButton} !w-12 !h-12`} aria-label="Take a photo" title="Take a photo" disabled={turn.isPending || preparing} onClick={() => input.current?.click()}><Camera size={21}/></button><button type="button" className={`${iconButton} !w-12 !h-12`} aria-label="Choose an image from gallery or files" title="Attach an image" disabled={turn.isPending || preparing} onClick={() => attachment.current?.click()}><Paperclip size={20}/></button><span className="t-label muted font-normal">Camera or image</span><button className="btn btn-primary w-12 h-12 p-0 shrink-0 ml-auto" aria-label="Send message" disabled={turn.isPending || preparing || (!text.trim() && !photo)}><Send size={18}/></button></div>
+        </form>
       </div>
     </>}
   </div>;

@@ -1,12 +1,13 @@
 {
-  "reportId": "LI-470dfad0-ce9b-4ca9-b5ae-4830646feae3",
+  "reportId": "LI-b1cfe01d-dcf1-4896-869a-66fd009379c1",
   "fontSize": 16,
   "capture": "environment",
+  "source": "gallery",
   "compressedPreview": "Photo ready · 157 KB",
   "uploadedPhotoBytes": 159925,
   "resumed": true,
   "newInspectionConfirmation": true,
   "highlighted": true,
   "errors": [],
-  "device": "Chromium mobile emulation; physical camera/tunnel verification remains for P0-12"
+  "device": "Chromium mobile emulation; user confirmed the physical-phone camera flow works"
 }

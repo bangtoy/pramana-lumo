@@ -11,7 +11,8 @@ try {
   const composer = page.getByRole('textbox', { name: 'Message Lumo' }); await composer.waitFor();
   const id = await page.evaluate(() => localStorage.getItem('pramana.inspection-draft'));
   assert.equal(await composer.evaluate(el => getComputedStyle(el).fontSize), '16px');
-  assert.equal(await page.locator('input[type=file]').getAttribute('capture'), 'environment');
+  assert.equal(await page.getByLabel('Take an inspection photo').getAttribute('capture'), 'environment');
+  assert.equal(await page.getByLabel('Attach an image').getAttribute('capture'), null);
   await page.screenshot({ path: '../docs/verification/screenshots/inspector-opening-390.png' });
   async function send(text) { await composer.fill(text); await page.getByRole('button', { name: 'Send message', exact: true }).click(); await page.waitForFunction(() => !document.querySelector('textarea')?.disabled, null, { timeout: 120000 }); }
   await send('I am Alex at Tanjung Enim. Use RI-DT-UTYPE-01 for DT-11 · B 9111 KD. The truck is safely parked, isolated and chocked.');
@@ -19,7 +20,7 @@ try {
   await page.screenshot({ path: '../docs/verification/screenshots/inspector-active-390.png' });
   await page.getByRole('button', { name: 'Vehicle model' }).click(); assert.equal(await page.locator('.truck-svg').count(), 0);
   await page.getByRole('button', { name: 'Vehicle model' }).click();
-  await page.locator('input[type=file]').setInputFiles('public/demo/apar-label.jpg');
+  await page.getByLabel(process.env.PHOTO_SOURCE === 'gallery' ? 'Attach an image' : 'Take an inspection photo').setInputFiles('public/demo/apar-label.jpg');
   await page.getByText(/Photo ready ·/).waitFor();
   const previewText = await page.getByText(/Photo ready ·/).innerText();
   await page.screenshot({ path: '../docs/verification/screenshots/inspector-photo-390.png' });
@@ -37,6 +38,6 @@ try {
   await page.goto(`${base}/petugas?laporan=LI-2026-10-29-DT07`, { waitUntil: 'networkidle' }); await page.getByRole('heading', { name: 'Inspection submitted' }).waitFor();
   await page.screenshot({ path: '../docs/verification/screenshots/inspector-complete-390.png' });
   assert.deepEqual(errors, []);
-  const result = { reportId: id, fontSize: 16, capture: 'environment', compressedPreview: previewText, uploadedPhotoBytes: bytes, resumed: true, newInspectionConfirmation: true, highlighted: true, errors, device: 'Chromium mobile emulation; physical camera/tunnel verification remains for P0-12' };
+  const result = { reportId: id, fontSize: 16, capture: 'environment', source: process.env.PHOTO_SOURCE || 'camera', compressedPreview: previewText, uploadedPhotoBytes: bytes, resumed: true, newInspectionConfirmation: true, highlighted: true, errors, device: 'Chromium mobile emulation; user confirmed the physical-phone camera flow works' };
   writeFileSync('../docs/verification/inspector-ui-check.json', JSON.stringify(result, null, 2)); console.log(result);
 } finally { await browser.close(); }

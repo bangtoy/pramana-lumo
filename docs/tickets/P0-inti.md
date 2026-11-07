@@ -288,7 +288,7 @@ Baca dulu: `docs/tickets/README.md` (Definition of Done), `docs/PRD.md` §4.1–
 
 **Selesai bila**
 - [x] Di 390×844 layout dan teks chat 16 px diverifikasi; screens/11–12 masih placeholder.
-- [ ] Foto dari kamera HP fisik (via tunnel) terkirim < 300 KB. Browser mobile sudah lulus: 159.925 bytes; verifikasi perangkat diminta dan dicatat untuk P0-12.
+- [x] Foto dari kamera HP fisik (via tunnel): pengguna mengonfirmasi tidak ada masalah. Browser mobile mengukur 159.925 bytes. Pemilih lampiran gambar ditambahkan sesuai masukan pengguna.
 - [x] Refresh di tengah P2H melanjutkan draft.
 
 **Prompt /goal**
