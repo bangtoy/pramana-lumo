@@ -4,8 +4,8 @@ import { mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 process.env.DATA_DIR = mkdtempSync(path.join(tmpdir(), 'pramana-wo-'));
-const { getLaporan, saveLaporan, listWorkOrders } = await import('../lib/db.ts');
-const { createWorkOrders } = await import('../lib/work-order.ts');
+const { database, getLaporan, saveLaporan, listWorkOrders, getWorkOrder } = await import('../lib/db.ts');
+const { createWorkOrders, updateWorkOrder, syncItemDitangani } = await import('../lib/work-order.ts');
 const { jakartaDay } = await import('../lib/waktu.ts');
 
 test('Jakarta deadlines cross midnight, month and leap-year boundaries', () => {
@@ -13,6 +13,32 @@ test('Jakarta deadlines cross midnight, month and leap-year boundaries', () => {
   assert.equal(jakartaDay(0, new Date('2026-11-07T17:00:00Z')), '2026-11-08');
   assert.equal(jakartaDay(-2, new Date('2026-12-30T18:00:00Z')), '2027-01-02');
   assert.equal(jakartaDay(1, new Date('2024-03-01T00:00:00Z')), '2024-02-29');
+});
+
+test('work-order and finding changes synchronize atomically without changing inspection outcomes', async () => {
+  const report = { ...getLaporan('LI-2026-10-29-DT07')!, id: 'LI-WO-SYNC' }; saveLaporan(report);
+  const [order] = await createWorkOrders(report.id, async () => []);
+  updateWorkOrder(order, { mekanik: '  Hendra  ' });
+  const completed = updateWorkOrder(order, { status: 'selesai', target: '2026-11-08', catatan_selesai: 'Tyre replaced and tested.' });
+  assert.equal(completed.mekanik, 'Hendra', 'A stale caller preserves newer assignment');
+  assert.ok(completed.selesai_at); assert.equal(getLaporan(report.id)!.hasil[order.item_id].ditangani, true);
+  assert.equal(getLaporan(report.id)!.hasil[order.item_id].stop, true);
+  assert.equal(updateWorkOrder(order, { status: 'selesai' }).selesai_at, completed.selesai_at);
+  syncItemDitangani(report.id, order.item_id, false);
+  const reopened = getWorkOrder(order.id)!;
+  assert.equal(reopened.status, 'terbuka'); assert.equal(reopened.selesai_at, null); assert.equal(reopened.catatan_selesai, null);
+  syncItemDitangani(report.id, order.item_id, true);
+  assert.equal(getWorkOrder(order.id)!.catatan_selesai, 'Marked handled from the inspection report.');
+  assert.equal(getLaporan(report.id)!.hasil[order.item_id].status, 'tidak_baik');
+  assert.throws(() => updateWorkOrder(order, { target: '2026-02-30' }));
+  assert.throws(() => updateWorkOrder(order, { target: 'tomorrow' }));
+  assert.throws(() => updateWorkOrder(order, { prioritas: 'sedang' }));
+  const db = database();
+  db.exec("CREATE TRIGGER fail_report_write BEFORE UPDATE ON laporan BEGIN SELECT RAISE(ABORT, 'simulated disk failure'); END");
+  try { assert.throws(() => updateWorkOrder(order, { status: 'terbuka' }), /simulated disk failure/); }
+  finally { db.exec('DROP TRIGGER fail_report_write'); }
+  assert.equal(getWorkOrder(order.id)!.status, 'selesai', 'WO rolls back if the report write fails');
+  assert.equal(getLaporan(report.id)!.hasil[order.item_id].ditangani, true);
 });
 
 test('creation selects only unassigned defects, enforces STOP, falls back and remains idempotent', async () => {

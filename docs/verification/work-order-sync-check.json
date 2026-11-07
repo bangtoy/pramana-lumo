@@ -1,0 +1,12 @@
+{
+  "orderId": "WO-544919ca-5847-4de4-a661-004a55523c34",
+  "reportId": "LI-2026-10-29-DT07",
+  "workOrderToFinding": true,
+  "findingToWorkOrder": true,
+  "stopPreserved": true,
+  "completionTimestampStable": true,
+  "reopenClearsCompletion": true,
+  "invalidDateRejected": true,
+  "invalidFieldRejected": true,
+  "unknownOrder404": true
+}

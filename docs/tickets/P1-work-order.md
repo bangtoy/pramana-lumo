@@ -39,8 +39,8 @@ Prasyarat: P0 selesai. Acuan layar: `design/screens/04-supervisor-work-order.png
 - `PATCH /api/work-order/:id` memakai `updateWorkOrder`; 404 bila tidak ada.
 
 **Selesai bila**
-- [ ] `PATCH /api/work-order/X {status:"selesai"}` → `GET /api/laporan/<laporan>` menunjukkan `ditangani: true` pada item itu.
-- [ ] `PATCH /api/laporan/<id> {item_id, ditangani:false}` → WO kembali `terbuka`.
+- [x] `PATCH /api/work-order/X {status:"selesai"}` → `GET /api/laporan/<laporan>` menunjukkan `ditangani: true` pada item itu.
+- [x] `PATCH /api/laporan/<id> {item_id, ditangani:false}` → WO kembali `terbuka`.
 
 **Verifikasi**
 ```bash
