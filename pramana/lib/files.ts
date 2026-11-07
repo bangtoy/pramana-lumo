@@ -1,8 +1,8 @@
 import { mkdir, readFile, writeFile, unlink } from "node:fs/promises";
 import path from "node:path";
-import { getFile, insertFile, newId, now, type FileRecord } from "./db";
-import { resolveRef, UPLOAD_DIR } from "./paths";
-import { fail } from "./http";
+import { getFile, insertFile, newId, now, type FileRecord } from "./db.ts";
+import { resolveRef, UPLOAD_DIR } from "./paths.ts";
+import { fail } from "./http.ts";
 
 export async function saveUpload(file: File): Promise<FileRecord> {
   if (!file.size || file.size > 20*1024*1024) fail("Choose a file between 1 byte and 20 MB.",413);

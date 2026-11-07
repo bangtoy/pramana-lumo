@@ -179,9 +179,9 @@ Baca dulu: `docs/tickets/README.md` (Definition of Done), `docs/PRD.md` §4.1–
 - API: `GET/POST /api/rencana`, `GET/PATCH /api/rencana/:id` (edit manual, judul, `model_id`, `diarsipkan`), `POST /api/rencana/:id/turn` (multipart teks + `file`/`fileId`, respons NDJSON status lalu `{reply}`). Rencana tanpa item dan tanpa percakapan boleh dihapus saat membuat yang baru.
 
 **Selesai bila**
-- [ ] Teks "P2H dump truck tronton" → ≥ 8 item tersimpan.
-- [ ] `design/assets/uji/dum-trcuk-spel.webp` → item bersumber `spec` dan `standar`, `spec_fakta` terisi, < 30 detik.
-- [ ] Giliran berikutnya membaca edit manual terbaru.
+- [x] Teks "P2H dump truck tronton" → ≥ 8 item tersimpan.
+- [x] `design/assets/uji/dum-trcuk-spel.webp` → item bersumber `spec` dan `standar`, `spec_fakta` terisi, < 30 detik.
+- [x] Giliran berikutnya membaca edit manual terbaru.
 
 **Verifikasi:** `curl -F text="P2H dump truck tronton" localhost:3000/api/rencana/<id>/turn` lalu `GET /api/rencana/<id>`.
 

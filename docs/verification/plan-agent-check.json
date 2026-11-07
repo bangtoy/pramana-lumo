@@ -1,0 +1,113 @@
+{
+  "model": "configured OPENAI_MODEL",
+  "results": [
+    {
+      "scenario": "text plan",
+      "id": "RI-e2c9b338-861b-42e9-9233-dc43f0492a34",
+      "count": 8,
+      "seconds": 17.28,
+      "statuses": [
+        "Lumo is reading…",
+        "Organising inspection items…"
+      ]
+    },
+    {
+      "scenario": "spec plan",
+      "id": "RI-ed0a9718-4809-41d7-bfba-263e080a16f3",
+      "count": 8,
+      "facts": [
+        {
+          "label": "Body type",
+          "nilai": "U-type dump truck"
+        },
+        {
+          "label": "External dimensions",
+          "nilai": "6,000 × 2,500 × 1,870 mm"
+        },
+        {
+          "label": "Internal dimensions",
+          "nilai": "5,900 × 2,340 × 1,750 mm"
+        },
+        {
+          "label": "Body volume",
+          "nilai": "24 m³"
+        },
+        {
+          "label": "Chassis",
+          "nilai": "Truck chassis, 10 wheels"
+        },
+        {
+          "label": "Hydraulic chassis / dump-body chassis",
+          "nilai": "UNP 200 mm"
+        },
+        {
+          "label": "Cross member",
+          "nilai": "UNP 100 mm"
+        },
+        {
+          "label": "Side chassis",
+          "nilai": "UNP 120 mm"
+        },
+        {
+          "label": "Side wall supports",
+          "nilai": "UNP 120 mm"
+        },
+        {
+          "label": "Top side rails",
+          "nilai": "UNP 150 mm"
+        },
+        {
+          "label": "Dump-gate frame",
+          "nilai": "UNP 100 mm"
+        },
+        {
+          "label": "Floor plate",
+          "nilai": "6 mm"
+        },
+        {
+          "label": "Body wall plate",
+          "nilai": "4 mm"
+        },
+        {
+          "label": "Spacboard plate",
+          "nilai": "2 mm"
+        },
+        {
+          "label": "Body safety props",
+          "nilai": "Standard bodywork, 2 pieces"
+        },
+        {
+          "label": "Hydraulic",
+          "nilai": "TENSUKY KRM 210; source text appears to say “Root 100 mm” (unclear)"
+        },
+        {
+          "label": "Pump",
+          "nilai": "KP 1505"
+        },
+        {
+          "label": "PTO",
+          "nilai": "Standard from unit"
+        },
+        {
+          "label": "Body lamps",
+          "nilai": "2 LED lamps"
+        },
+        {
+          "label": "Reflectors",
+          "nilai": "DISHUB standard"
+        }
+      ],
+      "seconds": 24.8,
+      "under30Seconds": true,
+      "statuses": [
+        "Reading the attachment…",
+        "Organising inspection items…"
+      ]
+    },
+    {
+      "scenario": "manual edit read on next turn",
+      "seconds": 3.49,
+      "passed": true
+    }
+  ]
+}

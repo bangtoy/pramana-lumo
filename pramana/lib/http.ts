@@ -1,7 +1,8 @@
 import { ZodError } from "zod";
 
-class HttpError extends Error {
-  constructor(message: string, public status: number) { super(message); }
+export class HttpError extends Error {
+  status: number;
+  constructor(message: string, status: number) { super(message); this.status = status; }
 }
 export function fail(message: string, status = 400): never { throw new HttpError(message, status); }
 
