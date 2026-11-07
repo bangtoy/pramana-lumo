@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { writeFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import { jakartaDay } from '../lib/waktu.ts';
+import { chooseDate, chooseOption } from './ui-controls.mjs';
 const { chromium } = await import(pathToFileURL(process.env.PLAYWRIGHT_MODULE).href);
 const base = `http://localhost:${process.env.PORT || 3002}`, reportId = 'LI-2026-10-29-DT07';
 async function api(path, body) {
@@ -31,7 +32,7 @@ try {
   await Promise.all([patched(), row.getByRole('textbox', { name: /^Mechanic/ }).press('Tab')]);
   await page.reload({ waitUntil: 'networkidle' });
   assert.equal(await row.getByRole('textbox', { name: /^Mechanic/ }).inputValue(), 'Hendra');
-  await Promise.all([patched(), row.locator('input[type="date"]').fill(jakartaDay(1))]);
+  await Promise.all([patched(), chooseDate(page, row.getByRole('button', { name: /^Target for / }), jakartaDay(1))]);
   await row.getByText('Overdue', { exact: true }).waitFor();
   await page.getByRole('button', { name: `Overdue ${overdueCount + 1}`, exact: true }).click();
   await page.waitForURL(/filter=terlambat/); assert.ok(await row.isVisible());
@@ -63,9 +64,9 @@ try {
   await page.goto(`${base}/supervisor/work-order?laporan=${reportId}`, { waitUntil: 'networkidle' });
   assert.equal(await page.locator('[data-work-order]').count(), 2);
   assert.equal(await page.getByRole('button', { name: 'All 2', exact: true }).getAttribute('aria-pressed'), 'true');
-  await page.getByRole('combobox', { name: 'Priority', exact: true }).selectOption('sedang');
+  await chooseOption(page, page.getByRole('combobox', { name: 'Priority', exact: true }), 'Medium');
   await page.getByRole('heading', { name: 'No work orders in this view' }).waitFor();
-  await page.getByRole('combobox', { name: 'Priority', exact: true }).selectOption('');
+  await chooseOption(page, page.getByRole('combobox', { name: 'Priority', exact: true }), 'All priorities');
   await row.waitFor();
   await page.setViewportSize({ width: 390, height: 844 });
   await snapshot('work-order-390');

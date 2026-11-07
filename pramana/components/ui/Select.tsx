@@ -7,7 +7,7 @@ import "./Select.css";
 
 type Option = { value: string; label: string };
 
-export function Select({ value, onChange, options, disabled, id, "aria-label": label, "aria-labelledby": labelledBy, className = "" }: {
+export function Select({ value, onChange, options, disabled, id, "aria-label": label, "aria-labelledby": labelledBy, className = "", size = "default" }: {
   value: string;
   onChange: (value: string) => void;
   options: Option[];
@@ -16,6 +16,7 @@ export function Select({ value, onChange, options, disabled, id, "aria-label": l
   "aria-label"?: string;
   "aria-labelledby"?: string;
   className?: string;
+  size?: "default" | "compact";
 }) {
   const listId = useId();
   const trigger = useRef<HTMLButtonElement>(null);
@@ -38,7 +39,7 @@ export function Select({ value, onChange, options, disabled, id, "aria-label": l
   }
 
   return <>
-    <button ref={trigger} id={id} type="button" role="combobox" aria-label={label} aria-labelledby={labelledBy} aria-haspopup="listbox" aria-expanded={open} aria-controls={open ? listId : undefined} aria-activedescendant={open ? `${listId}-${active}` : undefined} disabled={disabled} className={`input t-body planner-select-trigger ${className}`} onClick={() => { setActive(Math.max(0, selected)); setOpen(!open); }} onKeyDown={event => {
+    <button ref={trigger} id={id} type="button" role="combobox" aria-label={label} aria-labelledby={labelledBy} aria-haspopup="listbox" aria-expanded={open} aria-controls={open ? listId : undefined} aria-activedescendant={open ? `${listId}-${active}` : undefined} disabled={disabled} data-size={size} className={`input ${size === "compact" ? "t-body-sm" : "t-body"} planner-select-trigger ${className}`} onClick={() => { setActive(Math.max(0, selected)); setOpen(!open); }} onKeyDown={event => {
       if (["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) {
         event.preventDefault();
         const start = open ? active : Math.max(0, selected);
@@ -58,7 +59,7 @@ export function Select({ value, onChange, options, disabled, id, "aria-label": l
         if (match >= 0) { setActive(match); setOpen(true); }
       }
     }}><span className="truncate">{options[selected]?.label ?? "Choose an option"}</span><ChevronDown size={16} strokeWidth={1.5} aria-hidden="true" className="shrink-0 muted"/></button>
-    {open && !disabled && <AnchoredPopover anchor={trigger} onClose={close} id={listId} role="listbox" className="planner-select-menu">
+    {open && !disabled && <AnchoredPopover anchor={trigger} onClose={close} id={listId} role="listbox" aria-label={label} aria-labelledby={labelledBy} className="planner-select-menu">
       {options.map((option, index) => <div id={`${listId}-${index}`} key={option.value} role="option" aria-selected={option.value === value} data-highlighted={active === index} className="t-body planner-select-option" onPointerMove={() => setActive(index)} onPointerDown={event => event.preventDefault()} onClick={() => choose(index)}>
         <span className="min-w-0 flex-1">{option.label}</span>{option.value === value && <Check size={16} strokeWidth={1.5} aria-hidden="true" className="shrink-0"/>}
       </div>)}

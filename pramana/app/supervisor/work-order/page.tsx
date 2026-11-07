@@ -10,6 +10,7 @@ import { isWorkOrderOverdue, sortWorkOrders } from '@/lib/work-order-rules';
 import { unitCode } from '@/lib/rules';
 import { EmptyState, ErrorState, Spinner } from '@/components/ui';
 import { WorkOrderRow } from '@/components/work-order/WorkOrderRow';
+import { Select } from '@/components/ui/Select';
 
 const filters = { terbuka: 'Open', terlambat: 'Overdue', selesai: 'Completed', semua: 'All' } as const;
 type Filter = keyof typeof filters;
@@ -44,7 +45,7 @@ function WorkOrders() {
     <header className="space-y-2"><p className="t-data muted">Dashboard</p><h1 className="t-display">Work orders</h1><p className="t-body muted max-w-prose">Repair instructions drafted from inspection findings. Completing a work order also marks its finding handled.</p></header>
     <div className="flex flex-wrap items-center gap-2">
       <div className="seg flex-wrap max-w-full" aria-label="Work order status">{(Object.keys(filters) as Filter[]).map(key => <button className="t-body" key={key} aria-pressed={filter === key} onClick={() => change('filter', key)}>{filters[key]} <span className="muted tabular-nums">{query.isLoading || query.error ? '—' : totals[key]}</span></button>)}</div>
-      <select className="input t-body" aria-label="Priority" value={priority} onChange={e => change('prioritas', e.target.value)}><option value="">All priorities</option><option value="tinggi">High</option><option value="sedang">Medium</option></select>
+      <Select className="w-[170px] max-w-full" aria-label="Priority" value={priority} onChange={value => change('prioritas', value)} options={[{ value: '', label: 'All priorities' }, { value: 'tinggi', label: 'High' }, { value: 'sedang', label: 'Medium' }]}/>
     </div>
     {reportId && <div className="flex flex-wrap items-center gap-2"><span className="pill pill-dugaan t-body-sm max-w-full !h-auto !whitespace-normal py-1 break-all">Report {reportId}</span><Link href="/supervisor/work-order?filter=semua" className="t-body-sm text-[var(--color-primary)] hover:underline">Show all</Link></div>}
     {!!units.length && <div className="flex flex-wrap items-center gap-2 t-body-sm" aria-label="Selected units"><span className="muted">Units: {units.join(', ')}</span><button className="text-[var(--color-primary)] hover:underline" onClick={() => change('unit', '')}>Show all units</button></div>}
