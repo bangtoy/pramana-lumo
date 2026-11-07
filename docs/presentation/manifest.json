@@ -1,0 +1,179 @@
+[
+  {
+    "file": "slides/01-cover.html",
+    "label": "P2H yang bisa dibuktikan",
+    "thumb": "thumbs/01-cover.jpg",
+    "seconds": 20,
+    "appendix": false,
+    "notes": "00:00–00:20. “Sebelum satu dump truck mulai shift, kita butuh tahu kondisinya. Pramana menghubungkan pemeriksaan, bukti foto, dan tindak lanjut. Lumo mendampingi percakapannya.” Jangan membacakan seluruh alur. Cover menggunakan referensi UI Lumo dari design system, bukan tangkapan deployment.",
+    "criteria": [
+      "Problem & Solution Fit"
+    ]
+  },
+  {
+    "file": "slides/02-problem.html",
+    "label": "Centang belum menjawab apa yang diperiksa",
+    "thumb": "thumbs/02-problem.jpg",
+    "seconds": 25,
+    "appendix": false,
+    "notes": "00:20–00:45. “Form terisi belum tentu cukup untuk keputusan. Unit punya komponen spesifik. Foto bisa terlalu jauh. Dan temuan perlu ada pemilik tindak lanjutnya. Itulah tiga celah yang kami fokuskan.” Masalah ini berasal dari PRD; jangan menyebut persentase kesalahan, kecelakaan, atau temuan wawancara yang belum ada.",
+    "criteria": [
+      "Problem & Solution Fit"
+    ]
+  },
+  {
+    "file": "slides/03-solution.html",
+    "label": "Satu alur dari spesifikasi sampai tindakan",
+    "thumb": "thumbs/03-solution.jpg",
+    "seconds": 25,
+    "appendix": false,
+    "notes": "00:45–01:10. “Supervisor menyiapkan rencana dari spesifikasi dan Standar P2H. Petugas dipandu mengumpulkan bukti. Hasilnya menjadi laporan dan Work Order. Lumo membantu menilai input, sedangkan aturan kode menjaga kelengkapan. Tindakan tetap melalui Supervisor.” Arahkan audiens dari kiri ke kanan, jangan baca tiap kotak.",
+    "criteria": [
+      "Problem & Solution Fit",
+      "Insight & Originality"
+    ]
+  },
+  {
+    "file": "slides/04-plan.html",
+    "label": "Rencana mengikuti kendaraan yang diperiksa",
+    "thumb": "thumbs/04-plan.jpg",
+    "seconds": 35,
+    "appendix": false,
+    "notes": "01:10–01:45. “Di sini Supervisor menyusun rencana untuk dump truck. Saat item ban dipilih, komponen pada Model Kendaraan bisa disorot. Item menjelaskan yang dicek, foto yang diminta, dan kondisi STOP. Rencana bisa dilengkapi dan diedit Supervisor.” Jika membuka live demo, gunakan rencana seed yang sudah ada, bukan generate baru yang latensinya belum diukur. Batasi pergantian tab agar slot 35 detik cukup.",
+    "criteria": [
+      "Problem & Solution Fit",
+      "Build Quality",
+      "Deep Domain AI"
+    ]
+  },
+  {
+    "file": "slides/05-evidence.html",
+    "label": "Bukti kurang jelas diperbaiki saat masih di lokasi",
+    "thumb": "thumbs/05-evidence.jpg",
+    "seconds": 50,
+    "appendix": false,
+    "notes": "01:45–02:35. Klik 1, lalu 2, lalu 3. “APAR terlihat, tetapi label belum terbaca. Percakapan meminta foto yang lebih dekat. Foto label membantu melengkapi bukti, bukan otomatis menyatakan APAR aman. Pada contoh ban benjol, kondisi sesuai aturan STOP. Temuan harus disertai bukti dan diteruskan ke Supervisor.” Nyatakan bahwa ini simulasi alur dengan foto contoh, bukan penilaian model secara langsung. Beri sekitar 12 detik per langkah dan 14 detik untuk menjelaskan jaminan kode.",
+    "criteria": [
+      "Build Quality",
+      "Insight & Originality"
+    ]
+  },
+  {
+    "file": "slides/06-follow-up.html",
+    "label": "Satu temuan sampai tindak lanjut",
+    "thumb": "thumbs/06-follow-up.jpg",
+    "seconds": 40,
+    "appendix": false,
+    "notes": "02:35–03:15. Tunjukkan laporan, klik Work Order, lalu referensi Tanya Lumo jika waktu cukup. “Supervisor melihat komponen, foto, dan alasan STOP. Work Order menghubungkan temuan ke mekanik dan target. Status penanganan tersinkron dengan laporan. Pada desain P3, Tanya Lumo menyertakan sumber.” Jangan membuat/menutup WO di deployment bersama hanya untuk presentasi. Penutupan WO bukan bukti otomatis bahwa kendaraan sudah layak jalan. Versi live dapat memakai sebutan Pak Pramana; branding Lumo dan beberapa fitur dashboard adalah referensi desain yang disediakan.",
+    "criteria": [
+      "Build Quality",
+      "Real-World Value"
+    ]
+  },
+  {
+    "file": "slides/07-quality.html",
+    "label": "Agent menilai, kode memegang aturan",
+    "thumb": "thumbs/07-quality.jpg",
+    "seconds": 30,
+    "appendix": false,
+    "notes": "03:15–03:45. “Keandalan tidak diserahkan seluruhnya ke prompt. Kode menolak pencatatan tanpa foto wajib, memegang progres, dan memblokir pengiriman yang belum lengkap. Saat Analis gagal, jawaban cadangan tetap merujuk data. Tindakan tetap pada Supervisor.” Bukti source berasal dari branch lumo-design; jangan mengatakan seluruh skenario ini baru saja diuji end-to-end di server live.",
+    "criteria": [
+      "Build Quality"
+    ]
+  },
+  {
+    "file": "slides/08-originality.html",
+    "label": "Bukti, komponen, dan tindakan berbagi konteks",
+    "thumb": "thumbs/08-originality.jpg",
+    "seconds": 25,
+    "appendix": false,
+    "notes": "03:45–04:10. “Insight kami: bukti yang berguna tergantung pada komponen yang diperiksa. Karena itu, rencana, pertanyaan lanjutan, dan tindak lanjut berbagi konteks unit yang sama. Kualitas laporan dibangun selama pemeriksaan, bukan baru diperbaiki setelah Petugas pulang.” Jangan mengklaim belum ada produk lain yang melakukan ini.",
+    "criteria": [
+      "Insight & Originality"
+    ]
+  },
+  {
+    "file": "slides/09-value.html",
+    "label": "Manfaat yang bisa dinilai dan diukur",
+    "thumb": "thumbs/09-value.jpg",
+    "seconds": 25,
+    "appendix": false,
+    "notes": "04:10–04:35. “Manfaat langsungnya berbeda untuk tiga orang: arahan bagi Petugas, bukti yang siap ditinjau bagi Supervisor, dan pekerjaan yang jelas bagi mekanik. PRD menetapkan target rencana di bawah 30 detik dan P2H delapan item di bawah empat menit. Keduanya masih target, bukan angka dampak yang sudah kami buktikan.”",
+    "criteria": [
+      "Real-World Value"
+    ]
+  },
+  {
+    "file": "slides/10-direction.html",
+    "label": "Deep Domain AI untuk P2H dump truck",
+    "thumb": "thumbs/10-direction.jpg",
+    "seconds": 20,
+    "appendix": false,
+    "notes": "04:35–04:55. “Kami paling kuat di Deep Domain AI karena memahami struktur kerja P2H, bukan sekadar pertanyaan umum. AI-native juga terlihat pada percakapan yang mengarahkan pengumpulan bukti. Kami sengaja membatasi otonomi: Supervisor tetap meninjau rencana dan mengambil tindakan.”",
+    "criteria": [
+      "Alignment with Build Direction"
+    ]
+  },
+  {
+    "file": "slides/11-codex.html",
+    "label": "Konteks, kontrak, dan verifikasi untuk Codex",
+    "thumb": "thumbs/11-codex.jpg",
+    "seconds": 30,
+    "appendix": false,
+    "notes": "04:55–05:25. “Penggunaan Codex kami dibentuk oleh konteks yang jelas: istilah domain, kontrak data, design system, lalu tiket dengan Definition of Done. Aturan penting diminta hidup di kode, dan perubahan harus diverifikasi. Artefak workflow tersedia di repo.” Bukti atribusi sesi belum tersedia: jangan mengklaim persentase, jumlah prompt, token, atau percepatan pembangunan. Bila tim memiliki log sesi asli, tambahkan satu contoh konkret task → diff → uji sebelum penjurian.",
+    "criteria": [
+      "Use of Codex"
+    ]
+  },
+  {
+    "file": "slides/12-closing.html",
+    "label": "Dari centang menjadi bukti yang dapat ditindaklanjuti",
+    "thumb": "thumbs/12-closing.jpg",
+    "seconds": 35,
+    "appendix": false,
+    "notes": "05:25–06:00. “Pramana berangkat dari kebutuhan yang sederhana: pemeriksaan harus menghasilkan bukti yang berguna. Rencana mengikuti unit, Lumo membantu melengkapi bukti, dan temuan terhubung ke perbaikan. Langkah berikutnya adalah pilot untuk mengukur kualitas bukti dan waktu tindak lanjut. Aplikasi dapat dibuka di p2h.apta.works. Terima kasih.” Selesaikan di 06:00. Lampiran untuk Q&A; tidak dibacakan dalam enam menit.",
+    "criteria": [
+      "Problem & Solution Fit",
+      "Real-World Value"
+    ]
+  },
+  {
+    "file": "slides/13-architecture.html",
+    "label": "Lampiran: batas agent dan kode",
+    "thumb": "thumbs/13-architecture.jpg",
+    "seconds": 0,
+    "appendix": true,
+    "notes": "Lampiran untuk pertanyaan arsitektur. Sebut satu agent per tanggung jawab dan pemisahan dialog dari aturan deterministik. Jangan menyebut versi model sebagai fakta rilis publik: nama model di konfigurasi repo dapat merupakan alias endpoint lokal. Generate Model Kendaraan membutuhkan runtime Linux sesuai ADR; model siap pakai menjadi jalur demo.",
+    "criteria": [
+      "Build Quality"
+    ]
+  },
+  {
+    "file": "slides/14-validation.html",
+    "label": "Lampiran: apa yang sudah dan belum dibuktikan",
+    "thumb": "thumbs/14-validation.jpg",
+    "seconds": 0,
+    "appendix": true,
+    "notes": "Jawab status dengan tepat: capture/read-only membuktikan halaman bisa dibuka dan isi yang terlihat, bukan seluruh alur agent bekerja. Referensi desain, source branch, dan deployment adalah tiga jenis bukti berbeda. Penutupan Work Order berarti ditangani, bukan izin otomatis mengoperasikan unit.",
+    "criteria": [
+      "Build Quality",
+      "Real-World Value"
+    ]
+  },
+  {
+    "file": "slides/15-judging-map.html",
+    "label": "Lampiran: pemetaan keenam judging criteria",
+    "thumb": "thumbs/15-judging-map.jpg",
+    "seconds": 0,
+    "appendix": true,
+    "notes": "Gunakan saat juri ingin melihat hubungan presentasi dengan rubrik. Tidak ada asumsi semua kriteria berbobot sama. Bukti paling lemah yang perlu dilengkapi tim adalah studi kebutuhan/pilot dan log sesi penggunaan Codex yang konkret.",
+    "criteria": [
+      "Problem & Solution Fit",
+      "Build Quality",
+      "Insight & Originality",
+      "Real-World Value",
+      "Alignment with Build Direction",
+      "Use of Codex"
+    ]
+  }
+]

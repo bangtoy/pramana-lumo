@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Pramana + Lumo · Presentasi 6 menit</title>
+<!--
+  deck_index.html — 多文件 slide deck 拼接器 · 双概览模式
+
+  概览（默认进入，两种模式按 getSeconds()%5 随机：20% 画廊 / 80% 网格）：
+   · grid  自适应网格墙：列数随页数+视口自适应，行多则倾斜变平，scale-to-fit 居中铺满（任意页数都不溢出/不失真）
+   · gallery 无限画廊：固定卡片大小，无缝无限平铺 + 缓慢漂移 + 轻微呼吸；一个 tile 含全部页（洗牌），看完所有页才重复
+  演示 present：单页 fit 缩放翻页。ESC / ⊞ 回概览。
+  性能：manifest 每项可带 thumb（预渲染缩略图），概览即用 <img> 平铺，避免 N 个 iframe 同时加载。
+
+  用法：复制为 index.html；建 slides/ 放每页独立 HTML；编辑 MANIFEST。
+  可选覆盖：window.DECK_OVERVIEW = 'grid' | 'gallery'（不写则随机）；URL ?ov=grid|gallery 临时强制。
+  键盘（演示）：← / → / Space / PgUp / PgDown / Home / End / 1-9 / P 打印 / ESC 回概览
+-->
+<script>
+  window.DECK_MANIFEST = [
+  {
+    "file": "slides/01-cover.html",
+    "label": "P2H yang bisa dibuktikan",
+    "thumb": "thumbs/01-cover.jpg",
+    "seconds": 20,
+    "appendix": false,
+    "notes": "00:00–00:20. “Sebelum satu dump truck mulai shift, kita butuh tahu kondisinya. Pramana menghubungkan pemeriksaan, bukti foto, dan tindak lanjut. Lumo mendampingi percakapannya.” Jangan membacakan seluruh alur. Cover menggunakan referensi UI Lumo dari design system, bukan tangkapan deployment.",
+    "criteria": [
+      "Problem & Solution Fit"
+    ]
+  },
+  {
+    "file": "slides/02-problem.html",
+    "label": "Centang belum menjawab apa yang diperiksa",
+    "thumb": "thumbs/02-problem.jpg",
+    "seconds": 25,
+    "appendix": false,
+    "notes": "00:20–00:45. “Form terisi belum tentu cukup untuk keputusan. Unit punya komponen spesifik. Foto bisa terlalu jauh. Dan temuan perlu ada pemilik tindak lanjutnya. Itulah tiga celah yang kami fokuskan.” Masalah ini berasal dari PRD; jangan menyebut persentase kesalahan, kecelakaan, atau temuan wawancara yang belum ada.",
+    "criteria": [
+      "Problem & Solution Fit"
+    ]
+  },
+  {
+    "file": "slides/03-solution.html",
+    "label": "Satu alur dari spesifikasi sampai tindakan",
+    "thumb": "thumbs/03-solution.jpg",
+    "seconds": 25,
+    "appendix": false,
+    "notes": "00:45–01:10. “Supervisor menyiapkan rencana dari spesifikasi dan Standar P2H. Petugas dipandu mengumpulkan bukti. Hasilnya menjadi laporan dan Work Order. Lumo membantu menilai input, sedangkan aturan kode menjaga kelengkapan. Tindakan tetap melalui Supervisor.” Arahkan audiens dari kiri ke kanan, jangan baca tiap kotak.",
+    "criteria": [
+      "Problem & Solution Fit",
+      "Insight & Originality"
+    ]
+  },
+  {
+    "file": "slides/04-plan.html",
+    "label": "Rencana mengikuti kendaraan yang diperiksa",
+    "thumb": "thumbs/04-plan.jpg",
+    "seconds": 35,
+    "appendix": false,
+    "notes": "01:10–01:45. “Di sini Supervisor menyusun rencana untuk dump truck. Saat item ban dipilih, komponen pada Model Kendaraan bisa disorot. Item menjelaskan yang dicek, foto yang diminta, dan kondisi STOP. Rencana bisa dilengkapi dan diedit Supervisor.” Jika membuka live demo, gunakan rencana seed yang sudah ada, bukan generate baru yang latensinya belum diukur. Batasi pergantian tab agar slot 35 detik cukup.",
+    "criteria": [
+      "Problem & Solution Fit",
+      "Build Quality",
+      "Deep Domain AI"
+    ]
+  },
+  {
+    "file": "slides/05-evidence.html",
+    "label": "Bukti kurang jelas diperbaiki saat masih di lokasi",
+    "thumb": "thumbs/05-evidence.jpg",
+    "seconds": 50,
+    "appendix": false,
+    "notes": "01:45–02:35. Klik 1, lalu 2, lalu 3. “APAR terlihat, tetapi label belum terbaca. Percakapan meminta foto yang lebih dekat. Foto label membantu melengkapi bukti, bukan otomatis menyatakan APAR aman. Pada contoh ban benjol, kondisi sesuai aturan STOP. Temuan harus disertai bukti dan diteruskan ke Supervisor.” Nyatakan bahwa ini simulasi alur dengan foto contoh, bukan penilaian model secara langsung. Beri sekitar 12 detik per langkah dan 14 detik untuk menjelaskan jaminan kode.",
+    "criteria": [
+      "Build Quality",
+      "Insight & Originality"
+    ]
+  },
+  {
+    "file": "slides/06-follow-up.html",
+    "label": "Satu temuan sampai tindak lanjut",
+    "thumb": "thumbs/06-follow-up.jpg",
+    "seconds": 40,
+    "appendix": false,
+    "notes": "02:35–03:15. Tunjukkan laporan, klik Work Order, lalu referensi Tanya Lumo jika waktu cukup. “Supervisor melihat komponen, foto, dan alasan STOP. Work Order menghubungkan temuan ke mekanik dan target. Status penanganan tersinkron dengan laporan. Pada desain P3, Tanya Lumo menyertakan sumber.” Jangan membuat/menutup WO di deployment bersama hanya untuk presentasi. Penutupan WO bukan bukti otomatis bahwa kendaraan sudah layak jalan. Versi live dapat memakai sebutan Pak Pramana; branding Lumo dan beberapa fitur dashboard adalah referensi desain yang disediakan.",
+    "criteria": [
+      "Build Quality",
+      "Real-World Value"
+    ]
+  },
+  {
+    "file": "slides/07-quality.html",
+    "label": "Agent menilai, kode memegang aturan",
+    "thumb": "thumbs/07-quality.jpg",
+    "seconds": 30,
+    "appendix": false,
+    "notes": "03:15–03:45. “Keandalan tidak diserahkan seluruhnya ke prompt. Kode menolak pencatatan tanpa foto wajib, memegang progres, dan memblokir pengiriman yang belum lengkap. Saat Analis gagal, jawaban cadangan tetap merujuk data. Tindakan tetap pada Supervisor.” Bukti source berasal dari branch lumo-design; jangan mengatakan seluruh skenario ini baru saja diuji end-to-end di server live.",
+    "criteria": [
+      "Build Quality"
+    ]
+  },
+  {
+    "file": "slides/08-originality.html",
+    "label": "Bukti, komponen, dan tindakan berbagi konteks",
+    "thumb": "thumbs/08-originality.jpg",
+    "seconds": 25,
+    "appendix": false,
+    "notes": "03:45–04:10. “Insight kami: bukti yang berguna tergantung pada komponen yang diperiksa. Karena itu, rencana, pertanyaan lanjutan, dan tindak lanjut berbagi konteks unit yang sama. Kualitas laporan dibangun selama pemeriksaan, bukan baru diperbaiki setelah Petugas pulang.” Jangan mengklaim belum ada produk lain yang melakukan ini.",
+    "criteria": [
+      "Insight & Originality"
+    ]
+  },
+  {
+    "file": "slides/09-value.html",
+    "label": "Manfaat yang bisa dinilai dan diukur",
+    "thumb": "thumbs/09-value.jpg",
+    "seconds": 25,
+    "appendix": false,
+    "notes": "04:10–04:35. “Manfaat langsungnya berbeda untuk tiga orang: arahan bagi Petugas, bukti yang siap ditinjau bagi Supervisor, dan pekerjaan yang jelas bagi mekanik. PRD menetapkan target rencana di bawah 30 detik dan P2H delapan item di bawah empat menit. Keduanya masih target, bukan angka dampak yang sudah kami buktikan.”",
+    "criteria": [
+      "Real-World Value"
+    ]
+  },
+  {
+    "file": "slides/10-direction.html",
+    "label": "Deep Domain AI untuk P2H dump truck",
+    "thumb": "thumbs/10-direction.jpg",
+    "seconds": 20,
+    "appendix": false,
+    "notes": "04:35–04:55. “Kami paling kuat di Deep Domain AI karena memahami struktur kerja P2H, bukan sekadar pertanyaan umum. AI-native juga terlihat pada percakapan yang mengarahkan pengumpulan bukti. Kami sengaja membatasi otonomi: Supervisor tetap meninjau rencana dan mengambil tindakan.”",
+    "criteria": [
+      "Alignment with Build Direction"
+    ]
+  },
+  {
+    "file": "slides/11-codex.html",
+    "label": "Konteks, kontrak, dan verifikasi untuk Codex",
+    "thumb": "thumbs/11-codex.jpg",
+    "seconds": 30,
+    "appendix": false,
+    "notes": "04:55–05:25. “Penggunaan Codex kami dibentuk oleh konteks yang jelas: istilah domain, kontrak data, design system, lalu tiket dengan Definition of Done. Aturan penting diminta hidup di kode, dan perubahan harus diverifikasi. Artefak workflow tersedia di repo.” Bukti atribusi sesi belum tersedia: jangan mengklaim persentase, jumlah prompt, token, atau percepatan pembangunan. Bila tim memiliki log sesi asli, tambahkan satu contoh konkret task → diff → uji sebelum penjurian.",
+    "criteria": [
+      "Use of Codex"
+    ]
+  },
+  {
+    "file": "slides/12-closing.html",
+    "label": "Dari centang menjadi bukti yang dapat ditindaklanjuti",
+    "thumb": "thumbs/12-closing.jpg",
+    "seconds": 35,
+    "appendix": false,
+    "notes": "05:25–06:00. “Pramana berangkat dari kebutuhan yang sederhana: pemeriksaan harus menghasilkan bukti yang berguna. Rencana mengikuti unit, Lumo membantu melengkapi bukti, dan temuan terhubung ke perbaikan. Langkah berikutnya adalah pilot untuk mengukur kualitas bukti dan waktu tindak lanjut. Aplikasi dapat dibuka di p2h.apta.works. Terima kasih.” Selesaikan di 06:00. Lampiran untuk Q&A; tidak dibacakan dalam enam menit.",
+    "criteria": [
+      "Problem & Solution Fit",
+      "Real-World Value"
+    ]
+  },
+  {
+    "file": "slides/13-architecture.html",
+    "label": "Lampiran: batas agent dan kode",
+    "thumb": "thumbs/13-architecture.jpg",
+    "seconds": 0,
+    "appendix": true,
+    "notes": "Lampiran untuk pertanyaan arsitektur. Sebut satu agent per tanggung jawab dan pemisahan dialog dari aturan deterministik. Jangan menyebut versi model sebagai fakta rilis publik: nama model di konfigurasi repo dapat merupakan alias endpoint lokal. Generate Model Kendaraan membutuhkan runtime Linux sesuai ADR; model siap pakai menjadi jalur demo.",
+    "criteria": [
+      "Build Quality"
+    ]
+  },
+  {
+    "file": "slides/14-validation.html",
+    "label": "Lampiran: apa yang sudah dan belum dibuktikan",
+    "thumb": "thumbs/14-validation.jpg",
+    "seconds": 0,
+    "appendix": true,
+    "notes": "Jawab status dengan tepat: capture/read-only membuktikan halaman bisa dibuka dan isi yang terlihat, bukan seluruh alur agent bekerja. Referensi desain, source branch, dan deployment adalah tiga jenis bukti berbeda. Penutupan Work Order berarti ditangani, bukan izin otomatis mengoperasikan unit.",
+    "criteria": [
+      "Build Quality",
+      "Real-World Value"
+    ]
+  },
+  {
+    "file": "slides/15-judging-map.html",
+    "label": "Lampiran: pemetaan keenam judging criteria",
+    "thumb": "thumbs/15-judging-map.jpg",
+    "seconds": 0,
+    "appendix": true,
+    "notes": "Gunakan saat juri ingin melihat hubungan presentasi dengan rubrik. Tidak ada asumsi semua kriteria berbobot sama. Bukti paling lemah yang perlu dilengkapi tim adalah studi kebutuhan/pilot dan log sesi penggunaan Codex yang konkret.",
+    "criteria": [
+      "Problem & Solution Fit",
+      "Build Quality",
+      "Insight & Originality",
+      "Real-World Value",
+      "Alignment with Build Direction",
+      "Use of Codex"
+    ]
+  }
+];
+  window.DECK_WIDTH = 1920;
+  window.DECK_HEIGHT = 1080;
+  window.GALLERY_CARD_W = 300;       // 画廊卡片基准宽度
+  window.GALLERY_DRIFT_SECONDS = 80; // 画廊漂移一圈时长
+  // window.DECK_OVERVIEW = 'grid';  // 取消注释可固定概览模式
+</script>
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow: hidden; font-family: -apple-system, "PingFang SC", sans-serif; background: #0a0a0a; }
+
+  .overview { position: fixed; inset: 0; }
+  body[data-mode="present"] .overview { display: none; }
+  body[data-mode="present"] .start-btn { display: none; }
+  body[data-mode="overview"] #present-ui { display: none; }
+  body[data-ov="grid"]    #ov-gallery { display: none; }
+  body[data-ov="gallery"] #ov-grid    { display: none; }
+  body[data-ov="gallery"][data-mode="overview"] { background: #0a0805; }
+  body[data-ov="grid"][data-mode="overview"]    { background: #efece4; }
+
+  /* ════════ 模式 1 · 自适应网格墙（一屏装得下→居中轻斜；装不下→舒适大小竖向滚动）════════ */
+  #ov-grid { display: flex; justify-content: center; perspective: 2200px; perspective-origin: 50% 42%;
+    background: radial-gradient(120% 90% at 50% 0%, #f4f1e9, #e7e3d8 75%); }
+  body[data-grid="fit"]    #ov-grid { overflow: hidden;   align-items: center; }
+  body[data-grid="scroll"] #ov-grid { overflow-y: auto; overflow-x: hidden; align-items: flex-start; padding: 74px 0 110px; }
+  .wall-wrap { }
+  body[data-grid="fit"]    .wall-wrap { transform: translateY(-3vh); }
+  .wall { display: grid; gap: 20px; transform-origin: center center; margin: 0 auto; }  /* 不用 preserve-3d：整墙作单个倾斜平面，命中测试可靠 */
+  #ov-grid .card {
+    position: relative; aspect-ratio: 16/9; border-radius: 9px; overflow: hidden; background: #fff; cursor: pointer;
+    box-shadow: 0 16px 34px rgba(40,34,24,0.20), 0 3px 10px rgba(40,34,24,0.12);
+    transition: transform .28s cubic-bezier(.2,.7,.2,1), box-shadow .28s;
+  }
+  #ov-grid .card:hover {
+    transform: scale(1.18);
+    box-shadow: 0 48px 92px rgba(40,34,24,0.36), 0 14px 30px rgba(40,34,24,0.22); z-index: 20;
+  }
+
+  /* ════════ 模式 2 · 无限画廊 ════════ */
+  #ov-gallery { overflow: hidden; perspective: 2200px; perspective-origin: 50% 42%;
+    background: radial-gradient(130% 120% at 50% 38%, #1b1610, #0a0805 82%); }
+  .stage3d { --rx: 18; --rz: 9; position: absolute; inset: 0; transform-style: preserve-3d; transform: scale(1.22) rotateX(18deg) rotateZ(-9deg); transform-origin: center center; }
+  .breathe { position: absolute; inset: 0; animation: breathe 26s ease-in-out infinite; transform-origin: center center; transform-style: preserve-3d; }
+  .drift-layer { position: absolute; top: 0; left: 0; will-change: transform; animation: drift var(--driftSec, 80s) linear infinite; transform-style: preserve-3d; }
+  #ov-gallery:hover .drift-layer { animation-play-state: paused; }
+  .gallery { display: grid; }
+  #ov-gallery .card {
+    position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; background: #fff; cursor: pointer;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.42), 0 3px 9px rgba(0,0,0,0.3);
+    transition: transform .34s cubic-bezier(.2,.7,.2,1), box-shadow .34s; transform-style: preserve-3d; will-change: transform;
+  }
+  #ov-gallery .card:hover {
+    transform: translateZ(60px) rotateX(calc(var(--rx,18)*-1deg)) rotateZ(calc(var(--rz,9)*1deg)) scale(1.06);
+    box-shadow: 0 30px 64px rgba(0,0,0,0.55), 0 8px 20px rgba(0,0,0,0.4); z-index: 30;
+  }
+  .vignette { position: fixed; inset: 0; pointer-events: none; z-index: 20; box-shadow: inset 0 0 240px 70px rgba(8,6,3,0.62); }
+  @keyframes drift { from { transform: translate3d(0,0,0); } to { transform: translate3d(calc(var(--dx)*-1), calc(var(--dy)*-1), 0); } }
+  @keyframes breathe { 0%,100% { transform: scale(1.0); } 50% { transform: scale(1.045); } }
+
+  /* 卡片通用内容 */
+  .card .thumb { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; transform-origin: top left; pointer-events: none; }
+  .card .thumb iframe { width: 1920px; height: 1080px; border: 0; display: block; background: #fff; pointer-events: none; }
+  .card .thumb-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+  .card .num { position: absolute; bottom: 6px; left: 7px; background: rgba(16,12,7,0.76); color: #fff; font-size: 11px; line-height: 1; padding: 4px 7px; border-radius: 5px; font-variant-numeric: tabular-nums; letter-spacing: 0.03em; z-index: 3; pointer-events: none; max-width: 90%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #ov-gallery .card .num { opacity: 0; transition: opacity .25s; }
+  #ov-gallery .card:hover .num { opacity: 1; }
+
+  .overview-title { position: fixed; top: 24px; left: 0; right: 0; text-align: center; font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; z-index: 40; pointer-events: none; }
+  body[data-ov="grid"]    .overview-title { color: #5a5346; opacity: 0.66; }
+  body[data-ov="gallery"] .overview-title { color: rgba(244,238,224,0.7); text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
+
+  .start-btn { position: fixed; bottom: 26px; right: 26px; border: 0; padding: 13px 24px; border-radius: 999px; font-size: 15px; font-family: inherit; letter-spacing: 0.04em; cursor: pointer; z-index: 200; transition: transform .18s, box-shadow .18s; }
+  body[data-ov="grid"]    .start-btn { background: #1a1712; color: #fff; box-shadow: 0 8px 28px rgba(40,34,24,0.28); }
+  body[data-ov="gallery"] .start-btn { background: #f4eee0; color: #1a1712; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+  .start-btn:hover { transform: translateY(-2px); }
+
+  /* ════════ 演示模式 ════════ */
+  #stage { position: fixed; top: 50%; left: 50%; transform-origin: top left; will-change: transform; background: #fff; box-shadow: 0 10px 60px rgba(0,0,0,0.4); }
+  #stage iframe { width: 100%; height: 100%; border: 0; display: block; background: #fff; }
+  .counter { position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.65); color: #fff; padding: 6px 14px; border-radius: 999px; font-size: 13px; letter-spacing: 0.05em; font-variant-numeric: tabular-nums; z-index: 100; opacity: 0.7; }
+  .counter .label { color: rgba(255,255,255,0.7); margin-left: 8px; }
+  .overview-btn { position: fixed; top: 20px; left: 20px; background: rgba(0,0,0,0.55); color: rgba(255,255,255,0.85); border: 0; padding: 7px 14px; border-radius: 999px; font-size: 13px; font-family: inherit; cursor: pointer; z-index: 100; opacity: 0.6; }
+  .overview-btn:hover { opacity: 1; }
+  .nav-zone { position: fixed; top: 0; bottom: 0; width: 15%; cursor: pointer; z-index: 50; }
+  .nav-zone.left { left: 0; } .nav-zone.right { right: 0; }
+  .nav-hint { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 999px; background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.6); display: flex; align-items: center; justify-content: center; font-size: 22px; opacity: 0; transition: opacity .2s; }
+  .nav-zone.left .nav-hint { left: 20px; } .nav-zone.right .nav-hint { right: 20px; }
+  .nav-zone:hover .nav-hint { opacity: 1; }
+
+  @media print {
+    @page { size: 1920px 1080px; margin: 0; }
+    html, body { background: #fff; overflow: visible; height: auto; }
+    body[data-mode] .overview { display: none !important; }
+    #stage { position: static; transform: none !important; box-shadow: none; }
+    .counter, .nav-zone, .overview-btn, .start-btn { display: none !important; }
+    .print-stack { display: block; }
+    .print-stack iframe { width: 1920px; height: 1080px; page-break-after: always; display: block; }
+  }
+</style>
+<link rel="stylesheet" href="shared/presenter.css">
+</head>
+<body data-mode="overview">
+
+<div id="ov-grid" class="overview">
+  <div class="overview-title">Pramana + Lumo · 12 slide utama / 6 menit · klik slide untuk mulai</div>
+  <div class="wall-wrap"><div class="wall" id="wall"></div></div>
+</div>
+
+<div id="ov-gallery" class="overview">
+  <div class="stage3d"><div class="breathe"><div class="drift-layer" id="driftLayer"><div class="gallery" id="gallery"></div></div></div></div>
+  <div class="vignette"></div>
+  <div class="overview-title">Pramana + Lumo · galeri presentasi · arahkan kursor untuk jeda</div>
+</div>
+
+<button class="start-btn" id="startBtn">Mulai presentasi →</button>
+
+<div id="present-ui">
+  <div id="stage"><iframe id="frame" title="Slide presentasi" src="about:blank"></iframe></div>
+  <button class="overview-btn" id="overviewBtn">Kembali ke galeri</button>
+  <div class="nav-zone left"  id="navL"><div class="nav-hint">‹</div></div>
+  <div class="nav-zone right" id="navR"><div class="nav-hint">›</div></div>
+  <div class="counter" id="counter">1 / 1</div>
+</div>
+
+<div class="print-stack" id="printStack" style="display:none;"></div>
+
+<script>
+(function () {
+  const W = window.DECK_WIDTH || 1920;
+  const H = window.DECK_HEIGHT || 1080;
+  const deck = window.DECK_MANIFEST || [];
+  const CARD_W = window.GALLERY_CARD_W || 300;
+  const DRIFT_SEC = window.GALLERY_DRIFT_SECONDS || 80;
+  const stage = document.getElementById('stage');
+  const frame = document.getElementById('frame');
+  const counter = document.getElementById('counter');
+  const printStack = document.getElementById('printStack');
+  const wall = document.getElementById('wall');
+  const gallery = document.getElementById('gallery');
+  const driftLayer = document.getElementById('driftLayer');
+  const storageKey = 'deck-index-' + location.pathname;
+  let current = 0;
+
+  stage.style.width = W + 'px'; stage.style.height = H + 'px';
+  driftLayer.style.setProperty('--driftSec', DRIFT_SEC + 's');
+
+  // 概览模式：URL ?ov= > window.DECK_OVERVIEW > 随机(秒%5==0 → 20% 画廊)
+  const qp = new URLSearchParams(location.search).get('ov');
+  // 用户未指定时按秒数随机：网格(iframe 真页面) 60% / 无限画廊(图片缩略图) 40%。可用 ?ov=grid|gallery 或 window.DECK_OVERVIEW 固定。
+  const OVERVIEW = qp || window.DECK_OVERVIEW || ((new Date().getSeconds() % 5 < 2) ? 'gallery' : 'grid');
+  document.body.setAttribute('data-ov', OVERVIEW === 'gallery' ? 'gallery' : 'grid');
+
+  function setMode(mode) {
+    document.body.setAttribute('data-mode', mode);
+    if (mode === 'present') { fit(); show(current); }
+    else { requestAnimationFrame(buildOverview); }
+  }
+
+  /* ─ 媒体（缩略图优先，否则 iframe） ─ */
+  function makeCard(idx, useScale, useImg) {
+    const card = document.createElement('button');
+    card.type = 'button'; card.setAttribute('aria-label', 'Buka: ' + (deck[idx].label || 'slide'));
+    card.className = 'card'; card.dataset.idx = idx;
+    const item = deck[idx];
+    if (useImg && item.thumb) {
+      // 仅画廊用：预渲染缩略图，扛无限平铺的性能
+      const im = document.createElement('img');
+      im.className = 'thumb-img'; im.src = item.thumb; im.decoding = 'async';
+      card.appendChild(im);
+    } else {
+      // 网格默认用：真实 HTML 子页面（清晰、所见即所得）
+      const thumb = document.createElement('div');
+      thumb.className = 'thumb';
+      if (useScale != null) thumb.style.transform = 'scale(' + useScale + ')';
+      const ifr = document.createElement('iframe');
+      ifr.src = item.file; ifr.title = item.label; ifr.setAttribute('scrolling', 'no');
+      thumb.appendChild(ifr); card.appendChild(thumb);
+    }
+    const num = document.createElement('div');
+    num.className = 'num';
+    num.textContent = (idx + 1) + (item.label ? ' · ' + item.label : '');
+    card.appendChild(num);
+    card.addEventListener('click', () => { current = idx; setMode('present'); });
+    return card;
+  }
+
+  function buildOverview() {
+    if (document.body.getAttribute('data-mode') !== 'overview') return;
+    if (OVERVIEW === 'gallery') buildGallery(); else buildGrid();
+  }
+
+  /* ════════ 网格墙（自适应） ════════ */
+  function buildGrid() {
+    const n = deck.length; if (!n) return;
+    wall.innerHTML = '';
+    for (let i = 0; i < n; i++) wall.appendChild(makeCard(i, null, false));  // 网格 = iframe 真页面
+    layoutWall();
+  }
+  const GRID_PAD = 74;  // #ov-grid scroll 顶部 padding，算动态 transform-origin 用
+  function layoutWall() {
+    const n = deck.length; if (!n) return;
+    const vw = innerWidth, vh = innerHeight, gap = 26;
+    const availW = vw * 0.86;                                   // 留 rotateZ 横向余量（强对角也不裁切）
+    const target = 280;
+    let cols = Math.max(3, Math.min(9, Math.floor((availW + gap) / (target + gap))));
+    cols = Math.min(cols, n);
+    const rows = Math.ceil(n / cols);
+    const cardW = Math.min(target + 40, (availW - (cols - 1) * gap) / cols);
+    const cardH = cardW * 9 / 16;
+    const baseW = cols * cardW + (cols - 1) * gap;
+    const wallH = rows * cardH + (rows - 1) * gap;
+    wall.style.gridTemplateColumns = 'repeat(' + cols + ', 1fr)';
+    wall.style.gap = gap + 'px';
+    wall.style.width = baseW + 'px';
+    // 单平面(无 preserve-3d)→任意角度都不重叠、可点；fit 与 scroll 都给强对角倾斜
+    if (wallH <= vh * 0.80) {
+      document.body.setAttribute('data-grid', 'fit');
+      const rx = Math.max(11, Math.min(15, 15 - (rows - 2) * 1.1));
+      const rz = Math.max(8, Math.min(11, 11 - (rows - 2) * 0.7));
+      wall.style.setProperty('--rx', rx); wall.style.setProperty('--rz', rz);
+      wall.style.transformOrigin = 'center center';
+      const tilt = 'rotateX(' + rx + 'deg) rotateZ(-' + rz + 'deg)';
+      wall.style.transform = tilt;
+      const r = wall.getBoundingClientRect();
+      let s = Math.min(vw * 0.92 / r.width, vh * 0.80 / r.height);
+      s = Math.max(0.6, Math.min(s, 1.6));
+      wall.style.transform = 'scale(' + s + ') ' + tilt;
+    } else {
+      // 多页：舒适大小竖向滚动 + 强对角倾斜；transform-origin 跟随滚动→消除高墙 rotateZ 把远端行甩出屏幕
+      document.body.setAttribute('data-grid', 'scroll');
+      wall.style.setProperty('--rx', 14); wall.style.setProperty('--rz', 7);
+      wall.style.transform = 'rotateX(14deg) rotateZ(-7deg)';
+      updateScrollOrigin();
+    }
+    wall.querySelectorAll('.card .thumb').forEach(t => { const c = t.parentElement; if (c.clientWidth) t.style.transform = 'scale(' + (c.clientWidth / W) + ')'; });
+  }
+  function updateScrollOrigin() {
+    if (document.body.getAttribute('data-grid') !== 'scroll') return;
+    const ovg = document.getElementById('ov-grid');
+    wall.style.transformOrigin = '50% ' + (ovg.scrollTop + window.innerHeight / 2 - GRID_PAD) + 'px';
+  }
+
+  /* ════════ 无限画廊（洗牌不重复） ════════ */
+  function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  function shuffledRange(n, seed) { const rnd = mulberry32(seed); const a = Array.from({ length: n }, (_, i) => i); for (let i = n - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); const tmp = a[i]; a[i] = a[j]; a[j] = tmp; } return a; }
+
+  function buildGallery() {
+    const n = deck.length; if (!n) return;
+    const vw = innerWidth, vh = innerHeight, gap = 18;
+    const cardW = CARD_W, cardH = cardW * 9 / 16;
+    const cellW = cardW + gap, cellH = cardH + gap;
+    const visCols = Math.ceil(vw / cellW), visRows = Math.ceil(vh / cellH);
+    // tile：宽够铺满；行数取「够铺满」与「装下全部 N 页」的较大者 → 看完所有页才重复
+    const tileCols = visCols + 1;
+    const tileRows = Math.max(visRows + 1, Math.ceil(n / tileCols));
+    const tileCells = tileCols * tileRows;
+    const perm = shuffledRange(n, 0x9e3779b9);        // 洗牌一次，打散规则感
+    const tilePage = new Array(tileCells);
+    for (let k = 0; k < tileCells; k++) tilePage[k] = perm[k % n];
+
+    const cols = tileCols * 2, rows = tileRows * 2;    // 2× tile 保证无缝漂移
+    driftLayer.style.setProperty('--dx', (tileCols * cellW) + 'px');
+    driftLayer.style.setProperty('--dy', (tileRows * cellH) + 'px');
+    gallery.style.gridTemplateColumns = 'repeat(' + cols + ', ' + cardW + 'px)';
+    gallery.style.gridAutoRows = cardH + 'px';
+    gallery.style.gap = gap + 'px';
+    gallery.innerHTML = '';
+    const scale = cardW / W;
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const idx = tilePage[(r % tileRows) * tileCols + (c % tileCols)];
+        gallery.appendChild(makeCard(idx, scale, true));  // 画廊 = 图片缩略图（性能）
+      }
+    }
+  }
+
+  /* ════════ 演示 ════════ */
+  function fit() {
+    const s = Math.min(innerWidth / W, innerHeight / H);
+    stage.style.transform = 'translate(' + ((innerWidth - W * s) / 2) + 'px, ' + ((innerHeight - H * s) / 2) + 'px) scale(' + s + ')';
+    stage.style.top = '0'; stage.style.left = '0';
+  }
+  function show(idx) {
+    if (idx < 0 || idx >= deck.length) return;
+    current = idx;
+    if (frame.getAttribute('src') !== deck[idx].file) frame.src = deck[idx].file;
+    document.dispatchEvent(new CustomEvent('pramana:slide', { detail: idx }));
+    counter.innerHTML = (idx + 1) + ' / ' + deck.length + ' <span class="label">' + (deck[idx].label || '') + '</span>';
+    try { localStorage.setItem(storageKey, String(idx)); } catch (_) {}
+    if (location.hash !== '#' + (idx + 1)) history.replaceState(null, '', '#' + (idx + 1));
+  }
+  function next() { show(Math.min(current + 1, deck.length - 1)); }
+  function prev() { show(Math.max(current - 1, 0)); }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'Escape') { if (document.body.getAttribute('data-mode') === 'present') { e.preventDefault(); setMode('overview'); } return; }
+    if (e.key === 'p' || e.key === 'P') { window.print(); return; }
+    if (document.body.getAttribute('data-mode') !== 'present') return;
+    switch (e.key) {
+      case 'ArrowRight': case ' ': case 'PageDown': e.preventDefault(); next(); break;
+      case 'ArrowLeft': case 'PageUp': e.preventDefault(); prev(); break;
+      case 'Home': e.preventDefault(); show(0); break;
+      case 'End': e.preventDefault(); show(deck.length - 1); break;
+      default: if (e.key >= '1' && e.key <= '9') { const i = parseInt(e.key, 10) - 1; if (i < deck.length) { e.preventDefault(); show(i); } }
+    }
+  });
+  document.getElementById('navL').addEventListener('click', prev);
+  document.getElementById('navR').addEventListener('click', next);
+  document.getElementById('startBtn').addEventListener('click', () => setMode('present'));
+  document.getElementById('overviewBtn').addEventListener('click', () => setMode('overview'));
+  window.pramanaDeck = { next, prev, show, overview: () => setMode('overview'), start: () => setMode('present') };
+  let rT;
+  window.addEventListener('resize', () => { fit(); clearTimeout(rT); rT = setTimeout(buildOverview, 140); });
+  document.getElementById('ov-grid').addEventListener('scroll', updateScrollOrigin, { passive: true });
+  window.addEventListener('hashchange', () => { const m = location.hash.match(/^#(\d+)$/); if (m) { current = parseInt(m[1], 10) - 1; setMode('present'); } });
+
+  const hashMatch = location.hash.match(/^#(\d+)$/);
+  if (hashMatch) current = Math.min(parseInt(hashMatch[1], 10) - 1, deck.length - 1);
+  else { try { const v = parseInt(localStorage.getItem(storageKey), 10); if (!isNaN(v) && v >= 0 && v < deck.length) current = v; } catch (_) {} }
+
+  fit(); show(current);
+  if (hashMatch) setMode('present'); else { setMode('overview'); buildOverview(); }
+
+  window.addEventListener('beforeprint', () => { printStack.innerHTML = ''; deck.forEach(item => { const f = document.createElement('iframe'); f.src = item.file; printStack.appendChild(f); }); printStack.style.display = 'block'; stage.style.display = 'none'; });
+  window.addEventListener('afterprint', () => { printStack.innerHTML = ''; printStack.style.display = 'none'; stage.style.display = ''; });
+})();
+</script>
+<script src="shared/presenter.js"></script>
+</body>
+</html>

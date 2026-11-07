@@ -1,0 +1,281 @@
+{
+  "verifiedAt": "2026-11-07T03:23:44.568Z",
+  "scope": "HTML presentation, not end-to-end verification of the hosted app.",
+  "slideCount": 15,
+  "mainSlides": 12,
+  "totalSeconds": 360,
+  "pages": [
+    {
+      "file": "slides/01-cover.html",
+      "errors": [],
+      "title": "Pramana · P2H yang bisa dibuktikan",
+      "images": [],
+      "headingCount": 1,
+      "fonts": {
+        "geist": true,
+        "mono": true
+      },
+      "overflow": []
+    },
+    {
+      "file": "slides/02-problem.html",
+      "errors": [],
+      "title": "Pramana · Centang belum menjawab apa yang diperiksa",
+      "images": [],
+      "headingCount": 1,
+      "fonts": {
+        "geist": true,
+        "mono": true
+      },
+      "overflow": []
+    },
+    {
+      "file": "slides/03-solution.html",
+      "errors": [],
+      "title": "Pramana · Satu alur dari spesifikasi sampai tindakan",
+      "images": [],
+      "headingCount": 1,
+      "fonts": {
+        "geist": true,
+        "mono": true
+      },
+      "overflow": []
+    },
+    {
+      "file": "slides/04-plan.html",
+      "errors": [],
+      "title": "Pramana · Rencana mengikuti kendaraan yang diperiksa",
+      "images": [],
+      "headingCount": 1,
+      "fonts": {
+        "geist": true,
+        "mono": true
+      },
+      "overflow": []
+    },
+    {
+      "file": "slides/05-evidence.html",
+      "errors": [],
+      "title": "Pramana · Bukti kurang jelas diperbaiki saat masih di lokasi",
+      "images": [],
+      "headingCount": 1,
+      "fonts": {
+        "geist": true,
+        "mono": true
+      },
+      "overflow": []
+    },
+    {
+      "file": "slides/06-follow-up.html",
+      "errors": [],
+      "title": "Pramana · Satu temuan sampai tindak lanjut",
+      "images": [],
+      "headingCount": 1,
+      "fonts": {
+        "geist": true,
+        "mono": true
+      },
+      "overflow": []
+    },
+    {
+      "file": "slides/07-quality.html",
+      "errors": [],
+      "title": "Pramana · Agent menilai, kode memegang aturan",
+      "images": [],
+      "headingCount": 1,
+      "fonts": {
+        "geist": true,
+        "mono": true
+      },
+      "overflow": []
+    },
+    {
+      "file": "slides/08-originality.html",
+      "errors": [],
+      "title": "Pramana · Bukti, komponen, dan tindakan berbagi konteks",
+      "images": [],
+      "headingCount": 1,
+      "fonts": {
+        "geist": true,
+        "mono": true
+      },
+      "overflow": []
+    },
+    {
+      "file": "slides/09-value.html",
+      "errors": [],
+      "title": "Pramana · Manfaat yang bisa dinilai dan diukur",
+      "images": [],
+      "headingCount": 1,
+      "fonts": {
+        "geist": true,
+        "mono": true
+      },
+      "overflow": []
+    },
+    {
+      "file": "slides/10-direction.html",
+      "errors": [],
+      "title": "Pramana · Deep Domain AI untuk P2H dump truck",
+      "images": [],
+      "headingCount": 1,
+      "fonts": {
+        "geist": true,
+        "mono": true
+      },
+      "overflow": []
+    },
+    {
+      "file": "slides/11-codex.html",
+      "errors": [],
+      "title": "Pramana · Konteks, kontrak, dan verifikasi untuk Codex",
+      "images": [],
+      "headingCount": 1,
+      "fonts": {
+        "geist": true,
+        "mono": true
+      },
+      "overflow": []
+    },
+    {
+      "file": "slides/12-closing.html",
+      "errors": [],
+      "title": "Pramana · Dari centang menjadi bukti yang dapat ditindaklanjuti",
+      "images": [],
+      "headingCount": 1,
+      "fonts": {
+        "geist": true,
+        "mono": true
+      },
+      "overflow": []
+    },
+    {
+      "file": "slides/13-architecture.html",
+      "errors": [],
+      "title": "Pramana · Lampiran: batas agent dan kode",
+      "images": [],
+      "headingCount": 1,
+      "fonts": {
+        "geist": true,
+        "mono": true
+      },
+      "overflow": []
+    },
+    {
+      "file": "slides/14-validation.html",
+      "errors": [],
+      "title": "Pramana · Lampiran: apa yang sudah dan belum dibuktikan",
+      "images": [],
+      "headingCount": 1,
+      "fonts": {
+        "geist": true,
+        "mono": true
+      },
+      "overflow": []
+    },
+    {
+      "file": "slides/15-judging-map.html",
+      "errors": [],
+      "title": "Pramana · Lampiran: pemetaan keenam judging criteria",
+      "images": [],
+      "headingCount": 1,
+      "fonts": {
+        "geist": true,
+        "mono": true
+      },
+      "overflow": []
+    }
+  ],
+  "interactions": [
+    {
+      "label": "Overview has every slide",
+      "passed": true
+    },
+    {
+      "label": "Start enters presentation",
+      "passed": true
+    },
+    {
+      "label": "Six-minute timer starts with presentation",
+      "passed": true
+    },
+    {
+      "label": "Timer pauses",
+      "passed": true
+    },
+    {
+      "label": "Keyboard changes slide",
+      "passed": true
+    },
+    {
+      "label": "Reload preserves slide",
+      "passed": true
+    },
+    {
+      "label": "Speaker notes open with N",
+      "passed": true
+    },
+    {
+      "label": "Speaker notes close with N",
+      "passed": true
+    },
+    {
+      "label": "Fullscreen button",
+      "passed": true
+    },
+    {
+      "label": "Evidence photo retake stage",
+      "passed": true
+    },
+    {
+      "label": "Evidence STOP stage",
+      "passed": true
+    },
+    {
+      "label": "Evidence reset",
+      "passed": true
+    },
+    {
+      "label": "Keyboard works after focus enters iframe",
+      "passed": true
+    },
+    {
+      "label": "Work Order tab",
+      "passed": true
+    },
+    {
+      "label": "Tanya Lumo tab",
+      "passed": true
+    },
+    {
+      "label": "Escape returns to overview from iframe",
+      "passed": true
+    },
+    {
+      "label": "3D gallery builds from thumbnails",
+      "passed": true
+    },
+    {
+      "label": "3D gallery thumbnails load",
+      "passed": true
+    },
+    {
+      "label": "Presentation fits 1440x900",
+      "passed": true
+    },
+    {
+      "label": "Presentation fits 1280x720",
+      "passed": true
+    },
+    {
+      "label": "Presentation fits 390x844",
+      "passed": true
+    },
+    {
+      "label": "Local presentation and images work offline",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "passed": true
+}

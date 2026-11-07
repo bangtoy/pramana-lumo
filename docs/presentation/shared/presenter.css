@@ -1,0 +1,32 @@
+@import url('./slides.css');
+html,body{font-family:Geist,sans-serif;background:var(--color-rail)}
+body[data-ov="grid"][data-mode="overview"],#ov-grid{background:var(--color-rail)}
+body[data-ov="gallery"][data-mode="overview"],#ov-gallery{background:var(--color-on-surface)}
+.overview-title{font-family:'Geist Mono',monospace;letter-spacing:.035em;text-transform:none;font-size:15px;top:26px;line-height:1.5;padding:0 22px}
+body[data-ov="grid"] .overview-title{color:var(--color-on-surface-muted);opacity:1}
+body[data-ov="gallery"] .overview-title{color:var(--color-on-primary);text-shadow:none}
+.card{padding:0;border:0;text-align:left;font:inherit}
+.vignette{box-shadow:inset 0 0 230px 60px color-mix(in srgb,var(--color-on-surface) 60%,transparent)}
+.start-btn,body[data-ov="grid"] .start-btn,body[data-ov="gallery"] .start-btn{font-family:Geist,sans-serif;letter-spacing:-.01em;background:var(--gradient-primary);color:var(--color-on-primary);border-radius:10px;box-shadow:var(--shadow-primary-hover);padding:15px 26px;bottom:27px}
+#stage{box-shadow:var(--shadow-floating)}
+.counter{border-radius:7px;background:var(--color-on-surface);font-family:'Geist Mono',monospace;font-size:12px;bottom:15px;right:16px;opacity:.72;max-width:56vw;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.counter .label{font-size:inherit;line-height:inherit}
+.overview-btn{font-family:Geist,sans-serif;letter-spacing:0;background:var(--color-on-surface);border-radius:7px;top:14px;left:16px;font-size:12px}
+.nav-zone{width:4%;background:transparent;border:0}.nav-hint{background:var(--color-on-surface);color:var(--color-on-primary);font-size:20px;width:32px;height:32px}
+#overviewTools{position:fixed;bottom:28px;left:28px;z-index:190;display:flex;gap:8px;flex-wrap:wrap;max-width:68vw}
+#overviewTools a{background:var(--color-surface);color:var(--color-text-strong);border:1px solid var(--color-line);padding:11px 15px;border-radius:9px;text-decoration:none;font-size:13px;box-shadow:var(--shadow-control)}
+#overviewTools a:hover{border-color:var(--color-border-strong)}
+body[data-mode="present"] #overviewTools{display:none}
+#presenterControls{position:fixed;top:14px;right:16px;display:flex;align-items:center;gap:7px;z-index:110}
+body[data-mode="overview"] #presenterControls{display:none}
+#presenterControls button{border:1px solid var(--color-line);border-radius:7px;padding:6px 11px;background:var(--color-surface);color:var(--color-text-strong);font-size:12px;line-height:1.4;box-shadow:var(--shadow-control)}
+#presenterControls #pitchClock{min-width:65px;font-family:'Geist Mono',monospace;font-variant-numeric:tabular-nums;color:var(--color-on-accent-subtle)}
+#presenterControls #pitchClock.expired{color:var(--color-status-tidak-baik);background:var(--color-status-tidak-baik-subtle)}
+#notesPanel{position:fixed;top:61px;right:16px;width:min(560px,calc(100vw - 32px));max-height:calc(100vh - 130px);overflow-y:auto;background:var(--color-surface);color:var(--color-on-surface);border:1px solid var(--color-line);border-radius:12px;padding:25px;z-index:120;box-shadow:var(--shadow-overlay)}
+#notesPanel[hidden]{display:none}#notesPanel .meta{font-size:12px}#notesPanel h2{font-size:23px;line-height:1.3;margin:12px 0 16px;letter-spacing:-.025em}#notesPanel p{font-size:16px;line-height:1.65;text-wrap:pretty}#notesPanel a{font-size:14px;display:inline-block;margin-top:18px}
+#keyboardHelp{position:fixed;bottom:16px;left:16px;color:var(--color-on-surface-muted);font-family:'Geist Mono',monospace;font-size:10px;z-index:101;padding:5px 8px;border-radius:6px;background:var(--color-surface);pointer-events:none}
+body[data-mode="overview"] #keyboardHelp{display:none}
+.card:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--color-primary);outline-offset:4px}
+@media(max-width:640px){.overview-title{font-size:11px;top:17px;padding:0 15px}#overviewTools{bottom:84px;left:16px;max-width:calc(100vw - 32px);gap:5px}#overviewTools a{font-size:11px;padding:8px 10px}.start-btn{right:16px;bottom:20px!important;padding:12px 18px!important;font-size:13px}#presenterControls button{font-size:10px;padding:5px 7px}#keyboardHelp{display:none}.overview-btn{font-size:10px;padding:6px 8px}.counter{font-size:10px;bottom:10px}.counter .label{display:none}}
+@media(prefers-reduced-motion:reduce){.breathe,.drift-layer{animation:none!important}.card{transition:none!important}}
+@media print{#presenterControls,#notesPanel,#keyboardHelp,#overviewTools{display:none!important}}
