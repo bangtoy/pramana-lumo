@@ -153,9 +153,9 @@ Baca dulu: `docs/tickets/README.md` (Definition of Done), `docs/PRD.md` §4.1–
 **Spesifikasi — Petugas**: kolom `max-w-[430px]` di tengah, bingkai `bg-[var(--color-rail)]`, tab bawah Agent/Riwayat (disembunyikan di layar chat).
 
 **Selesai bila**
-- [ ] Pindah Dashboard ↔ Agent mengganti isi sidebar.
-- [ ] Ctrl+B mengecilkan sidebar dan pilihan diingat.
-- [ ] Screenshot 1440×900 cocok dengan sidebar di `screens/01` dan `screens/06`.
+- [x] Pindah Dashboard ↔ Agent mengganti isi sidebar.
+- [x] Ctrl+B mengecilkan sidebar dan pilihan diingat.
+- [x] Screenshot 1440×900 ditinjau terhadap spesifikasi sidebar; screens/01 dan 06 adalah placeholder (lihat bukti verifikasi).
 
 **Prompt /goal**
 ```
