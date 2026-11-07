@@ -7,7 +7,18 @@ process.env.DATA_DIR = mkdtempSync(path.join(tmpdir(), 'pramana-wo-'));
 const { database, getLaporan, saveLaporan, listWorkOrders, getWorkOrder } = await import('../lib/db.ts');
 const { createWorkOrders, updateWorkOrder, syncItemDitangani } = await import('../lib/work-order.ts');
 const { jakartaDay } = await import('../lib/waktu.ts');
-const { isWorkOrderOverdue, sortWorkOrders } = await import('../lib/work-order-rules.ts');
+const { isWorkOrderOverdue, sortWorkOrders, reportWorkOrderSummary } = await import('../lib/work-order-rules.ts');
+
+test('report summaries do not mark remaining unassigned findings complete', async () => {
+  const report = { ...getLaporan('LI-2026-10-29-DT07')!, id: 'LI-WO-SUMMARY' }; saveLaporan(report);
+  const orders = await createWorkOrders(report.id, async () => []);
+  const closed = orders.map(order => ({ ...order, status: 'selesai' as const }));
+  assert.deepEqual(reportWorkOrderSummary(report, []), { status: 'pending', open: 0, pending: 2 });
+  assert.deepEqual(reportWorkOrderSummary(report, [orders[0]]), { status: 'open', open: 1, pending: 1 });
+  assert.deepEqual(reportWorkOrderSummary(report, [closed[0]]), { status: 'pending', open: 0, pending: 1 });
+  assert.deepEqual(reportWorkOrderSummary(report, closed), { status: 'completed', open: 0, pending: 0 });
+  assert.deepEqual(reportWorkOrderSummary({ ...report, hasil: {} }, []), { status: 'none', open: 0, pending: 0 });
+});
 
 test('work-order urgency uses Jakarta dates and keeps open overdue work first', async () => {
   const [base] = await createWorkOrders('LI-2026-10-29-DT07', async () => []);

@@ -1,0 +1,17 @@
+{
+  "reportId": "LI-dfcb81e2-232f-4eca-8dad-12f0d16da30b",
+  "orderId": "WO-22c868c2-1364-4d18-bb33-2a886da3d04f",
+  "title": "Replace the tyre with the bulging, cracked sidewall",
+  "creationMs": 4247,
+  "onlyNotGoodFindings": true,
+  "scopedRedirect": true,
+  "linkedHighlight": true,
+  "assignedMechanicCard": true,
+  "completionSynchronized": true,
+  "reportReopenSynchronized": true,
+  "sidebarUpdates": true,
+  "reportListCompleted": true,
+  "inspectorReadOnly": true,
+  "responsive": true,
+  "errors": []
+}

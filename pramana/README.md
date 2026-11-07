@@ -54,7 +54,7 @@ names for that endpoint. Environment files are excluded from the image and Git.
 SQLite, evidence, generated models and local traces persist in the `pramana-data`
 volume. `docker compose down` preserves it; `seed:if-empty` preserves existing
 records on restart. The tunnel URL is temporary and changes when recreated.
-This P0 demo has no login; use demo data with the public tunnel.
+This demo has no login; use demo data with the public tunnel.
 
 If port 3000 is occupied, choose another port before starting:
 
@@ -75,5 +75,15 @@ and [Cloudflare Quick Tunnels](https://developers.cloudflare.com/tunnel/get-star
 The [P0 evidence log](../docs/verification/P0.md) records per-ticket checks;
 the [P0 demo runbook](../docs/verification/DEMO-P0.md) lists the presenter flow,
 real-agent integration results and backup report. The implementation covers
-P0-00 through P0-13. Work orders, daily metrics and cross-report analysis remain
-P1–P3; the P0 finding chat answers questions about a single finding.
+P0-00 through P0-13 and P1-01 through P1-04. See the
+[P1 evidence log](../docs/verification/P1.md) for work-order checks and the demo
+flow. Daily metrics and cross-report analysis remain P2–P3; the finding chat
+answers questions about a single finding.
+
+From a submitted inspection report, choose **Create work orders** to draft one
+repair instruction per unassigned Not good finding. If the model is unavailable,
+the server uses the finding's original note. STOP findings are high priority and
+due today in Jakarta; other findings are medium priority and due in two days.
+In **Work orders**, assign a mechanic, set a target, and complete with a note.
+Completion and reopening synchronize with the linked finding. These actions
+record repair follow-up; the original inspection verdict and STOP remain intact.

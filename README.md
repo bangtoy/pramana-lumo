@@ -2,8 +2,9 @@
 
 Aplikasi Next.js berada di [`pramana/`](pramana/README.md), menggunakan OpenAI
 Agents SDK JavaScript/TypeScript, SQLite, dan model kendaraan interaktif Anatomy.
-Antarmuka aplikasi berbahasa Inggris. Implementasi inti mengikuti tiket P0-00
-sampai P0-13; P1–P3 tetap menjadi tahap berikutnya.
+Antarmuka aplikasi berbahasa Inggris. Implementasi mencakup P0-00 sampai P0-13
+dan P1-01 sampai P1-04: pembuatan work order, penugasan mekanik, target, serta
+sinkronisasi penyelesaian dengan temuan. P2–P3 tetap menjadi tahap berikutnya.
 
 ```sh
 cd pramana
@@ -18,7 +19,8 @@ maupun lampiran gambar dari galeri/file. Bila port 3000 terpakai, atur
 
 Lihat [hasil verifikasi](docs/verification/P0.md) dan
 [naskah demo P0](docs/verification/DEMO-P0.md) untuk bukti pengujian, laporan
-cadangan, dan batas lingkup demo.
+cadangan, dan batas lingkup demo. [Verifikasi P1](docs/verification/P1.md)
+mencatat pengujian work order dan alur demo lanjutannya.
 
 ## Kit desain & dokumen
 

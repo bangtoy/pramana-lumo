@@ -24,3 +24,11 @@ export function sortWorkOrders(orders: WorkOrder[], today = jakartaDay()): WorkO
     Number(b.prioritas === 'tinggi') - Number(a.prioritas === 'tinggi') ||
     b.created_at.localeCompare(a.created_at) || a.id.localeCompare(b.id));
 }
+
+export function reportWorkOrderSummary(report: ReportView, orders: WorkOrder[]) {
+  const linked = orders.filter(w => w.laporan_id === report.id);
+  const open = linked.filter(w => w.status === 'terbuka').length;
+  const pending = pendingWorkOrderFindings(report, linked).length;
+  const status = open ? 'open' : pending ? 'pending' : linked.length ? 'completed' : 'none';
+  return { status, open, pending } as const;
+}

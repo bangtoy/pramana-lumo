@@ -94,7 +94,7 @@ curl -s localhost:3000/api/laporan/<laporan_id> | jq '.hasil.<item_id>.ditangani
 - Sidebar: badge jumlah WO terbuka (sudah di P0-05) ikut berubah.
 
 **Selesai bila**
-- [ ] Alur: detail laporan STOP → Buat work order → halaman WO tersaring → Tandai selesai → kembali ke detail, temuan "Selesai" dan kartu WO hijau.
+- [x] Alur: detail laporan STOP → Buat work order → halaman WO tersaring → Tandai selesai → kembali ke detail, temuan "Handled" dan kartu WO hijau.
 
 **Prompt /goal**
 ```
