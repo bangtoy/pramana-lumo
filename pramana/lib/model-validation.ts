@@ -2,7 +2,7 @@ import { spawn } from "node:child_process";
 import { z } from "zod";
 export const ModelManifest = z.object({
   nama: z.string().min(1).max(160), tipe: z.string().min(1).max(160), bisa_tilt: z.boolean(),
-  komponen: z.array(z.object({ comp_id: z.string().regex(/^[a-z][a-z0-9_]{0,79}$/), label: z.string().min(1).max(160), item_ids: z.string().array().min(1) })).min(1).max(30),
+  komponen: z.array(z.object({ comp_id: z.string().regex(/^[a-z][a-z0-9_]{0,79}$/), label: z.string().min(1).max(160), item_ids: z.string().array() })).min(1).max(30),
 }).strict();
 export type ModelManifest = z.infer<typeof ModelManifest>;
 export function requireGeometryAudit(raw: unknown) {
@@ -23,7 +23,7 @@ tags={'svg','g','path','circle','ellipse','rect','line','polyline','polygon','de
 for e in r.iter():
  assert e.tag.startswith('{http://www.w3.org/2000/svg}') and e.tag.split('}')[1] in tags,'Unsupported SVG element'
  assert not any(a.split('}')[-1] in ('href','src') for a in e.attrib),'External references are not allowed'
- if 'style' in e.attrib: assert re.fullmatch(r'(stroke:url\(#[\w-]+\)|stop-color:var\(--anatomy-(hi|mid|lo|faint|lit)\));?',e.attrib['style']),'Unsupported SVG style'
+ if 'style' in e.attrib: assert re.fullmatch(r'(stroke:url\(#[\w-]+\)|stop-color:var\(--anatomy-(hi|mid|lo|faint|lit)\)|fill:#[0-9A-Fa-f]{6});?',e.attrib['style']),'Unsupported SVG style'
 print(json.dumps({'components':sorted(set(e.attrib['data-comp'] for e in r.iter() if 'data-comp' in e.attrib)), 'frames':sorted(set(int(e.attrib['data-frame']) for e in r.iter() if 'data-frame' in e.attrib)), 'shapes':sum(e.tag.split('}')[-1] in ['path','circle','ellipse','rect','polygon'] for e in r.iter())}))`;
   return new Promise((resolve, reject) => {
     const child = spawn(process.platform === "win32" ? "python" : "python3", ["-c", code], { stdio: ["pipe", "pipe", "pipe"], windowsHide: true });

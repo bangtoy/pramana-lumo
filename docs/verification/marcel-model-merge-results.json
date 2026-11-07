@@ -1,0 +1,13 @@
+{
+  "savedModel": "MDL-e1f1323f-56dd-40f3-9c75-51b92c1a44ae",
+  "planId": "RI-48ee9f27-fe3f-491b-93d2-e6ed24cf9081",
+  "highlightedItems": 10,
+  "literalFillBrowserFixture": {
+    "convertedToPresentationAttribute": true,
+    "inlineStyleRemoved": true,
+    "before": "rgb(255, 255, 255)",
+    "focused": "rgb(249, 253, 255)"
+  },
+  "mobileNoOverflow": true,
+  "errors": []
+}
