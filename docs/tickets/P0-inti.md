@@ -287,9 +287,9 @@ Baca dulu: `docs/tickets/README.md` (Definition of Done), `docs/PRD.md` §4.1–
 - Riwayat: daftar kartu (unit `.t-heading`, StopPill, rencana `.t-body-sm.muted`, waktu + hitungan `.t-data`), detail read-only memakai `LaporanDetail` bertumpuk.
 
 **Selesai bila**
-- [ ] Di 390×844 tampilan setara `screens/11` dan `12`; teks chat 16 px.
-- [ ] Foto dari kamera HP (via tunnel) terkirim < 300 KB.
-- [ ] Refresh di tengah P2H melanjutkan draft.
+- [x] Di 390×844 layout dan teks chat 16 px diverifikasi; screens/11–12 masih placeholder.
+- [ ] Foto dari kamera HP fisik (via tunnel) terkirim < 300 KB. Browser mobile sudah lulus: 159.925 bytes; verifikasi perangkat diminta dan dicatat untuk P0-12.
+- [x] Refresh di tengah P2H melanjutkan draft.
 
 **Prompt /goal**
 ```

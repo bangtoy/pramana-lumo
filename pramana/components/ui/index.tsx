@@ -39,7 +39,7 @@ export function MascotAvatar({mood="netral",size=32}:{mood?:"netral"|"serius";si
 export function MascotHero({pose="menyapa",size=96}:{pose?:Pose;size?:number}) {
   return <div className="lumo-hero shrink-0" style={{width:size*1.15,height:size*1.15}}><Image src={`/lumo/lumo-${pose}.png`} alt={`Lumo ${poseLabel[pose]}`} width={size*2} height={size*2} loading="eager" className="w-full h-full object-contain"/></div>;
 }
-export function TypingBubble({label="Lumo is reading…"}:{label?:string}) {return <div role="status" className="flex items-center gap-2"><MascotAvatar size={28}/><span className="bubble-agent inline-flex items-center gap-1 p-3" aria-hidden="true">{[0,1,2].map(i=><span key={i} className="typing-dot h-1.5 w-1.5 rounded-full"/>)}</span><span className="t-body-sm muted">{label}</span></div>;}
+export function TypingBubble({label="Lumo is reading…"}:{label?:string}) {return <div role="status" className="flex items-center gap-2"><MascotAvatar size={28}/><span className="bubble-pramana inline-flex items-center gap-1 p-3" aria-hidden="true">{[0,1,2].map(i=><span key={i} className="typing-dot h-1.5 w-1.5 rounded-full"/>)}</span><span className="t-body-sm muted">{label}</span></div>;}
 export function SumberBadge({sumber}:{sumber:ItemRencana["sumber"]}) {
   const labels={spec:"Spec sheet",standar:"Standard",form_lama:"Existing form",manual:"Manual"};
   return <span className={`pill t-label pill-sumber-${sumber==="standar"?"standar":"spec"}`}>{labels[sumber]}</span>;
