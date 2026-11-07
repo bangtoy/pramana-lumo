@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { ArrowLeft, Camera, ChevronDown, ChevronUp, Paperclip, Plus, RotateCcw, Send, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Camera, Check, ChevronDown, ChevronUp, Paperclip, Plus, RotateCcw, Send, X } from "lucide-react";
 import { api, compressImage, fmtDate, postJson, postTurn } from "@/lib/client";
 import { counts, itemsOf, nextItem, progress, unitCode, verdict, type ReportView } from "@/lib/rules";
 import type { ChatMessage, StatusItem, TurnResponse } from "@/lib/contracts";
@@ -53,6 +53,7 @@ function Conversation({ id, create }: { id: string; create: () => Promise<void> 
   if (query.isLoading) return <div className="p-5"><Spinner/></div>;
   if (query.error || !report) return <div className="p-5"><ErrorState error={query.error || 'Inspection not found.'}><button className="btn btn-secondary" onClick={() => void create()}>Start a new inspection</button></ErrorState></div>;
   const items = itemsOf(report), active = nextItem(report), done = progress(report), last = report.messages.filter(m => m.role === 'pramana').at(-1);
+  const messages = [...report.messages, ...optimistic];
   const resultCounts = counts(report);
   const completionSummary = [
     resultCounts.tidak_baik ? `${resultCounts.tidak_baik} ${resultCounts.tidak_baik === 1 ? 'finding needs' : 'findings need'} attention.` : '',
@@ -69,15 +70,26 @@ function Conversation({ id, create }: { id: string; create: () => Promise<void> 
       {report.rencana_snapshot?.model_id && <div className="shrink-0 border-b border-[var(--color-line)]"><button className="t-body-sm muted w-full flex items-center justify-between px-4 py-2" aria-expanded={showModel} onClick={() => setShowModel(!showModel)}>Vehicle model{showModel ? <ChevronUp size={16}/> : <ChevronDown size={16}/>}</button>{showModel && <VehicleModel className="h-44 px-4 pb-2" modelId={report.rencana_snapshot.model_id} focus={active?.comp_id} statuses={statuses} tiltControl={false}/>}</div>}
       <div className="flex-1 min-h-0 overflow-y-auto p-4 space-y-4" role="log" aria-label="Inspection conversation" aria-live="polite">
         <div className="flex flex-col items-center gap-1 pb-3"><MascotHero pose="menyapa" size={96}/><h2 className="t-heading">Lumo</h2><p className="t-body-sm muted">Your P2H companion · {fmtDate(report.started_at)}</p></div>
-        {[...report.messages, ...optimistic].map(message => <div key={message.id} className={`flex gap-2 ${message.role === 'user' ? 'justify-end' : ''}`}>
+        {messages.map((message, index) => {
+          const replies = message.role === 'pramana' ? message.quick_replies || [] : [];
+          const answer = messages[index + 1]?.role === 'user' ? messages[index + 1].text.trim() : '';
+          const selected = replies.includes(answer) ? answer : null;
+          const current = message.id === last?.id;
+          const choices = current ? replies : selected ? [selected] : [];
+          const disabled = !current || turn.isPending || preparing;
+          return <div key={message.id} className={`flex gap-2 ${message.role === 'user' ? 'justify-end' : ''}`}>
           {message.role === 'pramana' && <MascotAvatar size={28} mood={message.mood}/>}
-          <div className="min-w-0 max-w-[88%] space-y-2"><div className={`p-3 t-body-lg whitespace-pre-wrap break-words ${message.role === 'user' ? 'bubble-petugas' : 'bubble-pramana'}`}>{message.text}{message.files?.map(file => <a key={file.id} href={`/api/files/${file.id}`} target="_blank" rel="noreferrer" className="block mt-2"><img src={`/api/files/${file.id}`} alt={file.caption || 'Inspection photo'} className="rounded-lg max-h-48 w-full object-cover" onLoad={() => end.current?.scrollIntoView({ block: 'end' })}/></a>)}</div>{!!message.pills?.length && <div className="flex flex-wrap gap-1.5">{message.pills.map((pill, i) => <ChatPill key={i} pill={pill}/>)}</div>}</div>
-        </div>)}
+          <div className="min-w-0 max-w-[88%] space-y-2"><div className={`p-3 t-body-lg whitespace-pre-wrap break-words ${message.role === 'user' ? 'bubble-petugas' : 'bubble-pramana'}`}>{message.text}{message.files?.map(file => <a key={file.id} href={`/api/files/${file.id}`} target="_blank" rel="noreferrer" className="block mt-2"><img src={`/api/files/${file.id}`} alt={file.caption || 'Inspection photo'} className="rounded-lg max-h-48 w-full object-cover" onLoad={() => end.current?.scrollIntoView({ block: 'end' })}/></a>)}</div>{!!message.pills?.length && <div className="flex flex-wrap gap-1.5">{message.pills.map((pill, i) => <ChatPill key={i} pill={pill}/>)}</div>}
+            {!!choices.length && <div role="group" aria-label={current ? 'Reply choices' : 'Selected reply'} className="space-y-2" data-inspection-choices>
+              <p className="t-label muted font-normal pt-1">{current ? 'Choose an option' : 'Selected option'}</p>
+              {choices.map(reply => <button key={reply} type="button" className={`flex w-full min-h-12 items-center gap-3 rounded-[12px] border px-3 py-3 text-left t-body-lg disabled:cursor-default ${selected === reply ? 'border-[var(--color-primary)] bg-[var(--color-accent-subtle)] text-[var(--color-on-accent-subtle)]' : 'border-[var(--color-line)] bg-[var(--color-surface)] text-[var(--color-text-strong)] enabled:hover:border-[var(--color-primary)] enabled:hover:bg-[var(--color-accent-subtle)]'} ${turn.isPending || preparing ? 'opacity-60' : ''}`} aria-pressed={selected === reply} disabled={disabled} onClick={() => send(reply)}><span className="min-w-0 flex-1 whitespace-normal [overflow-wrap:anywhere]">{reply}</span>{selected === reply ? <Check size={18} aria-hidden="true" className="shrink-0"/> : <ArrowRight size={18} aria-hidden="true" className="shrink-0 text-[var(--color-primary)]"/>}</button>)}
+            </div>}
+          </div>
+        </div>; })}
         {turn.isPending && <TypingBubble label={status}/>}<div ref={end}/>
       </div>
       <div className="shrink-0 p-3 border-t border-[var(--color-line)] bg-[var(--color-surface)] pb-[max(12px,env(safe-area-inset-bottom))]">
         {(turn.error || photoError) && <div className="mb-2 max-h-28 overflow-y-auto"><ErrorState error={photoError || turn.error!}/></div>}
-        {!turn.isPending && !!last?.quick_replies?.length && <div className="flex gap-2 overflow-x-auto pb-3">{last.quick_replies.map(reply => <button key={reply} className="btn btn-secondary-field t-body-sm shrink-0 max-w-64 truncate" onClick={() => send(reply)} disabled={preparing}>{reply}</button>)}</div>}
         {photo && photoUrl && <div className="mb-2 flex items-center gap-2"><img src={photoUrl} alt="Photo ready to send" className="h-12 w-12 shrink-0 rounded object-cover"/><span className="t-caption-data muted flex-1">Photo ready · {Math.ceil(photo.size / 1024)} KB</span><button className={iconButton} aria-label="Remove photo" disabled={turn.isPending} onClick={() => { setPhoto(undefined); if (input.current) input.current.value = ''; }}><X size={16}/></button></div>}
         {preparing && <Spinner label="Preparing photo…"/>}
         <form className="space-y-2" onSubmit={e => { e.preventDefault(); send(); }}>

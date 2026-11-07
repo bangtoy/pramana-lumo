@@ -1,0 +1,58 @@
+{
+  "results": {
+    "390": {
+      "choicesInChat": true,
+      "fullLabels": [
+        {
+          "height": 122,
+          "font": "16px",
+          "overflow": false
+        },
+        {
+          "height": 98,
+          "font": "16px",
+          "overflow": false
+        },
+        {
+          "height": 98,
+          "font": "16px",
+          "overflow": false
+        }
+      ],
+      "keyboardSelection": true,
+      "oneTurn": true,
+      "pendingDisabled": true,
+      "historySelectionPreserved": true,
+      "reload": true,
+      "noPageOverflow": true
+    },
+    "1440": {
+      "choicesInChat": true,
+      "fullLabels": [
+        {
+          "height": 98,
+          "font": "16px",
+          "overflow": false
+        },
+        {
+          "height": 74,
+          "font": "16px",
+          "overflow": false
+        },
+        {
+          "height": 98,
+          "font": "16px",
+          "overflow": false
+        }
+      ],
+      "keyboardSelection": true,
+      "oneTurn": true,
+      "pendingDisabled": true,
+      "historySelectionPreserved": true,
+      "reload": true,
+      "noPageOverflow": true
+    }
+  },
+  "errors": [],
+  "network": "Report and agent turn are browser fixtures; no stored inspection was changed."
+}
